@@ -279,6 +279,22 @@ fun SettingsContent(viewModel: MainViewModel, modifier: Modifier = Modifier) {
         verticalArrangement = Arrangement.spacedBy(4.dp),
         horizontalAlignment = Alignment.Start
     ) {
+        // Help Section
+        RoundedCardContainer {
+            IconToggleItem(
+                iconRes = R.drawable.rounded_help_24,
+                title = stringResource(R.string.label_help_guide),
+                isChecked = false,
+                onCheckedChange = {
+                    showInstructionsSheet = true
+                },
+                showToggle = false,
+                modifier = Modifier.fillMaxWidth().height(72.dp)
+            )
+        }
+
+        Spacer(modifier = Modifier.height(8.dp))
+
         // App Settings Section
         Text(
             text = "App Settings",
