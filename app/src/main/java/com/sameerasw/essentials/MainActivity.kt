@@ -875,7 +875,9 @@ class MainActivity : FragmentActivity() {
                                                                 onRefreshAllClick = {
                                                                     HapticUtil.performUIHaptic(view)
                                                                     updatesViewModel.checkForUpdates(context)
-                                                                }
+                                                                },
+                                                                isRefreshing = refreshingRepoIds.isNotEmpty(),
+                                                                progress = { animatedProgress }
                                                             )
                                                         }
                                                     }
@@ -1124,11 +1126,14 @@ class MainActivity : FragmentActivity() {
     }
 }
 
+@OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 private fun AppsActionButtons(
     view: android.view.View,
     onAddClick: () -> Unit,
-    onRefreshAllClick: () -> Unit
+    onRefreshAllClick: () -> Unit,
+    isRefreshing: Boolean,
+    progress: () -> Float
 ) {
     Row(
         modifier = Modifier
@@ -1153,12 +1158,20 @@ private fun AppsActionButtons(
         Button(
             onClick = onRefreshAllClick,
             modifier = Modifier.weight(1f),
+            enabled = !isRefreshing
         ) {
-            Icon(
-                painter = painterResource(id = R.drawable.rounded_refresh_24),
-                contentDescription = null,
-                modifier = Modifier.size(18.dp)
-            )
+            if (isRefreshing) {
+                CircularWavyProgressIndicator(
+                    progress = progress,
+                    modifier = Modifier.size(18.dp)
+                )
+            } else {
+                Icon(
+                    painter = painterResource(id = R.drawable.rounded_refresh_24),
+                    contentDescription = null,
+                    modifier = Modifier.size(18.dp)
+                )
+            }
             Spacer(modifier = Modifier.width(8.dp))
             Text(stringResource(R.string.action_refresh))
         }
