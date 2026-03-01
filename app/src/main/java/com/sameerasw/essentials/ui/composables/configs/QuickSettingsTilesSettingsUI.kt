@@ -275,9 +275,10 @@ fun QuickSettingsTilesSettingsUI(
             R.string.tile_charge_optimization,
             R.drawable.rounded_battery_android_frame_shield_24,
             ChargeQuickTileService::class.java,
-            listOf("WRITE_SECURE_SETTINGS"),
+            if (ShellUtils.isRootEnabled(context)) listOf("ROOT") else listOf("SHIZUKU", "WRITE_SECURE_SETTINGS"),
             R.string.about_desc_charge_optimization
         )
+
     )
 
     if (showPermissionSheet && selectedTileForPermissions != null) {

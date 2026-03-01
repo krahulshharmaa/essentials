@@ -2,11 +2,14 @@ package com.sameerasw.essentials.services.tiles
 
 import android.graphics.drawable.Icon
 import android.os.Build
+import android.provider.Settings
 import android.service.quicksettings.Tile
 import android.service.quicksettings.TileService
 import androidx.annotation.RequiresApi
 import androidx.core.content.edit
 import com.sameerasw.essentials.utils.HapticUtil
+import com.sameerasw.essentials.utils.ShellUtils
+import com.sameerasw.essentials.utils.PermissionUtils
 
 @RequiresApi(Build.VERSION_CODES.N)
 abstract class BaseTileService : TileService() {
@@ -75,6 +78,33 @@ abstract class BaseTileService : TileService() {
     }
 
     protected abstract fun getTileState(): Int
+
+    protected fun getSecureInt(key: String, def: Int): Int {
+        try {
+            val value = Settings.Secure.getInt(contentResolver, key, -1)
+            if (value != -1) return value
+        } catch (_: SecurityException) {
+            // Only fallback to shell on SecurityException
+            return try {
+                val output = ShellUtils.runCommandWithOutput(this, "settings get secure $key")
+                output?.toIntOrNull() ?: def
+            } catch (_: Exception) {
+                def
+            }
+        } catch (_: Exception) {
+            return def
+        }
+        return def
+    }
+
+    protected fun putSecureInt(key: String, value: Int) {
+        try {
+            Settings.Secure.putInt(contentResolver, key, value)
+        } catch (_: Exception) {
+            // Fallback to shell if standard API fails
+            ShellUtils.runCommand(this, "settings put secure $key $value")
+        }
+    }
 }
 
 

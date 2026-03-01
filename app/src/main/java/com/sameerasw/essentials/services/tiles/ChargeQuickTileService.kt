@@ -43,23 +43,23 @@ class ChargeQuickTileService : BaseTileService() {
     }
 
     override fun onTileClick() {
-        val adaptiveChargingEnabled = Settings.Secure.getInt(contentResolver, ADAPTIVE_CHARGING_SETTING, 0) == 1
-        val chargeOptimizationEnabled = Settings.Secure.getInt(contentResolver, CHARGE_OPTIMIZATION_MODE, 0) == 1
+        val adaptiveChargingEnabled = getSecureInt(ADAPTIVE_CHARGING_SETTING, 0) == 1
+        val chargeOptimizationEnabled = getSecureInt(CHARGE_OPTIMIZATION_MODE, 0) == 1
         
         when {
             adaptiveChargingEnabled -> {
-                Settings.Secure.putInt(contentResolver, CHARGE_OPTIMIZATION_MODE, 1)
-                Settings.Secure.putInt(contentResolver, ADAPTIVE_CHARGING_SETTING, 0)
+                putSecureInt(CHARGE_OPTIMIZATION_MODE, 1)
+                putSecureInt(ADAPTIVE_CHARGING_SETTING, 0)
             }
 
             chargeOptimizationEnabled -> {
-                Settings.Secure.putInt(contentResolver, CHARGE_OPTIMIZATION_MODE, 0)
-                Settings.Secure.putInt(contentResolver, ADAPTIVE_CHARGING_SETTING, 0)
+                putSecureInt(CHARGE_OPTIMIZATION_MODE, 0)
+                putSecureInt(ADAPTIVE_CHARGING_SETTING, 0)
             }
 
             else -> {
-                Settings.Secure.putInt(contentResolver, CHARGE_OPTIMIZATION_MODE, 0)
-                Settings.Secure.putInt(contentResolver, ADAPTIVE_CHARGING_SETTING, 1)
+                putSecureInt(CHARGE_OPTIMIZATION_MODE, 0)
+                putSecureInt(ADAPTIVE_CHARGING_SETTING, 1)
             }
         }
     }
@@ -67,8 +67,8 @@ class ChargeQuickTileService : BaseTileService() {
     override fun getTileLabel(): String = getString(R.string.tile_charge_optimization)
 
     override fun getTileSubtitle(): String {
-        val adaptiveChargingEnabled = Settings.Secure.getInt(contentResolver, ADAPTIVE_CHARGING_SETTING, 0) == 1
-        val chargeOptimizationEnabled = Settings.Secure.getInt(contentResolver, CHARGE_OPTIMIZATION_MODE, 0) == 1
+        val adaptiveChargingEnabled = getSecureInt(ADAPTIVE_CHARGING_SETTING, 0) == 1
+        val chargeOptimizationEnabled = getSecureInt(CHARGE_OPTIMIZATION_MODE, 0) == 1
         return when {
             chargeOptimizationEnabled -> getString(R.string.limit_to_80)
             adaptiveChargingEnabled -> getString(R.string.adaptive_charging)
@@ -81,8 +81,8 @@ class ChargeQuickTileService : BaseTileService() {
     }
 
     override fun getTileIcon(): Icon {
-        val adaptiveChargingEnabled = Settings.Secure.getInt(contentResolver, ADAPTIVE_CHARGING_SETTING, 0) == 1
-        val chargeOptimizationEnabled = Settings.Secure.getInt(contentResolver, CHARGE_OPTIMIZATION_MODE, 0) == 1
+        val adaptiveChargingEnabled = getSecureInt(ADAPTIVE_CHARGING_SETTING, 0) == 1
+        val chargeOptimizationEnabled = getSecureInt(CHARGE_OPTIMIZATION_MODE, 0) == 1
         val resId = when {
             chargeOptimizationEnabled -> R.drawable.rounded_battery_android_frame_shield_24
             adaptiveChargingEnabled -> R.drawable.rounded_battery_android_frame_plus_24
@@ -92,8 +92,8 @@ class ChargeQuickTileService : BaseTileService() {
     }
 
     override fun getTileState(): Int {
-        val adaptiveChargingEnabled = Settings.Secure.getInt(contentResolver, ADAPTIVE_CHARGING_SETTING, 0) == 1
-        val chargeOptimizationEnabled = Settings.Secure.getInt(contentResolver, CHARGE_OPTIMIZATION_MODE, 0) == 1
+        val adaptiveChargingEnabled = getSecureInt(ADAPTIVE_CHARGING_SETTING, 0) == 1
+        val chargeOptimizationEnabled = getSecureInt(CHARGE_OPTIMIZATION_MODE, 0) == 1
         return if (chargeOptimizationEnabled || adaptiveChargingEnabled) Tile.STATE_ACTIVE else Tile.STATE_INACTIVE
     }
 }
