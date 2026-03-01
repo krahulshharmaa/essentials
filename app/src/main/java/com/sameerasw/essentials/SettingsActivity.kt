@@ -23,14 +23,18 @@ import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -41,8 +45,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -51,16 +53,17 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.zIndex
 import androidx.core.app.ActivityCompat
 import com.sameerasw.essentials.domain.DIYTabs
 import com.sameerasw.essentials.domain.registry.PermissionRegistry
-import com.sameerasw.essentials.ui.components.ReusableTopAppBar
+import com.sameerasw.essentials.ui.components.SettingsFloatingToolbar
 import com.sameerasw.essentials.ui.components.cards.IconToggleItem
 import com.sameerasw.essentials.ui.components.cards.PermissionCard
 import com.sameerasw.essentials.ui.components.containers.RoundedCardContainer
@@ -68,6 +71,8 @@ import com.sameerasw.essentials.ui.components.dialogs.AboutSection
 import com.sameerasw.essentials.ui.components.pickers.DefaultTabPicker
 import com.sameerasw.essentials.ui.components.sheets.InstructionsBottomSheet
 import com.sameerasw.essentials.ui.components.sheets.UpdateBottomSheet
+import com.sameerasw.essentials.ui.modifiers.BlurDirection
+import com.sameerasw.essentials.ui.modifiers.progressiveBlur
 import com.sameerasw.essentials.ui.theme.EssentialsTheme
 import com.sameerasw.essentials.utils.HapticUtil
 import com.sameerasw.essentials.utils.PermissionUtils
@@ -93,6 +98,10 @@ class SettingsActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        
+        val isDarkMode = (resources.configuration.uiMode and android.content.res.Configuration.UI_MODE_NIGHT_MASK) == 
+            android.content.res.Configuration.UI_MODE_NIGHT_YES
+        window.setBackgroundDrawableResource(if (isDarkMode) android.R.color.black else R.color.app_window_background)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             window.isNavigationBarContrastEnforced = false
         }
@@ -103,8 +112,6 @@ class SettingsActivity : ComponentActivity() {
             EssentialsTheme(pitchBlackTheme = isPitchBlackThemeEnabled) {
                 val context = LocalContext.current
                 val view = LocalView.current
-                val scrollBehavior =
-                    TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
 
                 var showBugReportSheet by remember { mutableStateOf(false) }
 
@@ -119,46 +126,57 @@ class SettingsActivity : ComponentActivity() {
                     )
                 }
 
-                Scaffold(
-                    contentWindowInsets = androidx.compose.foundation.layout.WindowInsets(
-                        0,
-                        0,
-                        0,
-                        0
-                    ),
-                    modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
-                    containerColor = MaterialTheme.colorScheme.surfaceContainer,
-                    topBar = {
-                        ReusableTopAppBar(
-                            title = "Settings",
-                            hasBack = true,
-                            hasSearch = false,
-                            onBackClick = { finish() },
-                            scrollBehavior = scrollBehavior,
-                            actions = {
-                                androidx.compose.material3.IconButton(
-                                    onClick = {
-                                        HapticUtil.performVirtualKeyHaptic(view)
-                                        showBugReportSheet = true
-                                    },
-                                    colors = androidx.compose.material3.IconButtonDefaults.iconButtonColors(
-                                        containerColor = MaterialTheme.colorScheme.surfaceBright
-                                    ),
-                                    modifier = Modifier.size(40.dp)
-                                ) {
-                                    Icon(
-                                        painter = painterResource(id = R.drawable.rounded_bug_report_24),
-                                        contentDescription = "Report Bug",
-                                        modifier = Modifier.size(24.dp)
-                                    )
-                                }
-                            }
+                val statusBarHeightPx = with(LocalDensity.current) {
+                    WindowInsets.statusBars.asPaddingValues().calculateTopPadding().toPx()
+                }
+                val statusBarHeight = WindowInsets.statusBars.asPaddingValues().calculateTopPadding()
+
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .background(MaterialTheme.colorScheme.surfaceContainer)
+                        .progressiveBlur(
+                            blurRadius = 40f,
+                            height = statusBarHeightPx * 1.15f,
+                            direction = BlurDirection.TOP
                         )
-                    }
-                ) { innerPadding ->
+                ) {
+                    val contentPadding = androidx.compose.foundation.layout.PaddingValues(
+                        top = statusBarHeight,
+                        bottom = 150.dp,
+                        start = 16.dp,
+                        end = 16.dp
+                    )
+
                     SettingsContent(
                         viewModel = viewModel,
-                        modifier = Modifier.padding(innerPadding)
+                        contentPadding = contentPadding,
+                        modifier = Modifier
+                            .progressiveBlur(
+                                blurRadius = 40f,
+                                height = with(LocalDensity.current) { 150.dp.toPx() },
+                                direction = BlurDirection.BOTTOM
+                            )
+                    )
+
+                    SettingsFloatingToolbar(
+                        title = stringResource(R.string.label_settings),
+                        onBackClick = { finish() },
+                        modifier = Modifier
+                            .align(Alignment.BottomCenter)
+                            .zIndex(1f),
+                        menuContent = {
+                            MenuItem(
+                                text = { Text(stringResource(R.string.action_report_bug)) },
+                                onClick = { showBugReportSheet = true },
+                                leadingIcon = {
+                                    Icon(
+                                        painter = painterResource(id = R.drawable.rounded_bug_report_24),
+                                        contentDescription = null
+                                    )
+                                }
+                            )
+                        }
                     )
                 }
             }
@@ -189,7 +207,11 @@ class SettingsActivity : ComponentActivity() {
 }
 
 @Composable
-fun SettingsContent(viewModel: MainViewModel, modifier: Modifier = Modifier) {
+fun SettingsContent(
+    viewModel: MainViewModel,
+    contentPadding: androidx.compose.foundation.layout.PaddingValues,
+    modifier: Modifier = Modifier
+) {
     val isAccessibilityEnabled by viewModel.isAccessibilityEnabled
     val isWriteSecureSettingsEnabled by viewModel.isWriteSecureSettingsEnabled
     val isPostNotificationsEnabled by viewModel.isPostNotificationsEnabled
@@ -275,7 +297,7 @@ fun SettingsContent(viewModel: MainViewModel, modifier: Modifier = Modifier) {
         modifier = modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
-            .padding(16.dp),
+            .padding(contentPadding),
         verticalArrangement = Arrangement.spacedBy(4.dp),
         horizontalAlignment = Alignment.Start
     ) {

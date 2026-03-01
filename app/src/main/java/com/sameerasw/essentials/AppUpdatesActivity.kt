@@ -257,8 +257,10 @@ class AppUpdatesActivity : FragmentActivity() {
                                 HapticUtil.performMediumHaptic(view)
                                 showAddRepoSheet = true
                             },
+                            modifier = Modifier.padding(bottom = 16.dp, end = 16.dp),
                             containerColor = MaterialTheme.colorScheme.primaryContainer,
-                            contentColor = MaterialTheme.colorScheme.onPrimaryContainer
+                            contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
+                            elevation = androidx.compose.material3.FloatingActionButtonDefaults.elevation(0.dp, 0.dp, 0.dp, 0.dp)
                         ) {
                             androidx.compose.material3.Icon(
                                 painter = painterResource(id = R.drawable.rounded_add_24),

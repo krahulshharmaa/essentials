@@ -508,7 +508,8 @@ class MainActivity : FragmentActivity() {
                                             },
                                             containerColor = MaterialTheme.colorScheme.primaryContainer,
                                             contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
-                                            shape = MaterialTheme.shapes.large
+                                            shape = MaterialTheme.shapes.large,
+                                            elevation = androidx.compose.material3.FloatingActionButtonDefaults.elevation(0.dp, 0.dp, 0.dp, 0.dp)
                                         ) {
                                             when (currentTab) {
                                                 DIYTabs.ESSENTIALS -> {
@@ -946,8 +947,9 @@ class MainActivity : FragmentActivity() {
                         }
                     }
 
-                    // Mark app as ready after composing (happens very quickly)
+                    // Mark app as ready after a short delay to ensure first frame is painted
                     LaunchedEffect(Unit) {
+                        kotlinx.coroutines.delay(100)
                         isAppReady = true
                     }
                 }

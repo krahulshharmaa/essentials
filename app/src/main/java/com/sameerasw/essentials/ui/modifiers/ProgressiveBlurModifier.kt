@@ -41,7 +41,7 @@ private val PROGRESSIVE_BLUR_SKSL = """
         half4 accum = half4(0.0);
         float weightSum = 0.0;
         
-        const int SAMPLES = 8; 
+        const int SAMPLES = 5; 
         float offsetScale = radius / float(SAMPLES);
         
         for (int x = -SAMPLES; x <= SAMPLES; x++) {

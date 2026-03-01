@@ -55,7 +55,8 @@ fun DIYFloatingToolbar(
         modifier = modifier
             .windowInsetsPadding(
                 androidx.compose.foundation.layout.WindowInsets.navigationBars
-            ),
+            )
+            .padding(start = 16.dp, end = 16.dp, bottom = 0.dp),
         expanded = expanded,
         floatingActionButton = floatingActionButton,
         scrollBehavior = scrollBehavior,
