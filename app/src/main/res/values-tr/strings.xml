@@ -42,7 +42,7 @@
     <string name="screen_off">Screen Off</string>
     <string name="screen_on">Screen On</string>
     <string name="volume_up">Volume Up</string>
-    <string name="volume_down">Volume Down</string>
+    <string name="volume_down">Sesi kıs</string>
     <string name="action_toggle_flashlight">Toggle flashlight</string>
     <string name="action_media_play_pause">Media play/pause</string>
     <string name="action_media_next">Media next</string>
