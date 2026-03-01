@@ -79,6 +79,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import android.widget.Toast
+import androidx.compose.foundation.background
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
@@ -863,6 +864,22 @@ class MainActivity : FragmentActivity() {
                                                     ),
                                                     verticalArrangement = Arrangement.spacedBy(16.dp)
                                                 ) {
+                                                    item {
+                                                        RoundedCardContainer {
+                                                            AppsActionButtons(
+                                                                view = view,
+                                                                onAddClick = {
+                                                                    HapticUtil.performUIHaptic(view)
+                                                                    showAddRepoSheet = true
+                                                                },
+                                                                onRefreshAllClick = {
+                                                                    HapticUtil.performUIHaptic(view)
+                                                                    updatesViewModel.checkForUpdates(context)
+                                                                }
+                                                            )
+                                                        }
+                                                    }
+
                                                     // Pending Section
                                                     if (pending.isNotEmpty()) {
                                                         item {
@@ -1103,6 +1120,47 @@ class MainActivity : FragmentActivity() {
                 }
                 startActivity(settingsIntent)
             }
+        }
+    }
+}
+
+@Composable
+private fun AppsActionButtons(
+    view: android.view.View,
+    onAddClick: () -> Unit,
+    onRefreshAllClick: () -> Unit
+) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(MaterialTheme.colorScheme.surfaceBright)
+            .padding(12.dp),
+        horizontalArrangement = Arrangement.spacedBy(12.dp)
+    ) {
+        Button(
+            onClick = onAddClick,
+            modifier = Modifier.weight(1f),
+        ) {
+            Icon(
+                painter = painterResource(id = R.drawable.rounded_add_24),
+                contentDescription = null,
+                modifier = Modifier.size(18.dp)
+            )
+            Spacer(modifier = Modifier.width(8.dp))
+            Text(stringResource(R.string.action_add))
+        }
+
+        Button(
+            onClick = onRefreshAllClick,
+            modifier = Modifier.weight(1f),
+        ) {
+            Icon(
+                painter = painterResource(id = R.drawable.rounded_refresh_24),
+                contentDescription = null,
+                modifier = Modifier.size(18.dp)
+            )
+            Spacer(modifier = Modifier.width(8.dp))
+            Text(stringResource(R.string.action_refresh))
         }
     }
 }
