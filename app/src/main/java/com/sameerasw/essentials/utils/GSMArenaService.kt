@@ -9,10 +9,18 @@ import org.jsoup.nodes.Document
 object GSMArenaService {
     private const val BASE_URL = "https://www.gsmarena.com"
 
-    fun fetchSpecs(brand: String, model: String): DeviceSpecs? {
+    fun fetchSpecs(vararg queries: String): DeviceSpecs? {
+        for (query in queries) {
+            val specs = tryFetchSpecs(query)
+            if (specs != null) return specs
+        }
+        return null
+    }
+
+    private fun tryFetchSpecs(query: String): DeviceSpecs? {
         return try {
-            val query = "$brand $model".replace(" ", "+")
-            val searchUrl = "$BASE_URL/results.php3?sQuickSearch=yes&sName=$query"
+            val formattedQuery = query.replace(" ", "+")
+            val searchUrl = "$BASE_URL/results.php3?sQuickSearch=yes&sName=$formattedQuery"
 
             val searchDoc: Document = Jsoup.connect(searchUrl)
                 .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36")
