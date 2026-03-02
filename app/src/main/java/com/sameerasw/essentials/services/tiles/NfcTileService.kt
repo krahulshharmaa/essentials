@@ -7,6 +7,7 @@ import android.os.Build
 import android.service.quicksettings.Tile
 import androidx.annotation.RequiresApi
 import com.sameerasw.essentials.R
+import com.sameerasw.essentials.utils.ShellUtils
 import java.lang.reflect.Method
 
 @RequiresApi(Build.VERSION_CODES.N)
@@ -55,8 +56,8 @@ class NfcTileService : BaseTileService() {
     }
 
     override fun hasFeaturePermission(): Boolean {
-        // We need WRITE_SECURE_SETTINGS to toggle NFC via reflection
-        return checkCallingOrSelfPermission(android.Manifest.permission.WRITE_SECURE_SETTINGS) == android.content.pm.PackageManager.PERMISSION_GRANTED
+        return com.sameerasw.essentials.utils.PermissionUtils.canWriteSecureSettings(this) ||
+                (ShellUtils.isAvailable(this) && ShellUtils.hasPermission(this))
     }
 
     override fun getTileIcon(): Icon {
@@ -80,8 +81,10 @@ class NfcTileService : BaseTileService() {
             val method: Method = nfcAdapter.javaClass.getMethod(methodName)
             method.invoke(nfcAdapter) as Boolean
         } catch (e: Exception) {
-            e.printStackTrace()
-            false
+            // Fallback to shell if reflection fails
+            val command = if (enable) "svc nfc enable" else "svc nfc disable"
+            ShellUtils.runCommand(context, command)
+            true
         }
     }
 }

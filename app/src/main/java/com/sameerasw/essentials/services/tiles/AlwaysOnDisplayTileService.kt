@@ -9,6 +9,7 @@ import android.service.quicksettings.Tile
 import androidx.annotation.RequiresApi
 import com.sameerasw.essentials.R
 import com.sameerasw.essentials.data.repository.SettingsRepository
+import com.sameerasw.essentials.utils.ShellUtils
 
 @RequiresApi(Build.VERSION_CODES.N)
 class AlwaysOnDisplayTileService : BaseTileService() {
@@ -24,7 +25,8 @@ class AlwaysOnDisplayTileService : BaseTileService() {
     }
 
     override fun hasFeaturePermission(): Boolean {
-        return checkCallingOrSelfPermission(Manifest.permission.WRITE_SECURE_SETTINGS) == PackageManager.PERMISSION_GRANTED
+        return com.sameerasw.essentials.utils.PermissionUtils.canWriteSecureSettings(this) ||
+                (ShellUtils.isAvailable(this) && ShellUtils.hasPermission(this))
     }
 
     override fun getTileIcon(): Icon? {
@@ -60,11 +62,11 @@ class AlwaysOnDisplayTileService : BaseTileService() {
     }
 
     private fun isAodEnabled(): Boolean {
-        return Settings.Secure.getInt(contentResolver, "doze_always_on", 0) == 1
+        return getSecureInt("doze_always_on", 0) == 1
     }
-
+    
     private fun setAodEnabled(enabled: Boolean) {
-        Settings.Secure.putInt(contentResolver, "doze_always_on", if (enabled) 1 else 0)
+        putSecureInt("doze_always_on", if (enabled) 1 else 0)
     }
 
     private fun isGlanceEnabled(): Boolean {

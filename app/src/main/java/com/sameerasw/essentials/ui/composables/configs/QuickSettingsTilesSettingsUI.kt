@@ -68,6 +68,7 @@ import com.sameerasw.essentials.services.tiles.UsbDebuggingTileService
 import com.sameerasw.essentials.ui.components.sheets.PermissionsBottomSheet
 import com.sameerasw.essentials.ui.modifiers.highlight
 import com.sameerasw.essentials.utils.PermissionUIHelper
+import com.sameerasw.essentials.utils.PermissionUtils
 import com.sameerasw.essentials.utils.ShellUtils
 import com.sameerasw.essentials.viewmodels.MainViewModel
 
@@ -128,7 +129,9 @@ fun QuickSettingsTilesSettingsUI(
             R.string.tile_aod,
             R.drawable.rounded_mobile_text_2_24,
             AlwaysOnDisplayTileService::class.java,
-            listOf("WRITE_SECURE_SETTINGS"),
+            if (ShellUtils.isRootEnabled(context)) listOf("ROOT")
+            else if (PermissionUtils.canWriteSecureSettings(context)) listOf("WRITE_SECURE_SETTINGS")
+            else listOf("SHIZUKU"),
             R.string.about_desc_aod
         ),
         QSTileInfo(
@@ -177,7 +180,9 @@ fun QuickSettingsTilesSettingsUI(
             R.string.tile_mono_audio,
             R.drawable.rounded_headphones_24,
             MonoAudioTileService::class.java,
-            if (ShellUtils.isRootEnabled(context)) listOf("ROOT") else listOf("SHIZUKU"),
+            if (ShellUtils.isRootEnabled(context)) listOf("ROOT")
+            else if (PermissionUtils.canWriteSecureSettings(context)) listOf("WRITE_SECURE_SETTINGS")
+            else listOf("SHIZUKU"),
             R.string.about_desc_mono_audio
         ),
         QSTileInfo(
@@ -216,7 +221,9 @@ fun QuickSettingsTilesSettingsUI(
             R.string.nfc_tile_label,
             R.drawable.rounded_nfc_24,
             NfcTileService::class.java,
-            if (ShellUtils.isRootEnabled(context)) listOf("ROOT") else listOf("SHIZUKU"),
+            if (ShellUtils.isRootEnabled(context)) listOf("ROOT")
+            else if (PermissionUtils.canWriteSecureSettings(context)) listOf("WRITE_SECURE_SETTINGS")
+            else listOf("SHIZUKU"),
             R.string.about_desc_nfc
         ),
         QSTileInfo(
@@ -275,7 +282,7 @@ fun QuickSettingsTilesSettingsUI(
             R.string.tile_charge_optimization,
             R.drawable.rounded_battery_android_frame_shield_24,
             ChargeQuickTileService::class.java,
-            if (ShellUtils.isRootEnabled(context)) listOf("ROOT") else listOf("SHIZUKU", "WRITE_SECURE_SETTINGS"),
+            if (ShellUtils.isRootEnabled(context)) listOf("ROOT") else listOf("SHIZUKU"),
             R.string.about_desc_charge_optimization
         )
 
