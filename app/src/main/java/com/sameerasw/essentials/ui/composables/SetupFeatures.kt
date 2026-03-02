@@ -26,6 +26,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
+import androidx.compose.material3.pulltorefresh.PullToRefreshBox
+import androidx.compose.material3.pulltorefresh.rememberPullToRefreshState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -37,16 +39,27 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusChanged
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.width
+import androidx.compose.material.icons.rounded.KeyboardArrowDown
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.OutlinedCard
+import androidx.compose.ui.graphics.Color
 import androidx.core.net.toUri
 import androidx.fragment.app.FragmentActivity
 import com.sameerasw.essentials.FeatureSettingsActivity
 import com.sameerasw.essentials.R
+import com.sameerasw.essentials.ui.activities.YourAndroidActivity
 import com.sameerasw.essentials.domain.registry.FeatureRegistry
 import com.sameerasw.essentials.domain.registry.PermissionRegistry
 import com.sameerasw.essentials.ui.components.FavoriteCarousel
@@ -54,7 +67,9 @@ import com.sameerasw.essentials.ui.components.cards.FeatureCard
 import com.sameerasw.essentials.ui.components.containers.RoundedCardContainer
 import com.sameerasw.essentials.ui.components.sheets.PermissionItem
 import com.sameerasw.essentials.ui.components.sheets.PermissionsBottomSheet
+import com.sameerasw.essentials.utils.DeviceUtils
 import com.sameerasw.essentials.utils.BiometricSecurityHelper
+import com.sameerasw.essentials.utils.HapticUtil
 import com.sameerasw.essentials.viewmodels.MainViewModel
 import kotlinx.coroutines.delay
 
@@ -762,9 +777,13 @@ fun SetupFeatures(
     }
 
     val scrollState = rememberScrollState()
+    val view = LocalView.current
     val focusRequester = remember { FocusRequester() }
     val focusManager = LocalFocusManager.current
     var isFocused by remember { mutableStateOf(false) }
+    
+    val pullRefreshState = rememberPullToRefreshState()
+    var isRefreshing by remember { mutableStateOf(false) }
 
     val allFeatures = FeatureRegistry.ALL_FEATURES
 
@@ -776,21 +795,132 @@ fun SetupFeatures(
             onSearchHandled()
         }
     }
+    
+    LaunchedEffect(isRefreshing) {
+        if (isRefreshing) {
+            HapticUtil.performUIHaptic(view)
+            context.startActivity(Intent(context, YourAndroidActivity::class.java))
+            delay(500)
+            isRefreshing = false
+        }
+    }
 
-    Column(
-        modifier = modifier
-            .fillMaxSize()
-            .verticalScroll(scrollState)
-            .pointerInput(Unit) {
-                detectTapGestures(onTap = { focusManager.clearFocus() })
-            },
-        verticalArrangement = Arrangement.Top,
-        horizontalAlignment = Alignment.Start
-    ) {
-        Spacer(modifier = Modifier.height(contentPadding.calculateTopPadding()))
+    var lastHapticBucket by remember { mutableStateOf(0) }
+    LaunchedEffect(pullRefreshState.distanceFraction) {
+        val fraction = pullRefreshState.distanceFraction
+        val currentBucket = (fraction * 10).toInt()
         
-        OutlinedTextField(
-            value = viewModel.searchQuery.value,
+        if (fraction >= 1f && lastHapticBucket < 10) {
+            HapticUtil.performUIHaptic(view) 
+            lastHapticBucket = 10
+        } else if (fraction < 1f && currentBucket != lastHapticBucket) {
+            if (currentBucket > lastHapticBucket) {
+                HapticUtil.performSliderHaptic(view)
+            }
+            lastHapticBucket = currentBucket
+        }
+        
+        if (fraction == 0f) {
+            lastHapticBucket = 0
+        }
+    }
+    
+    PullToRefreshBox(
+        isRefreshing = isRefreshing,
+        onRefresh = { isRefreshing = true },
+        state = pullRefreshState,
+        indicator = { },
+        modifier = modifier.fillMaxSize()
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .verticalScroll(scrollState)
+                .pointerInput(Unit) {
+                    detectTapGestures(onTap = { focusManager.clearFocus() })
+                },
+            verticalArrangement = Arrangement.Top,
+            horizontalAlignment = Alignment.Start
+        ) {
+            Spacer(modifier = Modifier.height(contentPadding.calculateTopPadding()))
+            
+            val deviceInfo = remember { DeviceUtils.getDeviceInfo(context) }
+            val fraction = pullRefreshState.distanceFraction
+            val thresholdPassed = fraction >= 1f
+            
+            val cardExpansion by androidx.compose.animation.core.animateDpAsState(
+                targetValue = 120.dp * fraction.coerceIn(0f, 1f),
+                animationSpec = androidx.compose.animation.core.spring(stiffness = androidx.compose.animation.core.Spring.StiffnessMediumLow),
+                label = "cardExpansion"
+            )
+
+            val containerColor by androidx.compose.animation.animateColorAsState(
+                targetValue = if (thresholdPassed) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.surfaceContainerLow,
+                animationSpec = androidx.compose.animation.core.tween(durationMillis = 300),
+                label = "containerColor"
+            )
+
+            val contentColor by androidx.compose.animation.animateColorAsState(
+                targetValue = if (thresholdPassed) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.primary,
+                animationSpec = androidx.compose.animation.core.tween(durationMillis = 300),
+                label = "contentColor"
+            )
+
+            val arrowColor by androidx.compose.animation.animateColorAsState(
+                targetValue = if (thresholdPassed) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onSurfaceVariant,
+                animationSpec = androidx.compose.animation.core.tween(durationMillis = 300),
+                label = "arrowColor"
+            )
+
+            val borderColor by androidx.compose.animation.animateColorAsState(
+                targetValue = if (thresholdPassed) Color.Transparent else MaterialTheme.colorScheme.outlineVariant,
+                animationSpec = androidx.compose.animation.core.tween(durationMillis = 300),
+                label = "borderColor"
+            )
+
+            // My Android
+            OutlinedCard(
+                onClick = {
+                    HapticUtil.performUIHaptic(view)
+                    context.startActivity(Intent(context, YourAndroidActivity::class.java))
+                },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp)
+                    .padding(top = 16.dp, bottom = 0.dp)
+                    .height(64.dp + cardExpansion),
+                shape = MaterialTheme.shapes.extraLarge,
+                colors = CardDefaults.outlinedCardColors(
+                    containerColor = containerColor,
+                    contentColor = if (thresholdPassed) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onSurface
+                ),
+                border = BorderStroke(1.dp, borderColor)
+            ) {
+                Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Icon(
+                                imageVector = androidx.compose.material.icons.Icons.Rounded.KeyboardArrowDown,
+                                contentDescription = null,
+                                modifier = Modifier.size(24.dp).graphicsLayer {
+                                    rotationZ = (fraction * 180f).coerceIn(0f, 180f)
+                                },
+                                tint = contentColor
+                            )
+                            Spacer(modifier = Modifier.width(8.dp))
+                            Text(
+                                text = deviceInfo.deviceName,
+                                style = MaterialTheme.typography.titleMedium,
+                                fontWeight = androidx.compose.ui.text.font.FontWeight.Medium,
+                                color = if (thresholdPassed) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onSurface
+                            )
+                        }
+                    }
+                }
+            }
+            
+            OutlinedTextField(
+                value = viewModel.searchQuery.value,
             onValueChange = { new ->
                 viewModel.onSearchQueryChanged(new, context)
             },
@@ -1002,11 +1132,69 @@ fun SetupFeatures(
                                 }
                             } else null
                         )
+                            }
+                        }
+
+                } else {
+                    val topLevelFeatures =
+                        allFeatures.filter { it.parentFeatureId == null && it.isVisibleInMain }
+
+                    if (topLevelFeatures.isNotEmpty()) {
+                        RoundedCardContainer(
+                            modifier = Modifier.padding(horizontal = 16.dp),
+                        ) {
+                            topLevelFeatures.forEachIndexed { index, feature ->
+                                FeatureCard(
+                                    title = feature.title,
+                                    isEnabled = feature.isEnabled(viewModel),
+                                    onToggle = { enabled ->
+                                        BiometricSecurityHelper.runWithAuth(
+                                            activity = context as FragmentActivity,
+                                            feature = feature,
+                                            isToggle = true,
+                                            action = {
+                                                feature.onToggle(viewModel, context, enabled)
+                                            }
+                                        )
+                                    },
+                                    onClick = {
+                                        BiometricSecurityHelper.runWithAuth(
+                                            activity = context as FragmentActivity,
+                                            feature = feature,
+                                            action = {
+                                                feature.onClick(context, viewModel)
+                                            }
+                                        )
+                                    },
+                                    iconRes = feature.iconRes,
+                                    modifier = Modifier.padding(horizontal = 0.dp, vertical = 0.dp),
+                                    isToggleEnabled = feature.isToggleEnabled(viewModel, context),
+                                    showToggle = feature.showToggle,
+                                    hasMoreSettings = feature.hasMoreSettings,
+                                    onDisabledToggleClick = {
+                                        currentFeature = feature.title
+                                        showSheet = true
+                                    },
+                                    description = feature.description,
+                                    isBeta = feature.isBeta,
+                                    isPinned = pinnedFeatureKeys.contains(feature.id),
+                                    onPinToggle = {
+                                        viewModel.togglePinFeature(feature.id)
+                                    },
+                                    onHelpClick = if (feature.aboutDescription != null) {
+                                        {
+                                            selectedHelpFeature = feature
+                                            showHelpSheet = true
+                                        }
+                                    } else null
+                                )
+                            }
+                        }
                     }
                 }
+
+                Spacer(modifier = Modifier.height(contentPadding.calculateBottomPadding()))
             }
         }
-        
-        Spacer(modifier = Modifier.height(contentPadding.calculateBottomPadding()))
     }
 }

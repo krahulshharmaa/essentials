@@ -146,7 +146,10 @@ fun FeatureCard(
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
-                        Text(text = resolvedTitle)
+                        Text(
+                            text = resolvedTitle,
+                            color = MaterialTheme.colorScheme.onSurface
+                        )
                         if (isBeta) {
                             Card(
                                 colors = CardDefaults.cardColors(
@@ -195,7 +198,8 @@ fun FeatureCard(
                             .padding(end = 12.dp)
                             .size(24.dp),
                         painter = painterResource(id = R.drawable.rounded_chevron_right_24),
-                        contentDescription = "More settings"
+                        contentDescription = "More settings",
+                        tint = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }
 

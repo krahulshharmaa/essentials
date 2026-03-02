@@ -70,7 +70,8 @@ fun IconToggleItem(
             Column(modifier = Modifier.weight(1f)) {
                 Text(
                     text = title,
-                    style = MaterialTheme.typography.bodyMedium
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurface
                 )
                 Text(
                     text = description,
@@ -82,7 +83,8 @@ fun IconToggleItem(
             Text(
                 text = title,
                 style = MaterialTheme.typography.bodyMedium,
-                modifier = Modifier.weight(1f)
+                modifier = Modifier.weight(1f),
+                color = MaterialTheme.colorScheme.onSurface
             )
         }
 
