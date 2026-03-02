@@ -33,6 +33,8 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -72,6 +74,7 @@ import com.sameerasw.essentials.utils.BiometricSecurityHelper
 import com.sameerasw.essentials.utils.HapticUtil
 import com.sameerasw.essentials.viewmodels.MainViewModel
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 private const val FEATURE_MAPS_POWER_SAVING = R.string.feat_maps_power_saving_title
 
@@ -783,7 +786,8 @@ fun SetupFeatures(
     var isFocused by remember { mutableStateOf(false) }
     
     val pullRefreshState = rememberPullToRefreshState()
-    var isRefreshing by remember { mutableStateOf(false) }
+    var isRefreshing by rememberSaveable { mutableStateOf(false) }
+    val scope = rememberCoroutineScope()
 
     val allFeatures = FeatureRegistry.ALL_FEATURES
 
@@ -796,12 +800,32 @@ fun SetupFeatures(
         }
     }
     
+    val lifecycleOwner = androidx.lifecycle.compose.LocalLifecycleOwner.current
+    var shouldResetRefreshing by rememberSaveable { mutableStateOf(false) }
+
+    androidx.compose.runtime.DisposableEffect(lifecycleOwner) {
+        val observer = androidx.lifecycle.LifecycleEventObserver { _, event ->
+            if (event == androidx.lifecycle.Lifecycle.Event.ON_RESUME) {
+                if (shouldResetRefreshing) {
+                    scope.launch {
+                        delay(200)
+                        isRefreshing = false
+                        shouldResetRefreshing = false
+                    }
+                }
+            }
+        }
+        lifecycleOwner.lifecycle.addObserver(observer)
+        onDispose {
+            lifecycleOwner.lifecycle.removeObserver(observer)
+        }
+    }
+
     LaunchedEffect(isRefreshing) {
         if (isRefreshing) {
             HapticUtil.performUIHaptic(view)
             context.startActivity(Intent(context, YourAndroidActivity::class.java))
-            delay(500)
-            isRefreshing = false
+            shouldResetRefreshing = true
         }
     }
 
@@ -845,11 +869,11 @@ fun SetupFeatures(
             Spacer(modifier = Modifier.height(contentPadding.calculateTopPadding()))
             
             val deviceInfo = remember { DeviceUtils.getDeviceInfo(context) }
-            val fraction = pullRefreshState.distanceFraction
-            val thresholdPassed = fraction >= 1f
+            val displayFraction = if (isRefreshing) 1f else pullRefreshState.distanceFraction
+            val thresholdPassed = displayFraction >= 1f
             
             val cardExpansion by androidx.compose.animation.core.animateDpAsState(
-                targetValue = 120.dp * fraction.coerceIn(0f, 1f),
+                targetValue = 120.dp * displayFraction.coerceIn(0f, 1f),
                 animationSpec = androidx.compose.animation.core.spring(stiffness = androidx.compose.animation.core.Spring.StiffnessMediumLow),
                 label = "cardExpansion"
             )
@@ -903,7 +927,7 @@ fun SetupFeatures(
                                 imageVector = androidx.compose.material.icons.Icons.Rounded.KeyboardArrowDown,
                                 contentDescription = null,
                                 modifier = Modifier.size(24.dp).graphicsLayer {
-                                    rotationZ = (fraction * 180f).coerceIn(0f, 180f)
+                                    rotationZ = (displayFraction * 180f).coerceIn(0f, 180f)
                                 },
                                 tint = contentColor
                             )
