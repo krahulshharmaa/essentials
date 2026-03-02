@@ -33,9 +33,9 @@ object DeviceImageMapper {
                 R.drawable.pixel_9pro_9proxl_10_10pro_10proxl
 
             m.contains("pixel 9") -> R.drawable.pixel_9
-
+            
             // Default fallback
-            else -> R.drawable.rounded_android_24
+            else -> 0
         }
     }
 
@@ -53,7 +53,7 @@ object DeviceImageMapper {
             osName.contains("android 14") || osName.contains("upside") || sdk >= 34 -> R.drawable.android14
             osName.contains("android 13") || osName.contains("tiramisu") || sdk >= 33 -> R.drawable.android13
             osName.contains("android 12") || osName.contains("snow cone") || sdk >= 31 -> R.drawable.android12
-            else -> R.drawable.rounded_android_24
+            else -> 0
         }
     }
 }

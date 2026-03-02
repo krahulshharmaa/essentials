@@ -50,7 +50,12 @@ fun DeviceHeroCard(
     modifier: Modifier = Modifier
 ) {
     val imageUrls = deviceSpecs?.imageUrls ?: emptyList()
-    val pageCount = 1 + imageUrls.size
+    val isPixel = deviceInfo.manufacturer.contains("Google", ignoreCase = true)
+    
+    // Only show the illustration page if it's a Pixel AND we have a mapping
+    val illustrationRes = DeviceImageMapper.getDeviceDrawable(deviceInfo.model)
+    val showIllustration = isPixel && illustrationRes != 0
+    val pageCount = (if (showIllustration) 1 else 0) + imageUrls.size
     val pagerState = rememberPagerState(pageCount = { pageCount })
 
     Column(
@@ -59,80 +64,79 @@ fun DeviceHeroCard(
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Box(
-            modifier = Modifier
-                .graphicsLayer {
-                    translationY = imageOffset().toPx()
-                }
-                .fillMaxWidth()
-                .height(480.dp)
-                .clip(MaterialTheme.shapes.medium),
-            contentAlignment = Alignment.Center
-        ) {
-            HorizontalPager(
-                state = pagerState,
-                modifier = Modifier.fillMaxSize(),
-                verticalAlignment = Alignment.CenterVertically
-            ) { page ->
-                Box(
+        if (pageCount > 0) {
+            Box(
+                modifier = Modifier
+                    .graphicsLayer {
+                        translationY = imageOffset().toPx()
+                    }
+                    .fillMaxWidth()
+                    .height(480.dp)
+                    .clip(MaterialTheme.shapes.medium),
+                contentAlignment = Alignment.Center
+            ) {
+                HorizontalPager(
+                    state = pagerState,
                     modifier = Modifier.fillMaxSize(),
-                    contentAlignment = Alignment.Center
-                ) {
-                    if (page == 0) {
-                        // stylized vector
-                        Icon(
-                            painter = painterResource(
-                                id = DeviceImageMapper.getDeviceDrawable(
-                                    deviceInfo.model
-                                )
-                            ),
-                            contentDescription = null,
-                            tint = MaterialTheme.colorScheme.primary,
-                            modifier = Modifier
-                                .fillMaxHeight(0.85f)
-                                .fillMaxWidth(0.85f)
-                        )
-                    } else {
-                        // real image from gsmarena
-                        AsyncImage(
-                            model = imageUrls[page - 1],
-                            contentDescription = "Device Image",
-                            contentScale = ContentScale.Fit,
-                            modifier = Modifier
-                                .fillMaxHeight(0.85f)
-                                .fillMaxWidth(0.85f)
-                                .clip(RoundedCornerShape(24.dp))
-                                .shimmer()
-                        )
+                    verticalAlignment = Alignment.CenterVertically
+                ) { page ->
+                    Box(
+                        modifier = Modifier.fillMaxSize(),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        if (showIllustration && page == 0) {
+                            // stylized vector
+                            Icon(
+                                painter = painterResource(id = illustrationRes),
+                                contentDescription = null,
+                                tint = MaterialTheme.colorScheme.primary,
+                                modifier = Modifier
+                                    .fillMaxHeight(0.85f)
+                                    .fillMaxWidth(0.85f)
+                            )
+                        } else {
+                            // real image from gsmarena
+                            val imageIndex = if (showIllustration) page - 1 else page
+                            AsyncImage(
+                                model = imageUrls[imageIndex],
+                                contentDescription = "Device Image",
+                                contentScale = ContentScale.Fit,
+                                modifier = Modifier
+                                    .fillMaxHeight(0.85f)
+                                    .fillMaxWidth(0.85f)
+                                    .clip(RoundedCornerShape(24.dp))
+                                    .shimmer()
+                            )
+                        }
+                    }
+                }
+
+                // Page Indicator dots
+                if (pageCount > 1) {
+                    Row(
+                        Modifier
+                            .align(Alignment.BottomCenter)
+                            .padding(bottom = 16.dp),
+                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        repeat(pageCount) { iteration ->
+                            val color = if (pagerState.currentPage == iteration)
+                                MaterialTheme.colorScheme.primary
+                            else
+                                MaterialTheme.colorScheme.primary.copy(alpha = 0.2f)
+                            Box(
+                                modifier = Modifier
+                                    .size(8.dp)
+                                    .clip(MaterialTheme.shapes.small)
+                                    .background(color)
+                            )
+                        }
                     }
                 }
             }
 
-            // Page Indicator dots
-            if (pageCount > 1) {
-                Row(
-                    Modifier
-                        .align(Alignment.BottomCenter)
-                        .padding(bottom = 16.dp),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp)
-                ) {
-                    repeat(pageCount) { iteration ->
-                        val color = if (pagerState.currentPage == iteration)
-                            MaterialTheme.colorScheme.primary
-                        else
-                            MaterialTheme.colorScheme.primary.copy(alpha = 0.2f)
-                        Box(
-                            modifier = Modifier
-                                .size(8.dp)
-                                .clip(MaterialTheme.shapes.small)
-                                .background(color)
-                        )
-                    }
-                }
-            }
+            Spacer(modifier = Modifier.height(24.dp))
         }
-
-        Spacer(modifier = Modifier.height(24.dp))
 
         // User-set Device Name
         Text(
@@ -172,79 +176,60 @@ fun DeviceHeroCard(
             },
     ) {
 
-
-        Row(
-            modifier = Modifier
-                .background(
-                    MaterialTheme.colorScheme.surfaceContainerHighest,
-                    shape = Shapes.extraSmall
-                )
-                .fillMaxWidth()
-                .padding(16.dp),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.Center
-        ) {
+        val androidLogoRes = DeviceImageMapper.getAndroidLogo(deviceInfo)
+        if (isPixel && androidLogoRes != 0) {
             Row(
+                modifier = Modifier
+                    .background(
+                        MaterialTheme.colorScheme.surfaceContainerHighest,
+                        shape = Shapes.extraSmall
+                    )
+                    .fillMaxWidth()
+                    .padding(16.dp),
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(16.dp)
+                horizontalArrangement = Arrangement.Center
             ) {
-                Icon(
-                    painter = painterResource(id = DeviceImageMapper.getAndroidLogo(deviceInfo)),
-                    contentDescription = null,
-                    tint = Color.Unspecified,
-                    modifier = Modifier.size(56.dp)
-                )
-                Column(horizontalAlignment = Alignment.Start) {
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        Text(
-                            text = "Android ${deviceInfo.androidVersion} (${
-                                DeviceUtils.getOSName(
-                                    deviceInfo.sdkInt,
-                                    deviceInfo.osCodename
-                                )
-                            })",
-                            style = MaterialTheme.typography.bodyLarge,
-                            fontWeight = FontWeight.Bold,
-                            color = MaterialTheme.colorScheme.primary
-                        )
-                        val isBeta = deviceInfo.buildTag.lowercase().contains("beta")
-                        val isCanary = deviceInfo.buildTag.lowercase().contains("canary")
-
-                        if (isBeta || isCanary) {
-                            Spacer(modifier = Modifier.size(8.dp))
-                            Box(
-                                modifier = Modifier
-                                    .background(
-                                        MaterialTheme.colorScheme.primary,
-                                        shape = MaterialTheme.shapes.large
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(16.dp)
+                ) {
+                    Icon(
+                        painter = painterResource(id = androidLogoRes),
+                        contentDescription = null,
+                        tint = Color.Unspecified,
+                        modifier = Modifier.size(56.dp)
+                    )
+                    Column(horizontalAlignment = Alignment.Start) {
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Text(
+                                text = "Android ${deviceInfo.androidVersion} (${
+                                    DeviceUtils.getOSName(
+                                        deviceInfo.sdkInt,
+                                        deviceInfo.osCodename
                                     )
-                                    .padding(horizontal = 6.dp, vertical = 2.dp)
-                            ) {
-                                Text(
-                                    text = if (isCanary) "CANARY" else "BETA",
-                                    style = MaterialTheme.typography.labelSmall,
-                                    fontWeight = FontWeight.Bold,
-                                    color = MaterialTheme.colorScheme.onPrimary
-                                )
-                            }
-                        }
-                    }
-                    Text(
-                        text = "API ${deviceInfo.sdkInt} • Patch: ${
-                            DeviceUtils.formatSecurityPatch(
-                                deviceInfo.securityPatch
+                                })",
+                                style = MaterialTheme.typography.bodyLarge,
+                                fontWeight = FontWeight.Bold,
+                                color = MaterialTheme.colorScheme.primary
                             )
-                        }",
-                        style = MaterialTheme.typography.labelMedium,
-                        fontWeight = FontWeight.Medium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-                    Text(
-                        text = "Build: ${deviceInfo.display}",
-                        style = MaterialTheme.typography.labelSmall,
-                        fontWeight = FontWeight.Normal,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.8f)
-                    )
+                        }
+                        Text(
+                            text = "API ${deviceInfo.sdkInt} • Patch: ${
+                                DeviceUtils.formatSecurityPatch(
+                                    deviceInfo.securityPatch
+                                )
+                            }",
+                            style = MaterialTheme.typography.labelMedium,
+                            fontWeight = FontWeight.Medium,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                        Text(
+                            text = "Build: ${deviceInfo.display}",
+                            style = MaterialTheme.typography.labelSmall,
+                            fontWeight = FontWeight.Normal,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.8f)
+                        )
+                    }
                 }
             }
         }

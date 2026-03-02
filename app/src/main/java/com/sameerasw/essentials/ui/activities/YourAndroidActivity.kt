@@ -90,19 +90,41 @@ class YourAndroidViewModel : ViewModel() {
         viewModelScope.launch {
             _isSpecsLoading.value = true
             val specs = withContext(Dispatchers.IO) {
-                // Remove generic terms from the hardware name
-                val brand = deviceInfo.manufacturer.replace("Google", "")
-                    .replace("samsung", "Samsung")
-                    .trim()
+                val manufacturer = deviceInfo.manufacturer
                 val model = deviceInfo.model
-                    .replace("Pixel", "")
-                    .replace("Galaxy", "")
-                    .trim()
+                val deviceName = deviceInfo.deviceName
+                val deviceCodename = deviceInfo.device
+
+                // Generate a prioritized list of search queries
+                val queries = mutableListOf<String>()
                 
-                // Fallback to simpler search
-                val searchBrand = if(brand.isEmpty()) deviceInfo.manufacturer else brand
+                // 1. Marketing name (Manufacturer + Model)
+                if (model.contains(manufacturer, ignoreCase = true)) {
+                    queries.add(model)
+                } else {
+                    queries.add("$manufacturer $model")
+                }
                 
-                GSMArenaService.fetchSpecs(brand = searchBrand, model = model)
+                // 2. Model number directly if it's different from marketing name
+                if (!queries.contains(model)) {
+                    queries.add(model)
+                }
+                
+                // 3. User-defined device name (sometimes it's the marketing name)
+                if (deviceName.isNotBlank() && !queries.contains(deviceName)) {
+                    queries.add(deviceName)
+                }
+                
+                // 4. Device codename (e.g., "shiba", "a51")
+                if (deviceCodename.isNotBlank() && !queries.contains(deviceCodename)) {
+                    queries.add(deviceCodename)
+                }
+
+                GSMArenaService.fetchSpecs(
+                    preferredName = manufacturer,
+                    preferredModel = model,
+                    queries = queries.toTypedArray()
+                )
             }
             _deviceSpecs.value = specs
             _isSpecsLoading.value = false

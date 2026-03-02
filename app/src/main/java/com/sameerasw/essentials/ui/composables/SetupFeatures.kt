@@ -7,6 +7,7 @@ import android.content.Context
 import android.content.Intent
 import android.provider.Settings
 import androidx.compose.foundation.gestures.detectTapGestures
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -33,6 +34,8 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -72,6 +75,7 @@ import com.sameerasw.essentials.utils.BiometricSecurityHelper
 import com.sameerasw.essentials.utils.HapticUtil
 import com.sameerasw.essentials.viewmodels.MainViewModel
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 private const val FEATURE_MAPS_POWER_SAVING = R.string.feat_maps_power_saving_title
 
@@ -783,7 +787,8 @@ fun SetupFeatures(
     var isFocused by remember { mutableStateOf(false) }
     
     val pullRefreshState = rememberPullToRefreshState()
-    var isRefreshing by remember { mutableStateOf(false) }
+    var isRefreshing by rememberSaveable { mutableStateOf(false) }
+    val scope = rememberCoroutineScope()
 
     val allFeatures = FeatureRegistry.ALL_FEATURES
 
@@ -796,12 +801,32 @@ fun SetupFeatures(
         }
     }
     
+    val lifecycleOwner = androidx.lifecycle.compose.LocalLifecycleOwner.current
+    var shouldResetRefreshing by rememberSaveable { mutableStateOf(false) }
+
+    androidx.compose.runtime.DisposableEffect(lifecycleOwner) {
+        val observer = androidx.lifecycle.LifecycleEventObserver { _, event ->
+            if (event == androidx.lifecycle.Lifecycle.Event.ON_RESUME) {
+                if (shouldResetRefreshing) {
+                    scope.launch {
+                        delay(200)
+                        isRefreshing = false
+                        shouldResetRefreshing = false
+                    }
+                }
+            }
+        }
+        lifecycleOwner.lifecycle.addObserver(observer)
+        onDispose {
+            lifecycleOwner.lifecycle.removeObserver(observer)
+        }
+    }
+
     LaunchedEffect(isRefreshing) {
         if (isRefreshing) {
             HapticUtil.performUIHaptic(view)
             context.startActivity(Intent(context, YourAndroidActivity::class.java))
-            delay(500)
-            isRefreshing = false
+            shouldResetRefreshing = true
         }
     }
 
@@ -842,14 +867,13 @@ fun SetupFeatures(
             verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.Start
         ) {
-            Spacer(modifier = Modifier.height(contentPadding.calculateTopPadding()))
-            
             val deviceInfo = remember { DeviceUtils.getDeviceInfo(context) }
-            val fraction = pullRefreshState.distanceFraction
-            val thresholdPassed = fraction >= 1f
+            val displayFraction = if (isRefreshing) 1f else pullRefreshState.distanceFraction
+            val thresholdPassed = displayFraction >= 1f
+            val statusBarPadding = contentPadding.calculateTopPadding()
             
             val cardExpansion by androidx.compose.animation.core.animateDpAsState(
-                targetValue = 120.dp * fraction.coerceIn(0f, 1f),
+                targetValue = 120.dp * displayFraction.coerceIn(0f, 1f),
                 animationSpec = androidx.compose.animation.core.spring(stiffness = androidx.compose.animation.core.Spring.StiffnessMediumLow),
                 label = "cardExpansion"
             )
@@ -878,6 +902,30 @@ fun SetupFeatures(
                 label = "borderColor"
             )
 
+            val chevronAlpha by androidx.compose.animation.core.animateFloatAsState(
+                targetValue = if (thresholdPassed) 0f else 1f,
+                animationSpec = androidx.compose.animation.core.tween(durationMillis = 300),
+                label = "chevronAlpha"
+            )
+
+            val chevronWidth by androidx.compose.animation.core.animateDpAsState(
+                targetValue = if (thresholdPassed) 0.dp else 24.dp + 8.dp, // size + spacer
+                animationSpec = androidx.compose.animation.core.tween(durationMillis = 300),
+                label = "chevronWidth"
+            )
+
+            val fontWeight by androidx.compose.animation.core.animateIntAsState(
+                targetValue = if (thresholdPassed) 700 else 500,
+                animationSpec = androidx.compose.animation.core.tween(durationMillis = 300),
+                label = "fontWeight"
+            )
+
+            val textScale by androidx.compose.animation.core.animateFloatAsState(
+                targetValue = if (thresholdPassed) 1.5f else 1f,
+                animationSpec = androidx.compose.animation.core.tween(durationMillis = 300),
+                label = "textScale"
+            )
+
             // My Android
             OutlinedCard(
                 onClick = {
@@ -887,9 +935,14 @@ fun SetupFeatures(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp)
-                    .padding(top = 16.dp, bottom = 0.dp)
-                    .height(64.dp + cardExpansion),
-                shape = MaterialTheme.shapes.extraLarge,
+                    .padding(top = 0.dp, bottom = 0.dp)
+                    .height(64.dp + statusBarPadding + cardExpansion),
+                shape = RoundedCornerShape(
+                    topStart = 0.dp,
+                    topEnd = 0.dp,
+                    bottomStart = 28.dp,
+                    bottomEnd = 28.dp
+                ),
                 colors = CardDefaults.outlinedCardColors(
                     containerColor = containerColor,
                     contentColor = if (thresholdPassed) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onSurface
@@ -898,20 +951,36 @@ fun SetupFeatures(
             ) {
                 Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                     Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
+                        Spacer(modifier = Modifier.height(statusBarPadding))
                         Row(verticalAlignment = Alignment.CenterVertically) {
-                            Icon(
-                                imageVector = androidx.compose.material.icons.Icons.Rounded.KeyboardArrowDown,
-                                contentDescription = null,
-                                modifier = Modifier.size(24.dp).graphicsLayer {
-                                    rotationZ = (fraction * 180f).coerceIn(0f, 180f)
-                                },
-                                tint = contentColor
-                            )
-                            Spacer(modifier = Modifier.width(8.dp))
+                            Box(
+                                modifier = Modifier
+                                    .width(chevronWidth)
+                                    .graphicsLayer { alpha = chevronAlpha }
+                            ) {
+                                Row(verticalAlignment = Alignment.CenterVertically) {
+                                    Icon(
+                                        imageVector = androidx.compose.material.icons.Icons.Rounded.KeyboardArrowDown,
+                                        contentDescription = null,
+                                        modifier = Modifier
+                                            .size(24.dp)
+                                            .graphicsLayer {
+                                                rotationZ = (displayFraction * 180f).coerceIn(0f, 180f)
+                                            },
+                                        tint = contentColor
+                                    )
+                                    Spacer(modifier = Modifier.width(8.dp))
+                                }
+                            }
                             Text(
                                 text = deviceInfo.deviceName,
-                                style = MaterialTheme.typography.titleMedium,
-                                fontWeight = androidx.compose.ui.text.font.FontWeight.Medium,
+                                style = MaterialTheme.typography.titleMedium.copy(
+                                    fontWeight = androidx.compose.ui.text.font.FontWeight(fontWeight)
+                                ),
+                                modifier = Modifier.graphicsLayer {
+                                    scaleX = textScale
+                                    scaleY = textScale
+                                },
                                 color = if (thresholdPassed) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onSurface
                             )
                         }
