@@ -165,6 +165,7 @@ class FeatureSettingsActivity : FragmentActivity() {
             remember(context) { viewModel.check(context) }
 
             val isPitchBlackThemeEnabled by viewModel.isPitchBlackThemeEnabled
+            val isBlurEnabled by viewModel.isBlurEnabled
             val pinnedFeatureKeys by viewModel.pinnedFeatureKeys
 
             EssentialsTheme(pitchBlackTheme = isPitchBlackThemeEnabled) {
@@ -319,20 +320,28 @@ class FeatureSettingsActivity : FragmentActivity() {
                         modifier = Modifier
                             .fillMaxSize()
                             .background(MaterialTheme.colorScheme.surfaceContainer)
-                            .progressiveBlur(
-                                blurRadius = 40f,
-                                height = statusBarHeightPx * 1.15f,
-                                direction = BlurDirection.TOP
+                            .then(
+                                if (isBlurEnabled) {
+                                    Modifier.progressiveBlur(
+                                        blurRadius = 40f,
+                                        height = statusBarHeightPx * 1.15f,
+                                        direction = BlurDirection.TOP
+                                    )
+                                } else Modifier
                             )
                     ) {
                         val hasScroll = featureId != "Sound mode tile" && featureId != "Quick settings tiles"
                         Column(
                             modifier = Modifier
                                 .fillMaxSize()
-                                .progressiveBlur(
-                                    blurRadius = 40f,
-                                    height = with(LocalDensity.current) { 150.dp.toPx() },
-                                    direction = BlurDirection.BOTTOM
+                                .then(
+                                    if (isBlurEnabled) {
+                                        Modifier.progressiveBlur(
+                                            blurRadius = 40f,
+                                            height = with(LocalDensity.current) { 150.dp.toPx() },
+                                            direction = BlurDirection.BOTTOM
+                                        )
+                                    } else Modifier
                                 )
                                 .then(if (hasScroll) Modifier.verticalScroll(rememberScrollState()) else Modifier)
                         ) {

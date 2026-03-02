@@ -122,6 +122,7 @@ class YourAndroidActivity : ComponentActivity() {
         setContent {
             val mainViewModel: com.sameerasw.essentials.viewmodels.MainViewModel = androidx.lifecycle.viewmodel.compose.viewModel()
             val isPitchBlackThemeEnabled by mainViewModel.isPitchBlackThemeEnabled
+            val isBlurEnabled by mainViewModel.isBlurEnabled
             
             val viewModel: YourAndroidViewModel = androidx.lifecycle.viewmodel.compose.viewModel()
             val deviceSpecs by viewModel.deviceSpecs.collectAsState()
@@ -143,10 +144,14 @@ class YourAndroidActivity : ComponentActivity() {
                     modifier = Modifier
                         .fillMaxSize()
                         .background(MaterialTheme.colorScheme.surfaceContainer)
-                        .progressiveBlur(
-                            blurRadius = 40f,
-                            height = statusBarHeightPx * 1.15f,
-                            direction = BlurDirection.TOP
+                        .then(
+                            if (isBlurEnabled) {
+                                Modifier.progressiveBlur(
+                                    blurRadius = 40f,
+                                    height = statusBarHeightPx * 1.15f,
+                                    direction = BlurDirection.TOP
+                                )
+                            } else Modifier
                         )
                 ) {
                     YourAndroidContent(
@@ -191,9 +196,11 @@ fun YourAndroidContent(
         }
     }
 
+    val mainViewModel: com.sameerasw.essentials.viewmodels.MainViewModel = androidx.lifecycle.viewmodel.compose.viewModel()
     val configuration = LocalConfiguration.current
     val screenHeight = configuration.screenHeightDp.dp
     val initialImageOffset = (screenHeight / 2) - 240.dp - 64.dp
+    val isBlurEnabled by mainViewModel.isBlurEnabled
 
     val imageOffsetState = animateDpAsState(
         targetValue = if (isStartupAnimationRunning) 0.dp else initialImageOffset,
@@ -220,10 +227,14 @@ fun YourAndroidContent(
     Column(
         modifier = modifier
             .fillMaxSize()
-            .progressiveBlur(
-                blurRadius = 40f,
-                height = with(LocalDensity.current) { 150.dp.toPx() },
-                direction = BlurDirection.BOTTOM
+            .then(
+                if (isBlurEnabled) {
+                    Modifier.progressiveBlur(
+                        blurRadius = 40f,
+                        height = with(LocalDensity.current) { 150.dp.toPx() },
+                        direction = BlurDirection.BOTTOM
+                    )
+                } else Modifier
             )
             .verticalScroll(rememberScrollState())
             .padding(

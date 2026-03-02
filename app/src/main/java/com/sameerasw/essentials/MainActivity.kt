@@ -241,6 +241,7 @@ class MainActivity : FragmentActivity() {
         viewModel.check(this)
         setContent {
             val isPitchBlackThemeEnabled by viewModel.isPitchBlackThemeEnabled
+            val isBlurEnabled by viewModel.isBlurEnabled
             EssentialsTheme(pitchBlackTheme = isPitchBlackThemeEnabled) {
                 androidx.compose.runtime.CompositionLocalProvider(
                     com.sameerasw.essentials.ui.state.LocalMenuStateManager provides remember { com.sameerasw.essentials.ui.state.MenuStateManager() }
@@ -451,10 +452,14 @@ class MainActivity : FragmentActivity() {
                         Box(
                             modifier = Modifier
                                 .fillMaxSize()
-                                .progressiveBlur(
-                                    blurRadius = 40f,
-                                    height = statusBarHeightPx * 1.15f,
-                                    direction = BlurDirection.TOP
+                                .then(
+                                    if (isBlurEnabled) {
+                                        Modifier.progressiveBlur(
+                                            blurRadius = 40f,
+                                            height = statusBarHeightPx * 1.15f,
+                                            direction = BlurDirection.TOP
+                                        )
+                                    } else Modifier
                                 )
                         ) {
                             val currentTab = remember(tabs, currentPage) {
@@ -609,10 +614,14 @@ class MainActivity : FragmentActivity() {
                                 modifier = Modifier
                                     .scale(1f - (backProgress.value * 0.05f))
                                     .alpha(1f - (backProgress.value * 0.3f))
-                                    .progressiveBlur(
-                                        blurRadius = 40f,
-                                        height = with(androidx.compose.ui.platform.LocalDensity.current) { 130.dp.toPx() },
-                                        direction = BlurDirection.BOTTOM
+                                    .then(
+                                        if (isBlurEnabled) {
+                                            Modifier.progressiveBlur(
+                                                blurRadius = 40f,
+                                                height = with(androidx.compose.ui.platform.LocalDensity.current) { 130.dp.toPx() },
+                                                direction = BlurDirection.BOTTOM
+                                            )
+                                        } else Modifier
                                     ),
                                 label = "Tab Transition"
                             ) { targetPage ->
