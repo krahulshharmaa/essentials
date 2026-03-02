@@ -10,6 +10,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -164,6 +165,7 @@ class FeatureSettingsActivity : FragmentActivity() {
             remember(context) { viewModel.check(context) }
 
             val isPitchBlackThemeEnabled by viewModel.isPitchBlackThemeEnabled
+            val isBlurEnabled by viewModel.isBlurEnabled
             val pinnedFeatureKeys by viewModel.pinnedFeatureKeys
 
             EssentialsTheme(pitchBlackTheme = isPitchBlackThemeEnabled) {
@@ -318,25 +320,35 @@ class FeatureSettingsActivity : FragmentActivity() {
                         modifier = Modifier
                             .fillMaxSize()
                             .background(MaterialTheme.colorScheme.surfaceContainer)
-                            .progressiveBlur(
-                                blurRadius = 40f,
-                                height = statusBarHeightPx * 1.15f,
-                                direction = BlurDirection.TOP
+                            .then(
+                                if (isBlurEnabled) {
+                                    Modifier.progressiveBlur(
+                                        blurRadius = 40f,
+                                        height = statusBarHeightPx * 1.15f,
+                                        direction = BlurDirection.TOP
+                                    )
+                                } else Modifier
                             )
                     ) {
                         val hasScroll = featureId != "Sound mode tile" && featureId != "Quick settings tiles"
                         Column(
                             modifier = Modifier
                                 .fillMaxSize()
-                                .progressiveBlur(
-                                    blurRadius = 40f,
-                                    height = with(LocalDensity.current) { 150.dp.toPx() },
-                                    direction = BlurDirection.BOTTOM
+                                .then(
+                                    if (isBlurEnabled) {
+                                        Modifier.progressiveBlur(
+                                            blurRadius = 40f,
+                                            height = with(LocalDensity.current) { 150.dp.toPx() },
+                                            direction = BlurDirection.BOTTOM
+                                        )
+                                    } else Modifier
                                 )
                                 .then(if (hasScroll) Modifier.verticalScroll(rememberScrollState()) else Modifier)
                         ) {
                             // Top padding for status bar
-                            androidx.compose.foundation.layout.Spacer(modifier = Modifier.height(statusBarHeight))
+                            if (featureId != "Quick settings tiles") {
+                                androidx.compose.foundation.layout.Spacer(modifier = Modifier.height(statusBarHeight))
+                            }
 
                             if (featureId == "Watch") {
                                 WatchSettingsUI(
@@ -533,8 +545,12 @@ class FeatureSettingsActivity : FragmentActivity() {
 
                                     "Quick settings tiles" -> {
                                         QuickSettingsTilesSettingsUI(
-                                            modifier = Modifier.padding(top = 16.dp),
-                                            highlightSetting = highlightSetting
+                                            modifier = Modifier.fillMaxSize(),
+                                            highlightSetting = highlightSetting,
+                                            contentPadding = PaddingValues(
+                                                top = statusBarHeight,
+                                                bottom = 150.dp
+                                            )
                                         )
                                     }
 
@@ -620,7 +636,9 @@ class FeatureSettingsActivity : FragmentActivity() {
 
                             }
                             // Bottom padding for toolbar
-                            androidx.compose.foundation.layout.Spacer(modifier = Modifier.height(150.dp))
+                            if (featureId != "Quick settings tiles") {
+                                androidx.compose.foundation.layout.Spacer(modifier = Modifier.height(150.dp))
+                            }
                         }
 
                         SettingsFloatingToolbar(

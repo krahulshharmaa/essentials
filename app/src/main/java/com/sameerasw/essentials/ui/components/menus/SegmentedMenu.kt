@@ -57,9 +57,13 @@ fun SegmentedDropdownMenuItem(
         disabledTrailingIconColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f),
     )
 ) {
+    val view = androidx.compose.ui.platform.LocalView.current
     DropdownMenuItem(
         text = text,
-        onClick = onClick,
+        onClick = {
+            com.sameerasw.essentials.utils.HapticUtil.performUIHaptic(view)
+            onClick()
+        },
         modifier = modifier
             .clip(MaterialTheme.shapes.extraSmall)
             .background(MaterialTheme.colorScheme.surfaceContainerHigh),

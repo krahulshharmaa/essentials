@@ -9,6 +9,7 @@ import androidx.annotation.RequiresApi
 import com.sameerasw.essentials.FeatureSettingsActivity
 import com.sameerasw.essentials.R
 import com.sameerasw.essentials.utils.PermissionUtils
+import com.sameerasw.essentials.utils.ShellUtils
 
 @RequiresApi(Build.VERSION_CODES.N)
 class ChargeQuickTileService : BaseTileService() {
@@ -77,9 +78,7 @@ class ChargeQuickTileService : BaseTileService() {
     }
 
     override fun hasFeaturePermission(): Boolean {
-        return PermissionUtils.canWriteSecureSettings(this) &&
-                com.sameerasw.essentials.utils.ShellUtils.hasPermission(this) &&
-                com.sameerasw.essentials.utils.ShellUtils.isAvailable(this)
+        return ShellUtils.isAvailable(this) && ShellUtils.hasPermission(this)
     }
 
 

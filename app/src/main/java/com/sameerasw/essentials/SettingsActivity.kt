@@ -131,14 +131,20 @@ class SettingsActivity : ComponentActivity() {
                 }
                 val statusBarHeight = WindowInsets.statusBars.asPaddingValues().calculateTopPadding()
 
+                val isBlurEnabled by viewModel.isBlurEnabled
+
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
                         .background(MaterialTheme.colorScheme.surfaceContainer)
-                        .progressiveBlur(
-                            blurRadius = 40f,
-                            height = statusBarHeightPx * 1.15f,
-                            direction = BlurDirection.TOP
+                        .then(
+                            if (isBlurEnabled) {
+                                Modifier.progressiveBlur(
+                                    blurRadius = 40f,
+                                    height = statusBarHeightPx * 1.15f,
+                                    direction = BlurDirection.TOP
+                                )
+                            } else Modifier
                         )
                 ) {
                     val contentPadding = androidx.compose.foundation.layout.PaddingValues(
@@ -152,10 +158,14 @@ class SettingsActivity : ComponentActivity() {
                         viewModel = viewModel,
                         contentPadding = contentPadding,
                         modifier = Modifier
-                            .progressiveBlur(
-                                blurRadius = 40f,
-                                height = with(LocalDensity.current) { 150.dp.toPx() },
-                                direction = BlurDirection.BOTTOM
+                            .then(
+                                if (isBlurEnabled) {
+                                    Modifier.progressiveBlur(
+                                        blurRadius = 40f,
+                                        height = with(LocalDensity.current) { 150.dp.toPx() },
+                                        direction = BlurDirection.BOTTOM
+                                    )
+                                } else Modifier
                             )
                     )
 
@@ -341,6 +351,13 @@ fun SettingsContent(
                 description = stringResource(R.string.setting_pitch_black_theme_desc),
                 isChecked = viewModel.isPitchBlackThemeEnabled.value,
                 onCheckedChange = { viewModel.setPitchBlackThemeEnabled(it, context) }
+            )
+            IconToggleItem(
+                iconRes = R.drawable.rounded_blur_on_24,
+                title = "Use blur",
+                description = "Enable progressive blur elements across the UI",
+                isChecked = viewModel.isBlurEnabled.value,
+                onCheckedChange = { viewModel.setBlurEnabled(it, context) }
             )
             IconToggleItem(
                 iconRes = R.drawable.rounded_numbers_24,

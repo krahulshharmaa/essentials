@@ -163,6 +163,7 @@ class SettingsRepository(private val context: Context) {
         const val KEY_NOTIFICATION_GLANCE_SELECTED_APPS = "notification_glance_selected_apps"
         const val KEY_AOD_FORCE_TURN_OFF_ENABLED = "aod_force_turn_off_enabled"
         const val KEY_AUTO_ACCESSIBILITY_ENABLED = "auto_accessibility_enabled"
+        const val KEY_USE_BLUR = "use_blur"
     }
 
     // Observe changes

@@ -32,6 +32,8 @@ import com.sameerasw.essentials.ui.components.menus.SegmentedDropdownMenu
 import com.sameerasw.essentials.ui.components.menus.SegmentedDropdownMenuItem
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.platform.LocalView
+import com.sameerasw.essentials.utils.HapticUtil
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3ExpressiveApi::class)
 @Composable
@@ -42,6 +44,7 @@ fun SettingsFloatingToolbar(
     menuContent: (@Composable SettingsMenuScope.() -> Unit)? = null
 ) {
     var menuExpanded by remember { mutableStateOf(false) }
+    val view = LocalView.current
 
     if (menuContent != null) {
         HorizontalFloatingToolbar(
@@ -52,7 +55,10 @@ fun SettingsFloatingToolbar(
             floatingActionButton = {
                 Box {
                     FloatingActionButton(
-                        onClick = { menuExpanded = true },
+                        onClick = {
+                            HapticUtil.performVirtualKeyHaptic(view)
+                            menuExpanded = true
+                        },
                         containerColor = MaterialTheme.colorScheme.primaryContainer,
                         contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
                         shape = MaterialTheme.shapes.large,
@@ -104,8 +110,12 @@ private fun RowScope.ToolbarContent(
     title: String,
     onBackClick: () -> Unit
 ) {
+    val view = LocalView.current
     IconButton(
-        onClick = onBackClick,
+        onClick = {
+            HapticUtil.performVirtualKeyHaptic(view)
+            onBackClick()
+        },
         modifier = Modifier.align(Alignment.CenterVertically),
         colors = IconButtonDefaults.filledIconButtonColors(
             contentColor = MaterialTheme.colorScheme.primary,

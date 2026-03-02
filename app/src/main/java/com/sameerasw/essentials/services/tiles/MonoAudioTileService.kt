@@ -14,11 +14,9 @@ class MonoAudioTileService : BaseTileService() {
     }
 
     override fun hasFeaturePermission(): Boolean {
-        // Private secure settings can only be modified by ADB, system apps, or
-        // apps with a target sdk of Android 5.1 and lower.
-        return com.sameerasw.essentials.utils.ShellUtils.hasPermission(this) && com.sameerasw.essentials.utils.ShellUtils.isAvailable(
-            this
-        )
+        return com.sameerasw.essentials.utils.PermissionUtils.canWriteSecureSettings(this) ||
+                (com.sameerasw.essentials.utils.ShellUtils.isAvailable(this) &&
+                        com.sameerasw.essentials.utils.ShellUtils.hasPermission(this))
     }
 
     override fun getTileIcon(): Icon {

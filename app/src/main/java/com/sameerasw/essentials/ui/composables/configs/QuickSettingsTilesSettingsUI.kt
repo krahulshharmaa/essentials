@@ -14,8 +14,12 @@ import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -68,6 +72,7 @@ import com.sameerasw.essentials.services.tiles.UsbDebuggingTileService
 import com.sameerasw.essentials.ui.components.sheets.PermissionsBottomSheet
 import com.sameerasw.essentials.ui.modifiers.highlight
 import com.sameerasw.essentials.utils.PermissionUIHelper
+import com.sameerasw.essentials.utils.PermissionUtils
 import com.sameerasw.essentials.utils.ShellUtils
 import com.sameerasw.essentials.viewmodels.MainViewModel
 
@@ -82,7 +87,8 @@ data class QSTileInfo(
 @Composable
 fun QuickSettingsTilesSettingsUI(
     modifier: Modifier = Modifier,
-    highlightSetting: String? = null
+    highlightSetting: String? = null,
+    contentPadding: PaddingValues = PaddingValues(0.dp)
 ) {
     val context = LocalContext.current
     LocalView.current
@@ -128,7 +134,9 @@ fun QuickSettingsTilesSettingsUI(
             R.string.tile_aod,
             R.drawable.rounded_mobile_text_2_24,
             AlwaysOnDisplayTileService::class.java,
-            listOf("WRITE_SECURE_SETTINGS"),
+            if (ShellUtils.isRootEnabled(context)) listOf("ROOT")
+            else if (PermissionUtils.canWriteSecureSettings(context)) listOf("WRITE_SECURE_SETTINGS")
+            else listOf("SHIZUKU"),
             R.string.about_desc_aod
         ),
         QSTileInfo(
@@ -177,7 +185,9 @@ fun QuickSettingsTilesSettingsUI(
             R.string.tile_mono_audio,
             R.drawable.rounded_headphones_24,
             MonoAudioTileService::class.java,
-            if (ShellUtils.isRootEnabled(context)) listOf("ROOT") else listOf("SHIZUKU"),
+            if (ShellUtils.isRootEnabled(context)) listOf("ROOT")
+            else if (PermissionUtils.canWriteSecureSettings(context)) listOf("WRITE_SECURE_SETTINGS")
+            else listOf("SHIZUKU"),
             R.string.about_desc_mono_audio
         ),
         QSTileInfo(
@@ -216,7 +226,9 @@ fun QuickSettingsTilesSettingsUI(
             R.string.nfc_tile_label,
             R.drawable.rounded_nfc_24,
             NfcTileService::class.java,
-            if (ShellUtils.isRootEnabled(context)) listOf("ROOT") else listOf("SHIZUKU"),
+            if (ShellUtils.isRootEnabled(context)) listOf("ROOT")
+            else if (PermissionUtils.canWriteSecureSettings(context)) listOf("WRITE_SECURE_SETTINGS")
+            else listOf("SHIZUKU"),
             R.string.about_desc_nfc
         ),
         QSTileInfo(
@@ -275,7 +287,7 @@ fun QuickSettingsTilesSettingsUI(
             R.string.tile_charge_optimization,
             R.drawable.rounded_battery_android_frame_shield_24,
             ChargeQuickTileService::class.java,
-            if (ShellUtils.isRootEnabled(context)) listOf("ROOT") else listOf("SHIZUKU", "WRITE_SECURE_SETTINGS"),
+            if (ShellUtils.isRootEnabled(context)) listOf("ROOT") else listOf("SHIZUKU"),
             R.string.about_desc_charge_optimization
         )
 
@@ -332,11 +344,13 @@ fun QuickSettingsTilesSettingsUI(
 
     Column(
         modifier = modifier
-            .fillMaxWidth()
+            .fillMaxSize()
             .verticalScroll(rememberScrollState())
-            .padding(16.dp),
+            .padding(horizontal = 16.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
+        Spacer(modifier = Modifier.height(contentPadding.calculateTopPadding()))
+        Spacer(modifier = Modifier.height(16.dp))
         tiles.chunked(2).forEach { rowTiles ->
             Row(
                 modifier = Modifier.fillMaxWidth(),
@@ -415,8 +429,10 @@ fun QuickSettingsTilesSettingsUI(
             text = "Long press a tile to see what it does",
             style = MaterialTheme.typography.labelMedium,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
-            modifier = Modifier.padding(top = 8.dp, bottom = 48.dp)
+            modifier = Modifier.padding(top = 8.dp)
         )
+
+        Spacer(modifier = Modifier.height(contentPadding.calculateBottomPadding()))
     }
 }
 

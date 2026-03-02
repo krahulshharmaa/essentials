@@ -168,6 +168,7 @@ class MainViewModel : ViewModel() {
     val hasPendingUpdates = mutableStateOf(false)
 
     val isPitchBlackThemeEnabled = mutableStateOf(false)
+    val isBlurEnabled = mutableStateOf(true)
 
     // Keyboard Customization
     val keyboardHeight = mutableFloatStateOf(54f)
@@ -407,6 +408,8 @@ class MainViewModel : ViewModel() {
                     SettingsRepository.KEY_AOD_FORCE_TURN_OFF_ENABLED -> isAodForceTurnOffEnabled.value = settingsRepository.getBoolean(key)
                     SettingsRepository.KEY_NOTIFICATION_GLANCE_SAME_AS_LIGHTING -> isNotificationGlanceSameAsLightingEnabled.value = settingsRepository.getBoolean(key, true)
                     SettingsRepository.KEY_AUTO_ACCESSIBILITY_ENABLED -> isAutoAccessibilityEnabled.value = settingsRepository.getBoolean(key)
+
+                    SettingsRepository.KEY_USE_BLUR -> isBlurEnabled.value = settingsRepository.getBoolean(key, true)
                 }
             }
         }
@@ -778,6 +781,7 @@ class MainViewModel : ViewModel() {
         isNotificationGlanceEnabled.value = settingsRepository.getBoolean(SettingsRepository.KEY_NOTIFICATION_GLANCE_ENABLED)
         isAodForceTurnOffEnabled.value = settingsRepository.getBoolean(SettingsRepository.KEY_AOD_FORCE_TURN_OFF_ENABLED)
         isNotificationGlanceSameAsLightingEnabled.value = settingsRepository.getBoolean(SettingsRepository.KEY_NOTIFICATION_GLANCE_SAME_AS_LIGHTING, true)
+        isBlurEnabled.value = settingsRepository.getBoolean(SettingsRepository.KEY_USE_BLUR, true)
 
         refreshTrackedUpdates(context)
         if (isBatteryNotificationEnabled.value) {
@@ -922,6 +926,11 @@ class MainViewModel : ViewModel() {
     fun setPitchBlackThemeEnabled(enabled: Boolean, context: Context) {
         isPitchBlackThemeEnabled.value = enabled
         settingsRepository.putBoolean(SettingsRepository.KEY_PITCH_BLACK_THEME_ENABLED, enabled)
+    }
+
+    fun setBlurEnabled(enabled: Boolean, context: Context) {
+        isBlurEnabled.value = enabled
+        settingsRepository.putBoolean(SettingsRepository.KEY_USE_BLUR, enabled)
     }
 
     fun checkForUpdates(context: Context, manual: Boolean = false) {
