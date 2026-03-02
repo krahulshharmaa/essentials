@@ -9,13 +9,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 @Composable
 fun RoundedCardContainer(
     modifier: Modifier = Modifier,
-    spacing: androidx.compose.ui.unit.Dp = 2.dp,
-    cornerRadius: androidx.compose.ui.unit.Dp = 24.dp,
+    spacing: Dp = 2.dp,
+    cornerRadius: Dp = 24.dp,
     containerColor: Color = Color.Transparent,
     content: @Composable ColumnScope.() -> Unit
 ) {
@@ -27,4 +28,3 @@ fun RoundedCardContainer(
         content = content
     )
 }
-

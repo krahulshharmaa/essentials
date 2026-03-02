@@ -7,11 +7,16 @@ import android.os.VibratorManager
 import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -20,21 +25,21 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.zIndex
 import androidx.core.net.toUri
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Lifecycle
@@ -42,7 +47,7 @@ import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.sameerasw.essentials.domain.HapticFeedbackType
 import com.sameerasw.essentials.domain.registry.FeatureRegistry
-import com.sameerasw.essentials.ui.components.ReusableTopAppBar
+import com.sameerasw.essentials.ui.components.SettingsFloatingToolbar
 import com.sameerasw.essentials.ui.components.cards.FeatureCard
 import com.sameerasw.essentials.ui.components.containers.RoundedCardContainer
 import com.sameerasw.essentials.ui.components.linkActions.LinkPickerScreen
@@ -68,6 +73,8 @@ import com.sameerasw.essentials.ui.composables.configs.SoundModeTileSettingsUI
 import com.sameerasw.essentials.ui.composables.configs.StatusBarIconSettingsUI
 import com.sameerasw.essentials.ui.composables.configs.TextAnimationsSettingsUI
 import com.sameerasw.essentials.ui.composables.configs.WatchSettingsUI
+import com.sameerasw.essentials.ui.modifiers.BlurDirection
+import com.sameerasw.essentials.ui.modifiers.progressiveBlur
 import com.sameerasw.essentials.ui.theme.EssentialsTheme
 import com.sameerasw.essentials.utils.BiometricSecurityHelper
 import com.sameerasw.essentials.utils.HapticUtil
@@ -95,6 +102,10 @@ class FeatureSettingsActivity : FragmentActivity() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             window.isNavigationBarContrastEnforced = false
         }
+        
+        val isDarkMode = (resources.configuration.uiMode and android.content.res.Configuration.UI_MODE_NIGHT_MASK) == 
+            android.content.res.Configuration.UI_MODE_NIGHT_YES
+        window.setBackgroundDrawableResource(if (isDarkMode) android.R.color.black else R.color.app_window_background)
         val featureId = intent.getStringExtra("feature") ?: ""
         val featureObj = FeatureRegistry.ALL_FEATURES.find { it.id == featureId }
         val highlightSetting = intent.getStringExtra("highlight_setting")
@@ -149,9 +160,8 @@ class FeatureSettingsActivity : FragmentActivity() {
                 }
             }
 
-            LaunchedEffect(Unit) {
-                viewModel.check(context)
-            }
+            // Initialize synchronously so settingsRepository is ready before first composition
+            remember(context) { viewModel.check(context) }
 
             val isPitchBlackThemeEnabled by viewModel.isPitchBlackThemeEnabled
             val pinnedFeatureKeys by viewModel.pinnedFeatureKeys
@@ -296,99 +306,38 @@ class FeatureSettingsActivity : FragmentActivity() {
                         )
                     }
 
-                    val scrollBehavior =
-                        TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
-                    Scaffold(
-                        contentWindowInsets = androidx.compose.foundation.layout.WindowInsets(
-                            0,
-                            0,
-                            0,
-                            0
-                        ),
-                        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
-                        containerColor = MaterialTheme.colorScheme.surfaceContainer,
-                        topBar = {
-                            ReusableTopAppBar(
-                                title = if (featureObj != null) stringResource(featureObj.title) else featureId,
-                                hasBack = true,
-                                hasSearch = false,
-                                onBackClick = { finish() },
-                                scrollBehavior = scrollBehavior,
-                                subtitle = if (featureObj != null) stringResource(featureObj.description) else "",
-                                isBeta = featureObj?.isBeta ?: false,
-                                actions = {
-                                    if (featureObj != null && featureObj.aboutDescription != null) {
-                                        var showMenu by remember { mutableStateOf(false) }
-                                        androidx.compose.material3.IconButton(
-                                            onClick = {
-                                                HapticUtil.performVirtualKeyHaptic(view)
-                                                showMenu = true
-                                            },
-                                            colors = androidx.compose.material3.IconButtonDefaults.iconButtonColors(
-                                                containerColor = MaterialTheme.colorScheme.surfaceBright
-                                            ),
-                                            modifier = Modifier.size(40.dp)
-                                        ) {
-                                            Icon(
-                                                painter = painterResource(id = R.drawable.rounded_more_vert_24),
-                                                contentDescription = stringResource(R.string.content_desc_more_options),
-                                                modifier = Modifier.size(24.dp)
-                                            )
+                    val pageTitle = if (featureObj != null) stringResource(featureObj.title) else featureId
+                    val hasMenu = featureObj != null && featureObj.aboutDescription != null
 
-                                            com.sameerasw.essentials.ui.components.menus.SegmentedDropdownMenu(
-                                                expanded = showMenu,
-                                                onDismissRequest = { showMenu = false }
-                                            ) {
-                                                com.sameerasw.essentials.ui.components.menus.SegmentedDropdownMenuItem(
-                                                    text = {
-                                                        Text(stringResource(R.string.action_what_is_this))
-                                                    },
-                                                    onClick = {
-                                                        showMenu = false
-                                                        selectedHelpFeature = featureObj
-                                                        showHelpSheet = true
-                                                    },
-                                                    leadingIcon = {
-                                                        Icon(
-                                                            painter = painterResource(id = R.drawable.rounded_help_24),
-                                                            contentDescription = null
-                                                        )
-                                                    }
-                                                )
-                                            }
-                                        }
-                                    }
-                                }
+                    val statusBarHeightPx = with(LocalDensity.current) {
+                        WindowInsets.statusBars.asPaddingValues().calculateTopPadding().toPx()
+                    }
+                    val statusBarHeight = WindowInsets.statusBars.asPaddingValues().calculateTopPadding()
+
+                    Box(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .background(MaterialTheme.colorScheme.surfaceContainer)
+                            .progressiveBlur(
+                                blurRadius = 40f,
+                                height = statusBarHeightPx * 1.15f,
+                                direction = BlurDirection.TOP
                             )
-                        },
-                        floatingActionButton = {
-                            if (featureId == "Notification lighting") {
-                                ExtendedFloatingActionButton(
-                                    onClick = {
-                                        HapticUtil.performVirtualKeyHaptic(view)
-                                        viewModel.triggerNotificationLighting(context)
-                                    },
-                                    expanded = fabExpanded,
-                                    icon = {
-                                        Icon(
-                                            painter = painterResource(id = R.drawable.rounded_play_arrow_24),
-                                            contentDescription = null
-                                        )
-                                    },
-                                    text = { Text(stringResource(R.string.action_preview)) },
-                                    modifier = Modifier.height(64.dp)
-                                )
-                            }
-                        }
-                    ) { innerPadding ->
-                        val hasScroll =
-                            featureId != "Sound mode tile" && featureId != "Quick settings tiles"
+                    ) {
+                        val hasScroll = featureId != "Sound mode tile" && featureId != "Quick settings tiles"
                         Column(
                             modifier = Modifier
-                                .padding(innerPadding)
                                 .fillMaxSize()
+                                .progressiveBlur(
+                                    blurRadius = 40f,
+                                    height = with(LocalDensity.current) { 150.dp.toPx() },
+                                    direction = BlurDirection.BOTTOM
+                                )
                                 .then(if (hasScroll) Modifier.verticalScroll(rememberScrollState()) else Modifier)
                         ) {
+                            // Top padding for status bar
+                            androidx.compose.foundation.layout.Spacer(modifier = Modifier.height(statusBarHeight))
+
                             if (featureId == "Watch") {
                                 WatchSettingsUI(
                                     viewModel = watchViewModel,
@@ -670,7 +619,34 @@ class FeatureSettingsActivity : FragmentActivity() {
                                 }
 
                             }
+                            // Bottom padding for toolbar
+                            androidx.compose.foundation.layout.Spacer(modifier = Modifier.height(150.dp))
                         }
+
+                        SettingsFloatingToolbar(
+                            title = pageTitle,
+                            onBackClick = { finish() },
+                            modifier = Modifier
+                                .align(Alignment.BottomCenter)
+                                .zIndex(1f),
+                            menuContent = if (hasMenu) {
+                                {
+                                    MenuItem(
+                                        text = { Text(stringResource(R.string.action_what_is_this)) },
+                                        onClick = {
+                                            selectedHelpFeature = featureObj
+                                            showHelpSheet = true
+                                        },
+                                        leadingIcon = {
+                                            Icon(
+                                                painter = painterResource(id = R.drawable.rounded_help_24),
+                                                contentDescription = null
+                                            )
+                                        }
+                                    )
+                                }
+                            } else null
+                        )
                     }
                 }
             }

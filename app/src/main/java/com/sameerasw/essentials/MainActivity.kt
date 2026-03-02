@@ -12,7 +12,6 @@ import androidx.activity.viewModels
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.core.Animatable
-import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -43,14 +42,10 @@ import androidx.compose.material3.FloatingToolbarDefaults
 import androidx.compose.material3.FloatingToolbarDefaults.ScreenOffset
 import androidx.compose.material3.FloatingToolbarExitDirection.Companion.Bottom
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ProgressIndicatorDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -79,14 +74,23 @@ import androidx.fragment.app.FragmentActivity
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import android.widget.Toast
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
+import androidx.compose.foundation.layout.statusBars
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
+import coil.compose.AsyncImage
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 import com.sameerasw.essentials.domain.DIYTabs
 import com.sameerasw.essentials.domain.registry.initPermissionRegistry
 import com.sameerasw.essentials.ui.components.DIYFloatingToolbar
-import com.sameerasw.essentials.ui.components.ReusableTopAppBar
 import com.sameerasw.essentials.ui.components.cards.TrackedRepoCard
+import androidx.compose.foundation.layout.statusBarsPadding
 import com.sameerasw.essentials.ui.components.containers.RoundedCardContainer
 import com.sameerasw.essentials.ui.components.sheets.AddRepoBottomSheet
 import com.sameerasw.essentials.ui.components.sheets.GitHubAuthSheet
@@ -97,6 +101,8 @@ import com.sameerasw.essentials.ui.components.menus.SegmentedDropdownMenuItem
 import com.sameerasw.essentials.ui.composables.DIYScreen
 import com.sameerasw.essentials.ui.composables.FreezeGridUI
 import com.sameerasw.essentials.ui.composables.SetupFeatures
+import com.sameerasw.essentials.ui.modifiers.BlurDirection
+import com.sameerasw.essentials.ui.modifiers.progressiveBlur
 import com.sameerasw.essentials.ui.theme.EssentialsTheme
 import com.sameerasw.essentials.utils.HapticUtil
 import com.sameerasw.essentials.viewmodels.AppUpdatesViewModel
@@ -247,9 +253,6 @@ class MainActivity : FragmentActivity() {
                         stringResource(R.string.label_unknown)
                     }
 
-                    var searchRequested by remember { mutableStateOf(false) }
-                    val scrollBehavior =
-                        TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
                     var showUpdateSheet by remember { mutableStateOf(false) }
                     var showInstructionsSheet by remember { mutableStateOf(false) }
                     val isUpdateAvailable by viewModel.isUpdateAvailable
@@ -257,6 +260,7 @@ class MainActivity : FragmentActivity() {
 
                     var showGitHubAuthSheet by remember { mutableStateOf(false) }
                     var showNewAutomationSheet by remember { mutableStateOf(false) }
+                    var showFabProfileMenu by remember { mutableStateOf(false) }
                     val gitHubToken by viewModel.gitHubToken
                     val gitHubUser by gitHubAuthViewModel.currentUser
 
@@ -436,190 +440,32 @@ class MainActivity : FragmentActivity() {
                             0,
                             0
                         ),
-                        modifier = Modifier
-                            .nestedScroll(scrollBehavior.nestedScrollConnection)
-                            .nestedScroll(exitAlwaysScrollBehavior),
+                        modifier = Modifier,
                         containerColor = MaterialTheme.colorScheme.surfaceContainer,
-                        topBar = {
-                            val currentTab = remember(tabs, currentPage) {
-                                tabs.getOrNull(currentPage) ?: tabs.firstOrNull()
-                                ?: DIYTabs.ESSENTIALS
-                            }
-                            ReusableTopAppBar(
-                                title = currentTab.title,
-                                subtitle = currentTab.subtitle,
-                                hasBack = false,
-                                hasSearch = true,
-                                hasSettings = currentTab == DIYTabs.ESSENTIALS || currentTab == DIYTabs.FREEZE,
-                                hasHelp = currentTab == DIYTabs.ESSENTIALS,
-                                helpIconRes = R.drawable.rounded_help_24,
-                                helpContentDescription = R.string.action_help_guide,
-                                onSearchClick = { searchRequested = true },
-                                onSettingsClick = {
-                                    if (currentTab == DIYTabs.FREEZE) {
-                                        startActivity(
-                                            Intent(
-                                                this,
-                                                FeatureSettingsActivity::class.java
-                                            ).apply {
-                                                putExtra("feature", "Freeze")
-                                            })
-                                    } else {
-                                        startActivity(Intent(this, SettingsActivity::class.java))
-                                    }
-                                },
-                                onUpdateClick = { showUpdateSheet = true },
-                                onGitHubClick = { showGitHubAuthSheet = true },
-                                hasGitHub = currentTab == DIYTabs.APPS,
-                                gitHubUser = gitHubUser,
-                                onSignOutClick = { gitHubAuthViewModel.signOut(context) },
-                                onHelpClick = {
-                                    showInstructionsSheet = true
-                                },
-                                actions = {
-                                    when (currentTab) {
-                                        DIYTabs.FREEZE -> {
-                                            var showFreezeMenu by remember { mutableStateOf(false) }
-                                            Box {
-                                                IconButton(
-                                                    onClick = {
-                                                        HapticUtil.performVirtualKeyHaptic(view)
-                                                        showFreezeMenu = true
-                                                    },
-                                                    colors = IconButtonDefaults.iconButtonColors(
-                                                        containerColor = MaterialTheme.colorScheme.surfaceBright
-                                                    )
-                                                ) {
-                                                    Icon(
-                                                        painter = painterResource(id = R.drawable.rounded_mode_cool_24),
-                                                        contentDescription = stringResource(R.string.tab_freeze)
-                                                    )
-                                                }
-
-                                                SegmentedDropdownMenu(
-                                                    expanded = showFreezeMenu,
-                                                    onDismissRequest = { showFreezeMenu = false }
-                                                ) {
-                                                    SegmentedDropdownMenuItem(
-                                                        text = { Text(stringResource(R.string.action_freeze_all)) },
-                                                        onClick = {
-                                                            showFreezeMenu = false
-                                                            viewModel.freezeAllApps(context)
-                                                        },
-                                                        leadingIcon = {
-                                                            Icon(
-                                                                painter = painterResource(id = R.drawable.rounded_mode_cool_24),
-                                                                contentDescription = null
-                                                            )
-                                                        }
-                                                    )
-                                                    SegmentedDropdownMenuItem(
-                                                        text = { Text(stringResource(R.string.action_unfreeze_all)) },
-                                                        onClick = {
-                                                            showFreezeMenu = false
-                                                            viewModel.unfreezeAllApps(context)
-                                                        },
-                                                        leadingIcon = {
-                                                            Icon(
-                                                                painter = painterResource(id = R.drawable.rounded_mode_cool_off_24),
-                                                                contentDescription = null
-                                                            )
-                                                        }
-                                                    )
-                                                    SegmentedDropdownMenuItem(
-                                                        text = { Text("Freeze Automatic") },
-                                                        onClick = {
-                                                            showFreezeMenu = false
-                                                            viewModel.freezeAutomaticApps(context)
-                                                        },
-                                                        leadingIcon = {
-                                                            Icon(
-                                                                painter = painterResource(id = R.drawable.rounded_nest_farsight_cool_24),
-                                                                contentDescription = null
-                                                            )
-                                                        }
-                                                    )
-                                                }
-                                            }
-                                            Spacer(modifier = Modifier.width(8.dp))
-                                        }
-
-                                        DIYTabs.DIY -> {
-                                            IconButton(
-                                                onClick = {
-                                                    HapticUtil.performVirtualKeyHaptic(view)
-                                                    showNewAutomationSheet = true
-                                                },
-                                                colors = IconButtonDefaults.iconButtonColors(
-                                                    containerColor = MaterialTheme.colorScheme.surfaceBright
-                                                )
-                                            ) {
-                                                Icon(
-                                                    painter = painterResource(id = R.drawable.rounded_add_24),
-                                                    contentDescription = stringResource(R.string.diy_editor_new_title)
-                                                )
-                                            }
-                                            Spacer(modifier = Modifier.width(8.dp))
-                                        }
-
-                                        DIYTabs.APPS -> {
-                                            IconButton(
-                                                onClick = {
-                                                    HapticUtil.performVirtualKeyHaptic(view)
-                                                    showAddRepoSheet = true
-                                                },
-                                                colors = IconButtonDefaults.iconButtonColors(
-                                                    containerColor = MaterialTheme.colorScheme.surfaceBright
-                                                )
-                                            ) {
-                                                Icon(
-                                                    painter = painterResource(id = R.drawable.rounded_add_24),
-                                                    contentDescription = stringResource(R.string.action_add_repo)
-                                                )
-                                            }
-                                            Spacer(modifier = Modifier.width(8.dp))
-
-                                            IconButton(
-                                                onClick = {
-                                                    HapticUtil.performVirtualKeyHaptic(view)
-                                                    updatesViewModel.checkForUpdates(context)
-                                                },
-                                                enabled = refreshingRepoIds.isEmpty(),
-                                                colors = IconButtonDefaults.iconButtonColors(
-                                                    containerColor = MaterialTheme.colorScheme.surfaceBright
-                                                ),
-                                                modifier = Modifier.size(40.dp)
-                                            ) {
-                                                if (refreshingRepoIds.isNotEmpty()) {
-                                                    CircularWavyProgressIndicator(
-                                                        progress = { animatedProgress },
-                                                        modifier = Modifier.size(24.dp)
-                                                    )
-                                                } else {
-                                                    Icon(
-                                                        painter = painterResource(id = R.drawable.rounded_refresh_24),
-                                                        contentDescription = stringResource(R.string.action_refresh),
-                                                        modifier = Modifier.size(24.dp)
-                                                    )
-                                                }
-                                            }
-                                            Spacer(modifier = Modifier.width(8.dp))
-                                        }
-
-                                        else -> {}
-                                    }
-                                },
-                                hasUpdateAvailable = isUpdateAvailable,
-                                hasHelpBadge = false,
-                                scrollBehavior = scrollBehavior
-                            )
-                        }
+                        topBar = {}
                     ) { innerPadding ->
-                        Box(modifier = Modifier.fillMaxSize()) {
+                        val statusBarHeightPx = with(androidx.compose.ui.platform.LocalDensity.current) {
+                            WindowInsets.statusBars.asPaddingValues().calculateTopPadding().toPx()
+                        }
+                        
+                        Box(
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .progressiveBlur(
+                                    blurRadius = 40f,
+                                    height = statusBarHeightPx * 1.15f,
+                                    direction = BlurDirection.TOP
+                                )
+                        ) {
+                            val currentTab = remember(tabs, currentPage) {
+                                tabs.getOrNull(currentPage) ?: tabs.firstOrNull() ?: DIYTabs.ESSENTIALS
+                            }
+
+
                             DIYFloatingToolbar(
                                 modifier = Modifier
                                     .align(Alignment.BottomCenter)
-                                    .offset(y = -ScreenOffset)
+                                    // .offset(y = -ScreenOffset)
                                     .zIndex(1f),
                                 currentPage = currentPage,
                                 tabs = tabs,
@@ -628,7 +474,120 @@ class MainActivity : FragmentActivity() {
                                     currentPage = index
                                 },
                                 scrollBehavior = exitAlwaysScrollBehavior,
-                                badges = mapOf(DIYTabs.APPS to viewModel.hasPendingUpdates.value)
+                                badges = mapOf(DIYTabs.APPS to viewModel.hasPendingUpdates.value),
+                                floatingActionButton = {
+                                    Box { // Menu anchor
+                                        FloatingActionButton(
+                                            onClick = {
+                                                HapticUtil.performVirtualKeyHaptic(view)
+                                                when (currentTab) {
+                                                    DIYTabs.ESSENTIALS -> {
+                                                        startActivity(Intent(context, SettingsActivity::class.java))
+                                                    }
+                                                    DIYTabs.FREEZE -> {
+                                                        startActivity(
+                                                            Intent(
+                                                                context,
+                                                                FeatureSettingsActivity::class.java
+                                                            ).apply {
+                                                                putExtra("feature", "Freeze")
+                                                            })
+                                                    }
+                                                    DIYTabs.DIY -> {
+                                                        showNewAutomationSheet = true
+                                                    }
+                                                    DIYTabs.APPS -> {
+                                                        val user = gitHubUser
+                                                        if (user != null) {
+                                                            showFabProfileMenu = true
+                                                        } else {
+                                                            showGitHubAuthSheet = true
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            containerColor = MaterialTheme.colorScheme.primaryContainer,
+                                            contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
+                                            shape = MaterialTheme.shapes.large,
+                                            elevation = androidx.compose.material3.FloatingActionButtonDefaults.elevation(0.dp, 0.dp, 0.dp, 0.dp)
+                                        ) {
+                                            when (currentTab) {
+                                                DIYTabs.ESSENTIALS -> {
+                                                    Icon(
+                                                        painter = painterResource(id = R.drawable.rounded_settings_heart_24),
+                                                        contentDescription = stringResource(R.string.content_desc_settings)
+                                                    )
+                                                }
+                                                DIYTabs.FREEZE -> {
+                                                    Icon(
+                                                        painter = painterResource(id = R.drawable.rounded_settings_heart_24),
+                                                        contentDescription = stringResource(R.string.content_desc_settings)
+                                                    )
+                                                }
+                                                DIYTabs.DIY -> {
+                                                    Icon(
+                                                        painter = painterResource(id = R.drawable.rounded_add_24),
+                                                        contentDescription = stringResource(R.string.diy_editor_new_title)
+                                                    )
+                                                }
+                                                DIYTabs.APPS -> {
+                                                    val user = gitHubUser
+                                                    if (user != null) {
+                                                        AsyncImage(
+                                                            model = user.avatarUrl,
+                                                            contentDescription = stringResource(R.string.action_profile),
+                                                            contentScale = ContentScale.Crop,
+                                                            modifier = Modifier
+                                                                .size(24.dp)
+                                                                .clip(CircleShape),
+                                                            placeholder = painterResource(id = R.drawable.brand_github),
+                                                            error = painterResource(id = R.drawable.brand_github)
+                                                        )
+                                                    } else {
+                                                        Icon(
+                                                            painter = painterResource(id = R.drawable.brand_github),
+                                                            contentDescription = stringResource(R.string.action_sign_in_github)
+                                                        )
+                                                    }
+                                                }
+                                            }
+                                        }
+
+                                        if (currentTab == DIYTabs.APPS) {
+                                            val user = gitHubUser
+                                            if (user != null) {
+                                                SegmentedDropdownMenu(
+                                                    expanded = showFabProfileMenu,
+                                                    onDismissRequest = { showFabProfileMenu = false }
+                                                ) {
+                                                    SegmentedDropdownMenuItem(
+                                                        text = { Text(user.name ?: user.login) },
+                                                        onClick = { showFabProfileMenu = false },
+                                                        leadingIcon = {
+                                                            Icon(
+                                                                painter = painterResource(id = R.drawable.brand_github),
+                                                                contentDescription = null
+                                                            )
+                                                        }
+                                                    )
+                                                    SegmentedDropdownMenuItem(
+                                                        text = { Text(stringResource(R.string.action_sign_out)) },
+                                                        onClick = {
+                                                            gitHubAuthViewModel.signOut(context)
+                                                            showFabProfileMenu = false
+                                                        },
+                                                        leadingIcon = {
+                                                            Icon(
+                                                                painter = painterResource(id = R.drawable.rounded_logout_24),
+                                                                contentDescription = null
+                                                            )
+                                                        }
+                                                    )
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
                             )
 
                             AnimatedContent(
@@ -649,58 +608,73 @@ class MainActivity : FragmentActivity() {
                                 },
                                 modifier = Modifier
                                     .scale(1f - (backProgress.value * 0.05f))
-                                    .alpha(1f - (backProgress.value * 0.3f)),
+                                    .alpha(1f - (backProgress.value * 0.3f))
+                                    .progressiveBlur(
+                                        blurRadius = 40f,
+                                        height = with(androidx.compose.ui.platform.LocalDensity.current) { 130.dp.toPx() },
+                                        direction = BlurDirection.BOTTOM
+                                    ),
                                 label = "Tab Transition"
                             ) { targetPage ->
-                                when (tabs[targetPage]) {
+                                    val statusBarHeight = WindowInsets.statusBars.asPaddingValues().calculateTopPadding()
+                                    val topContentPadding = statusBarHeight
+                                    val bottomToolbarPadding = 150.dp
+                                    val contentPadding = PaddingValues(
+                                        top = topContentPadding,
+                                        bottom = bottomToolbarPadding,
+                                        start = 16.dp,
+                                        end = 16.dp
+                                    )
+
+                                    when (tabs[targetPage]) {
                                         DIYTabs.ESSENTIALS -> {
                                             SetupFeatures(
                                                 viewModel = viewModel,
-                                                modifier = Modifier.padding(innerPadding),
-                                                searchRequested = searchRequested,
-                                                onSearchHandled = { searchRequested = false },
+                                                modifier = Modifier.fillMaxSize(),
+                                                contentPadding = contentPadding,
                                                 onHelpClick = { showInstructionsSheet = true }
                                             )
                                         }
 
                                         DIYTabs.FREEZE -> {
-                                        FreezeGridUI(
-                                            viewModel = viewModel,
-                                            modifier = Modifier.padding(innerPadding),
-                                            contentPadding = innerPadding
-                                        )
-                                    }
+                                            FreezeGridUI(
+                                                viewModel = viewModel,
+                                                modifier = Modifier.fillMaxSize(),
+                                                contentPadding = contentPadding
+                                            )
+                                        }
 
-                                    DIYTabs.DIY -> {
-                                        DIYScreen(
-                                            modifier = Modifier.padding(innerPadding),
-                                            showNewAutomationSheet = showNewAutomationSheet,
-                                            onDismissNewAutomationSheet = { showNewAutomationSheet = false }
-                                        )
-                                    }
+                                        DIYTabs.DIY -> {
+                                            DIYScreen(
+                                                modifier = Modifier.fillMaxSize(),
+                                                contentPadding = contentPadding,
+                                                showNewAutomationSheet = showNewAutomationSheet,
+                                                onDismissNewAutomationSheet = { showNewAutomationSheet = false }
+                                            )
+                                        }
 
-                                    DIYTabs.APPS -> {
-                                        Box(modifier = Modifier.fillMaxSize()) {
-                                            val isLoading by updatesViewModel.isLoading
+                                        DIYTabs.APPS -> {
+                                            Box(modifier = Modifier.fillMaxSize()) {
+                                                val isLoading by updatesViewModel.isLoading
 
-                                            if (isLoading && trackedRepos.isEmpty()) {
-                                                Column(
-                                                    modifier = Modifier
-                                                        .padding(innerPadding)
-                                                        .fillMaxSize(),
-                                                    horizontalAlignment = Alignment.CenterHorizontally,
-                                                    verticalArrangement = Arrangement.Center
-                                                ) {
-                                                    androidx.compose.material3.LoadingIndicator()
-                                                }
-                                            } else if (trackedRepos.isEmpty()) {
-                                                Column(
-                                                    modifier = Modifier
-                                                        .padding(innerPadding)
-                                                        .fillMaxSize(),
-                                                    horizontalAlignment = Alignment.CenterHorizontally,
-                                                    verticalArrangement = Arrangement.Center
-                                                ) {
+                                                if (isLoading && trackedRepos.isEmpty()) {
+                                                    Column(
+                                                        modifier = Modifier
+                                                            .fillMaxSize()
+                                                            .padding(bottom = bottomToolbarPadding, start = 16.dp, end = 16.dp),
+                                                        horizontalAlignment = Alignment.CenterHorizontally,
+                                                        verticalArrangement = Arrangement.Center
+                                                    ) {
+                                                        androidx.compose.material3.LoadingIndicator()
+                                                    }
+                                                } else if (trackedRepos.isEmpty()) {
+                                                    Column(
+                                                        modifier = Modifier
+                                                            .fillMaxSize()
+                                                            .padding(bottom = bottomToolbarPadding, start = 16.dp, end = 16.dp),
+                                                        horizontalAlignment = Alignment.CenterHorizontally,
+                                                        verticalArrangement = Arrangement.Center
+                                                    ) {
                                                     Text(
                                                         text = stringResource(R.string.msg_no_repos_tracked),
                                                         style = MaterialTheme.typography.bodyLarge,
@@ -734,14 +708,34 @@ class MainActivity : FragmentActivity() {
 
                                                 LazyColumn(
                                                     modifier = Modifier.fillMaxSize(),
-                                                    contentPadding = androidx.compose.foundation.layout.PaddingValues(
-                                                        top = innerPadding.calculateTopPadding() + 16.dp,
-                                                        bottom = 150.dp,
+                                                    contentPadding = PaddingValues(
+                                                        bottom = bottomToolbarPadding,
                                                         start = 16.dp,
                                                         end = 16.dp
                                                     ),
                                                     verticalArrangement = Arrangement.spacedBy(16.dp)
                                                 ) {
+                                                    item {
+                                                        Spacer(modifier = Modifier.height(topContentPadding))
+                                                    }
+                                                    item {
+                                                        RoundedCardContainer {
+                                                            AppsActionButtons(
+                                                                view = view,
+                                                                onAddClick = {
+                                                                    HapticUtil.performUIHaptic(view)
+                                                                    showAddRepoSheet = true
+                                                                },
+                                                                onRefreshAllClick = {
+                                                                    HapticUtil.performUIHaptic(view)
+                                                                    updatesViewModel.checkForUpdates(context)
+                                                                },
+                                                                isRefreshing = refreshingRepoIds.isNotEmpty(),
+                                                                progress = { animatedProgress }
+                                                            )
+                                                        }
+                                                    }
+
                                                     // Pending Section
                                                     if (pending.isNotEmpty()) {
                                                         item {
@@ -953,8 +947,9 @@ class MainActivity : FragmentActivity() {
                         }
                     }
 
-                    // Mark app as ready after composing (happens very quickly)
+                    // Mark app as ready after a short delay to ensure first frame is painted
                     LaunchedEffect(Unit) {
+                        kotlinx.coroutines.delay(100)
                         isAppReady = true
                     }
                 }
@@ -982,6 +977,58 @@ class MainActivity : FragmentActivity() {
                 }
                 startActivity(settingsIntent)
             }
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3ExpressiveApi::class)
+@Composable
+private fun AppsActionButtons(
+    view: android.view.View,
+    onAddClick: () -> Unit,
+    onRefreshAllClick: () -> Unit,
+    isRefreshing: Boolean,
+    progress: () -> Float
+) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(MaterialTheme.colorScheme.surfaceBright)
+            .padding(12.dp),
+        horizontalArrangement = Arrangement.spacedBy(12.dp)
+    ) {
+        Button(
+            onClick = onAddClick,
+            modifier = Modifier.weight(1f),
+        ) {
+            Icon(
+                painter = painterResource(id = R.drawable.rounded_add_24),
+                contentDescription = null,
+                modifier = Modifier.size(18.dp)
+            )
+            Spacer(modifier = Modifier.width(8.dp))
+            Text(stringResource(R.string.action_add))
+        }
+
+        Button(
+            onClick = onRefreshAllClick,
+            modifier = Modifier.weight(1f),
+            enabled = !isRefreshing
+        ) {
+            if (isRefreshing) {
+                CircularWavyProgressIndicator(
+                    progress = progress,
+                    modifier = Modifier.size(18.dp)
+                )
+            } else {
+                Icon(
+                    painter = painterResource(id = R.drawable.rounded_refresh_24),
+                    contentDescription = null,
+                    modifier = Modifier.size(18.dp)
+                )
+            }
+            Spacer(modifier = Modifier.width(8.dp))
+            Text(stringResource(R.string.action_refresh))
         }
     }
 }

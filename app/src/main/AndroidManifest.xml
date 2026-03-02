@@ -87,6 +87,13 @@
         </activity>
 
         <activity
+            android:name=".ui.activities.YourAndroidActivity"
+            android:exported="false"
+            android:label="@string/tab_your_android"
+            android:theme="@style/Theme.Essentials">
+        </activity>
+
+        <activity
             android:name=".SettingsActivity"
             android:exported="false"
             android:label="Settings"

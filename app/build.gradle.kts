@@ -21,8 +21,8 @@ android {
         applicationId = "com.sameerasw.essentials"
         minSdk = 26
         targetSdk = 36
-        versionCode = 31
-        versionName = "12.0"
+        versionCode = 32
+        versionName = "12.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -139,4 +139,7 @@ dependencies {
     // Watermark dependencies
     implementation("androidx.exifinterface:exifinterface:1.3.7")
     implementation("androidx.compose.material:material-icons-extended:1.7.0") // Compatible with Compose BOM
+
+    // GSMArena Parsing
+    implementation("org.jsoup:jsoup:1.15.3")
 }

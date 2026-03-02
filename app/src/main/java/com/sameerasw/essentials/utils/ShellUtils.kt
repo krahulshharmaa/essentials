@@ -35,6 +35,16 @@ object ShellUtils {
         }
     }
 
+    fun runCommandWithOutput(context: Context, command: String): String? {
+        return try {
+            val process = newProcess(context, arrayOf("sh", "-c", command))
+            process?.inputStream?.bufferedReader()?.use { it.readText() }?.trim()
+        } catch (e: Exception) {
+            null
+        }
+    }
+
+
     fun newProcess(context: Context, command: Array<String>): Process? {
         return if (isRootEnabled(context)) {
             RootUtils.newProcess(command)

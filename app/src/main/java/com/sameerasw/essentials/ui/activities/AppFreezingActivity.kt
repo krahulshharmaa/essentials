@@ -173,6 +173,7 @@ class AppFreezingActivity : ComponentActivity() {
                     },
                     floatingActionButton = {
                         ExpandableFreezeFab(
+                            modifier = Modifier.padding(bottom = 16.dp, end = 16.dp),
                             onUnfreezeAll = { viewModel.unfreezeAllApps(context) },
                             onFreezeAll = { viewModel.freezeAllApps(context) },
                             onFreezeAutomatic = { viewModel.freezeAutomaticApps(context) }
@@ -346,6 +347,7 @@ fun AppGridItem(
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun ExpandableFreezeFab(
+    modifier: Modifier = Modifier,
     onUnfreezeAll: () -> Unit,
     onFreezeAll: () -> Unit,
     onFreezeAutomatic: () -> Unit
@@ -355,6 +357,7 @@ fun ExpandableFreezeFab(
     BackHandler(fabMenuExpanded) { fabMenuExpanded = false }
 
     FloatingActionButtonMenu(
+        modifier = modifier,
         expanded = fabMenuExpanded,
         button = {
             ToggleFloatingActionButton(
