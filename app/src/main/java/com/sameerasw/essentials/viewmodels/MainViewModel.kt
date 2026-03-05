@@ -173,6 +173,7 @@ class MainViewModel : ViewModel() {
 
     val isPitchBlackThemeEnabled = mutableStateOf(false)
     val isBlurEnabled = mutableStateOf(true)
+    val isBlurSettingEnabled = mutableStateOf(true)
     val isPowerSaveModeEnabled = mutableStateOf(false)
     private var powerSaveReceiver: BroadcastReceiver? = null
 
@@ -967,6 +968,7 @@ class MainViewModel : ViewModel() {
         val isProblematic = DeviceUtils.isBlurProblematicDevice()
         val isPowerSave = DeviceUtils.isPowerSaveMode(context)
         
+        isBlurSettingEnabled.value = useBlurSetting
         isBlurEnabled.value = useBlurSetting && !isProblematic && !isPowerSave
     }
 

@@ -362,7 +362,7 @@ fun SettingsContent(
                 } else {
                     stringResource(R.string.desc_use_blur)
                 },
-                isChecked = viewModel.isBlurEnabled.value,
+                isChecked = viewModel.isBlurSettingEnabled.value,
                 onCheckedChange = { viewModel.setBlurEnabled(it, context) },
                 enabled = !isBlurProblematic
             )
