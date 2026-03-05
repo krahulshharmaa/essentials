@@ -751,10 +751,9 @@ fun SettingsContent(
                     modifier = Modifier
                         .fillMaxWidth()
                         .background(
-                            color = MaterialTheme.colorScheme.surfaceBright,
-                            shape = RoundedCornerShape(MaterialTheme.shapes.extraSmall.bottomEnd)
+                            color = MaterialTheme.colorScheme.surfaceBright
                         )
-                        .padding(12.dp),
+                        .padding(start = 12.dp, end = 12.dp, top = 12.dp, bottom = 4.dp),
                     horizontalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
                     Button(
@@ -776,6 +775,28 @@ fun SettingsContent(
                         modifier = Modifier.weight(1f)
                     ) {
                         Text("Import Config")
+                    }
+                }
+
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .background(
+                            color = MaterialTheme.colorScheme.surfaceBright
+                        )
+                        .padding(start = 12.dp, end = 12.dp, top = 4.dp, bottom = 12.dp),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    Button(
+                        onClick = {
+                            HapticUtil.performVirtualKeyHaptic(view)
+                            viewModel.resetOnboarding(context)
+                            // Navigate back to main screen
+                            (context as? ComponentActivity)?.finish()
+                        },
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Text("Reset onboarding")
                     }
                 }
 

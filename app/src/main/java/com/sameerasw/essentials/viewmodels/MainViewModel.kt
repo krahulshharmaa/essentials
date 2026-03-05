@@ -117,6 +117,7 @@ class MainViewModel : ViewModel() {
     val isAodForceTurnOffEnabled = mutableStateOf(false)
     val isAutoAccessibilityEnabled = mutableStateOf(false)
     val isNotificationGlanceSameAsLightingEnabled = mutableStateOf(true)
+    val isOnboardingCompleted = mutableStateOf(true) // Default to true so it doesn't flash on first check if not loaded
 
 
     data class CalendarAccount(
@@ -401,6 +402,10 @@ class MainViewModel : ViewModel() {
                         isCalendarSyncEnabled.value = settingsRepository.getBoolean(key)
                     }
 
+                    SettingsRepository.KEY_ONBOARDING_COMPLETED -> {
+                        isOnboardingCompleted.value = settingsRepository.getBoolean(key, false)
+                    }
+
                     SettingsRepository.KEY_TRACKED_REPOS -> {
                         appContext?.let { refreshTrackedUpdates(it) }
                     }
@@ -590,6 +595,7 @@ class MainViewModel : ViewModel() {
 
         notificationLightingStyle.value = settingsRepository.getNotificationLightingStyle()
         notificationLightingColorMode.value = settingsRepository.getNotificationLightingColorMode()
+        isOnboardingCompleted.value = settingsRepository.getBoolean(SettingsRepository.KEY_ONBOARDING_COMPLETED, false)
         notificationLightingCustomColor.intValue = settingsRepository.getInt(
             SettingsRepository.KEY_EDGE_LIGHTING_CUSTOM_COLOR,
             0xFF6200EE.toInt()
@@ -2301,5 +2307,16 @@ class MainViewModel : ViewModel() {
         if (::settingsRepository.isInitialized) {
             settingsRepository.unregisterOnSharedPreferenceChangeListener(preferenceChangeListener)
         }
+    }
+
+    fun setOnboardingCompleted(completed: Boolean, context: Context) {
+        settingsRepository.putBoolean(SettingsRepository.KEY_ONBOARDING_COMPLETED, completed)
+        isOnboardingCompleted.value = completed
+    }
+
+    fun resetOnboarding(context: Context) {
+        setOnboardingCompleted(false, context)
+        // Reset tab to ESSENTIALS
+        setDefaultTab(com.sameerasw.essentials.domain.DIYTabs.ESSENTIALS, context)
     }
 }
