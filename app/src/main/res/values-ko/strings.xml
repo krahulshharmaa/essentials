@@ -1,1100 +1,1100 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Essentials</string>
-    <string name="label_beta">BETA</string>
+    <string name="app_name">골자</string>
+    <string name="label_beta">베타</string>
     <string name="accessibility_service_description"><b>Essentials Accessibility Service</b>\n\nThis service is required for the following advanced features:\n\n<b>• Physical Button Remapping:</b>\nDetects volume button presses even when the screen is off to trigger actions like the Flashlight.\n\n<b>• Per-App Settings:</b>\nMonitors the currently active app to apply specific profiles for Dynamic Night Light, Notification Lighting Colors, and App Lock.\n\n<b>• Screen Control:</b>\nAllows the app to lock the screen (e.g. via Double Tap or Widgets) and detect screen state changes.\n\n<b>• Security:</b>\nPrevents unauthorized changes by detecting window content when the device is locked.\n\n<small>No input text or sensitive user data is collected or transmitted.</small></string>
-    <string name="freeze_activity_title">App Freezing</string>
-    <string name="freeze_activity_subtitle">Disable apps that are rarely used</string>
-    <string name="freeze_shortcut_short_label">App Freezing</string>
-    <string name="freeze_shortcut_long_label">Open App Freezing</string>
-    <string name="frozen_app_shortcut_label">Frozen App</string>
-    <string name="screen_off_widget_label">Empty screen off widget</string>
-    <string name="app_freezing_tile_label">App Freezing</string>
-    <string name="flashlight_pulse_tile_label">Flashlight Pulse</string>
-    <string name="check_pre_releases_label">Check for pre-releases</string>
-    <string name="check_pre_releases_desc">Might be unstable</string>
+    <string name="freeze_activity_title">앱 정지</string>
+    <string name="freeze_activity_subtitle">거의 사용하지 않는 앱 비활성화</string>
+    <string name="freeze_shortcut_short_label">앱 정지</string>
+    <string name="freeze_shortcut_long_label">앱 정지 열기</string>
+    <string name="frozen_app_shortcut_label">겨울왕국 앱</string>
+    <string name="screen_off_widget_label">빈 화면 꺼짐 위젯</string>
+    <string name="app_freezing_tile_label">앱 정지</string>
+    <string name="flashlight_pulse_tile_label">손전등 펄스</string>
+    <string name="check_pre_releases_label">시험판 확인</string>
+    <string name="check_pre_releases_desc">불안정할 수도 있음</string>
     <!-- App Lock -->
-    <string name="settings_section_security">Security</string>
-    <string name="app_lock_enable_title">Enable app lock</string>
-    <string name="app_lock_auth_title">App Lock Security</string>
-    <string name="app_lock_enable_auth_subtitle">Authenticate to enable app lock</string>
-    <string name="app_lock_disable_auth_subtitle">Authenticate to disable app lock</string>
-    <string name="app_lock_select_apps_title">Select locked apps</string>
-    <string name="app_lock_select_apps_desc">Choose which apps require authentication</string>
-    <string name="app_lock_description">Secure your apps with biometric authentication. Locked apps will require authentication when launching, Stays unlocked until the screen turns off.</string>
-    <string name="app_lock_warning">Beware that this is not a robust solution as this is only a 3rd party application. If you need strong security, consider using Private Space or other such features.</string>
-    <string name="app_lock_biometric_note">Another note, the biometric authentication prompt only lets you use STRONG secure class methods. Face unlock security methods in WEAK class in devices such as Pixel 7 will only be able to utilize the available other STRONG auth methods such as fingerprint or pin.</string>
+    <string name="settings_section_security">보안</string>
+    <string name="app_lock_enable_title">앱 잠금 활성화</string>
+    <string name="app_lock_auth_title">앱 잠금 보안</string>
+    <string name="app_lock_enable_auth_subtitle">앱 잠금을 활성화하려면 인증하세요.</string>
+    <string name="app_lock_disable_auth_subtitle">앱 잠금을 비활성화하려면 인증하세요.</string>
+    <string name="app_lock_select_apps_title">잠긴 앱 선택</string>
+    <string name="app_lock_select_apps_desc">인증이 필요한 앱 선택</string>
+    <string name="app_lock_description">생체 인증으로 앱을 보호하세요. 잠긴 앱은 실행 시 인증이 필요하며, 화면이 꺼질 때까지 잠금 해제 상태를 유지합니다.</string>
+    <string name="app_lock_warning">이는 타사 응용 프로그램일 뿐이므로 강력한 솔루션이 아니라는 점에 유의하세요. 강력한 보안이 필요한 경우 개인 공간 또는 기타 유사한 기능을 사용해 보세요.</string>
+    <string name="app_lock_biometric_note">또 다른 참고 사항은 생체 인증 프롬프트에서는 STRONG 보안 클래스 방법만 사용할 수 있다는 것입니다. Pixel 7과 같은 기기에서 WEAK 클래스의 얼굴 잠금 해제 보안 방법은 지문이나 핀과 같은 사용 가능한 다른 STRONG 인증 방법만 활용할 수 있습니다.</string>
     <!-- Button Remap -->
-    <string name="button_remap_enable_title">Enable Button Remap</string>
-    <string name="button_remap_use_shizuku_title">Use Shizuku</string>
-    <string name="button_remap_use_shizuku_desc">Works with screen off (Recommended)</string>
-    <string name="shizuku_not_running_toast">Shizuku is not running</string>
-    <string name="shizuku_detected_prefix">Detected %1$s</string>
-    <string name="shizuku_status_prefix">Status: %1$s</string>
-    <string name="shizuku_open_button">Open Shizuku</string>
-    <string name="settings_section_flashlight">Flashlight</string>
-    <string name="flashlight_options_title">Flashlight options</string>
-    <string name="flashlight_options_desc">Adjust fading and other settings</string>
-    <string name="setting_pitch_black_theme_title">Pitch black theme</string>
-    <string name="setting_pitch_black_theme_desc">Use pure black background in dark mode</string>
-    <string name="settings_section_haptic">Haptic Feedback</string>
-    <string name="button_remap_section_long_press">Remap Long Press</string>
-    <string name="screen_off">Screen Off</string>
-    <string name="screen_on">Screen On</string>
-    <string name="volume_up">Volume Up</string>
-    <string name="volume_down">Volume Down</string>
-    <string name="action_toggle_flashlight">Toggle flashlight</string>
-    <string name="action_media_play_pause">Media play/pause</string>
-    <string name="action_media_next">Media next</string>
-    <string name="action_media_previous">Media previous</string>
-    <string name="action_toggle_vibrate">Toggle vibrate</string>
-    <string name="action_toggle_mute">Toggle mute</string>
-    <string name="action_ai_assistant">AI assistant</string>
-    <string name="action_take_screenshot">Take screenshot</string>
-    <string name="action_cycle_sound_modes">Cycle sound modes</string>
-    <string name="action_like_song">Like current song</string>
-    <string name="like_song_settings_title">Like song settings</string>
-    <string name="like_song_settings_desc">This feature requires notification access to detect the currently playing media and trigger the like action. Please enable it below.</string>
-    <string name="like_song_toast_enabled">Show toast message</string>
-    <string name="like_song_aod_overlay_title">Show overlay on AOD</string>
-    <string name="feat_ambient_music_glance_title">Ambient music glance</string>
-    <string name="feat_ambient_music_glance_desc">Glance at media on AOD</string>
-    <string name="ambient_glance_docked_mode_title">Docked mode</string>
-    <string name="ambient_glance_docked_mode_desc">Keep the overlay visible indefinitely while music is playing on AOD</string>
-    <string name="feat_notification_glance_title">Notification glance</string>
-    <string name="feat_notification_glance_desc">Keep AOD on while notifications are pending</string>
-    <string name="notification_glance_same_as_lighting_title">Same apps as notification lighting</string>
-    <string name="notification_glance_desc">This feature will dynamically enable Always on Display when a notification arrives from a selected app, and disable it once all matching notifications are dismissed. Pick apps or use the same selection as notification lighting.</string>
-    <string name="grant_notification_access">Grant notification access</string>
-    <string name="action_toggle_media_volume">Toggle media volume</string>
-    <string name="button_remap_screen_off_hint">When the screen is off, long-press the selected button to trigger its assigned action. On Pixel devices, this action only gets triggered if the AOD is on due to system limitations.</string>
-    <string name="button_remap_screen_on_hint">When the screen is on, long-press the selected button to trigger its assigned action.</string>
-    <string name="flashlight_intensity_title">Flashlight Intensity</string>
-    <string name="flashlight_fade_title">Fade in and out</string>
-    <string name="flashlight_fade_desc">Smoothly toggle flashlight</string>
-    <string name="flashlight_global_title">Global controls</string>
-    <string name="flashlight_global_desc">Fade-in flashlight globally</string>
-    <string name="flashlight_adjust_intensity_title">Adjust intensity</string>
-    <string name="flashlight_adjust_intensity_desc">Volume + - adjusts flashlight intensity</string>
-    <string name="flashlight_live_update_title">Live update</string>
-    <string name="flashlight_live_update_desc">Show brightness in status bar</string>
-    <string name="settings_section_other">Other</string>
-    <string name="flashlight_always_off_title">Always turn off flashlight</string>
-    <string name="flashlight_always_off_desc">Even while display is on</string>
-    <string name="content_desc_settings">Settings</string>
+    <string name="button_remap_enable_title">버튼 재매핑 활성화</string>
+    <string name="button_remap_use_shizuku_title">Shizuku 또는 루트 또는 루트 사용</string>
+    <string name="button_remap_use_shizuku_desc">화면이 꺼진 상태에서도 작동(권장)</string>
+    <string name="shizuku_not_running_toast">시즈쿠가 달리고 있지 않아요</string>
+    <string name="shizuku_detected_prefix">감지됨 %1$s</string>
+    <string name="shizuku_status_prefix">상태: %1$s</string>
+    <string name="shizuku_open_button">오픈 시즈쿠</string>
+    <string name="settings_section_flashlight">플래시</string>
+    <string name="flashlight_options_title">손전등 옵션</string>
+    <string name="flashlight_options_desc">페이딩 및 기타 설정 조정</string>
+    <string name="setting_pitch_black_theme_title">피치 블랙 테마</string>
+    <string name="setting_pitch_black_theme_desc">어두운 모드에서 순수한 검정색 배경 사용</string>
+    <string name="settings_section_haptic">햅틱 피드백</string>
+    <string name="button_remap_section_long_press">길게 누르기 다시 매핑</string>
+    <string name="screen_off">화면 끄기</string>
+    <string name="screen_on">화면 켜짐</string>
+    <string name="volume_up">볼륨 높이기</string>
+    <string name="volume_down">볼륨 낮추기</string>
+    <string name="action_toggle_flashlight">손전등 전환</string>
+    <string name="action_media_play_pause">미디어 재생/일시 중지</string>
+    <string name="action_media_next">다음 미디어</string>
+    <string name="action_media_previous">이전 미디어</string>
+    <string name="action_toggle_vibrate">진동으로 전환</string>
+    <string name="action_toggle_mute">음소거 전환</string>
+    <string name="action_ai_assistant">AI 비서</string>
+    <string name="action_take_screenshot">스크린샷 찍기</string>
+    <string name="action_cycle_sound_modes">사이클 사운드 모드</string>
+    <string name="action_like_song">현재 노래 좋아요</string>
+    <string name="like_song_settings_title">노래 설정 좋아요</string>
+    <string name="like_song_settings_desc">이 기능을 사용하려면 현재 재생 중인 미디어를 감지하고 좋아요 작업을 실행하려면 알림 액세스가 필요합니다. 아래에서 활성화해 주세요.</string>
+    <string name="like_song_toast_enabled">토스트 메시지 표시</string>
+    <string name="like_song_aod_overlay_title">AOD에 오버레이 표시</string>
+    <string name="feat_ambient_music_glance_title">주변 음악 한눈에 보기</string>
+    <string name="feat_ambient_music_glance_desc">AOD에 대한 미디어 살펴보기</string>
+    <string name="ambient_glance_docked_mode_title">도킹 모드</string>
+    <string name="ambient_glance_docked_mode_desc">AOD에서 음악이 재생되는 동안 오버레이가 무기한 표시되도록 유지</string>
+    <string name="feat_notification_glance_title">알림 한눈에 보기</string>
+    <string name="feat_notification_glance_desc">알림이 보류 중인 동안 AOD를 계속 켜두세요</string>
+    <string name="notification_glance_same_as_lighting_title">알림 조명과 동일한 앱</string>
+    <string name="notification_glance_desc">이 기능은 선택한 앱에서 알림이 도착하면 Always on Display를 동적으로 활성화하고, 일치하는 모든 알림이 해제되면 비활성화합니다. 앱을 선택하거나 알림 조명과 동일한 선택을 사용하세요.</string>
+    <string name="grant_notification_access">알림 액세스 권한 부여</string>
+    <string name="action_toggle_media_volume">미디어 볼륨 전환</string>
+    <string name="button_remap_screen_off_hint">화면이 꺼진 상태에서 선택한 버튼을 길게 누르면 할당된 작업이 실행됩니다. Pixel 장치에서 이 작업은 시스템 제한으로 인해 AOD가 켜져 있는 경우에만 트리거됩니다.</string>
+    <string name="button_remap_screen_on_hint">화면이 켜져 있을 때 선택한 버튼을 길게 누르면 할당된 작업이 실행됩니다.</string>
+    <string name="flashlight_intensity_title">손전등 강도</string>
+    <string name="flashlight_fade_title">페이드 인 및 페이드 아웃</string>
+    <string name="flashlight_fade_desc">손전등을 부드럽게 전환</string>
+    <string name="flashlight_global_title">전역 제어</string>
+    <string name="flashlight_global_desc">전 세계적으로 페이드인 손전등</string>
+    <string name="flashlight_adjust_intensity_title">강도 조정</string>
+    <string name="flashlight_adjust_intensity_desc">볼륨 + - 손전등 강도를 조정합니다.</string>
+    <string name="flashlight_live_update_title">실시간 업데이트</string>
+    <string name="flashlight_live_update_desc">상태 표시줄에 밝기 표시</string>
+    <string name="settings_section_other">다른</string>
+    <string name="flashlight_always_off_title">항상 손전등을 꺼주세요</string>
+    <string name="flashlight_always_off_desc">디스플레이가 켜져 있는 동안에도</string>
+    <string name="content_desc_settings">설정</string>
     <!-- Caffeinate / Permissions -->
-    <string name="permission_show_notification_title">Show Notification</string>
-    <string name="permission_post_notifications_title">Post Notifications</string>
-    <string name="permission_post_notifications_desc">Allows the app to show notifications</string>
-    <string name="permission_grant_action">Grant Permission</string>
-    <string name="caffeinate_notification_title">Caffeinate Active</string>
-    <string name="caffeinate_active">Active</string>
-    <string name="caffeinate_notification_desc">Screen is being kept awake</string>
-    <string name="caffeinate_battery_optimization_title">Ignore battery optimization</string>
-    <string name="caffeinate_abort_screen_off_title">Abort with screen off</string>
-    <string name="caffeinate_skip_countdown_title">Skip countdown</string>
-    <string name="caffeinate_skip_countdown_desc">Start Caffeinate immediately.</string>
-    <string name="caffeinate_timeout_presets_title">Timeout Presets</string>
-    <string name="caffeinate_timeout_presets_desc">Select available durations for QS tile</string>
+    <string name="permission_show_notification_title">알림 표시</string>
+    <string name="permission_post_notifications_title">게시물 알림</string>
+    <string name="permission_post_notifications_desc">앱이 알림을 표시하도록 허용합니다.</string>
+    <string name="permission_grant_action">권한 부여</string>
+    <string name="caffeinate_notification_title">카페인 활성</string>
+    <string name="caffeinate_active">활동적인</string>
+    <string name="caffeinate_notification_desc">화면이 계속 켜져 있습니다.</string>
+    <string name="caffeinate_battery_optimization_title">배터리 최적화 무시</string>
+    <string name="caffeinate_abort_screen_off_title">화면이 꺼진 상태에서 중단</string>
+    <string name="caffeinate_skip_countdown_title">카운트다운 건너뛰기</string>
+    <string name="caffeinate_skip_countdown_desc">즉시 카페인을 시작하세요.</string>
+    <string name="caffeinate_timeout_presets_title">시간 초과 사전 설정</string>
+    <string name="caffeinate_timeout_presets_desc">QS 타일에 사용 가능한 기간 선택</string>
     <string name="caffeinate_timeout_5m">5m</string>
     <string name="caffeinate_timeout_10m">10m</string>
     <string name="caffeinate_timeout_30m">30m</string>
-    <string name="perm_notif_policy_title">Do Not Disturb access</string>
-    <string name="perm_notif_policy_desc">Required to cycle between sound, vibrate and mute modes</string>
-    <string name="caffeinate_timeout_1h">1h</string>
-    <string name="caffeinate_timeout_infinity">∞</string>
-    <string name="caffeinate_starting_in">Starting in %1$ds…</string>
-    <string name="caffeinate_remaining">%1$s remaining</string>
-    <string name="caffeinate_live_channel_desc">Persistent notification for Caffeinate</string>
+    <string name="perm_notif_policy_title">방해 금지 액세스</string>
+    <string name="perm_notif_policy_desc">소리, 진동, 음소거 모드 간 전환이 필요함</string>
+    <string name="caffeinate_timeout_1h">1시간</string>
+    <string name="caffeinate_timeout_infinity">∨</string>
+    <string name="caffeinate_starting_in"> %1$d초부터 시작…</string>
+    <string name="caffeinate_remaining">%1$s 남은</string>
+    <string name="caffeinate_live_channel_desc">카페인에 대한 지속적인 알림</string>
     <!-- Dynamic Night Light -->
-    <string name="dynamic_night_light_enable_title">Enable Dynamic Night Light</string>
-    <string name="dynamic_night_light_apps_section">Apps that toggle off night light</string>
-    <string name="action_select_apps">Select apps</string>
+    <string name="dynamic_night_light_enable_title">동적 야간 조명 활성화</string>
+    <string name="dynamic_night_light_apps_section">야간 조명을 끄는 앱</string>
+    <string name="action_select_apps">앱 선택</string>
     <!-- App Freezing -->
-    <string name="settings_section_app_control">App Control</string>
-    <string name="action_freeze">Freeze</string>
-    <string name="action_unfreeze">Unfreeze</string>
-    <string name="content_desc_more_options">More options</string>
-    <string name="action_freeze_all">Freeze all apps</string>
-    <string name="action_unfreeze_all">Unfreeze all apps</string>
-    <string name="action_export_freeze">Export frozen apps list</string>
-    <string name="action_import_freeze">Import frozen apps list</string>
-    <string name="freeze_pick_apps_title">Pick apps to freeze</string>
-    <string name="freeze_pick_apps_desc">Choose which apps can be frozen</string>
-    <string name="settings_section_automation">Automation</string>
-    <string name="freeze_when_locked_title">Freeze when locked</string>
-    <string name="freeze_delay_title">Freeze delay</string>
-    <string name="delay_immediate">Immediate</string>
+    <string name="settings_section_app_control">앱 제어</string>
+    <string name="action_freeze">꼭 매달리게 하다</string>
+    <string name="action_unfreeze">녹이다</string>
+    <string name="content_desc_more_options">추가 옵션</string>
+    <string name="action_freeze_all">모든 앱 정지</string>
+    <string name="action_unfreeze_all">모든 앱 고정 해제</string>
+    <string name="action_export_freeze">정지된 앱 목록 내보내기</string>
+    <string name="action_import_freeze">정지된 앱 목록 가져오기</string>
+    <string name="freeze_pick_apps_title">정지할 앱 선택</string>
+    <string name="freeze_pick_apps_desc">고정할 수 있는 앱 선택</string>
+    <string name="settings_section_automation">오토메이션</string>
+    <string name="freeze_when_locked_title">잠긴 상태에서 동결</string>
+    <string name="freeze_delay_title">동결 지연</string>
+    <string name="delay_immediate">즉각적인</string>
     <string name="delay_1m">1m</string>
     <string name="delay_5m">5m</string>
     <string name="delay_15m">15m</string>
-    <string name="delay_manual">Manual</string>
-    <string name="freeze_auto_freeze_section">Auto freeze apps</string>
-    <string name="freeze_automation_hint">Freeze selected apps when the device locks. Choose a delay to avoid freezing apps if you unlock the screen shortly after turning it off.</string>
-    <string name="freeze_warning">Freezing system apps might be dangerous and may cause unexpected behavior.</string>
-    <string name="action_enable_in_settings">Enable in Settings</string>
-    <string name="freeze_dont_freeze_active_apps_title">Don\'t freeze active apps</string>
-    <string name="perm_usage_stats_title">Usage Stats</string>
-    <string name="perm_usage_stats_desc">Required to detect which apps are currently in the foreground to avoid freezing them</string>
-    <string name="perm_notif_listener_desc_freeze">Required to detect playing media and active notifications to avoid freezing them</string>
+    <string name="delay_manual">수동</string>
+    <string name="freeze_auto_freeze_section">앱 자동 정지</string>
+    <string name="freeze_automation_hint">기기가 잠길 때 선택한 앱을 정지합니다. 화면을 끈 직후 잠금을 해제하는 경우 앱이 정지되지 않도록 지연을 선택하세요.</string>
+    <string name="freeze_warning">시스템 앱을 정지시키는 것은 위험할 수 있으며 예기치 않은 동작이 발생할 수 있습니다.</string>
+    <string name="action_enable_in_settings">설정에서 활성화</string>
+    <string name="freeze_dont_freeze_active_apps_title">\'활성 앱을 정지하지 마세요.</string>
+    <string name="perm_usage_stats_title">사용 통계</string>
+    <string name="perm_usage_stats_desc">정지를 방지하기 위해 현재 포그라운드에 있는 앱을 감지하는 데 필요합니다.</string>
+    <string name="perm_notif_listener_desc_freeze">정지를 방지하기 위해 재생 중인 미디어 및 활성 알림을 감지하는 데 필요합니다.</string>
     <!-- Notification Lighting -->
-    <string name="notification_lighting_screen_off_title">Only show when screen off</string>
-    <string name="notification_lighting_skip_silent_title">Skip silent notifications</string>
-    <string name="notification_lighting_skip_persistent_title">Skip persistent notifications</string>
-    <string name="settings_section_flashlight_pulse">Flashlight Pulse</string>
-    <string name="flashlight_pulse_title">Flashlight pulse</string>
-    <string name="flashlight_pulse_facedown_title">Only while facing down</string>
-    <string name="flashlight_pulse_same_as_lighting_title">Same apps as notification lighting</string>
-    <string name="settings_section_style">Style</string>
-    <string name="notification_lighting_stroke_adjustment_section">Stroke adjustment</string>
-    <string name="notification_lighting_corner_radius_title">Corner radius</string>
-    <string name="notification_lighting_stroke_thickness_title">Stroke thickness</string>
-    <string name="notification_lighting_glow_adjustment_section">Glow adjustment</string>
-    <string name="notification_lighting_glow_spread_title">Glow spread</string>
-    <string name="notification_lighting_placement_section">Placement</string>
-    <string name="notification_lighting_h_pos_title">Horizontal position</string>
-    <string name="notification_lighting_v_pos_title">Vertical position</string>
-    <string name="notification_lighting_indicator_adjustment_section">Indicator adjustment</string>
-    <string name="notification_lighting_scale_title">Scale</string>
-    <string name="notification_lighting_duration_title">Duration</string>
-    <string name="settings_section_animation">Animation</string>
-    <string name="notification_lighting_pulse_count_title">Pulse count</string>
-    <string name="notification_lighting_pulse_duration_title">Pulse duration</string>
-    <string name="settings_section_color_mode">Color Mode</string>
-    <string name="settings_section_ambient_display">Ambient display</string>
-    <string name="ambient_display_title">Ambient display</string>
-    <string name="ambient_display_hint">Suitable if you are not using AOD.</string>
-    <string name="ambient_display_desc">Wake screen and show lighting</string>
-    <string name="ambient_show_lock_screen_title">Show lock screen</string>
-    <string name="ambient_show_lock_screen_desc">No black overlay</string>
+    <string name="notification_lighting_screen_off_title">화면이 꺼진 경우에만 표시</string>
+    <string name="notification_lighting_skip_silent_title">자동 알림 건너뛰기</string>
+    <string name="notification_lighting_skip_persistent_title">지속적인 알림 건너뛰기</string>
+    <string name="settings_section_flashlight_pulse">손전등 펄스</string>
+    <string name="flashlight_pulse_title">손전등 펄스</string>
+    <string name="flashlight_pulse_facedown_title">아래로 향한 동안에만</string>
+    <string name="flashlight_pulse_same_as_lighting_title">알림 조명과 동일한 앱</string>
+    <string name="settings_section_style">스타일</string>
+    <string name="notification_lighting_stroke_adjustment_section">스트로크 조정</string>
+    <string name="notification_lighting_corner_radius_title">코너 반경</string>
+    <string name="notification_lighting_stroke_thickness_title">스트로크 두께</string>
+    <string name="notification_lighting_glow_adjustment_section">글로우 조정</string>
+    <string name="notification_lighting_glow_spread_title">글로우 확산</string>
+    <string name="notification_lighting_placement_section">놓기</string>
+    <string name="notification_lighting_h_pos_title">수평 위치</string>
+    <string name="notification_lighting_v_pos_title">수직 위치</string>
+    <string name="notification_lighting_indicator_adjustment_section">표시기 조정</string>
+    <string name="notification_lighting_scale_title">규모</string>
+    <string name="notification_lighting_duration_title">지속</string>
+    <string name="settings_section_animation">생기</string>
+    <string name="notification_lighting_pulse_count_title">펄스 수</string>
+    <string name="notification_lighting_pulse_duration_title">펄스 지속 시간</string>
+    <string name="settings_section_color_mode">컬러 모드</string>
+    <string name="settings_section_ambient_display">주변 디스플레이</string>
+    <string name="ambient_display_title">주변 디스플레이</string>
+    <string name="ambient_display_hint">AOD를 사용하지 않는 경우 적합합니다.</string>
+    <string name="ambient_display_desc">화면 깨우기 및 조명 표시</string>
+    <string name="ambient_show_lock_screen_title">잠금 화면 표시</string>
+    <string name="ambient_show_lock_screen_desc">검은색 오버레이 없음</string>
     <!-- Tiles -->
-    <string name="action_add">Add</string>
-    <string name="qs_tile_already_added">Already added</string>
-    <string name="qs_tile_requires_android_13">Requires Android 13+</string>
-    <string name="tile_ui_blur">UI Blur</string>
-    <string name="tile_bubbles">Bubbles</string>
-    <string name="tile_sensitive_content">Sensitive Content</string>
-    <string name="tile_tap_to_wake">Tap to Wake</string>
+    <string name="action_add">추가하다</string>
+    <string name="qs_tile_already_added">이미 추가됨</string>
+    <string name="qs_tile_requires_android_13">안드로이드 13 이상이 필요합니다</string>
+    <string name="tile_ui_blur">UI 블러</string>
+    <string name="tile_bubbles">거품</string>
+    <string name="tile_sensitive_content">민감한 콘텐츠</string>
+    <string name="tile_tap_to_wake">탭하여 깨우기</string>
     <string name="tile_aod">AOD</string>
-    <string name="tile_caffeinate">Caffeinate</string>
-    <string name="tile_sound_mode">Sound Mode</string>
-    <string name="tile_notification_lighting">Notification Lighting</string>
-    <string name="tile_dynamic_night_light">Dynamic Night Light</string>
-    <string name="tile_locked_security">Locked Security</string>
-    <string name="tile_app_lock">App Lock</string>
-    <string name="tile_mono_audio">Mono Audio</string>
-    <string name="tile_flashlight">Flashlight</string>
-    <string name="tile_app_freezing">App Freezing</string>
-    <string name="tile_flashlight_pulse">Flashlight Pulse</string>
-    <string name="tile_stay_awake">Stay awake</string>
-    <string name="input_method_label">Essentials Keyboard</string>
-    <string name="subtype_en_us">English (US)</string>
-    <string name="tile_active">Active</string>
-    <string name="tile_inactive">Inactive</string>
-    <string name="tile_developer_options">Developer Options</string>
-    <string name="about_desc_developer_options">Toggle system Developer Options from a QS tile easily. This may reset some of the developer settings you have modified.</string>
+    <string name="tile_caffeinate">카페인</string>
+    <string name="tile_sound_mode">사운드 모드</string>
+    <string name="tile_notification_lighting">알림 조명</string>
+    <string name="tile_dynamic_night_light">동적 야간 조명</string>
+    <string name="tile_locked_security">잠긴 보안</string>
+    <string name="tile_app_lock">앱 잠금</string>
+    <string name="tile_mono_audio">모노 오디오</string>
+    <string name="tile_flashlight">플래시</string>
+    <string name="tile_app_freezing">앱 정지</string>
+    <string name="tile_flashlight_pulse">손전등 펄스</string>
+    <string name="tile_stay_awake">깨어있어</string>
+    <string name="input_method_label">필수 키보드</string>
+    <string name="subtype_en_us">영어(미국)</string>
+    <string name="tile_active">활동적인</string>
+    <string name="tile_inactive">비활성</string>
+    <string name="tile_developer_options">개발자 옵션</string>
+    <string name="about_desc_developer_options">QS 타일에서 시스템 개발자 옵션을 쉽게 전환할 수 있습니다. 수정한 개발자 설정 중 일부가 재설정될 수 있습니다.</string>
     <string name="nfc_tile_label">NFC</string>
-    <string name="tile_private_dns">Private DNS</string>
-    <string name="tile_private_dns_auto">Auto</string>
-    <string name="tile_private_dns_off">Off</string>
-    <string name="tile_usb_debugging">USB Debugging</string>
-    <string name="tile_color_picker">Color Picker</string>
-    <string name="toast_eyedropper_failed">Are you sure you\'re on Android 17? (╯°_°）╯</string>
-    <string name="subtitle_eye_dropper">Eye Dropper</string>
-    <string name="on">On</string>
-    <string name="off">Off</string>
-    <string name="private_dns_custom_title">Custom Private DNS</string>
-    <string name="private_dns_presets_title">Common DNS Presets</string>
-    <string name="private_dns_hostname_label">Provider hostname</string>
+    <string name="tile_private_dns">프라이빗 DNS</string>
+    <string name="tile_private_dns_auto">자동</string>
+    <string name="tile_private_dns_off">끄다</string>
+    <string name="tile_usb_debugging">USB 디버깅</string>
+    <string name="tile_color_picker">색상 선택기</string>
+    <string name="toast_eyedropper_failed">Android 17을 사용하고 계시나요?\'를 사용 중이신가요? (╯°_°)╯</string>
+    <string name="subtitle_eye_dropper">점안기</string>
+    <string name="on">~에</string>
+    <string name="off">끄다</string>
+    <string name="private_dns_custom_title">맞춤형 프라이빗 DNS</string>
+    <string name="private_dns_presets_title">일반적인 DNS 사전 설정</string>
+    <string name="private_dns_hostname_label">공급자 호스트 이름</string>
     <string name="dns_preset_adguard">AdGuard DNS</string>
     <string name="dns_preset_adguard_hostname">dns.adguard.com</string>
-    <string name="dns_preset_google">Google Public DNS</string>
+    <string name="dns_preset_google">구글 퍼블릭 DNS</string>
     <string name="dns_preset_google_hostname">dns.google</string>
-    <string name="dns_preset_cloudflare">Cloudflare DNS</string>
+    <string name="dns_preset_cloudflare">클라우드플레어 DNS</string>
     <string name="dns_preset_cloudflare_hostname">1dot1dot1dot1.cloudflare-dns.com</string>
-    <string name="dns_preset_quad9">Quad9 DNS</string>
+    <string name="dns_preset_quad9">쿼드9 DNS</string>
     <string name="dns_preset_quad9_hostname">dns.quad9.net</string>
-    <string name="dns_preset_cleanbrowsing">CleanBrowsing</string>
-    <string name="dns_preset_cleanbrowsing_hostname">adult-filter-dns.cleanbrowsing.org</string>
-    <string name="tile_charge_optimization">Charging</string>
-    <string name="limit_to_80">Limit to 80%</string>
-    <string name="adaptive_charging">Adaptive</string>
-    <string name="deactivated">Not optimized</string>
-    <string name="permission_missing">Permission missing</string>
+    <string name="dns_preset_cleanbrowsing">클린브라우징</string>
+    <string name="dns_preset_cleanbrowsing_hostname">성인 필터-dns.cleanbrowsing.org</string>
+    <string name="tile_charge_optimization">충전 중</string>
+    <string name="limit_to_80">80%로 제한</string>
+    <string name="adaptive_charging">적응형</string>
+    <string name="deactivated">최적화되지 않음</string>
+    <string name="permission_missing">권한이 없습니다.</string>
     <!-- Screen Locked Security -->
-    <string name="screen_locked_security_title">Screen locked security</string>
-    <string name="screen_locked_security_dialog_title">Screen Locked Security</string>
-    <string name="screen_locked_security_auth_enable">Authenticate to enable screen locked security</string>
-    <string name="screen_locked_security_auth_disable">Authenticate to disable screen locked security</string>
-    <string name="warning_title">⚠️ WARNING</string>
-    <string name="screen_locked_security_warning_text">This feature is not foolproof. There may be edge cases where someone still being able to interact with the tile. \nAlso keep in mind that Android will always allow to do a forced reboot and Pixels will always allow the device to be turned off from the lock screen as well.</string>
-    <string name="screen_locked_security_airplane_warning">Make sure to remove the airplane mode tile from quick settings as that is not preventable because it does not open a dialog window.</string>
-    <string name="screen_locked_security_description">When enabled, the Quick Settings panel will be immediately closed and the device will be locked down if someone attempt to interact with Internet tiles while the device is locked. \n\nThis will also disable biometric unlock to prevent further unauthorized access. Animation scale will be reduced to 0.1x while locked to make it even harder to interact with.</string>
+    <string name="screen_locked_security_title">화면 잠금 보안</string>
+    <string name="screen_locked_security_dialog_title">화면 잠금 보안</string>
+    <string name="screen_locked_security_auth_enable">화면 잠금 보안을 활성화하려면 인증하세요.</string>
+    <string name="screen_locked_security_auth_disable">화면 잠금 보안을 비활성화하려면 인증하세요.</string>
+    <string name="warning_title">⚠️ 경고</string>
+    <string name="screen_locked_security_warning_text">이 기능은 완벽하지 않습니다. 누군가 여전히 타일과 상호작용할 수 있는 극단적인 경우가 있을 수 있습니다. \n또한 Android는 항상 강제 재부팅을 허용하고 Pixels에서는 항상 잠금 화면에서 기기가 꺼지는 것을 허용한다는 점을 명심하세요.</string>
+    <string name="screen_locked_security_airplane_warning">비행기 모드 타일은 대화 상자 창이 열리지 않기 때문에 방지할 수 없으므로 빠른 설정에서 제거하세요.</string>
+    <string name="screen_locked_security_description">활성화하면 빠른 설정 패널이 즉시 닫히고 장치가 잠겨 있는 동안 누군가 인터넷 타일과 상호 작용을 시도하면 장치가 잠깁니다. \n\n이렇게 하면 추가 무단 액세스를 방지하기 위해 생체 인식 잠금 해제도 비활성화됩니다. 잠긴 동안에는 애니메이션 크기가 0.1x로 줄어들어 상호작용이 더욱 어려워집니다.</string>
     <!-- Sound Mode -->
-    <string name="sound_mode_reorder_title">Re-order modes</string>
-    <string name="sound_mode_long_press_hint">Long press to toggle</string>
-    <string name="content_desc_drag_reorder">Drag to reorder</string>
-    <string name="sound_mode_sound">Sound</string>
-    <string name="sound_mode_vibrate">Vibrate</string>
-    <string name="sound_mode_silent">Silent</string>
+    <string name="sound_mode_reorder_title">모드 재정렬</string>
+    <string name="sound_mode_long_press_hint">전환하려면 길게 누르세요.</string>
+    <string name="content_desc_drag_reorder">드래그하여 재정렬하세요.</string>
+    <string name="sound_mode_sound">소리</string>
+    <string name="sound_mode_vibrate">떨리다</string>
+    <string name="sound_mode_silent">조용한</string>
     <!-- Status Bar Categories -->
-    <string name="status_bar_category_connectivity">Connectivity</string>
-    <string name="status_bar_category_phone_network">Phone &amp; Network</string>
-    <string name="status_bar_category_audio_media">Audio &amp; Media</string>
-    <string name="status_bar_category_system_status">System Status</string>
-    <string name="status_bar_category_oem_specific">OEM Specific</string>
+    <string name="status_bar_category_connectivity">연결성</string>
+    <string name="status_bar_category_phone_network">전화 및 네트워크</string>
+    <string name="status_bar_category_audio_media">오디오 및 미디어</string>
+    <string name="status_bar_category_system_status">시스템 상태</string>
+    <string name="status_bar_category_oem_specific">OEM 특정</string>
     <!-- Status Bar Icons -->
     <string name="icon_wifi">WiFi</string>
-    <string name="icon_bluetooth">Bluetooth</string>
-    <string name="icon_nfc">NFC / Felica</string>
+    <string name="icon_bluetooth">블루투스</string>
+    <string name="icon_nfc">NFC / 펠리카</string>
     <string name="icon_vpn">VPN</string>
-    <string name="icon_airplane_mode">Airplane Mode</string>
-    <string name="icon_hotspot">Hotspot</string>
-    <string name="icon_cast">Cast</string>
-    <string name="icon_mobile_data">Mobile Data</string>
-    <string name="icon_phone_signal">Phone Signal</string>
+    <string name="icon_airplane_mode">비행기 모드</string>
+    <string name="icon_hotspot">핫스팟</string>
+    <string name="icon_cast">깁스</string>
+    <string name="icon_mobile_data">모바일 데이터</string>
+    <string name="icon_phone_signal">전화 신호</string>
     <string name="icon_volte">VoLTE / VoNR</string>
-    <string name="icon_wifi_calling">WiFi Calling / VoWiFi</string>
-    <string name="icon_call_status">Call Status / Sync</string>
+    <string name="icon_wifi_calling">WiFi 통화 / VoWiFi</string>
+    <string name="icon_call_status">통화 상태/동기화</string>
     <string name="icon_tty">TTY</string>
-    <string name="icon_volume">Volume</string>
-    <string name="icon_headset">Headset</string>
-    <string name="icon_speakerphone">Speakerphone</string>
+    <string name="icon_volume">용량</string>
+    <string name="icon_headset">헤드폰</string>
+    <string name="icon_speakerphone">스피커폰</string>
     <string name="icon_dmb">DMB</string>
-    <string name="icon_clock">Clock</string>
-    <string name="icon_ime">Input Method (IME)</string>
-    <string name="icon_alarm">Alarm</string>
-    <string name="icon_battery">Battery</string>
-    <string name="icon_power_saving">Power Saving</string>
-    <string name="icon_data_saver">Data Saver</string>
-    <string name="icon_rotation_lock">Rotation Lock</string>
-    <string name="icon_location">Location / GPS</string>
-    <string name="icon_sync">Sync</string>
-    <string name="icon_managed_profile">Managed Profile</string>
-    <string name="icon_dnd">Do Not Disturb</string>
-    <string name="icon_privacy">Privacy &amp; Secure Folder</string>
-    <string name="icon_security_status">Security Status (SU)</string>
-    <string name="icon_otg">OTG Mouse / Keyboard</string>
-    <string name="icon_samsung_smart">Samsung Smart Features</string>
-    <string name="icon_samsung_services">Samsung Services</string>
-    <string name="icon_ethernet">Ethernet</string>
+    <string name="icon_clock">시계</string>
+    <string name="icon_ime">입력 방법(IME)</string>
+    <string name="icon_alarm">경보</string>
+    <string name="icon_battery">배터리</string>
+    <string name="icon_power_saving">절전</string>
+    <string name="icon_data_saver">데이터 세이버</string>
+    <string name="icon_rotation_lock">회전 잠금</string>
+    <string name="icon_location">위치 / GPS</string>
+    <string name="icon_sync">동조</string>
+    <string name="icon_managed_profile">관리 프로필</string>
+    <string name="icon_dnd">방해하지 마세요</string>
+    <string name="icon_privacy">개인정보 보호 및 보안 폴더</string>
+    <string name="icon_security_status">보안 상태(SU)</string>
+    <string name="icon_otg">OTG 마우스/키보드</string>
+    <string name="icon_samsung_smart">삼성 스마트 기능</string>
+    <string name="icon_samsung_services">삼성서비스</string>
+    <string name="icon_ethernet">이더넷</string>
     <!-- Status Bar Settings -->
-    <string name="stb_clock_seconds">Show Seconds in Clock</string>
-    <string name="stb_battery_percentage">Battery Percentage</string>
-    <string name="stb_battery_percentage_always">Always</string>
-    <string name="stb_battery_percentage_charging">Charging</string>
-    <string name="stb_battery_percentage_never">Never</string>
-    <string name="stb_privacy_chip">Camera and Microphone use chips</string>
-    <string name="smart_data_title">Smart Data</string>
-    <string name="permission_read_phone_state_title">Read Phone State</string>
-    <string name="permission_read_phone_state_desc">Required to detect network type for Smart Data feature</string>
-    <string name="permission_read_phone_state_desc_call_vibrations">Required to detect call status changes to trigger haptic feedback.</string>
-    <string name="settings_section_smart_visibility">Smart Visibility</string>
-    <string name="smart_wifi_title">Smart WiFi</string>
-    <string name="smart_wifi_desc">Hide mobile data when WiFi is connected</string>
-    <string name="smart_data_desc">Hide mobile data in certain modes</string>
-    <string name="action_reset_all_icons">Reset All Icons</string>
-    <string name="status_bar_section_advanced">More Settings</string>
-    <string name="status_bar_icons_disclaimer">Please note that the implementation of these options may depend on the OEM and some may not be functional at all.</string>
+    <string name="stb_clock_seconds">시계에 초 표시</string>
+    <string name="stb_battery_percentage">배터리 비율</string>
+    <string name="stb_battery_percentage_always">언제나</string>
+    <string name="stb_battery_percentage_charging">충전 중</string>
+    <string name="stb_battery_percentage_never">절대</string>
+    <string name="stb_privacy_chip">카메라와 마이크는 칩을 사용합니다.</string>
+    <string name="smart_data_title">스마트 데이터</string>
+    <string name="permission_read_phone_state_title">전화 상태 읽기</string>
+    <string name="permission_read_phone_state_desc">스마트 데이터 기능의 네트워크 유형을 감지하는 데 필요합니다.</string>
+    <string name="permission_read_phone_state_desc_call_vibrations">햅틱 피드백을 트리거하기 위해 통화 상태 변경을 감지하는 데 필요합니다.</string>
+    <string name="settings_section_smart_visibility">스마트 가시성</string>
+    <string name="smart_wifi_title">스마트 WiFi</string>
+    <string name="smart_wifi_desc">WiFi가 연결되면 모바일 데이터 숨기기</string>
+    <string name="smart_data_desc">특정 모드에서 모바일 데이터 숨기기</string>
+    <string name="action_reset_all_icons">모든 아이콘 재설정</string>
+    <string name="status_bar_section_advanced">추가 설정</string>
+    <string name="status_bar_icons_disclaimer">이러한 옵션의 구현은 OEM에 따라 다를 수 있으며 일부는 전혀 작동하지 않을 수도 있습니다.</string>
     <!-- Network Type Picker -->
-    <string name="network_type_other">Other</string>
+    <string name="network_type_other">다른</string>
     <!-- Search -->
-    <string name="search_clock_seconds_title">Clock Seconds</string>
-    <string name="search_clock_seconds_desc">Show seconds in status bar clock</string>
-    <string name="search_battery_percentage_title">Battery Percentage</string>
-    <string name="search_battery_percentage_desc">Configure battery percentage visibility</string>
-    <string name="search_privacy_chip_title">Privacy Chips</string>
-    <string name="search_privacy_chip_desc">Show indicator when camera or mic is in use</string>
-    <string name="search_desc_toggle_visibility">Toggle visibility for %1$s</string>
-    <string name="action_pin">Pin to Favorites</string>
-    <string name="action_unpin">Unpin from Favorites</string>
+    <string name="search_clock_seconds_title">시계 초</string>
+    <string name="search_clock_seconds_desc">상태 표시줄 시계에 초 표시</string>
+    <string name="search_battery_percentage_title">배터리 비율</string>
+    <string name="search_battery_percentage_desc">배터리 비율 가시성 구성</string>
+    <string name="search_privacy_chip_title">개인 정보 보호 칩</string>
+    <string name="search_privacy_chip_desc">카메라나 마이크가 사용 중일 때 표시기 표시</string>
+    <string name="search_desc_toggle_visibility">공개 상태 전환 %1$s</string>
+    <string name="action_pin">즐겨찾기에 고정</string>
+    <string name="action_unpin">즐겨찾기에서 고정 해제</string>
     <!-- Extraction Batch 1 -->
     <!-- Categories -->
-    <string name="cat_tools">Tools</string>
-    <string name="cat_visuals">Visuals</string>
-    <string name="cat_system">System</string>
+    <string name="cat_tools">도구</string>
+    <string name="cat_visuals">비주얼</string>
+    <string name="cat_system">체계</string>
     <!-- UI Elements -->
-    <string name="search_placeholder">Search Essentials</string>
-    <string name="search_no_results">No results for \"%1$s\"</string>
-    <string name="search_results_title">Search Results</string>
-    <string name="requires_following_permissions">%1$s requires following permissions</string>
+    <string name="search_placeholder">필수 검색</string>
+    <string name="search_no_results">다음에 대한 검색결과가 없습니다. \"%1$s\"</string>
+    <string name="search_results_title">검색결과</string>
+    <string name="requires_following_permissions">%1$s 다음 권한이 필요합니다</string>
     <!-- Features -->
-    <string name="feat_screen_off_widget_title">Screen off widget</string>
-    <string name="feat_screen_off_widget_desc">Invisible widget to turn the screen off</string>
-    <string name="feat_statusbar_icons_title">Statusbar icons</string>
-    <string name="feat_statusbar_icons_desc">Control statusbar icons visibility</string>
-    <string name="feat_caffeinate_title">Caffeinate</string>
-    <string name="feat_caffeinate_desc">Keep the screen awake</string>
-    <string name="feat_maps_power_saving_title">Maps power saving mode</string>
-    <string name="feat_maps_power_saving_desc">For any Android device</string>
-    <string name="feat_notification_lighting_title">Notification lighting</string>
-    <string name="feat_notification_lighting_desc">Light up for notifications</string>
-    <string name="feat_flashlight_pulse_desc">Pulse the flashlight for notifications</string>
-    <string name="feat_sound_mode_tile_title">Sound mode tile</string>
-    <string name="feat_call_vibrations_title">Call vibrations</string>
-    <string name="feat_call_vibrations_desc">Vibrate for call actions</string>
-    <string name="show_bluetooth_devices">Show Bluetooth devices</string>
-    <string name="show_bluetooth_devices_summary">Display battery level of connected Bluetooth devices</string>
-    <string name="limit_max_devices">Limit max devices</string>
-    <string name="limit_max_devices_summary">Adjust max devices visible in widget</string>
-    <string name="widget_background_title">Widget background</string>
-    <string name="widget_background_summary">Show widget background</string>
+    <string name="feat_screen_off_widget_title">화면 끄기 위젯</string>
+    <string name="feat_screen_off_widget_desc">화면을 끄는 보이지 않는 위젯</string>
+    <string name="feat_statusbar_icons_title">상태 표시줄 아이콘</string>
+    <string name="feat_statusbar_icons_desc">상태 표시줄 아이콘 표시 여부 제어</string>
+    <string name="feat_caffeinate_title">카페인</string>
+    <string name="feat_caffeinate_desc">화면을 깨워두세요</string>
+    <string name="feat_maps_power_saving_title">지도 절전 모드</string>
+    <string name="feat_maps_power_saving_desc">모든 Android 기기의 경우</string>
+    <string name="feat_notification_lighting_title">알림 조명</string>
+    <string name="feat_notification_lighting_desc">알림을 위해 불을 켜세요</string>
+    <string name="feat_flashlight_pulse_desc">알림을 받으려면 손전등을 켜세요.</string>
+    <string name="feat_sound_mode_tile_title">사운드 모드 타일</string>
+    <string name="feat_call_vibrations_title">통화 진동</string>
+    <string name="feat_call_vibrations_desc">통화 작업 시 진동</string>
+    <string name="show_bluetooth_devices">블루투스 기기 표시</string>
+    <string name="show_bluetooth_devices_summary">연결된 Bluetooth 장치의 배터리 잔량 표시</string>
+    <string name="limit_max_devices">최대 장치 제한</string>
+    <string name="limit_max_devices_summary">위젯에 표시되는 최대 장치 조정</string>
+    <string name="widget_background_title">위젯 배경</string>
+    <string name="widget_background_summary">위젯 배경 표시</string>
     <!-- DIY Automation -->
-    <string name="diy_create_trigger_title">Trigger Automation</string>
-    <string name="diy_create_trigger_desc">Schedule an action to trigger on an observation</string>
-    <string name="diy_create_state_title">State Automation</string>
-    <string name="diy_create_state_desc">Schedule an action to execute based on the state of a condition in and out</string>
-    <string name="diy_editor_new_title">New Automation</string>
-    <string name="diy_editor_edit_title">Edit Automation</string>
-    <string name="feat_link_actions_title">Link actions</string>
-    <string name="feat_link_actions_desc">Handle links with multiple apps</string>
-    <string name="feat_snooze_notifications_title">Snooze system notifications</string>
-    <string name="feat_snooze_notifications_desc">Snooze persistent notifications</string>
-    <string name="feat_qs_tiles_title">Quick settings tiles</string>
-    <string name="feat_qs_tiles_desc">View all</string>
-    <string name="feat_button_remap_title">Button remap</string>
-    <string name="feat_button_remap_desc">Remap hardware button actions</string>
-    <string name="feat_dynamic_night_light_title">Dynamic night light</string>
-    <string name="feat_dynamic_night_light_desc">Toggle night light based on app</string>
-    <string name="feat_screen_locked_security_title">Screen locked security</string>
-    <string name="feat_screen_locked_security_desc">Prevent network controls</string>
-    <string name="feat_app_lock_title">App lock</string>
-    <string name="feat_app_lock_desc">Secure apps with biometrics</string>
-    <string name="feat_freeze_title">Freeze</string>
-    <string name="feat_freeze_desc">Disable rarely used apps</string>
-    <string name="feat_watermark_title">Watermark</string>
-    <string name="feat_watermark_desc">Add EXIF data and logos to photos</string>
-    <string name="feat_always_on_display_title">Always on Display</string>
-    <string name="feat_always_on_display_desc">Show time and info while screen off</string>
-    <string name="feat_calendar_sync_title">Calendar Sync</string>
-    <string name="feat_calendar_sync_desc">Sync events to your watch</string>
-    <string name="watermark_style_overlay">Overlay</string>
-    <string name="watermark_style_frame">Frame</string>
-    <string name="watermark_show_brand">Device Brand</string>
-    <string name="watermark_show_exif">EXIF Data</string>
-    <string name="watermark_pick_image">Pick Image</string>
-    <string name="watermark_save_success">Image saved to gallery</string>
-    <string name="action_share">Share</string>
-    <string name="watermark_exif_settings">EXIF Settings</string>
-    <string name="watermark_exif_focal_length">Focal Length</string>
-    <string name="watermark_exif_aperture">Aperture</string>
+    <string name="diy_create_trigger_title">트리거 자동화</string>
+    <string name="diy_create_trigger_desc">관찰 시 트리거할 작업 예약</string>
+    <string name="diy_create_state_title">상태 자동화</string>
+    <string name="diy_create_state_desc">조건 입력 및 출력 상태에 따라 실행할 작업 예약</string>
+    <string name="diy_editor_new_title">새로운 자동화</string>
+    <string name="diy_editor_edit_title">자동화 편집</string>
+    <string name="feat_link_actions_title">링크 작업</string>
+    <string name="feat_link_actions_desc">여러 앱의 링크 처리</string>
+    <string name="feat_snooze_notifications_title">시스템 알림 일시중지</string>
+    <string name="feat_snooze_notifications_desc">지속적인 알림 일시 중지</string>
+    <string name="feat_qs_tiles_title">빠른 설정 타일</string>
+    <string name="feat_qs_tiles_desc">모두 보기</string>
+    <string name="feat_button_remap_title">버튼 다시 매핑</string>
+    <string name="feat_button_remap_desc">하드웨어 버튼 동작 다시 매핑</string>
+    <string name="feat_dynamic_night_light_title">동적 야간 조명</string>
+    <string name="feat_dynamic_night_light_desc">앱에 따라 야간 조명 전환</string>
+    <string name="feat_screen_locked_security_title">화면 잠금 보안</string>
+    <string name="feat_screen_locked_security_desc">네트워크 제어 방지</string>
+    <string name="feat_app_lock_title">앱 잠금</string>
+    <string name="feat_app_lock_desc">생체인식으로 앱 보호</string>
+    <string name="feat_freeze_title">꼭 매달리게 하다</string>
+    <string name="feat_freeze_desc">거의 사용하지 않는 앱 비활성화</string>
+    <string name="feat_watermark_title">양수표</string>
+    <string name="feat_watermark_desc">사진에 EXIF ​​데이터 및 로고 추가</string>
+    <string name="feat_always_on_display_title">항상 표시됨</string>
+    <string name="feat_always_on_display_desc">화면이 꺼진 동안 시간 및 정보 표시</string>
+    <string name="feat_calendar_sync_title">캘린더 동기화</string>
+    <string name="feat_calendar_sync_desc">시계에 이벤트 동기화</string>
+    <string name="watermark_style_overlay">씌우다</string>
+    <string name="watermark_style_frame">액자</string>
+    <string name="watermark_show_brand">장치 브랜드</string>
+    <string name="watermark_show_exif">EXIF 데이터</string>
+    <string name="watermark_pick_image">이미지 선택</string>
+    <string name="watermark_save_success">갤러리에 이미지가 저장되었습니다.</string>
+    <string name="action_share">공유하다</string>
+    <string name="watermark_exif_settings">EXIF 설정</string>
+    <string name="watermark_exif_focal_length">초점 거리</string>
+    <string name="watermark_exif_aperture">구멍</string>
     <string name="watermark_exif_iso">ISO</string>
-    <string name="watermark_exif_shutter_speed">Shutter Speed</string>
-    <string name="watermark_exif_date">Date &amp; Time</string>
-    <string name="watermark_move_to_top">Move to Top</string>
-    <string name="watermark_left_align">Align Left</string>
-    <string name="watermark_text_size_brand">Brand Size</string>
-    <string name="watermark_text_size_data">Data Size</string>
-    <string name="watermark_text_size_custom">Text Size</string>
-    <string name="watermark_font_options">Font Size</string>
-    <string name="watermark_custom_text">Custom Text</string>
-    <string name="watermark_custom_text_hint">Enter your text...</string>
-    <string name="watermark_spacing">Spacing</string>
-    <string name="watermark_border_width">Border Width</string>
-    <string name="watermark_border_corners">Round Corners</string>
-    <string name="watermark_color_section">Color</string>
-    <string name="watermark_logo_section">Logo</string>
-    <string name="watermark_logo_show">Show Logo</string>
-    <string name="watermark_logo_size">Logo Size</string>
-    <string name="watermark_edit_texts">Edit Watermark Texts</string>
-    <string name="watermark_device_brand">Device brand</string>
-    <string name="watermark_date_time">Date &amp; Time</string>
-    <string name="watermark_no_date">No date information</string>
-    <string name="watermark_rotate_left">Rotate left</string>
-    <string name="watermark_rotate_right">Rotate right</string>
-    <string name="action_next">Next</string>
-    <string name="action_ok">OK</string>
-    <string name="action_save_changes">Save Changes</string>
-    <string name="calendar_sync_settings_title">Calendar Sync Settings</string>
-    <string name="calendar_sync_select_calendars">Sync specific calendars</string>
-    <string name="calendar_sync_periodic_title">Periodic Sync</string>
-    <string name="calendar_sync_periodic_desc">Sync every 15 minutes if changes found</string>
-    <string name="calendar_sync_sync_now">Sync Now</string>
-    <string name="calendar_sync_manual_sync_desc">Trigger immediate sync to watch</string>
-    <string name="calendar_sync_no_calendars">No local calendars found</string>
-    <string name="calendar_sync_sync_started">Calendar sync started</string>
+    <string name="watermark_exif_shutter_speed">셔터 속도</string>
+    <string name="watermark_exif_date">날짜 및 시간</string>
+    <string name="watermark_move_to_top">맨 위로 이동</string>
+    <string name="watermark_left_align">왼쪽 정렬</string>
+    <string name="watermark_text_size_brand">브랜드 사이즈</string>
+    <string name="watermark_text_size_data">데이터 크기</string>
+    <string name="watermark_text_size_custom">텍스트 크기</string>
+    <string name="watermark_font_options">글꼴 크기</string>
+    <string name="watermark_custom_text">맞춤 텍스트</string>
+    <string name="watermark_custom_text_hint">텍스트를 입력하세요...</string>
+    <string name="watermark_spacing">간격</string>
+    <string name="watermark_border_width">테두리 너비</string>
+    <string name="watermark_border_corners">둥근 모서리</string>
+    <string name="watermark_color_section">색상</string>
+    <string name="watermark_logo_section">심벌 마크</string>
+    <string name="watermark_logo_show">로고 표시</string>
+    <string name="watermark_logo_size">로고 크기</string>
+    <string name="watermark_edit_texts">워터마크 텍스트 편집</string>
+    <string name="watermark_device_brand">기기 브랜드</string>
+    <string name="watermark_date_time">날짜 및 시간</string>
+    <string name="watermark_no_date">날짜 정보가 없습니다</string>
+    <string name="watermark_rotate_left">왼쪽으로 회전</string>
+    <string name="watermark_rotate_right">오른쪽으로 회전</string>
+    <string name="action_next">다음</string>
+    <string name="action_ok">좋아요</string>
+    <string name="action_save_changes">변경 사항 저장</string>
+    <string name="calendar_sync_settings_title">캘린더 동기화 설정</string>
+    <string name="calendar_sync_select_calendars">특정 캘린더 동기화</string>
+    <string name="calendar_sync_periodic_title">주기적 동기화</string>
+    <string name="calendar_sync_periodic_desc">변경 사항이 발견되면 15분마다 동기화</string>
+    <string name="calendar_sync_sync_now">지금 동기화</string>
+    <string name="calendar_sync_manual_sync_desc">시청을 위해 즉시 동기화 실행</string>
+    <string name="calendar_sync_no_calendars">로컬 캘린더를 찾을 수 없습니다.</string>
+    <string name="calendar_sync_sync_started">캘린더 동기화가 시작되었습니다.</string>
     <!-- Search Settings -->
-    <string name="search_haptic_title">Widget Haptic feedback</string>
-    <string name="search_haptic_desc">Pick haptic feedback for widget taps</string>
-    <string name="search_smart_wifi_title">Smart WiFi</string>
-    <string name="search_smart_wifi_desc">Hide mobile data when WiFi is connected</string>
-    <string name="search_smart_data_title">Smart Data</string>
-    <string name="search_smart_data_desc">Hide mobile data in certain modes</string>
-    <string name="search_reset_icons_title">Reset All Icons</string>
-    <string name="search_reset_icons_desc">Reset status bar icon visibility to default</string>
-    <string name="search_caffeinate_abort_screen_off_title">Abort Caffeinate with screen off</string>
-    <string name="search_caffeinate_abort_screen_off_desc">Automatically turn off Caffeinate when manually locking the device</string>
-    <string name="search_lighting_style_title">Lighting Style</string>
-    <string name="search_lighting_style_desc">Choose between Stroke, Glow, Spinner, and more</string>
-    <string name="search_corner_radius_title">Corner radius</string>
-    <string name="search_corner_radius_desc">Adjust the corner radius of the notification lighting</string>
-    <string name="search_skip_silent_title">Skip silent notifications</string>
-    <string name="search_skip_silent_desc">Do not show lighting for silent notifications</string>
-    <string name="search_flashlight_pulse_title">Flashlight pulse</string>
-    <string name="search_flashlight_pulse_desc">Slowly pulse flashlight for new notifications</string>
-    <string name="search_only_facing_down_title">Only while facing down</string>
-    <string name="search_only_facing_down_desc">Pulse flashlight only when device is face down</string>
-    <string name="snooze_no_channels_discovered">No system channels discovered yet. They will appear here once detected.</string>
-    <string name="search_qs_blur_title">UI Blur</string>
-    <string name="search_qs_blur_desc">Toggle system-wide UI blur</string>
-    <string name="search_qs_bubbles_title">Bubbles</string>
-    <string name="search_qs_bubbles_desc">Enable floating window bubbles</string>
-    <string name="search_qs_sensitive_title">Sensitive Content</string>
-    <string name="search_qs_sensitive_desc">Hide notification details on lockscreen</string>
-    <string name="search_qs_wake_title">Tap to Wake</string>
-    <string name="search_qs_wake_desc">Double tap to wake control</string>
+    <string name="search_haptic_title">위젯 햅틱 피드백</string>
+    <string name="search_haptic_desc">위젯 탭에 대한 햅틱 피드백 선택</string>
+    <string name="search_smart_wifi_title">스마트 WiFi</string>
+    <string name="search_smart_wifi_desc">WiFi가 연결되면 모바일 데이터 숨기기</string>
+    <string name="search_smart_data_title">스마트 데이터</string>
+    <string name="search_smart_data_desc">특정 모드에서 모바일 데이터 숨기기</string>
+    <string name="search_reset_icons_title">모든 아이콘 재설정</string>
+    <string name="search_reset_icons_desc">상태 표시줄 아이콘 표시를 기본값으로 재설정</string>
+    <string name="search_caffeinate_abort_screen_off_title">화면이 꺼진 상태에서 카페인 섭취를 중단하세요</string>
+    <string name="search_caffeinate_abort_screen_off_desc">장치를 수동으로 잠그면 카페인이 자동으로 꺼집니다.</string>
+    <string name="search_lighting_style_title">조명 스타일</string>
+    <string name="search_lighting_style_desc">스트로크, 글로우, 스피너 등 중에서 선택하세요.</string>
+    <string name="search_corner_radius_title">코너 반경</string>
+    <string name="search_corner_radius_desc">알림 조명의 모서리 반경 조정</string>
+    <string name="search_skip_silent_title">자동 알림 건너뛰기</string>
+    <string name="search_skip_silent_desc">무음 알림에 대한 조명 표시 안 함</string>
+    <string name="search_flashlight_pulse_title">손전등 펄스</string>
+    <string name="search_flashlight_pulse_desc">새로운 알림을 위해 천천히 깜박이는 손전등</string>
+    <string name="search_only_facing_down_title">아래로 향한 동안에만</string>
+    <string name="search_only_facing_down_desc">장치가 아래를 향하고 있을 때만 펄스 손전등이 켜집니다.</string>
+    <string name="snooze_no_channels_discovered">아직 발견된 시스템 채널이 없습니다. 감지되면 여기에 표시됩니다.</string>
+    <string name="search_qs_blur_title">UI 블러</string>
+    <string name="search_qs_blur_desc">시스템 전체 UI 흐림 전환</string>
+    <string name="search_qs_bubbles_title">거품</string>
+    <string name="search_qs_bubbles_desc">부동 창 풍선 활성화</string>
+    <string name="search_qs_sensitive_title">민감한 콘텐츠</string>
+    <string name="search_qs_sensitive_desc">잠금 화면에서 알림 세부정보 숨기기</string>
+    <string name="search_qs_wake_title">탭하여 깨우기</string>
+    <string name="search_qs_wake_desc">절전 모드를 해제하려면 두 번 탭하세요.</string>
     <string name="search_qs_aod_title">AOD</string>
-    <string name="search_qs_aod_desc">Always On Display toggle</string>
-    <string name="search_qs_caffeinate_title">Caffeinate</string>
-    <string name="search_qs_caffeinate_desc">Keep screen awake toggle</string>
-    <string name="search_qs_sound_title">Sound Mode</string>
-    <string name="search_qs_sound_desc">Cycle sound modes (Ring/Vibrate/Silent)</string>
-    <string name="search_qs_lighting_title">Notification Lighting</string>
-    <string name="search_qs_lighting_desc">Toggle notification lighting service</string>
-    <string name="search_qs_night_light_title">Dynamic Night Light</string>
-    <string name="search_qs_night_light_desc">Night light automation toggle</string>
-    <string name="search_qs_locked_sec_title">Locked Security</string>
-    <string name="search_qs_locked_sec_desc">Network security on lockscreen toggle</string>
-    <string name="search_qs_mono_title">Mono Audio</string>
-    <string name="search_qs_mono_desc">Force mono audio output toggle</string>
-    <string name="search_qs_flashlight_title">Flashlight</string>
-    <string name="search_qs_flashlight_desc">Dedicated flashlight toggle</string>
-    <string name="search_qs_freeze_title">App Freezing</string>
-    <string name="search_qs_freeze_desc">Launch app freezing grid</string>
-    <string name="search_qs_pulse_title">Flashlight Pulse</string>
-    <string name="search_qs_pulse_desc">Toggle notification flashlight pulse</string>
-    <string name="search_qs_stay_awake_desc">Toggle stay awake developer option</string>
-    <string name="search_qs_private_dns_title">Private DNS</string>
-    <string name="search_qs_private_dns_desc">Cycle Private DNS modes (Off/Auto/Hostname)</string>
-    <string name="search_qs_usb_debugging_title">USB Debugging</string>
-    <string name="search_qs_usb_debugging_desc">Toggle USB Debugging developer option</string>
-    <string name="search_remap_enable_title">Enable Button Remap</string>
-    <string name="search_remap_enable_desc">Master toggle for volume button remapping</string>
-    <string name="search_remap_haptic_title">Remap Haptic Feedback</string>
-    <string name="search_remap_haptic_desc">Vibration feedback when remapped button is pressed</string>
-    <string name="search_remap_flashlight_title">Flashlight toggle</string>
-    <string name="search_remap_flashlight_desc">Toggle flashlight with volume buttons</string>
-    <string name="search_night_light_enable_title">Enable Dynamic Night Light</string>
-    <string name="search_night_light_enable_desc">Master switch for dynamic night light</string>
-    <string name="search_app_lock_enable_title">Enable app lock</string>
-    <string name="search_app_lock_enable_desc">Master toggle for app locking</string>
-    <string name="search_app_lock_pick_title">Select locked apps</string>
-    <string name="search_app_lock_pick_desc">Choose which apps require authentication</string>
-    <string name="search_freeze_pick_title">Pick apps to freeze</string>
-    <string name="search_freeze_pick_desc">Choose which apps can be frozen</string>
-    <string name="search_freeze_all_title">Freeze all apps</string>
-    <string name="search_freeze_all_desc">Immediately freeze all picked apps</string>
-    <string name="search_freeze_locked_title">Freeze when locked</string>
-    <string name="search_freeze_locked_desc">Freeze selected apps when device locks</string>
-    <string name="search_freeze_delay_title">Freeze delay</string>
-    <string name="search_freeze_delay_desc">Delay before freezing after locking</string>
+    <string name="search_qs_aod_desc">Always On Display 토글</string>
+    <string name="search_qs_caffeinate_title">카페인</string>
+    <string name="search_qs_caffeinate_desc">화면 활성 상태 유지 토글</string>
+    <string name="search_qs_sound_title">사운드 모드</string>
+    <string name="search_qs_sound_desc">사운드 모드 주기(벨소리/진동/무음)</string>
+    <string name="search_qs_lighting_title">알림 조명</string>
+    <string name="search_qs_lighting_desc">알림 조명 서비스 전환</string>
+    <string name="search_qs_night_light_title">동적 야간 조명</string>
+    <string name="search_qs_night_light_desc">야간 조명 자동화 토글</string>
+    <string name="search_qs_locked_sec_title">잠긴 보안</string>
+    <string name="search_qs_locked_sec_desc">잠금 화면 토글의 네트워크 보안</string>
+    <string name="search_qs_mono_title">모노 오디오</string>
+    <string name="search_qs_mono_desc">강제 모노 오디오 출력 토글</string>
+    <string name="search_qs_flashlight_title">플래시</string>
+    <string name="search_qs_flashlight_desc">전용 손전등 토글</string>
+    <string name="search_qs_freeze_title">앱 정지</string>
+    <string name="search_qs_freeze_desc">앱 고정 그리드 실행</string>
+    <string name="search_qs_pulse_title">손전등 펄스</string>
+    <string name="search_qs_pulse_desc">알림 손전등 펄스 전환</string>
+    <string name="search_qs_stay_awake_desc">깨어있는 개발자 옵션 전환</string>
+    <string name="search_qs_private_dns_title">프라이빗 DNS</string>
+    <string name="search_qs_private_dns_desc">비공개 DNS 모드 순환(끄기/자동/호스트 이름)</string>
+    <string name="search_qs_usb_debugging_title">USB 디버깅</string>
+    <string name="search_qs_usb_debugging_desc">USB 디버깅 개발자 옵션 전환</string>
+    <string name="search_remap_enable_title">버튼 재매핑 활성화</string>
+    <string name="search_remap_enable_desc">볼륨 버튼 재매핑을 위한 마스터 토글</string>
+    <string name="search_remap_haptic_title">햅틱 피드백 다시 매핑</string>
+    <string name="search_remap_haptic_desc">리매핑된 버튼을 눌렀을 때 진동 피드백</string>
+    <string name="search_remap_flashlight_title">손전등 토글</string>
+    <string name="search_remap_flashlight_desc">볼륨 버튼으로 손전등 전환</string>
+    <string name="search_night_light_enable_title">동적 야간 조명 활성화</string>
+    <string name="search_night_light_enable_desc">역동적인 야간 조명을 위한 마스터 스위치</string>
+    <string name="search_app_lock_enable_title">앱 잠금 활성화</string>
+    <string name="search_app_lock_enable_desc">앱 잠금을 위한 마스터 토글</string>
+    <string name="search_app_lock_pick_title">잠긴 앱 선택</string>
+    <string name="search_app_lock_pick_desc">인증이 필요한 앱 선택</string>
+    <string name="search_freeze_pick_title">정지할 앱 선택</string>
+    <string name="search_freeze_pick_desc">고정할 수 있는 앱 선택</string>
+    <string name="search_freeze_all_title">모든 앱 정지</string>
+    <string name="search_freeze_all_desc">선택한 모든 앱을 즉시 정지합니다.</string>
+    <string name="search_freeze_locked_title">잠긴 상태에서 동결</string>
+    <string name="search_freeze_locked_desc">기기가 잠길 때 선택한 앱 정지</string>
+    <string name="search_freeze_delay_title">동결 지연</string>
+    <string name="search_freeze_delay_desc">잠금 후 동결 전 지연</string>
     <!-- Permissions metadata -->
-    <string name="perm_shizuku_title">Shizuku</string>
-    <string name="perm_shizuku_desc">Required for advanced commands. Install Shizuku from the Play Store.</string>
-    <string name="perm_shizuku_install_action">Install Shizuku</string>
-    <string name="perm_shizuku_grant_title">Shizuku permission</string>
-    <string name="perm_shizuku_grant_desc">Required to run power-saving commands while maps is navigating.</string>
-    <string name="req_shizuku">Requires Shizuku or Root</string>
-    <string name="perm_root_title">Root Access</string>
-    <string name="perm_root_desc">Permissions required for system actions using Root privileges.</string>
-    <string name="perm_notif_listener_title">Notification Listener</string>
-    <string name="perm_notif_listener_desc_maps">Required to detect when Maps is navigating.</string>
-    <string name="perm_notif_listener_desc_lighting">Required to detect new notifications</string>
-    <string name="perm_notif_listener_desc_snooze">Required to detect and snooze notifications</string>
-    <string name="perm_accessibility_title">Accessibility Service</string>
-    <string name="perm_accessibility_desc_common">Required for App Lock, Screen off widget and other features to detect interactions</string>
-    <string name="perm_accessibility_desc_lighting">Required to trigger notification lighting on new notifications</string>
-    <string name="perm_default_browser_title">Default Browser</string>
-    <string name="perm_default_browser_desc">Required to handle links efficiently</string>
-    <string name="perm_accessibility_desc_remap">Required to intercept hardware button events</string>
-    <string name="perm_accessibility_desc_ambient_music_glance">Required to intercept volume key events while the screen is off to trigger the Ambient Glance overlay.</string>
-    <string name="perm_accessibility_desc_night_light">Needed to monitor foreground applications.</string>
-    <string name="perm_write_secure_title">Write Secure Settings</string>
-    <string name="perm_write_secure_desc_common">Required for Statusbar icons and Screen Locked Security</string>
-    <string name="perm_write_secure_desc_night_light">Needed to toggle Night Light. Grant via ADB or root.</string>
-    <string name="perm_write_settings_title">Modify System Settings</string>
-    <string name="perm_write_settings_desc">Required to toggle Adaptive Brightness and other system settings</string>
-    <string name="perm_overlay_title">Overlay Permission</string>
-    <string name="perm_overlay_desc">Required to display the notification lighting overlay on the screen</string>
-    <string name="perm_device_admin_title">Device Administrator</string>
-    <string name="perm_device_admin_desc">Required to hard-lock the device (disabling biometrics) on unauthorized access attempts</string>
-    <string name="perm_action_grant">Grant Permission</string>
-    <string name="perm_action_copy_adb">Copy ADB</string>
-    <string name="perm_action_check">Check</string>
-    <string name="perm_action_enable">Enable in Settings</string>
-    <string name="perm_action_how_to">How to grant</string>
-    <string name="perm_battery_optimization_title">Battery Optimization</string>
-    <string name="perm_battery_optimization_desc">Ensure the service is not killed by the system to save power.</string>
+    <string name="perm_shizuku_title">시즈쿠</string>
+    <string name="perm_shizuku_desc">고급 명령에 필요합니다. Play 스토어에서 Shizuku를 설치하세요.</string>
+    <string name="perm_shizuku_install_action">시즈쿠 설치</string>
+    <string name="perm_shizuku_grant_title">권한 부여</string>
+    <string name="perm_shizuku_grant_desc">지도를 탐색하는 동안 절전 명령을 실행하는 데 필요합니다.</string>
+    <string name="req_shizuku">Shizuku 또는 루트가 필요합니다.</string>
+    <string name="perm_root_title">루트 액세스</string>
+    <string name="perm_root_desc">루트 권한을 사용하는 시스템 작업에 필요한 권한입니다.</string>
+    <string name="perm_notif_listener_title">알림 수신기</string>
+    <string name="perm_notif_listener_desc_maps">Google 지도 내비게이션 상태를 모니터링하고 내비게이션 중이 아닐 때 절전 기능을 활성화하려면 알림 수신기 액세스가 필요합니다.</string>
+    <string name="perm_notif_listener_desc_lighting">새로운 알림을 감지하고 가장자리 조명을 트리거하려면 알림 수신기 액세스가 필요합니다.</string>
+    <string name="perm_notif_listener_desc_snooze">원치 않는 시스템 알림을 모니터링하고 일시 중지하려면 알림 수신기 액세스가 필요합니다.</string>
+    <string name="perm_accessibility_title">접근성 서비스</string>
+    <string name="perm_accessibility_desc_common">상호 작용을 감지하기 위해 앱 잠금, 화면 끄기 위젯 및 기타 기능에 필요합니다.</string>
+    <string name="perm_accessibility_desc_lighting">새 알림에 대한 알림 조명을 트리거하는 데 필요합니다.</string>
+    <string name="perm_default_browser_title">기본 브라우저</string>
+    <string name="perm_default_browser_desc">링크를 효율적으로 처리하는 데 필요</string>
+    <string name="perm_accessibility_desc_remap">하드웨어 버튼 이벤트를 가로채는 데 필요합니다.</string>
+    <string name="perm_accessibility_desc_ambient_music_glance">Ambient Glance 오버레이를 트리거하려면 화면이 꺼져 있는 동안 볼륨 키 이벤트를 가로채는 데 필요합니다.</string>
+    <string name="perm_accessibility_desc_night_light">포그라운드 애플리케이션을 모니터링하는 데 필요합니다.</string>
+    <string name="perm_write_secure_title">보안 설정 쓰기</string>
+    <string name="perm_write_secure_desc_common">상태 표시줄 아이콘 및 화면 잠금 보안에 필요합니다.</string>
+    <string name="perm_write_secure_desc_night_light">야간 조명을 전환하는 데 필요합니다. ADB 또는 루트를 통해 부여합니다.</string>
+    <string name="perm_write_settings_title">시스템 설정 수정</string>
+    <string name="perm_write_settings_desc">적응형 밝기 및 기타 시스템 설정을 전환하는 데 필요합니다.</string>
+    <string name="perm_overlay_title">오버레이 권한</string>
+    <string name="perm_overlay_desc">화면에 알림 조명 오버레이를 표시하는 데 필요합니다.</string>
+    <string name="perm_device_admin_title">장치 관리자</string>
+    <string name="perm_device_admin_desc">무단 액세스 시도 시 장치를 강제 잠금(생체 인식 비활성화)하는 데 필요합니다.</string>
+    <string name="perm_action_grant">권한 부여</string>
+    <string name="perm_action_copy_adb">ADB 복사</string>
+    <string name="perm_action_check">확인하다</string>
+    <string name="perm_action_enable">설정에서 활성화</string>
+    <string name="perm_action_how_to">부여 방법</string>
+    <string name="perm_battery_optimization_title">배터리 최적화</string>
+    <string name="perm_battery_optimization_desc">전원을 절약하려면 시스템이 서비스를 종료하지 않는지 확인하세요.</string>
     <!-- Tabs -->
-    <string name="tab_essentials">Essentials</string>
-    <string name="tab_freeze">Freeze</string>
-    <string name="tab_freeze_title">Frozen</string>
+    <string name="tab_essentials">골자</string>
+    <string name="tab_freeze">꼭 매달리게 하다</string>
+    <string name="tab_freeze_title">언</string>
     <string name="tab_diy">DIY</string>
-    <string name="tab_apps">Apps</string>
-    <string name="tab_freeze_subtitle">Disabled apps</string>
-    <string name="tab_diy_subtitle">Do It Yourself</string>
-    <string name="tab_apps_subtitle">Find and manage apps</string>
-    <string name="feat_app_updates_title">App Updates</string>
-    <string name="tab_app_updates_title">App Updates</string>
-    <string name="action_add_repo">Add Repository</string>
-    <string name="action_edit_repo">Edit Repository</string>
-    <string name="prompt_enter_repo_url">Enter GitHub Repository URL or owner/repo</string>
-    <string name="action_track">Track</string>
-    <string name="error_no_apk_found">No APK found in the latest release</string>
-    <string name="error_repo_not_found">Repository not found</string>
-    <string name="label_latest_release">Latest Release</string>
-    <string name="action_view_readme">View README</string>
-    <string name="label_stars">%d Stars</string>
-    <string name="label_installed_app">Installed app</string>
-    <string name="label_not_installed">Not installed</string>
-    <string name="action_pick_app">Pick app</string>
-    <string name="action_select_app">Select app</string>
-    <string name="action_untrack">Untrack</string>
-    <string name="label_pending">Pending</string>
-    <string name="label_up_to_date">Up-to-date</string>
-    <string name="feat_app_updates_desc">Track and download the latest releases for your favorite apps directly from GitHub.</string>
-    <string name="error_invalid_repo_format">Invalid format. Use owner/repo or GitHub URL</string>
-    <string name="error_generic_search">An error occurred during search</string>
-    <string name="label_auto">Auto</string>
-    <string name="label_options">Options</string>
-    <string name="option_allow_prereleases">Check for pre-releases</string>
-    <string name="option_notifications">Notifications</string>
-    <string name="error_rate_limited">GitHub rate limit exceeded. Please try again later.</string>
+    <string name="tab_apps">앱</string>
+    <string name="tab_freeze_subtitle">비활성화된 앱</string>
+    <string name="tab_diy_subtitle">스스로 해보세요</string>
+    <string name="tab_apps_subtitle">앱 찾기 및 관리</string>
+    <string name="feat_app_updates_title">앱 업데이트</string>
+    <string name="tab_app_updates_title">앱 업데이트</string>
+    <string name="action_add_repo">저장소 추가</string>
+    <string name="action_edit_repo">저장소 편집</string>
+    <string name="prompt_enter_repo_url">GitHub 리포지토리 URL 또는 소유자/리포지토리를 입력하세요.</string>
+    <string name="action_track">길</string>
+    <string name="error_no_apk_found">최신 릴리스에서 APK를 찾을 수 없습니다.</string>
+    <string name="error_repo_not_found">저장소를 찾을 수 없습니다.</string>
+    <string name="label_latest_release">최신 릴리스</string>
+    <string name="action_view_readme">읽어보기</string>
+    <string name="label_stars">%d 별</string>
+    <string name="label_installed_app">설치된 앱</string>
+    <string name="label_not_installed">설치되지 않음</string>
+    <string name="action_pick_app">앱 선택</string>
+    <string name="action_select_app">앱 선택</string>
+    <string name="action_untrack">추적 해제</string>
+    <string name="label_pending">보류 중</string>
+    <string name="label_up_to_date">최신</string>
+    <string name="feat_app_updates_desc">GitHub에서 직접 즐겨찾는 앱의 최신 릴리스를 추적하고 다운로드하세요.</string>
+    <string name="error_invalid_repo_format">형식이 잘못되었습니다. 소유자/저장소 또는 GitHub URL 사용</string>
+    <string name="error_generic_search">검색 중 오류가 발생했습니다.</string>
+    <string name="label_auto">자동</string>
+    <string name="label_options">옵션</string>
+    <string name="option_allow_prereleases">시험판 확인</string>
+    <string name="option_notifications">알림</string>
+    <string name="error_rate_limited">GitHub 비율 제한을 초과했습니다. 나중에 다시 시도해 주세요.</string>
     <!-- Keyboard Setup -->
-    <string name="label_keyboard_setup">Keyboard Setup</string>
-    <string name="btn_enable_keyboard">Enable in settings</string>
-    <string name="btn_select_keyboard">Switch to Essentials</string>
-    <string name="label_enabled">Enabled</string>
-    <string name="label_disabled">Disabled</string>
-    <string name="tile_adaptive_brightness">Adaptive Brightness</string>
-    <string name="tile_maps_power_saving">Maps Power Saving</string>
-    <string name="action_search">Search</string>
-    <string name="action_stop">Stop</string>
-    <string name="label_search">Search</string>
+    <string name="label_keyboard_setup">키보드 설정</string>
+    <string name="btn_enable_keyboard">설정에서 활성화</string>
+    <string name="btn_select_keyboard">필수 항목으로 전환</string>
+    <string name="label_enabled">활성화됨</string>
+    <string name="label_disabled">장애가 있는</string>
+    <string name="tile_adaptive_brightness">적응형 밝기</string>
+    <string name="tile_maps_power_saving">지도 절전</string>
+    <string name="action_search">찾다</string>
+    <string name="action_stop">멈추다</string>
+    <string name="label_search">찾다</string>
     <!-- UI Components General -->
-    <string name="action_back">Back</string>
-    <string name="content_desc_back">Back</string>
-    <string name="label_settings">Settings</string>
-    <string name="action_report_bug">Report a Bug</string>
-    <string name="action_done">Done</string>
-    <string name="action_preview">Preview</string>
-    <string name="action_help_guide">Help Guide</string>
-    <string name="action_what_is_this">What is this?</string>
-    <string name="update_available_title">Update Available</string>
-    <string name="about_desc_ambient_music_glance">Ambient Music Glance shows a Now Playing overlay on your lock screen when music is playing and playback changes. \n\nIf your device does not support overlays over AOD, you can opt for the Ambience screensaver added in your Android settings as an alternative while charging.</string>
-    <string name="about_desc_notification_lighting">Notification Lighting adds a beautiful edge lighting effect when you receive notifications.\n\nYou can customize the animation style, colors, and behavior. It works even when the screen is off (OEM dependent) or on top of your current app. Pick apps, notification priority or what behavior it should be triggering on from given controls. If your OEM does not support overlays above AOD, sue the Ambient display option found below.</string>
-    <string name="about_desc_screen_off_widget">Easily turn the screen off with a tap on a transparent resizable widget that does not add icons or any clutter to your home screen.</string>
-    <string name="about_desc_statusbar_icons">Take full control over your status bar icons.\n\nHide specific icons like WiFi, Bluetooth, or cellular data to keep your status bar clean. You can also customize the clock format and battery indicator with some smart controls as well. These are the list of available AOSP controls so your device OS might not respect all the controls.</string>
-    <string name="about_desc_caffeinate">Caffeinate prevents your screen from turning off automatically.\n\nKeep your screen awake for a specific duration or indefinitely. Useful when reading long articles or referencing a recipe.</string>
-    <string name="about_desc_maps_power_saving">Get the Pixel 10 series exclusive Google Maps Power Saving mode with the minimal pitch black background to display over your lock screen on any Android device. Start a navigation session, turn the screen off and back on. </string>
-    <string name="about_desc_flashlight_pulse">Pulse the flashlight when you receive a notification.\n\nWith devices have hardware support for flashlight dimming, the pulse will be smoothly animated.</string>
-    <string name="about_desc_snooze_notifications">Snooze annoying persistent system notifications which can not be modified by default. \n\nPlease wait until the notification arrives and then go into this feature where it\'s notification channel will be listed. Select that to snooze from next time.\n\nAny snoozed notification can still be accessed from your notification history in Android.</string>
-    <string name="about_desc_quick_settings_tiles">Add custom tiles to your Quick Settings panel.\n\nLong press any of them to learn what they do.</string>
-    <string name="about_desc_button_remap">Remap your hardware buttons to perform different actions and shortcuts.\n\nCustomize what happens when you long press volume buttons with certain conditions. \n\nSome behavior such as screen off trigger or flashlight controls might be OEM dependent on their implementation and may not work on all devices as expected. Some scenarios could be worked around using Shizuku permissions but may not give the same experience due to the implementations.</string>
-    <string name="about_desc_dynamic_night_light">Automatically toggle your screen blue light filter based on the foreground app.</string>
-    <string name="about_desc_screen_locked_security">Enhance security when your device is locked.\n\nRestrict access to some sensitive QS tiles preventing unauthorized network modifications and further preventing them re-attempting to do so by increasing the animation speed to prevent touch spam.\n\nThis feature is not robust and may have flaws such as some tiles which allow toggling directly such as bluetooth or flight mode not being able to be prevented.</string>
-    <string name="about_desc_app_lock">Secure your apps with a secondary authentication layer.\n\nYour device lock screen authentication method will be used as long as it meets the class 3 biometric security level by Android standards.</string>
-    <string name="about_desc_location_reached">Get notified when you get closer to your destination to ensure you never miss the stop.\n\nGo to Google Maps, long press a pin nearby to your destination and make sure it says \"Dropped pin\" (Otherwise the distance calculation might not be accurate), And then share the location to the Essentials app and start tracking.</string>
-    <string name="about_desc_freeze">Freeze apps to stop them from running in the background.\n\nPrevent battery drain and data usage by completely freezing apps when you are not using them. They will be unfrozen instantly when you launch them. The apps will not show up in the app drawer and also will not show up for app updates in Play Store while frozen.</string>
-    <string name="about_desc_system_keyboard">A custom input method no-one asked for.\n\nIt is just an experiment. Multiple languages may not get support as it is a very complex and time consuming implementation.</string>
-    <string name="about_desc_batteries">Monitor battery levels of all your connected devices.\n\nSee the battery status of your Bluetooth headphones, watch, and other accessories in one place. Connect with AirSync application to display your mac battery level as well.</string>
-    <string name="about_desc_watermark">Add a custom caption/ watermark to your photos with EXIF data and device information.\n\nShare an image directly from other app to Essentials to easily add a watermark.</string>
-    <string name="about_desc_calendar_sync">Sync all your upcoming calendar schedule not matter the restrictions on Google accounts not letting to be added to wearOS devices due to work or school policies. \n\nMake sure to install the wearOS Essentials companion app to display the schedule in the app as well as in a tile or a complication.</string>
-    <string name="about_desc_app_updates">Keep track of updates for your installed apps.\n\nGet notified about available updates, view changelogs and install them easily with a tap.</string>
-    <string name="about_desc_call_vibrations">Add haptic feedback to your calls.\n\nVibrate when a call is connected, disconnected, or accepted, giving you tactile confirmation without looking at the screen.</string>
-    <string name="about_desc_sound_mode_tile">Quickly toggle between Sound, Vibrate, and Silent modes.\n\nA convenient tile to change your ringer mode without using the volume buttons or settings. You can re-order the modes or disable any if not needed to customize the tile toggle to cycle behavior.</string>
-    <string name="about_desc_ui_blur">Easily toggle the system level blur depth effect across the OS.</string>
-    <string name="about_desc_bubbles">Enable or disable floating notification bubbles.\n\nQuickly toggle the system-wide setting for conversation bubbles.</string>
-    <string name="about_desc_sensitive_content">Hide sensitive content on the lock screen.\n\nToggle whether notification content is shown or hidden when your device is locked.</string>
-    <string name="about_desc_tap_to_wake">Toggle tap to wake functionality.\n\nEnable or disable the ability to wake your screen with a tap.</string>
-    <string name="about_desc_aod">Toggle Always On Display.\n\nQuickly enable or disable the always-on display to view info at a glance.</string>
-    <string name="about_desc_notification_glance">Automatically control your Always On Display based on your notifications. When a message or alert arrives from a selected app, AOD will stay on until you dismiss the notification, ensuring you never miss important info without wasting battery when no alerts are present.</string>
-    <string name="about_desc_mono_audio">Combine audio channels into mono.\n\nUseful when using a single earbud or for accessibility purposes.</string>
-    <string name="about_desc_flashlight_tile">Toggle the flashlight.\n\nA Long pressing opens the controls for intensity adjustment which might need hardware implementation which some devices may lack.</string>
-    <string name="about_desc_stay_awake">Keep the screen awake while charging.\n\nPrevents the screen from sleeping as long as the device is connected to a power source which is suitable for developers during debugging.</string>
-    <string name="about_desc_nfc">Toggle NFC.\n\nQuickly enable or disable Near Field Communication for payments and pairing.</string>
-    <string name="about_desc_adaptive_brightness">Toggle adaptive brightness.\n\nEnable or disable automatic screen brightness adjustment based on ambient light.</string>
-    <string name="about_desc_private_dns">Toggle Private DNS.\n\nCycle through Off, Automatic, and Private DNS provider modes.</string>
-    <string name="about_desc_usb_debugging">Toggle USB Debugging.\n\nEnable or disable ADB debugging access directly from the quick settings.</string>
-    <string name="about_desc_color_picker">Launch the eye dropper tool to pick colors introduced in Android 17 BETA 2</string>
-    <string name="about_desc_charge_optimization">Optimize your battery life by limiting the maximum charge or using adaptive charging. This is specially designed for Pixel devices to ensure longevity and healthy charging cycles.\n\nCredits: TebbeUbben/ChargeQuickTile</string>
-    <string name="action_download">Download</string>
+    <string name="action_back">뒤쪽에</string>
+    <string name="content_desc_back">뒤쪽에</string>
+    <string name="label_settings">설정</string>
+    <string name="action_report_bug">버그 신고</string>
+    <string name="action_done">완료</string>
+    <string name="action_preview">시사</string>
+    <string name="action_help_guide">도움말 안내</string>
+    <string name="action_what_is_this">이게 뭔가요?</string>
+    <string name="update_available_title">업데이트 가능</string>
+    <string name="about_desc_ambient_music_glance">Ambient Music Glance는 음악이 재생되고 재생이 변경될 때 잠금 화면에 Now Playing 오버레이를 표시합니다. \n\n기기가 AOD를 통한 오버레이를 지원하지 않는 경우 충전하는 동안 Android 설정에 추가된 Ambience 화면 보호기를 대안으로 선택할 수 있습니다.</string>
+    <string name="about_desc_notification_lighting">알림 조명은 알림을 받을 때 아름다운 가장자리 조명 효과를 추가합니다.\n\n애니메이션 스타일, 색상 및 동작을 사용자 정의할 수 있습니다. 화면이 꺼져 있거나(OEM에 따라 다름) 현재 앱 위에 있는 경우에도 작동합니다. 앱, 알림 우선순위 또는 특정 컨트롤에서 트리거되어야 하는 동작을 선택하세요. OEM이 AOD 위의 오버레이를 지원하지 않는 경우 아래에 있는 주변 디스플레이 옵션을 사용하세요.</string>
+    <string name="about_desc_screen_off_widget">홈 화면에 아이콘이나 어수선한 요소를 추가하지 않는 투명하고 크기 조절이 가능한 위젯을 탭하여 쉽게 화면을 끌 수 있습니다.</string>
+    <string name="about_desc_statusbar_icons">상태 표시줄 아이콘을 완전히 제어하세요.\n\nWiFi, 블루투스, 셀룰러 데이터와 같은 특정 아이콘을 숨겨 상태 표시줄을 깨끗하게 유지하세요. 일부 스마트 컨트롤을 사용하여 시계 형식과 배터리 표시기를 사용자 정의할 수도 있습니다. 이는 사용 가능한 AOSP 컨트롤 목록이므로 장치 OS가 모든 컨트롤을 따르지 않을 수도 있습니다.</string>
+    <string name="about_desc_caffeinate">카페인을 섭취하면 화면이 자동으로 꺼지는 것을 방지할 수 있습니다.\n\n특정 기간 동안 또는 무기한으로 화면을 켜두세요. 긴 글을 읽거나 레시피를 참고할 때 유용합니다.</string>
+    <string name="about_desc_maps_power_saving">모든 Android 기기의 잠금 화면에 표시할 수 있는 최소한의 칠흑색 배경을 갖춘 Pixel 10 시리즈 전용 Google 지도 절전 모드를 사용해 보세요. 내비게이션 세션을 시작하고 화면을 껐다가 다시 켜세요.</string>
+    <string name="about_desc_flashlight_pulse">알림을 받으면 손전등을 켜세요.\n\n장치에 손전등 밝기 조절 기능이 하드웨어로 지원되면 펄스가 부드럽게 움직입니다.</string>
+    <string name="about_desc_snooze_notifications">기본적으로 수정할 수 없는 성가신 지속적인 시스템 알림을 일시 중지합니다. \n\n알림이 도착할 때까지 기다린 후 이 기능으로 이동하면\'의 알림 채널이 나열됩니다. 다음 번부터 일시중지하려면 이를 선택하세요.\n\n일시중지된 알림은 Android의 알림 기록에서 계속 액세스할 수 있습니다.</string>
+    <string name="about_desc_quick_settings_tiles">빠른 설정 패널에 맞춤 타일을 추가하세요.\n\n어떤 타일을 길게 눌러 어떤 기능을 하는지 알아보세요.</string>
+    <string name="about_desc_button_remap">다양한 작업과 단축키를 수행하려면 하드웨어 버튼을 다시 매핑하세요.\n\n특정 조건에서 볼륨 버튼을 길게 눌렀을 때 발생하는 상황을 맞춤설정하세요. \n\n화면 끄기 트리거 또는 손전등 컨트롤과 같은 일부 동작은 구현에 따라 OEM에 따라 달라질 수 있으며 모든 기기에서 예상대로 작동하지 않을 수 있습니다. 일부 시나리오는 Shizuku 권한을 사용하여 해결할 수 있지만 구현으로 인해 동일한 경험을 제공하지 못할 수 있습니다.</string>
+    <string name="about_desc_dynamic_night_light">포그라운드 앱을 기반으로 화면 블루라이트 필터를 자동으로 전환합니다.</string>
+    <string name="about_desc_screen_locked_security">장치가 잠겨 있을 때 보안을 강화하세요.\n\n일부 중요한 QS 타일에 대한 액세스를 제한하여 승인되지 않은 네트워크 수정을 방지하고 터치 스팸을 방지하기 위해 애니메이션 속도를 높여 재시도를 방지합니다.\n\n이 기능은 강력하지 않으며 블루투스 또는 비행 모드와 같이 직접 전환할 수 있는 일부 타일과 같은 결함이 있을 수 있습니다. 예방할 수 있습니다.</string>
+    <string name="about_desc_app_lock">보조 인증 레이어로 앱을 보호하세요.\n\nAndroid 표준의 클래스 3 생체 인식 보안 수준을 충족하는 한 기기 잠금 화면 인증 방법이 사용됩니다.</string>
+    <string name="about_desc_location_reached">정류장을 놓치지 않도록 목적지에 가까워지면 알림을 받으세요.\n\nGoogle 지도로 이동하여 목적지 근처의 핀을 길게 누르고 \"핀이 꽂혀 있음\"이라고 표시되는지 확인한 다음(그렇지 않으면 거리 계산이 정확하지 않을 수 있음), 위치를 Essentials 앱에 공유하고 추적을 시작합니다.</string>
+    <string name="about_desc_freeze">백그라운드에서 실행되지 않도록 앱을 정지하세요.\n\n앱을 사용하지 않을 때 앱을 완전히 정지시켜 배터리 소모와 데이터 사용량을 방지하세요. 실행하면 즉시 고정이 해제됩니다. 앱은 앱 서랍에 표시되지 않으며 정지된 동안 Play 스토어의 앱 업데이트에도 표시되지 않습니다.</string>
+    <string name="about_desc_system_keyboard">누구도 요구하지 않은 맞춤 입력 방법입니다.\n\n이것은 단지 실험일 뿐입니다. 여러 언어는 매우 복잡하고 시간이 많이 걸리는 구현이므로 지원되지 않을 수 있습니다.</string>
+    <string name="about_desc_batteries">연결된 모든 장치의 배터리 수준을 모니터링하세요.\n\nBluetooth 헤드폰, 시계 및 기타 액세서리의 배터리 상태를 한 곳에서 확인하세요. AirSync 응용 프로그램과 연결하여 Mac 배터리 수준도 표시합니다.</string>
+    <string name="about_desc_watermark">EXIF 데이터 및 장치 정보를 사용하여 사진에 사용자 정의 캡션/워터마크를 추가하세요.\n\n다른 앱의 이미지를 Essentials에 직접 공유하면 워터마크를 쉽게 추가할 수 있습니다.</string>
+    <string name="about_desc_calendar_sync">직장이나 학교 정책으로 인해 wearOS 기기에 추가할 수 없는 Google 계정의 제한 사항에 상관없이 예정된 모든 캘린더 일정을 동기화하세요. \n\nWearOS Essentials 도우미 앱을 설치하여 앱은 물론 타일이나 정보 표시에도 일정을 표시하세요.</string>
+    <string name="about_desc_app_updates">설치된 앱의 업데이트를 추적하세요.\n\n사용 가능한 업데이트에 대한 알림을 받고, 변경 로그를 보고, 탭 한 번으로 쉽게 설치할 수 있습니다.</string>
+    <string name="about_desc_call_vibrations">통화에 촉각 피드백을 추가하세요.\n\n통화가 연결되거나 끊기거나 수락될 때 진동하여 화면을 보지 않고도 촉각적으로 확인할 수 있습니다.</string>
+    <string name="about_desc_sound_mode_tile">소리, 진동, 무음 모드 사이를 빠르게 전환하세요.\n\n볼륨 버튼이나 설정을 사용하지 않고도 벨소리 모드를 변경할 수 있는 편리한 타일입니다. 모드 순서를 변경하거나 필요하지 않은 경우 모드를 비활성화하여 타일 토글을 순환 동작으로 사용자 정의할 수 있습니다.</string>
+    <string name="about_desc_ui_blur">OS 전반에 걸쳐 시스템 수준의 흐림 심도 효과를 쉽게 전환할 수 있습니다.</string>
+    <string name="about_desc_bubbles">부동 알림 풍선을 활성화 또는 비활성화합니다.\n\n대화 풍선에 대한 시스템 전체 설정을 빠르게 전환합니다.</string>
+    <string name="about_desc_sensitive_content">잠금 화면에서 민감한 콘텐츠를 숨깁니다.\n\n기기가 잠겨 있을 때 알림 콘텐츠를 표시할지 숨길지 전환합니다.</string>
+    <string name="about_desc_tap_to_wake">탭하여 깨우기 기능을 전환합니다.\n\n탭으로 화면을 깨우는 기능을 활성화 또는 비활성화합니다.</string>
+    <string name="about_desc_aod">Always On Display를 전환합니다.\n\nAlways On Display를 빠르게 활성화 또는 비활성화하여 정보를 한눈에 볼 수 있습니다.</string>
+    <string name="about_desc_notification_glance">알림을 기반으로 Always On Display를 자동으로 제어합니다. 선택한 앱에서 메시지나 알림이 도착하면 알림을 해제할 때까지 AOD가 계속 켜져 있어 알림이 없을 때 배터리를 낭비하지 않고 중요한 정보를 놓치지 않도록 해줍니다.</string>
+    <string name="about_desc_mono_audio">오디오 채널을 모노로 결합합니다.\n\n단일 이어버드를 사용할 때 또는 접근성 목적으로 유용합니다.</string>
+    <string name="about_desc_flashlight_tile">손전등을 전환합니다.\n\nA 길게 누르면 일부 장치에는 부족할 수 있는 하드웨어 구현이 필요할 수 있는 강도 조정 컨트롤이 열립니다.</string>
+    <string name="about_desc_stay_awake">충전하는 동안 화면을 켜두세요.\n\n디버깅하는 동안 장치가 개발자에게 적합한 전원에 연결되어 있는 동안 화면이 절전 모드로 전환되는 것을 방지합니다.</string>
+    <string name="about_desc_nfc">NFC를 전환합니다.\n\n결제 및 페어링을 위해 근거리 통신을 빠르게 활성화 또는 비활성화합니다.</string>
+    <string name="about_desc_adaptive_brightness">적응형 밝기를 전환합니다.\n\n주변 조명에 따라 자동 화면 밝기 조정을 활성화 또는 비활성화합니다.</string>
+    <string name="about_desc_private_dns">개인 DNS를 전환합니다.\n\n끄기, 자동 및 개인 DNS 공급자 모드를 순환합니다.</string>
+    <string name="about_desc_usb_debugging">USB 디버깅을 전환합니다.\n\n빠른 설정에서 직접 ADB 디버깅 액세스를 활성화 또는 비활성화합니다.</string>
+    <string name="about_desc_color_picker">Android 17 베타 2에 도입된 색상을 선택하려면 스포이드 도구를 실행하세요.</string>
+    <string name="about_desc_charge_optimization">최대 충전량을 제한하거나 적응형 충전을 사용하여 배터리 수명을 최적화하세요. 이는 Pixel 장치의 수명과 건전한 충전 주기를 보장하기 위해 특별히 설계되었습니다.\n\n크레디트: TebbeUbben/ChargeQuickTile</string>
+    <string name="action_download">다운로드</string>
     <!-- DIY Section -->
-    <string name="diy_trigger_screen_off">Screen Off</string>
-    <string name="diy_trigger_screen_on">Screen On</string>
-    <string name="diy_trigger_device_unlock">Device Unlock</string>
-    <string name="diy_trigger_charger_connected">Charger Connected</string>
-    <string name="diy_trigger_charger_disconnected">Charger Disconnected</string>
-    <string name="diy_state_charging">Charging</string>
-    <string name="diy_state_screen_on">Screen On</string>
-    <string name="diy_action_haptic">Vibrate</string>
-    <string name="diy_action_notification">Show Notification</string>
-    <string name="diy_action_remove_notification">Remove Notification</string>
-    <string name="diy_action_flashlight_on">Turn On Flashlight</string>
-    <string name="diy_action_flashlight_off">Turn Off Flashlight</string>
-    <string name="diy_action_flashlight_toggle">Toggle Flashlight</string>
-    <string name="diy_action_dim_wallpaper">Dim Wallpaper</string>
-    <string name="diy_dim_wallpaper_desc">This action requires Shizuku or Root to adjust system wallpaper dimming.</string>
-    <string name="diy_select_trigger">Select Trigger</string>
-    <string name="diy_create_app_title">App</string>
-    <string name="diy_create_app_desc">Automate based on open app</string>
-    <string name="diy_select_state">Select State</string>
-    <string name="diy_select_action">Select Action</string>
-    <string name="diy_in_action_label">In Action</string>
-    <string name="diy_out_action_label">Out Action</string>
-    <string name="action_cancel">Cancel</string>
-    <string name="action_save">Save</string>
-    <string name="action_edit">Edit</string>
-    <string name="action_delete">Delete</string>
-    <string name="action_enable">Enable</string>
-    <string name="action_disable">Disable</string>
-    <string name="automation_service_channel_name">Automation Service</string>
-    <string name="automation_service_running_title">Automations Active</string>
-    <string name="automation_service_running_desc">Monitoring system events for your automations</string>
-    <string name="diy_action_device_effects">Device Effects</string>
-    <string name="diy_device_effects_desc">Control system-level effects like grayscale, AOD suppression, wallpaper dimming, and night mode.</string>
-    <string name="diy_effect_grayscale">Grayscale</string>
-    <string name="diy_effect_suppress_ambient">Suppress Ambient Display</string>
-    <string name="diy_effect_dim_wallpaper">Dim Wallpaper</string>
-    <string name="diy_effect_night_mode">Night Mode</string>
-    <string name="diy_device_effects_android_15_warning">This feature requires Android 15 or higher.</string>
-    <string name="diy_device_effects_enabled">Enabled</string>
-    <string name="diy_device_effects_disabled">Disabled</string>
-    <string name="diy_action_sound_mode">Sound Mode</string>
-    <string name="diy_sound_mode_desc">This action allows switching between Sound, Vibrate, and Silent modes based on triggers. It requires Do Not Disturb access.</string>
+    <string name="diy_trigger_screen_off">화면 끄기</string>
+    <string name="diy_trigger_screen_on">화면 켜짐</string>
+    <string name="diy_trigger_device_unlock">장치 잠금 해제</string>
+    <string name="diy_trigger_charger_connected">충전기 연결됨</string>
+    <string name="diy_trigger_charger_disconnected">충전기 연결 끊김</string>
+    <string name="diy_state_charging">충전 중</string>
+    <string name="diy_state_screen_on">화면 켜짐</string>
+    <string name="diy_action_haptic">떨리다</string>
+    <string name="diy_action_notification">알림 표시</string>
+    <string name="diy_action_remove_notification">알림 제거</string>
+    <string name="diy_action_flashlight_on">손전등 켜기</string>
+    <string name="diy_action_flashlight_off">손전등 끄기</string>
+    <string name="diy_action_flashlight_toggle">손전등 전환</string>
+    <string name="diy_action_dim_wallpaper">희미한 벽지</string>
+    <string name="diy_dim_wallpaper_desc">이 작업을 수행하려면 시스템 배경화면 밝기 조절을 조정하기 위해 Shizuku 또는 Root가 필요합니다.</string>
+    <string name="diy_select_trigger">트리거 선택</string>
+    <string name="diy_create_app_title">앱</string>
+    <string name="diy_create_app_desc">오픈앱 기반 자동화</string>
+    <string name="diy_select_state">상태 선택</string>
+    <string name="diy_select_action">작업 선택</string>
+    <string name="diy_in_action_label">실행 중</string>
+    <string name="diy_out_action_label">아웃 액션</string>
+    <string name="action_cancel">취소</string>
+    <string name="action_save">구하다</string>
+    <string name="action_edit">편집하다</string>
+    <string name="action_delete">삭제</string>
+    <string name="action_enable">할 수 있게 하다</string>
+    <string name="action_disable">장애를 입히다</string>
+    <string name="automation_service_channel_name">자동화 서비스</string>
+    <string name="automation_service_running_title">자동화 활성화</string>
+    <string name="automation_service_running_desc">자동화를 위한 시스템 이벤트 모니터링</string>
+    <string name="diy_action_device_effects">장치 효과</string>
+    <string name="diy_device_effects_desc">그레이스케일, AOD 억제, 배경화면 어둡게 하기, 야간 모드와 같은 시스템 수준 효과를 제어합니다.</string>
+    <string name="diy_effect_grayscale">그레이스케일</string>
+    <string name="diy_effect_suppress_ambient">주변 디스플레이 억제</string>
+    <string name="diy_effect_dim_wallpaper">희미한 벽지</string>
+    <string name="diy_effect_night_mode">야간 모드</string>
+    <string name="diy_device_effects_android_15_warning">이 기능을 사용하려면 Android 15 이상이 필요합니다.</string>
+    <string name="diy_device_effects_enabled">활성화됨</string>
+    <string name="diy_device_effects_disabled">장애가 있는</string>
+    <string name="diy_action_sound_mode">사운드 모드</string>
+    <string name="diy_sound_mode_desc">이 작업을 사용하면 트리거에 따라 소리, 진동 및 무음 모드 간에 전환할 수 있습니다. 방해금지 액세스가 필요합니다.</string>
     <!-- About Section -->
-    <string name="app_developer_name">Sameera Wijerathna</string>
-    <string name="app_description">The all-in-one toolbox for your Pixel and Androids</string>
+    <string name="app_developer_name">사메라 위제라트나</string>
+    <string name="app_description">Pixel 및 Android용 올인원 도구 상자</string>
     <!-- Edge Lighting -->
-    <string name="color_mode_system">System</string>
-    <string name="color_mode_custom">Custom</string>
-    <string name="color_mode_app_specific">App specific</string>
+    <string name="color_mode_system">체계</string>
+    <string name="color_mode_custom">관습</string>
+    <string name="color_mode_app_specific">특정 앱</string>
     <!-- Biometric & Security -->
-    <string name="error_auth_failed">Authentication failed</string>
-    <string name="shortcut_creation_hint_toast">Long press an app in the grid to add a shortcut</string>
-    <string name="error_app_uninstalled">App not found or uninstalled</string>
+    <string name="error_auth_failed">인증 실패</string>
+    <string name="shortcut_creation_hint_toast">바로가기를 추가하려면 그리드에서 앱을 길게 누르세요.</string>
+    <string name="error_app_uninstalled">앱을 찾을 수 없거나 제거되지 않았습니다.</string>
     <!-- Notifications -->
-    <string name="update_channel_name">App Updates</string>
-    <string name="update_channel_desc">Notifications for new app updates</string>
-    <string name="notification_update_available">Update available</string>
-    <string name="battery_notification_no_devices">No devices connected</string>
-    <string name="label_unknown">Unknown</string>
+    <string name="update_channel_name">앱 업데이트</string>
+    <string name="update_channel_desc">새로운 앱 업데이트 알림</string>
+    <string name="notification_update_available">업데이트 가능</string>
+    <string name="battery_notification_no_devices">연결된 기기 없음</string>
+    <string name="label_unknown">알려지지 않은</string>
     <string name="network_type_5g">5G</string>
     <string name="network_type_4g">4G</string>
     <string name="network_type_3g">3G</string>
-    <string name="label_shizuku_ritaka">Shizuku (Rikka)</string>
-    <string name="label_shizuku_tuozi">Shizuku (TuoZi)</string>
-    <string name="label_search_content_description">Search</string>
-    <string name="perm_device_admin_explanation">Required to hard-lock the device when unauthorized network changes are attempted on lock screen.</string>
-    <string name="biometric_subtitle_access_settings">Authenticate to access settings</string>
-    <string name="biometric_title_settings_format">%1$s Settings</string>
-    <string name="keyword_feature">feature</string>
-    <string name="keyword_settings">settings</string>
-    <string name="keyword_hide">hide</string>
-    <string name="keyword_show">show</string>
-    <string name="keyword_visibility">visibility</string>
-    <string name="error_loading_apps">Error loading apps: %1$s</string>
+    <string name="label_shizuku_ritaka">시즈쿠(릿카)</string>
+    <string name="label_shizuku_tuozi">시즈쿠(TuoZi)</string>
+    <string name="label_search_content_description">찾다</string>
+    <string name="perm_device_admin_explanation">잠금 화면에서 승인되지 않은 네트워크 변경을 시도하는 경우 장치를 강제 잠금하는 데 필요합니다.</string>
+    <string name="biometric_subtitle_access_settings">설정에 액세스하려면 인증하세요.</string>
+    <string name="biometric_title_settings_format">%1$s 설정</string>
+    <string name="keyword_feature">특징</string>
+    <string name="keyword_settings">설정</string>
+    <string name="keyword_hide">숨다</string>
+    <string name="keyword_show">보여주다</string>
+    <string name="keyword_visibility">시계</string>
+    <string name="error_loading_apps">앱 로드 중 오류 발생: %1$s</string>
     <string-array name="keywords_haptic">
-        <item>vibration</item>
-        <item>touch</item>
-        <item>feel</item>
+        <item>진동</item>
+        <item>만지다</item>
+        <item>느끼다</item>
     </string-array>
     <string-array name="keywords_network_visibility">
-        <item>network</item>
-        <item>visibility</item>
-        <item>auto</item>
-        <item>hide</item>
+        <item>회로망</item>
+        <item>시계</item>
+        <item>자동</item>
+        <item>숨다</item>
     </string-array>
     <string-array name="keywords_restore_default">
-        <item>restore</item>
-        <item>default</item>
-        <item>icon</item>
+        <item>복원하다</item>
+        <item>기본</item>
+        <item>상</item>
     </string-array>
     <string-array name="keywords_keyboard">
-        <item>keyboard</item>
-        <item>height</item>
-        <item>padding</item>
-        <item>haptic</item>
-        <item>input</item>
+        <item>건반</item>
+        <item>키</item>
+        <item>심</item>
+        <item>햅틱</item>
+        <item>입력</item>
     </string-array>
     <string-array name="keywords_flashlight">
-        <item>light</item>
-        <item>torch</item>
+        <item>빛</item>
+        <item>토치</item>
     </string-array>
     <string-array name="keywords_flashlight_pulse">
-        <item>light</item>
-        <item>torch</item>
-        <item>pulse</item>
-        <item>notification</item>
+        <item>빛</item>
+        <item>토치</item>
+        <item>맥박</item>
+        <item>공고</item>
     </string-array>
     <string-array name="keywords_qs_stay_awake">
-        <item>awake</item>
-        <item>developer</item>
-        <item>power</item>
-        <item>charge</item>
+        <item>깨어 있는</item>
+        <item>개발자</item>
+        <item>힘</item>
+        <item>요금</item>
     </string-array>
     <string-array name="keywords_notification_lighting">
-        <item>glow</item>
-        <item>notification</item>
-        <item>led</item>
+        <item>불타는 듯한 빛깔</item>
+        <item>공고</item>
+        <item>~ 주도의</item>
     </string-array>
     <string-array name="keywords_round_shape">
-        <item>round</item>
-        <item>shape</item>
-        <item>edge</item>
+        <item>둥근</item>
+        <item>모양</item>
+        <item>가장자리</item>
     </string-array>
     <string-array name="keywords_privacy">
-        <item>secure</item>
-        <item>privacy</item>
-        <item>biometric</item>
-        <item>face</item>
-        <item>fingerprint</item>
+        <item>안전한</item>
+        <item>은둔</item>
+        <item>생체인식</item>
+        <item>얼굴</item>
+        <item>지문</item>
     </string-array>
     <string-array name="keywords_sound_accessibility">
-        <item>sound</item>
-        <item>accessibility</item>
-        <item>hear</item>
+        <item>소리</item>
+        <item>접근성</item>
+        <item>듣다</item>
     </string-array>
     <string-array name="keywords_timeout">
-        <item>stay</item>
-        <item>on</item>
-        <item>timeout</item>
+        <item>머무르다</item>
+        <item>~에</item>
+        <item>시간 초과</item>
     </string-array>
     <string-array name="keywords_wake_display">
-        <item>touch</item>
-        <item>wake</item>
-        <item>display</item>
+        <item>만지다</item>
+        <item>깨어 있다</item>
+        <item>표시하다</item>
     </string-array>
     <string-array name="keywords_timer">
-        <item>timer</item>
-        <item>wait</item>
-        <item>timeout</item>
+        <item>시간제 노동자</item>
+        <item>기다리다</item>
+        <item>시간 초과</item>
     </string-array>
-    <string name="label_keyboard_always_dark">Always dark theme</string>
-    <string name="label_keyboard_pitch_black">Pitch black theme</string>
-    <string name="label_keyboard_clipboard_enabled">Clipboard History</string>
+    <string name="label_keyboard_always_dark">항상 어두운 테마</string>
+    <string name="label_keyboard_pitch_black">피치 블랙 테마</string>
+    <string name="label_keyboard_clipboard_enabled">클립보드 기록</string>
     <string-array name="keywords_selection">
-        <item>list</item>
-        <item>picker</item>
-        <item>selection</item>
+        <item>목록</item>
+        <item>소매치기</item>
+        <item>선택</item>
     </string-array>
     <string-array name="keywords_visual_style">
-        <item>animation</item>
-        <item>visual</item>
-        <item>look</item>
+        <item>생기</item>
+        <item>시각적</item>
+        <item>바라보다</item>
     </string-array>
     <string-array name="keywords_quiet_filter">
-        <item>quiet</item>
-        <item>ignore</item>
-        <item>filter</item>
+        <item>조용한</item>
+        <item>무시하다</item>
+        <item>필터</item>
     </string-array>
     <string-array name="keywords_automation_lock">
-        <item>automation</item>
-        <item>auto</item>
-        <item>lock</item>
+        <item>오토메이션</item>
+        <item>자동</item>
+        <item>잠그다</item>
     </string-array>
     <string-array name="keywords_adb_debug">
         <item>adb</item>
-        <item>usb</item>
-        <item>debug</item>
+        <item>USB</item>
+        <item>디버그</item>
     </string-array>
     <string-array name="keywords_blur_glass">
-        <item>blur</item>
-        <item>glass</item>
-        <item>vignette</item>
+        <item>흐림</item>
+        <item>유리</item>
+        <item>삽화</item>
     </string-array>
     <string-array name="keywords_float_window">
-        <item>float</item>
-        <item>window</item>
-        <item>overlay</item>
+        <item>뜨다</item>
+        <item>창문</item>
+        <item>씌우다</item>
     </string-array>
     <string-array name="keywords_always_display">
-        <item>always</item>
-        <item>display</item>
-        <item>clock</item>
+        <item>언제나</item>
+        <item>표시하다</item>
+        <item>시계</item>
     </string-array>
     <string-array name="keywords_audio_mute">
-        <item>audio</item>
-        <item>mute</item>
-        <item>volume</item>
+        <item>오디오</item>
+        <item>무음</item>
+        <item>용량</item>
     </string-array>
     <string-array name="keywords_blue_filter">
-        <item>blue</item>
-        <item>filter</item>
-        <item>auto</item>
+        <item>파란색</item>
+        <item>필터</item>
+        <item>자동</item>
     </string-array>
     <string-array name="keywords_app_freezing">
-        <item>freeze</item>
-        <item>shizuku</item>
+        <item>꼭 매달리게 하다</item>
+        <item>시즈쿠</item>
     </string-array>
     <string-array name="keywords_manual_now">
-        <item>manual</item>
-        <item>now</item>
-        <item>shizuku</item>
+        <item>수동</item>
+        <item>지금</item>
+        <item>시즈쿠</item>
     </string-array>
     <string-array name="keywords_proximity_sensor">
-        <item>proximity</item>
-        <item>sensor</item>
-        <item>face</item>
-        <item>down</item>
+        <item>근접성</item>
+        <item>감지기</item>
+        <item>얼굴</item>
+        <item>아래에</item>
     </string-array>
     <string-array name="keywords_switch_master">
-        <item>switch</item>
-        <item>master</item>
+        <item>스위치</item>
+        <item>주인</item>
     </string-array>
     <string-array name="keywords_vibration">
-        <item>vibration</item>
-        <item>feel</item>
+        <item>진동</item>
+        <item>느끼다</item>
     </string-array>
     <string-array name="keywords_battery">
-        <item>battery</item>
-        <item>charge</item>
-        <item>optimization</item>
-        <item>pixel</item>
+        <item>배터리</item>
+        <item>요금</item>
+        <item>최적화</item>
+        <item>픽셀</item>
     </string-array>
     <!-- App Selection Extra -->
-    <string name="action_invert_selection">Invert selection</string>
-    <string name="toggle_show_system_apps">Show system apps</string>
+    <string name="action_invert_selection">선택 반전</string>
+    <string name="toggle_show_system_apps">시스템 앱 표시</string>
     <!-- Updates -->
-    <string name="status_up_to_date">You are up to date</string>
-    <string name="warning_pre_release">This is a pre-release version and might be unstable.</string>
-    <string name="release_notes_format">Release Notes v%1$s</string>
-    <string name="action_view_on_github">View on GitHub</string>
-    <string name="action_download_apk">Download APK</string>
+    <string name="status_up_to_date">당신은 최신 상태입니다</string>
+    <string name="warning_pre_release">이는 시험판 버전이므로 불안정할 수 있습니다.</string>
+    <string name="release_notes_format">릴리스 노트 %1$s</string>
+    <string name="action_view_on_github">GitHub에서 보기</string>
+    <string name="action_download_apk">APK 다운로드</string>
     <!-- Haptic Types -->
-    <string name="haptic_none">None</string>
-    <string name="haptic_subtle">Subtle</string>
-    <string name="haptic_double">Double</string>
-    <string name="haptic_click">Click</string>
-    <string name="haptic_tick">Tick</string>
+    <string name="haptic_none">없음</string>
+    <string name="haptic_subtle">미묘한</string>
+    <string name="haptic_double">더블</string>
+    <string name="haptic_click">딸깍 하는 소리</string>
+    <string name="haptic_tick">진드기</string>
     <!-- Flashlight Intensity Overlay -->
-    <string name="action_turn_off">Turn Off</string>
-    <string name="feature_flashlight_brightness_title">Flashlight Brightness</string>
+    <string name="action_turn_off">끄기</string>
+    <string name="feature_flashlight_brightness_title">손전등 밝기</string>
     <!-- QS / Activities -->
-    <string name="error_unlock_network_settings">Unlock phone to change network settings</string>
+    <string name="error_unlock_network_settings">네트워크 설정을 변경하려면 휴대전화를 잠금 해제하세요.</string>
     <!-- About Section -->
-    <string name="developed_by_format">Developed by %1$s\nwith ❤\uFE0F from \uD83C\uDDF1\uD83C\uDDF0</string>
-    <string name="action_website">Website</string>
-    <string name="action_contact">Contact</string>
-    <string name="action_telegram">Telegram</string>
-    <string name="action_support">Support</string>
-    <string name="label_other_apps">Other Apps</string>
-    <string name="app_airsync">AirSync</string>
-    <string name="app_zenzero">ZenZero</string>
-    <string name="app_canvas">Canvas</string>
-    <string name="app_tasks">Tasks</string>
-    <string name="app_zero">Zero</string>
+    <string name="developed_by_format">❤ %1$s\nfrom과 함께\uFE0F 에 의해 개발됨 \uD83C\uDDF1\uD83C\uDDF0</string>
+    <string name="action_website">웹사이트</string>
+    <string name="action_contact">연락하다</string>
+    <string name="action_telegram">전보</string>
+    <string name="action_support">지원하다</string>
+    <string name="label_other_apps">기타 앱</string>
+    <string name="app_airsync">에어싱크</string>
+    <string name="app_zenzero">젠제로</string>
+    <string name="app_canvas">캔버스</string>
+    <string name="app_tasks">작업</string>
+    <string name="app_zero">영</string>
     <!-- Help & Guides -->
-    <string name="help_guides_title">Help &amp; Guides</string>
-    <string name="need_more_support_reach_out">Need more support? Reach out,</string>
-    <string name="action_collapse">Collapse</string>
-    <string name="action_expand">Expand</string>
-    <string name="support_group_label">Support Group</string>
-    <string name="email_label">Email</string>
-    <string name="send_email_chooser_title">Send email</string>
-    <string name="error_no_email_app">No email app available</string>
-    <string name="instruction_step_image_description">Step %1$d Image</string>
+    <string name="help_guides_title">도움말 및 가이드</string>
+    <string name="need_more_support_reach_out">더 많은 지원이 필요하십니까? 손을 뻗어,</string>
+    <string name="action_collapse">무너지다</string>
+    <string name="action_expand">확장하다</string>
+    <string name="support_group_label">지원 그룹</string>
+    <string name="email_label">이메일</string>
+    <string name="send_email_chooser_title">이메일 보내기</string>
+    <string name="error_no_email_app">사용 가능한 이메일 앱이 없습니다.</string>
+    <string name="instruction_step_image_description">단계 %1$d 이미지</string>
     <!-- Instructions Content -->
-    <string name="instruction_section_perms_title">Accessibility, Notification and Overlay permissions</string>
-    <string name="instruction_step_perms_1">You may get this access denied message if you try to grant sensitive permissions such as accessibility, notification listener or overlay permissions. To grant it, check the steps below.</string>
-    <string name="instruction_step_perms_2">1. Go to app info page of Essentials.</string>
-    <string name="instruction_step_perms_3">2. Open the 3-dot menu and select \'Allow restricted settings\'. You may have to authenticate with biometrics. Once done, Try to grant the permission again.</string>
-    <string name="instruction_section_shizuku_title">Shizuku</string>
-    <string name="instruction_section_shizuku_desc">Shizuku is a powerful tool that allows apps to use system APIs directly with ADB or root permissions. It is required for features like Maps min mode, App Freezer. And willa ssist granting some permissions such as WRITE_SECURE_SETTINGS. \n\nBut the Play Store version of Shizuku might be outdated and will probably be unusable on recent Android versions so in that case, please get the latest version from the github or an up-to-date fork of it.</string>
-    <string name="instruction_section_maps_title">Maps power saving mode</string>
-    <string name="instruction_section_maps_desc">This feature automatically triggers Google Maps power saving mode which is currently exclusive to the Pixel 10 series. A community member discovered that it is still usable on any Android device by launching the maps minMode activity with root privileges. \n\nAnd then, I had it automated with Tasker to automatically trigger when the screen turns off during a navigation session and then was able to achieve the same with just runtime Shizuku permissions. \n\nIt is intended to be shown over the AOD of Pixel 10 series so because of that, you may see an occasional message popping up on the display that it does not support landscape mode. That is not avoidable by the app and you can ignore.</string>
-    <string name="instruction_section_silent_title">Silent sound mode</string>
-    <string name="instruction_section_silent_desc">You may have noticed that the silent mode also triggers DND. \n\nThis is due to how the Android implemented it as even if we use the same API to switch to vibrate mode, it for some reason turns on DND along with the silent mode and this is not avoidable at this moment. :(</string>
-    <string name="instruction_section_freeze_title">What is freeze?</string>
-    <string name="instruction_section_freeze_desc">Pause and stay away from app distractions while saving a little bit of power preventing apps running in the background. Suitable for rarely used apps. \n\nNot recommended for any communication services as they will not notify you in an emergency unless you unfreeze them. \n\nHighly advised to not freeze system apps as they can lead to system instability. Proceed with caution, You were warned. \n\nInspired by Hail &lt;3</string>
-    <string name="instruction_section_security_title">Are app lock and screen locked security actually secure?</string>
-    <string name="instruction_section_security_desc">Absolutely not. \n\nAny 3rd party application can not 100% interfere with regular device interactions and even the app lock is only an overlay above selected apps to prevent interacting with them. There are workarounds and it is not foolproof. \n\nSame goes with the screen locked security feature which detects someone trying to interact with the network tiles which for some reason are still accessible for anyone on Pixels. So if they try hard enough they might still be able to change them and especially if you have a flight mode QS tile added, this app can not prevent interactions with it. \n\nThese features are made just as experiments for light usage and would never recommend as strong security and privacy solutions. \n\nSecure alternatives:\n - App lock: Private Space and Secure folder on Pixels and Samsung\n - Preventing mobile networks access: Make sure your theft protection and offline/ power off find my device settings are on. You may look into Graphene OS as well.</string>
-    <string name="instruction_section_statusbar_title">Statusbar icons</string>
-    <string name="instruction_section_statusbar_desc">You may notice that even after resetting the statusbar icons, Some icons such as device rotation, wired headphone icons may stay visible. This is due to how the statubar blacklist is implemented in Android and how your OEM may have customized them. \nYou may need further adjustments. \n\nAlso not all icon visibility options may work as they depend on the OEM implementations and availability.</string>
-    <string name="instruction_section_lighting_title">Notification lighting does not work</string>
-    <string name="instruction_section_lighting_desc">It depends on the OEM. Some like OneUI does not seem to allow overlays above the AOD preventing the lighting effects being shown. In this case, try the ambient display as a workaround. </string>
-    <string name="instruction_section_button_title">Button remap does not work while display is off</string>
-    <string name="instruction_section_button_desc">Some OEMs limit the accessibility service reporting once the display is actually off but they may still work while the AOD is on. \nIn this case, you may able to use button remaps with AOD on but not with off. \n\nAs a workaround, you will need to use Shizuku permissions and turn on the \'Use Shizuku\' toggle in button remap settings which identifies and listen to hardware input events.\nThis is not guaranteed to work on all devices and needs testing.\n\nAnd even if it\'s on, Shizuku method only will be used when it\'s needed. Otherwise it will always fallback to Accessibility which also handles the blocking of the actual input during long press.</string>
-    <string name="instruction_section_flashlight_title">Flashlight brightness does not work</string>
-    <string name="instruction_section_flashlight_desc">Only a limited number of devices got hardware and software support adjusting the flashlight intensity. \n\n\'The minimum version of Android is 13 (SDK33).\nFlashlight brightness control only supports HAL version 3.8 and higher, so among the supported devices, the latest ones (For example, Pixel 6/7, Samsung S23, etc.)\'\npolodarb/Flashlight-Tiramisu</string>
-    <string name="instruction_section_about_title">What the hell is this app?</string>
-    <string name="instruction_section_about_desc">Good question,\n\nI always wanted to extract the most out of my devices as I\'ve been a rooted user for ever since I got my first Project Treble device. And I\'ve been loving the Tasker app which is like the god when comes automation and utilizing every possible API and internal features of Android.\n\nSo I am not unrooted and back on stock Android beta experience and wanted to get the most out from what is possible with given privileges. Might as well share them. So with my beginner knowledge in Kotlin Jetpack and with the support of many research and assist tools and also the great community, I built an all-in-one app containing everything I wanted to be in my Android with given permissions. And here it is.\n\nFeature requests are welcome, I will consider and see if they are achievable with available permissions and my skills. Nowadays what is not possible. :)\n\nWhy not on Play Store?\nI don\'t wanna risk getting my Developer account banned due to the highly sensitive and internal permissions and APIs being used in the app. But with the way Android sideloading is headed, let\'s see what we have to do. I do understand the concerns of sideloaded apps being malicious.\nWhile we are at the topic, Checkout my other app AirSync if you are a mac + Android user. *shameless plug*\n\nEnjoy, Keep building! (っ◕‿◕)っ</string>
+    <string name="instruction_section_perms_title">접근성, 알림 및 오버레이 권한</string>
+    <string name="instruction_step_perms_1">접근성, 알림 수신기 또는 오버레이 권한과 같은 민감한 권한을 부여하려고 하면 이 액세스 거부 메시지가 표시될 수 있습니다. 이를 부여하려면 아래 단계를 확인하세요.</string>
+    <string name="instruction_step_perms_2">1. Essentials의 앱 정보 페이지로 이동합니다.</string>
+    <string name="instruction_step_perms_3">2. 점 3개 메뉴를 열고 \'제한된 설정 허용\'을 선택하세요. 생체인식으로 인증해야 할 수도 있습니다. 완료되면 권한을 다시 부여해 보세요.</string>
+    <string name="instruction_section_shizuku_title">시즈쿠</string>
+    <string name="instruction_section_shizuku_desc">Shizuku는 앱이 ADB 또는 루트 권한으로 시스템 API를 직접 사용할 수 있게 해주는 강력한 도구입니다. Maps min 모드, App Freezer와 같은 기능에 필요합니다. 그리고 willa는 WRITE_SECURE_SETTINGS와 같은 일부 권한을 부여해야 한다고 주장합니다. \n\n그러나 Shizuku의 Play 스토어 버전은 오래되었을 수 있으며 최신 Android 버전에서는 사용하지 못할 수 있으므로 이 경우 Github에서 최신 버전을 다운로드하거나 최신 버전의 포크를 다운로드하세요.</string>
+    <string name="instruction_section_maps_title">지도 절전 모드</string>
+    <string name="instruction_section_maps_desc">이 기능은 현재 Pixel 10 시리즈에만 제공되는 Google 지도 절전 모드를 자동으로 실행합니다. 커뮤니티 회원은 루트 권한으로 지도 minMode 활동을 실행하여 모든 Android 기기에서 여전히 사용할 수 있다는 것을 발견했습니다. \n\n그런 다음 Tasker를 사용하여 탐색 세션 중에 화면이 꺼지면 자동으로 트리거하도록 자동화한 다음 런타임 Shizuku 권한만으로 동일한 작업을 수행할 수 있었습니다. \n\nAOD를 통해 표시되도록 의도되었습니다. Pixel 10 시리즈는 이로 인해 가로 모드를 지원하지 않는다는 메시지가 디스플레이에 가끔 표시될 수 있습니다. 이는 앱에서 피할 수 없으므로 무시할 수 있습니다.</string>
+    <string name="instruction_section_silent_title">무음 모드</string>
+    <string name="instruction_section_silent_desc">무음 모드에서도 DND가 실행된다는 점을 눈치채셨을 것입니다. \n\n이것은 Android에서 구현한 방식 때문입니다. 동일한 API를 사용하여 진동 모드로 전환하더라도 어떤 이유로 무음 모드와 함께 DND가 켜지고 현재로서는 이를 피할 수 없습니다. :(</string>
+    <string name="instruction_section_freeze_title">동결이란 무엇입니까?</string>
+    <string name="instruction_section_freeze_desc">백그라운드에서 앱이 실행되는 것을 방지하여 약간의 전력을 절약하는 동시에 일시 중지하고 앱 방해 요소를 피하세요. 거의 사용하지 않는 앱에 적합합니다. \n\n잠금을 해제하지 않는 한 긴급 상황에 알림을 보내지 않으므로 모든 통신 서비스에는 권장되지 않습니다. \n\n시스템 앱은 시스템 불안정을 초래할 수 있으므로 정지하지 않는 것이 좋습니다. 주의해서 진행하세요. 경고를 받았습니다. \n\nHail &lt;3에서 영감을 얻었습니다.</string>
+    <string name="instruction_section_security_title">앱 잠금과 화면 잠금 보안은 실제로 안전한가요?</string>
+    <string name="instruction_section_security_desc">절대 그렇지 않습니다. \n\n모든 타사 애플리케이션은 일반적인 기기 상호 작용을 100% 방해할 수 없으며 앱 잠금도 선택한 앱 위에 오버레이되어 상호 작용을 방지할 뿐입니다. 해결 방법이 있으며 완벽하지는 않습니다. \n\n어떤 이유로든 Pixels의 모든 사람이 액세스할 수 있는 네트워크 타일과 상호 작용하려는 사람을 감지하는 화면 잠금 보안 기능도 마찬가지입니다. 따라서 충분히 노력하면 여전히 변경할 수 있으며 특히 비행 모드 QS 타일이 추가된 경우 이 앱은 해당 타일과의 상호 작용을 막을 수 없습니다. \n\n이러한 기능은 간단한 사용을 위한 실험으로 만들어졌으며 강력한 보안 및 개인 정보 보호 솔루션으로 권장되지 않습니다. \n\n안전함 대안:\n - 앱 잠금: Pixels 및 Samsung\n - 모바일 네트워크 액세스 방지: 도난 방지 및 오프라인/전원 끄기 내 장치 찾기 설정이 켜져 있는지 확인하세요. Graphene OS도 살펴볼 수 있습니다.</string>
+    <string name="instruction_section_statusbar_title">상태 표시줄 아이콘</string>
+    <string name="instruction_section_statusbar_desc">상태 표시줄 아이콘을 재설정한 후에도 장치 회전, 유선 헤드폰 아이콘과 같은 일부 아이콘이 계속 표시될 수 있습니다. 이는 Android에서 상태 표시줄 블랙리스트가 구현되는 방식과 OEM이 이를 사용자 정의한 방식으로 인해 발생합니다. \n추가 조정이 필요할 수 있습니다. \n\n또한 OEM 구현 및 가용성에 따라 일부 아이콘 표시 옵션이 작동하지 않을 수도 있습니다.</string>
+    <string name="instruction_section_lighting_title">알림 조명이 작동하지 않습니다</string>
+    <string name="instruction_section_lighting_desc">OEM에 따라 다릅니다. OneUI와 같은 일부는 AOD 위에 오버레이를 허용하지 않아 조명 효과가 표시되지 않는 것 같습니다. 이 경우 해결 방법으로 주변 디스플레이를 사용해 보세요.</string>
+    <string name="instruction_section_button_title">디스플레이가 꺼진 동안에는 버튼 다시 매핑이 작동하지 않습니다.</string>
+    <string name="instruction_section_button_desc">일부 OEM은 디스플레이가 실제로 꺼지면 접근성 서비스 보고를 제한하지만 AOD가 켜져 있는 동안에는 계속 작동할 수 있습니다. \n이 경우 AOD가 켜져 있지만 꺼진 상태에서는 버튼 다시 매핑을 사용할 수 없습니다. \n\n해결 방법으로 Shizuku 권한을 사용하고 켜야 합니다.  \'Shizuku 또는 Root\' 하드웨어 입력 이벤트를 식별하고 수신하는 버튼 다시 매핑 설정에서 전환합니다.\n이는 모든 장치 및 요구 사항에서 작동한다고 보장되지 않습니다. 테스트 중입니다.\n\n그리고\'가 켜져 있어도\'필요할 때만 Shizuku 방법이 사용됩니다. 그렇지 않으면 항상 길게 누르는 동안 실제 입력 차단을 처리하는 접근성으로 대체됩니다.</string>
+    <string name="instruction_section_flashlight_title">손전등 밝기가 작동하지 않습니다</string>
+    <string name="instruction_section_flashlight_desc">제한된 수의 장치만이 하드웨어 및 소프트웨어에서 손전등 강도 조정을 지원합니다. \n\n\'Android 최소 버전은 13(SDK33)입니다.\n손전등 밝기 조정은 HAL 버전 3.8 이상만 지원하므로 지원되는 장치 중 최신 장치(예: Pixel 6/7, Samsung S23, 등)\'\n폴로다브/후레쉬-티라미수</string>
+    <string name="instruction_section_about_title">도대체 이 앱이 뭐죠?</string>
+    <string name="instruction_section_about_desc">좋은 질문입니다.\n\n나는\'첫 번째 Project Treble 장치를 구입한 이후로 계속 루팅된 사용자였기 때문에 항상 내 장치를 최대한 활용하고 싶었습니다. 그리고 저는\'자동화가 가능하고 Android의 가능한 모든 API와 내부 기능을 활용하는 신과 같은 Tasker 앱을 좋아했습니다.\n\n그래서 저는 루팅되지 않고 Android 베타 경험으로 다시 돌아왔으며 주어진 권한으로 가능한 것을 최대한 활용하고 싶었습니다. 공유하는 것이 좋을 수도 있습니다. 그래서 Kotlin Jetpack에 대한 초보 지식과 많은 연구 및 지원 도구, 훌륭한 커뮤니티의 지원을 바탕으로 주어진 권한을 통해 Android에 포함하고 싶은 모든 것이 포함된 올인원 앱을 만들었습니다. 그리고 여기 있습니다.\n\n기능 요청을 환영합니다. 사용 가능한 권한과 내 기술로 달성 가능한지 검토하고 살펴보겠습니다. 요즘에는 불가능합니다. :)\n\nPlay Store에는 왜 없나요?\n저는\'앱에서 사용되는 매우 민감한 내부 권한과 API로 인해 내 개발자 계정이 금지될 위험을 감수하고 싶지 않습니다. 하지만 Android 사이드로딩이 진행되는 방식에 따라\'우리가 무엇을 해야 하는지 살펴보겠습니다. 사이드로드된 앱이 악성이라는 우려를 이해합니다.\n이 주제에 대해 이야기하는 동안 Mac + Android 사용자라면 내 다른 앱 AirSync를 확인해 보세요. *뻔뻔한 플러그*\n\n즐기세요, 계속 만들어보세요! (ㅍ◕‿◕)ㅍ</string>
     <!-- Bug Reporting -->
-    <string name="toast_bug_report_copied">Bug report copied to clipboard</string>
-    <string name="bug_report_title">Bug report</string>
-    <string name="bug_report_option_share_logs">Share logs</string>
-    <string name="bug_report_option_share_logs_desc">Include logs and details</string>
-    <string name="bug_report_device_info">Device Info</string>
-    <string name="bug_report_raw_json">Raw Report</string>
-    <string name="action_report_github">Open GitHub Issue</string>
-    <string name="action_report_email">Email Report</string>
-    <string name="action_copy_clipboard">Copy to Clipboard</string>
-    <string name="bug_report_email_subject">Essentials Bug Report</string>
-    <string name="bug_report_send_via">Send via</string>
+    <string name="toast_bug_report_copied">버그 신고가 클립보드에 복사되었습니다.</string>
+    <string name="bug_report_title">버그 신고</string>
+    <string name="bug_report_option_share_logs">로그 공유</string>
+    <string name="bug_report_option_share_logs_desc">로그 및 세부정보 포함</string>
+    <string name="bug_report_device_info">장치 정보</string>
+    <string name="bug_report_raw_json">원시 보고서</string>
+    <string name="action_report_github">GitHub 문제 열기</string>
+    <string name="action_report_email">이메일 보고서</string>
+    <string name="action_copy_clipboard">클립보드에 복사</string>
+    <string name="bug_report_email_subject">필수 버그 보고서</string>
+    <string name="bug_report_send_via">다음을 통해 보내기</string>
     <!-- Location Reached -->
-    <string name="feat_location_reached_title">Are We There Yet?</string>
-    <string name="feat_location_reached_desc">Prepare for your destination.</string>
-    <string name="location_reached_how_to">Open your map app, pick a location, and share it to Essentials.</string>
-    <string name="location_reached_radius_title">Radius: %d m</string>
-    <string name="perm_location_title">Location</string>
-    <string name="perm_location_desc">Used to detect arrival at your destination.</string>
-    <string name="perm_bg_location_title">Background Location</string>
-    <string name="perm_bg_location_desc">Required to monitor your arrival while the app is closed or the screen is off.</string>
-    <string name="location_reached_notification_title">Destination Reached!</string>
-    <string name="location_reached_notification_desc">You have arrived at your destination.</string>
-    <string name="location_reached_processing">Processing location…</string>
-    <string name="location_reached_dist_remaining">DISTANCE REMAINING</string>
-    <string name="location_reached_calculating">Calculating…</string>
-    <string name="location_reached_stop_tracking">Stop Tracking</string>
-    <string name="location_reached_dest_ready">Destination Ready</string>
-    <string name="location_reached_start_tracking">Start Tracking</string>
-    <string name="location_reached_view_map">View Map</string>
-    <string name="location_reached_clear">Clear</string>
-    <string name="location_reached_no_dest">No Destination</string>
-    <string name="location_reached_open_maps">Open Maps</string>
-    <string name="location_reached_fsi_title">Full-Screen Alarm Permission</string>
-    <string name="location_reached_fsi_desc">Required to wake your device upon arrival. Tap to grant.</string>
-    <string name="location_reached_dist_m">%1$d m</string>
-    <string name="location_reached_dist_km">%1$.1f km</string>
-    <string name="location_reached_service_title">Travel Alarm active</string>
-    <string name="location_reached_service_remaining">%1$s remaining (%2$d%%)</string>
-    <string name="location_reached_channel_name">Travel Progress</string>
-    <string name="location_reached_channel_desc">Shows real-time distance to destination</string>
-    <string name="location_reached_alarm_title">Destination Nearby</string>
-    <string name="location_reached_alarm_subtitle">Prepare to get off</string>
-    <string name="location_reached_dismiss">Dismiss</string>
-    <string name="location_reached_toast_set">Destination set: %1$.4f, %2$.4f</string>
-    <string name="setting_use_root_title">Use Root</string>
-    <string name="setting_use_root_desc">Instead of Shizuku</string>
-    <string name="root_not_available_toast">Root access not available. Please check your root manager.</string>
+    <string name="feat_location_reached_title">아직 도착하지 않았나요?</string>
+    <string name="feat_location_reached_desc">목적지 주변 알림</string>
+    <string name="location_reached_how_to">Google 지도를 열고 위치를 선택한 후 Essentials에 공유하세요.</string>
+    <string name="location_reached_radius_title">경보 반경: %d m</string>
+    <string name="perm_location_title">위치</string>
+    <string name="perm_location_desc">목적지 도착을 감지하는 데 사용됩니다.</string>
+    <string name="perm_bg_location_title">배경 위치</string>
+    <string name="perm_bg_location_desc">앱이 닫혀 있거나 화면이 꺼진 상태에서 도착을 모니터링하기 위해 필요합니다.</string>
+    <string name="location_reached_notification_title">목적지에 도달했습니다!</string>
+    <string name="location_reached_notification_desc">목적지에 도착했습니다.</string>
+    <string name="location_reached_processing">처리 위치…</string>
+    <string name="location_reached_dist_remaining">남은 거리</string>
+    <string name="location_reached_calculating">계산 중…</string>
+    <string name="location_reached_stop_tracking">추적 중지</string>
+    <string name="location_reached_dest_ready">목적지 준비 완료</string>
+    <string name="location_reached_start_tracking">추적 시작</string>
+    <string name="location_reached_view_map">지도 보기</string>
+    <string name="location_reached_clear">분명한</string>
+    <string name="location_reached_no_dest">목적지 없음</string>
+    <string name="location_reached_open_maps">지도 열기</string>
+    <string name="location_reached_fsi_title">전체 화면 알람 권한</string>
+    <string name="location_reached_fsi_desc">도착 시 기기를 깨워야 합니다. 부여하려면 탭하세요.</string>
+    <string name="location_reached_dist_m">%1$d 중</string>
+    <string name="location_reached_dist_km">%1$.1fkm</string>
+    <string name="location_reached_service_title">여행 알람 활성화</string>
+    <string name="location_reached_service_remaining">%1$s 남음 (%2$d%%)</string>
+    <string name="location_reached_channel_name">여행 진행</string>
+    <string name="location_reached_channel_desc">목적지까지의 거리를 실시간으로 표시</string>
+    <string name="location_reached_alarm_title">주변 목적지</string>
+    <string name="location_reached_alarm_subtitle">내릴 준비를 하세요</string>
+    <string name="location_reached_dismiss">해고하다</string>
+    <string name="location_reached_toast_set">대상 세트: %1$.4f, %2$.4f</string>
+    <string name="setting_use_root_title">루트 사용</string>
+    <string name="setting_use_root_desc">시즈쿠 대신</string>
+    <string name="root_not_available_toast">루트 액세스를 사용할 수 없습니다. 루트 관리자를 확인하세요.</string>
     <!-- System Keyboard -->
-    <string name="feat_system_keyboard_title">Keyboard</string>
-    <string name="feat_system_keys">Keys</string>
-    <string name="feat_system_keyboard_desc">Customize layout and behavior</string>
-    <string name="search_keyboard_height_title">Keyboard Height</string>
-    <string name="search_keyboard_height_desc">Adjust the total vertical size of the keyboard</string>
-    <string name="search_keyboard_padding_title">Bottom Padding</string>
-    <string name="search_keyboard_padding_desc">Add space below the keyboard</string>
-    <string name="search_keyboard_haptics_title">Haptic Feedback</string>
-    <string name="search_keyboard_haptics_desc">Vibrate on key press</string>
-    <string name="test_keyboard_hint">Test the keyboard</string>
-    <string name="label_keyboard_height">Keyboard Height</string>
-    <string name="label_keyboard_bottom_padding">Bottom Padding</string>
-    <string name="label_keyboard_haptics">Haptic Feedback</string>
-    <string name="label_keyboard_roundness">Key Roundness</string>
-    <string name="label_keyboard_functions_bottom">Move functions to bottom</string>
-    <string name="label_keyboard_functions_padding">Functions side padding</string>
-    <string name="label_keyboard_haptic_strength">Haptic feedback strength</string>
-    <string name="label_keyboard_shape">Keyboard shape</string>
-    <string name="shape_round">Round</string>
-    <string name="shape_flat">Flat</string>
-    <string name="shape_inverse">Inverse</string>
-    <string name="feat_batteries_title">Batteries</string>
-    <string name="feat_batteries_desc">Monitor your device battery levels</string>
-    <string name="batteries_widget_label">Battery Status</string>
-    <string name="connect_to_airsync">Connect to AirSync</string>
-    <string name="connect_to_airsync_summary">Display battery from your connected mac device in AirSync</string>
-    <string name="download_airsync">Download AirSync App</string>
-    <string name="download_airsync_summary">Required for Mac battery sync</string>
-    <string name="feat_battery_notification_title">Battery notification</string>
-    <string name="feat_battery_notification_desc">Persistent battery status notification</string>
-    <string name="about_desc_battery_notification">Replicate the battery widget experience in your notification shade. It will show the battery levels of all your connected devices in a single persistent notification, updated in real-time. This includes your Mac (via AirSync) and Bluetooth accessories.</string>
-    <string name="battery_notification_channel_name">Battery Status Notification</string>
-    <string name="battery_notification_channel_desc">Persistent notification showing connected devices battery levels</string>
-    <string name="perm_nearby_devices_title">Nearby Devices</string>
-    <string name="perm_nearby_devices_desc">Required to detect and retrieve battery information from Bluetooth accessories</string>
+    <string name="feat_system_keyboard_title">건반</string>
+    <string name="feat_system_keys">열쇠</string>
+    <string name="feat_system_keyboard_desc">레이아웃 및 동작 사용자 정의</string>
+    <string name="search_keyboard_height_title">키보드 높이</string>
+    <string name="search_keyboard_height_desc">키보드의 전체 수직 크기 조정</string>
+    <string name="search_keyboard_padding_title">하단 패딩</string>
+    <string name="search_keyboard_padding_desc">키보드 아래에 공간 추가</string>
+    <string name="search_keyboard_haptics_title">햅틱 피드백</string>
+    <string name="search_keyboard_haptics_desc">키를 누르면 진동</string>
+    <string name="test_keyboard_hint">키보드 테스트</string>
+    <string name="label_keyboard_height">키보드 높이</string>
+    <string name="label_keyboard_bottom_padding">하단 패딩</string>
+    <string name="label_keyboard_haptics">햅틱 피드백</string>
+    <string name="label_keyboard_roundness">키 진원도</string>
+    <string name="label_keyboard_functions_bottom">기능을 맨 아래로 이동</string>
+    <string name="label_keyboard_functions_padding">기능 측면 패딩</string>
+    <string name="label_keyboard_haptic_strength">햅틱 피드백 강도</string>
+    <string name="label_keyboard_shape">키보드 모양</string>
+    <string name="shape_round">둥근</string>
+    <string name="shape_flat">평평한</string>
+    <string name="shape_inverse">역</string>
+    <string name="feat_batteries_title">배터리</string>
+    <string name="feat_batteries_desc">장치 배터리 수준 모니터링</string>
+    <string name="batteries_widget_label">배터리 상태</string>
+    <string name="connect_to_airsync">AirSync에 연결</string>
+    <string name="connect_to_airsync_summary">AirSync에 연결된 Mac 장치의 배터리 표시</string>
+    <string name="download_airsync">AirSync 앱 다운로드</string>
+    <string name="download_airsync_summary">Mac 배터리 동기화에 필요</string>
+    <string name="feat_battery_notification_title">배터리 알림</string>
+    <string name="feat_battery_notification_desc">지속적인 배터리 상태 알림</string>
+    <string name="about_desc_battery_notification">알림 창에서 배터리 위젯 경험을 복제하세요. 실시간으로 업데이트되는 단일 영구 알림으로 연결된 모든 장치의 배터리 수준을 표시합니다. 여기에는 Mac(AirSync 사용) 및 Bluetooth 액세서리가 포함됩니다.</string>
+    <string name="battery_notification_channel_name">배터리 상태 알림</string>
+    <string name="battery_notification_channel_desc">연결된 장치의 배터리 수준을 보여주는 지속적인 알림</string>
+    <string name="perm_nearby_devices_title">주변 장치</string>
+    <string name="perm_nearby_devices_desc">Bluetooth 액세서리에서 배터리 정보를 감지하고 검색하는 데 필요합니다.</string>
     <!-- GitHub Auth -->
-    <string name="auth_copy_code">Copy code</string>
-    <string name="auth_open_login_page">Open login page</string>
-    <string name="auth_sign_in_rationale">Sign in to extend API call limits</string>
-    <string name="auth_waiting_for_authorization">Waiting for authorization...</string>
-    <string name="action_sign_in_github">Sign in with GitHub</string>
-    <string name="action_sign_out">Sign out</string>
-    <string name="action_profile">Profile</string>
+    <string name="auth_copy_code">코드 복사</string>
+    <string name="auth_open_login_page">로그인 페이지 열기</string>
+    <string name="auth_sign_in_rationale">API 호출 제한을 연장하려면 로그인하세요.</string>
+    <string name="auth_waiting_for_authorization">승인을 기다리는 중...</string>
+    <string name="action_sign_in_github">GitHub로 로그인</string>
+    <string name="action_sign_out">로그아웃</string>
+    <string name="action_profile">윤곽</string>
     <!-- App Updates / Repos -->
-    <string name="label_release_notes">Release Notes</string>
-    <string name="msg_no_repos_tracked">No repositories tracked yet</string>
-    <string name="label_no_app_linked">No app linked</string>
-    <string name="format_updated_relative">Updated %1$s</string>
+    <string name="label_release_notes">릴리스 노트</string>
+    <string name="msg_no_repos_tracked">아직 추적된 저장소가 없습니다.</string>
+    <string name="label_no_app_linked">연결된 앱 없음</string>
+    <string name="format_updated_relative">업데이트됨 %1$s</string>
     <!-- Relative Time -->
-    <string name="time_just_now">just now</string>
-    <string name="time_min_ago">%1$dm ago</string>
-    <string name="time_hour_ago">%1$dh ago</string>
-    <string name="time_day_ago">%1$dd ago</string>
-    <string name="time_month_ago">%1$dmo ago</string>
-    <string name="time_year_ago">%1$dy ago</string>
-    <string name="action_retry">Retry</string>
-    <string name="action_start_sign_in">Start Sign In</string>
-    <string name="auth_requesting_code">Requesting device code...</string>
-    <string name="auth_copy_code_instruction">1. Copy your code:</string>
-    <string name="auth_paste_code_instruction">2. Paste the code on GitHub:</string>
-    <string name="label_found_apks">Found APKs</string>
-    <string name="label_readme">README</string>
-    <string name="action_refresh">Refresh</string>
+    <string name="time_just_now">방금</string>
+    <string name="time_min_ago">%1$d몇 분 전</string>
+    <string name="time_hour_ago">%1$d시간 전</string>
+    <string name="time_day_ago">%1$d일 전</string>
+    <string name="time_month_ago">%1$d모 전</string>
+    <string name="time_year_ago">%1$d얼마 전</string>
+    <string name="action_retry">다시 해 보다</string>
+    <string name="action_start_sign_in">로그인 시작</string>
+    <string name="auth_requesting_code">장치 코드 요청 중...</string>
+    <string name="auth_copy_code_instruction">1. 코드를 복사하세요.</string>
+    <string name="auth_paste_code_instruction">2. GitHub에 코드를 붙여넣습니다.</string>
+    <string name="label_found_apks">APK 발견</string>
+    <string name="label_readme">읽어보기</string>
+    <string name="action_refresh">새로 고치다</string>
     <!-- Added Missing Group Strings -->
-    <string name="feat_sound_modes_title">Sound mode tile</string>
-    <string name="feat_sound_modes_desc">QS tile to toggle sound mode</string>
-    <string name="search_sound_mode_show_slider_title">Show slider</string>
-    <string name="search_sound_mode_show_slider_desc">Show volume slider in tile</string>
-    <string name="search_sound_mode_behavior_title">Cycle Behavior</string>
-    <string name="search_sound_mode_behavior_desc">Choose modes to cycle through</string>
-    <string name="feat_ambient_music_title">Ambient music glance</string>
-    <string name="feat_ambient_music_desc">Glance at media on AOD</string>
-    <string name="feat_sound_haptics_title">Sound and Haptics</string>
-    <string name="feat_sound_haptics_desc">Volume and haptic features</string>
-    <string name="feat_security_privacy_title">Security and Privacy</string>
-    <string name="feat_security_privacy_desc">Protect and secure your device</string>
-    <string name="feat_notifications_alerts_title">Notifications and Alerts</string>
-    <string name="feat_notifications_alerts_desc">Never miss your priorities</string>
-    <string name="feat_input_actions_title">Input and Actions</string>
-    <string name="feat_input_actions_desc">Control your device with ease</string>
-    <string name="feat_widgets_title">Widgets</string>
-    <string name="feat_widgets_desc">At a glance on your home screen</string>
-    <string name="feat_display_visuals_title">Display</string>
-    <string name="feat_display_visuals_desc">Visuals to enhance your experience</string>
-    <string name="feat_watch_title">Watch</string>
-    <string name="feat_watch_desc">Integrations with WearOS</string>
-    <string name="watch_no_companion_title">No Watch detected</string>
-    <string name="watch_no_companion_desc">It looks like you do not have the Essentials Wear companion app installed on your watch.</string>
-    <string name="watch_install_companion_action">Install Companion</string>
-    <string name="cat_interaction">Interaction</string>
-    <string name="cat_interface">Interface</string>
-    <string name="cat_display">Display</string>
-    <string name="cat_protection">Protection</string>
-    <string name="label_kbd_abc">ABC</string>
+    <string name="feat_sound_modes_title">사운드 모드 타일</string>
+    <string name="feat_sound_modes_desc">사운드 모드를 전환하는 QS 타일</string>
+    <string name="search_sound_mode_show_slider_title">슬라이더 표시</string>
+    <string name="search_sound_mode_show_slider_desc">타일에 볼륨 슬라이더 표시</string>
+    <string name="search_sound_mode_behavior_title">사이클 동작</string>
+    <string name="search_sound_mode_behavior_desc">순환할 모드 선택</string>
+    <string name="feat_ambient_music_title">주변 음악 한눈에 보기</string>
+    <string name="feat_ambient_music_desc">AOD에 대한 미디어 살펴보기</string>
+    <string name="feat_sound_haptics_title">사운드 및 햅틱</string>
+    <string name="feat_sound_haptics_desc">볼륨 및 햅틱 기능</string>
+    <string name="feat_security_privacy_title">보안 및 개인정보 보호</string>
+    <string name="feat_security_privacy_desc">장치를 보호하고 보안을 유지하세요</string>
+    <string name="feat_notifications_alerts_title">알림 및 경고</string>
+    <string name="feat_notifications_alerts_desc">우선순위를 절대 놓치지 마세요</string>
+    <string name="feat_input_actions_title">입력 및 작업</string>
+    <string name="feat_input_actions_desc">쉽게 장치를 제어하세요</string>
+    <string name="feat_widgets_title">위젯</string>
+    <string name="feat_widgets_desc">홈 화면에서 한눈에 보기</string>
+    <string name="feat_display_visuals_title">표시하다</string>
+    <string name="feat_display_visuals_desc">경험을 향상시키는 시각적 요소</string>
+    <string name="feat_watch_title">보다</string>
+    <string name="feat_watch_desc">WearOS와의 통합</string>
+    <string name="watch_no_companion_title">시계가 감지되지 않음</string>
+    <string name="watch_no_companion_desc">시계에 Essentials Wear 컴패니언 앱이 설치되어 있지 않은 것 같습니다.</string>
+    <string name="watch_install_companion_action">컴패니언 설치</string>
+    <string name="cat_interaction">상호 작용</string>
+    <string name="cat_interface">인터페이스</string>
+    <string name="cat_display">표시하다</string>
+    <string name="cat_protection">보호</string>
+    <string name="label_kbd_abc">알파벳</string>
     <string name="label_kbd_symbols">\?#/</string>
-    <string name="msg_restrict_own_app_repo">Oi! You can check updates in app settings, No need to add here XD</string>
-    <string name="action_export">Export</string>
-    <string name="action_import">Import</string>
-    <string name="msg_export_success">Repositories exported successfully</string>
-    <string name="msg_export_failed">Failed to export repositories</string>
-    <string name="msg_import_success">Repositories imported successfully</string>
-    <string name="msg_import_failed">Failed to import repositories</string>
-    <string name="label_apps">Apps</string>
-    <string name="feat_text_animations_title">Scale and Animations</string>
-    <string name="feat_text_animations_desc">Adjust system scale and animations</string>
-    <string name="settings_section_text">Text</string>
-    <string name="label_font_scale">Font Scale</string>
-    <string name="label_font_weight">Font Weight</string>
-    <string name="label_reset_default">Reset</string>
-    <string name="settings_section_scale">Scale</string>
-    <string name="label_smallest_width">Smallest Width</string>
-    <string name="msg_shizuku_permission_required">Shizuku permission required to adjust scale</string>
-    <string name="label_grant_permission">Grant Permission</string>
-    <string name="settings_section_animations">Animations</string>
-    <string name="label_animator_duration_scale">Animator duration scale</string>
-    <string name="label_transition_animation_scale">Transition animation scale</string>
-    <string name="label_window_animation_scale">Window animation scale</string>
-    <string name="about_desc_text_animations">Adjust system-wide font scale, weight, and animation speeds. Note that some settings may require advanced permissions or a device reboot for certain apps to reflect changes. \n\nAdditional shizuku or root permission may be necessary for scale adjustments</string>
-    <string name="feat_aod_force_turn_off_title">Force turn off AOD</string>
-    <string name="feat_aod_force_turn_off_desc">Force turn off the AOD when no notifications. Requires accessibility permission.</string>
-    <string name="feat_auto_accessibility_title">Auto accessibility</string>
-    <string name="feat_auto_accessibility_desc">Automatically grants the accessibility permission on app launch if missing using WRITE_SECURE_SETTINGS.</string>
-    <string name="label_help_guide">Help and Guides</string>
-    <string name="tab_your_android">Your Android</string>
-    <string name="label_device_storage">Storage</string>
-    <string name="label_device_ram">Memory</string>
-    <string name="label_use_blur">Use blur</string>
-    <string name="desc_use_blur">Enable progressive blur elements across the UI</string>
-    <string name="msg_blur_compatibility_error">Blur is disabled on this device to prevent a known display bug on Samsung devices with Android 15 or below.</string>
+    <string name="msg_restrict_own_app_repo">어이! 앱 설정에서 업데이트를 확인할 수 있습니다. 여기에 추가할 필요가 없습니다 XD</string>
+    <string name="action_export">내보내다</string>
+    <string name="action_import">수입</string>
+    <string name="msg_export_success">저장소를 성공적으로 내보냈습니다.</string>
+    <string name="msg_export_failed">저장소를 내보내지 못했습니다.</string>
+    <string name="msg_import_success">저장소를 성공적으로 가져왔습니다.</string>
+    <string name="msg_import_failed">저장소를 가져오지 못했습니다.</string>
+    <string name="label_apps">앱</string>
+    <string name="feat_text_animations_title">규모와 애니메이션</string>
+    <string name="feat_text_animations_desc">시스템 규모 및 애니메이션 조정</string>
+    <string name="settings_section_text">텍스트</string>
+    <string name="label_font_scale">글꼴 크기</string>
+    <string name="label_font_weight">글꼴 두께</string>
+    <string name="label_reset_default">다시 놓기</string>
+    <string name="settings_section_scale">규모</string>
+    <string name="label_smallest_width">최소 너비</string>
+    <string name="msg_shizuku_permission_required">규모를 조정하려면 Shizuku 권한이 필요합니다.</string>
+    <string name="label_grant_permission">권한 부여</string>
+    <string name="settings_section_animations">애니메이션</string>
+    <string name="label_animator_duration_scale">애니메이터 지속 시간 배율</string>
+    <string name="label_transition_animation_scale">전환 애니메이션 규모</string>
+    <string name="label_window_animation_scale">창 애니메이션 스케일</string>
+    <string name="about_desc_text_animations">시스템 전체의 글꼴 크기, 두께 및 애니메이션 속도를 조정합니다. 일부 설정에는 변경 사항을 반영하기 위해 특정 앱에 대한 고급 권한이나 장치 재부팅이 필요할 수 있습니다. \n\n규모 조정을 위해 추가 shizuku 또는 루트 권한이 필요할 수 있습니다.</string>
+    <string name="feat_aod_force_turn_off_title">AOD를 강제로 끄세요</string>
+    <string name="feat_aod_force_turn_off_desc">알림이 없을 때 AOD를 강제로 끄세요. 접근성 권한이 필요합니다.</string>
+    <string name="feat_auto_accessibility_title">자동 접근성</string>
+    <string name="feat_auto_accessibility_desc">WRITE_SECURE_SETTINGS를 사용하여 누락된 경우 앱 실행 시 접근성 권한을 자동으로 부여합니다.</string>
+    <string name="label_help_guide">도움말 및 가이드</string>
+    <string name="tab_your_android">당신의 안드로이드</string>
+    <string name="label_device_storage">저장</string>
+    <string name="label_device_ram">메모리</string>
+    <string name="label_use_blur">흐림 사용</string>
+    <string name="desc_use_blur">UI 전반에 걸쳐 점진적인 흐림 요소를 활성화합니다.</string>
+    <string name="msg_blur_compatibility_error">Android 15 이하를 실행하는 삼성 기기에서 알려진 디스플레이 버그를 방지하기 위해 이 기기에서는 흐림 기능이 비활성화되어 있습니다.</string>
 </resources>
