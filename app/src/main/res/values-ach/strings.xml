@@ -608,6 +608,7 @@
     <string name="action_help_guide">Kony</string>
     <string name="action_what_is_this">Eni ngo?</string>
     <string name="update_available_title">Lok manyen tye</string>
+    <string name="about_desc_your_android">Glance at your device\'s hardware and software specifications in detail. This information is fetched from GSMArena and system properties to provide a comprehensive overview of your Android device.</string>
     <string name="about_desc_ambient_music_glance">Ambient Music Glance nyutu Now Playing ma ki keto i kom gin ma ki lwongo ni lock screen ka wer tye ka winye ki ka wer tye ka loko. \n\nKa cim ni pe twero tic ki jami ma ki keto i kom AOD, ki in itwero yero Ambience screensaver ma ki medo i yub me Android ni ma calo gin mukene ka itye ka cwalo mac.</string>
     <string name="about_desc_notification_lighting">Mac ma nyutu ngec medo mac ma ryeny maber ka inongo ngec.\n\nItwero loko kit ma cal ni nen kwede, kala ne, ki kit ma en nen kwede. Tiiyo kede ka gin ma ki neno ni tye ka tic (ma jenge i kom OEM) onyo i kom gin ma itye ka tic kwede. Yer jami ma ki tiyo kwede, ngec ma pire tek onyo kit ma omyera obed ka kelo ki i kom jami ma kimiyo. Ka OEM ni pe miiyo kony me keto jami ma malo ma kato AOD, peny Ambient display option ma nonge piny kany.</string>
     <string name="about_desc_screen_off_widget">Wek wang gin ma ki neno ni oyot ki dii i kom gin ma ki twero loko dit ne ma pe medo cal onyo gin mo kiken i wang gin ma ki neno ni.</string>
@@ -1025,6 +1026,7 @@
     <string name="download_airsync_summary">Mite pi rwate pa batri pa Mac</string>
     <string name="feat_battery_notification_title">Ngec i kom batri</string>
     <string name="feat_battery_notification_desc">Ngec ma mako kit ma batri ni tye kwede</string>
+    <string name="battery_notification_hint">This notification displays battery levels for your connected Mac and Bluetooth devices. You can configure which devices to show in the Battery Widget settings.</string>
     <string name="about_desc_battery_notification">Nyut kit ma jami ma ki lwongo ni battery ni tiyo kwede i rwom me ngec ni. Obi nyutu rwom pa batri pa jami ni weng ma ki keto i cim ni i ngec acel ma rii, ma ki medo i kare kikome. Man medo ki Mac ni (ki AirSync) ki jami ma ki lwongo ni Bluetooth.</string>
     <string name="battery_notification_channel_name">Ngeyo kit ma mac tye kwede</string>
     <string name="battery_notification_channel_desc">Ngec ma bino kare ki kare ma nyutu rwom me batri pa jami ma ki keto i cim</string>
