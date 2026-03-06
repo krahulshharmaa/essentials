@@ -608,6 +608,7 @@
     <string name="action_help_guide">Hulpgids</string>
     <string name="action_what_is_this">Wat is dit?</string>
     <string name="update_available_title">Opdatering beskikbaar</string>
+    <string name="about_desc_your_android">Glance at your device\'s hardware and software specifications in detail. This information is fetched from GSMArena and system properties to provide a comprehensive overview of your Android device.</string>
     <string name="about_desc_ambient_music_glance">Ambient Music Glance wys \'n Speel nou-oorleg op jou sluitskerm wanneer musiek speel en terugspeel verander. \n\nAs jou toestel nie oorleggings oor AOD ondersteun nie, kan jy kies vir die Ambience-skermbewaarder wat in jou Android-instellings bygevoeg word as \'n alternatief terwyl dit laai.</string>
     <string name="about_desc_notification_lighting">Kennisgewingbeligting voeg \'n pragtige randbeligtingseffek by wanneer jy kennisgewings ontvang.\n\nJy kan die animasiestyl, kleure en gedrag pasmaak. Dit werk selfs wanneer die skerm af is (OEM-afhanklik) of bo-op jou huidige toepassing. Kies programme, kennisgewingsprioriteit of watter gedrag dit moet aktiveer vanaf gegewe kontroles. As jou OEM nie oorlegsels bo AOD ondersteun nie, dagvaar die Ambient Display-opsie wat hieronder gevind word.</string>
     <string name="about_desc_screen_off_widget">Skakel die skerm maklik af met \'n tik op \'n deursigtige legstuk wat verander kan word wat nie ikone of enige rommel by jou tuisskerm voeg nie.</string>
@@ -1025,6 +1026,7 @@
     <string name="download_airsync_summary">Vereis vir Mac-battery-sinkronisering</string>
     <string name="feat_battery_notification_title">Battery kennisgewing</string>
     <string name="feat_battery_notification_desc">Aanhoudende batterystatuskennisgewing</string>
+    <string name="battery_notification_hint">This notification displays battery levels for your connected Mac and Bluetooth devices. You can configure which devices to show in the Battery Widget settings.</string>
     <string name="about_desc_battery_notification">Herhaal die battery-legstuk-ervaring in jou kennisgewingskerm. Dit sal die batteryvlakke van al jou gekoppelde toestelle in \'n enkele aanhoudende kennisgewing wys, intyds opgedateer. Dit sluit jou Mac (via AirSync) en Bluetooth-bykomstighede in.</string>
     <string name="battery_notification_channel_name">Batterystatuskennisgewing</string>
     <string name="battery_notification_channel_desc">Aanhoudende kennisgewing wat gekoppelde toestelle se batteryvlakke wys</string>
