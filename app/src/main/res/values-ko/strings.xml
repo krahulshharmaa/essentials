@@ -608,6 +608,7 @@
     <string name="action_help_guide">도움말 안내</string>
     <string name="action_what_is_this">이게 뭔가요?</string>
     <string name="update_available_title">업데이트 가능</string>
+    <string name="about_desc_your_android">Glance at your device\'s hardware and software specifications in detail. This information is fetched from GSMArena and system properties to provide a comprehensive overview of your Android device.</string>
     <string name="about_desc_ambient_music_glance">Ambient Music Glance는 음악이 재생되고 재생이 변경될 때 잠금 화면에 Now Playing 오버레이를 표시합니다. \n\n기기가 AOD를 통한 오버레이를 지원하지 않는 경우 충전하는 동안 Android 설정에 추가된 Ambience 화면 보호기를 대안으로 선택할 수 있습니다.</string>
     <string name="about_desc_notification_lighting">알림 조명은 알림을 받을 때 아름다운 가장자리 조명 효과를 추가합니다.\n\n애니메이션 스타일, 색상 및 동작을 사용자 정의할 수 있습니다. 화면이 꺼져 있거나(OEM에 따라 다름) 현재 앱 위에 있는 경우에도 작동합니다. 앱, 알림 우선순위 또는 특정 컨트롤에서 트리거되어야 하는 동작을 선택하세요. OEM이 AOD 위의 오버레이를 지원하지 않는 경우 아래에 있는 주변 디스플레이 옵션을 사용하세요.</string>
     <string name="about_desc_screen_off_widget">홈 화면에 아이콘이나 어수선한 요소를 추가하지 않는 투명하고 크기 조절이 가능한 위젯을 탭하여 쉽게 화면을 끌 수 있습니다.</string>
@@ -1025,6 +1026,7 @@
     <string name="download_airsync_summary">Mac 배터리 동기화에 필요</string>
     <string name="feat_battery_notification_title">배터리 알림</string>
     <string name="feat_battery_notification_desc">지속적인 배터리 상태 알림</string>
+    <string name="battery_notification_hint">This notification displays battery levels for your connected Mac and Bluetooth devices. You can configure which devices to show in the Battery Widget settings.</string>
     <string name="about_desc_battery_notification">알림 창에서 배터리 위젯 경험을 복제하세요. 실시간으로 업데이트되는 단일 영구 알림으로 연결된 모든 장치의 배터리 수준을 표시합니다. 여기에는 Mac(AirSync 사용) 및 Bluetooth 액세서리가 포함됩니다.</string>
     <string name="battery_notification_channel_name">배터리 상태 알림</string>
     <string name="battery_notification_channel_desc">연결된 장치의 배터리 수준을 보여주는 지속적인 알림</string>
