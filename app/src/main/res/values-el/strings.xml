@@ -608,6 +608,7 @@
     <string name="action_help_guide">Οδηγός βοήθειας</string>
     <string name="action_what_is_this">Τι είναι αυτό;</string>
     <string name="update_available_title">Διαθέσιμη ενημέρωση</string>
+    <string name="about_desc_your_android">Glance at your device\'s hardware and software specifications in detail. This information is fetched from GSMArena and system properties to provide a comprehensive overview of your Android device.</string>
     <string name="about_desc_ambient_music_glance">Το Ambient Music Glance εμφανίζει μια επικάλυψη Now Playing στην οθόνη κλειδώματος σας κατά την αναπαραγωγή μουσικής και την αναπαραγωγή αλλάζει. \n\nΑν η συσκευή σας δεν υποστηρίζει επικαλύψεις μέσω AOD, μπορείτε να επιλέξετε την προφύλαξη οθόνης Ambience που προστίθεται στις ρυθμίσεις Android σας ως εναλλακτική κατά τη φόρτιση.</string>
     <string name="about_desc_notification_lighting">Το Notification Lighting προσθέτει ένα όμορφο εφέ φωτισμού άκρων όταν λαμβάνετε ειδοποιήσεις.\n\nΜπορείτε να προσαρμόσετε το στυλ, τα χρώματα και τη συμπεριφορά κινούμενων εικόνων. Λειτουργεί ακόμα και όταν η οθόνη είναι απενεργοποιημένη (εξαρτάται από OEM) ή πάνω από την τρέχουσα εφαρμογή σας. Επιλέξτε εφαρμογές, προτεραιότητα ειδοποίησης ή ποια συμπεριφορά θα πρέπει να ενεργοποιεί από τα δεδομένα ελέγχου. Εάν ο OEM σας δεν υποστηρίζει επικαλύψεις πάνω από το AOD, μηνύστε την επιλογή Εμφάνιση περιβάλλοντος που βρίσκεται παρακάτω.</string>
     <string name="about_desc_screen_off_widget">Απενεργοποιήστε εύκολα την οθόνη με ένα πάτημα σε ένα διαφανές γραφικό στοιχείο με δυνατότητα αλλαγής μεγέθους που δεν προσθέτει εικονίδια ή ακαταστασία στην αρχική οθόνη σας.</string>
@@ -1025,6 +1026,7 @@
     <string name="download_airsync_summary">Απαιτείται για συγχρονισμό μπαταρίας Mac</string>
     <string name="feat_battery_notification_title">Ειδοποίηση μπαταρίας</string>
     <string name="feat_battery_notification_desc">Μόνιμη ειδοποίηση κατάστασης μπαταρίας</string>
+    <string name="battery_notification_hint">This notification displays battery levels for your connected Mac and Bluetooth devices. You can configure which devices to show in the Battery Widget settings.</string>
     <string name="about_desc_battery_notification">Επαναλάβετε την εμπειρία γραφικού στοιχείου μπαταρίας στο σκίαστρο ειδοποιήσεων. Θα εμφανίζει τα επίπεδα της μπαταρίας όλων των συνδεδεμένων συσκευών σας σε μια μόνιμη ειδοποίηση, η οποία ενημερώνεται σε πραγματικό χρόνο. Αυτό περιλαμβάνει τα αξεσουάρ Mac (μέσω AirSync) και Bluetooth.</string>
     <string name="battery_notification_channel_name">Ειδοποίηση κατάστασης μπαταρίας</string>
     <string name="battery_notification_channel_desc">Μόνιμη ειδοποίηση που δείχνει τα επίπεδα μπαταρίας των συνδεδεμένων συσκευών</string>
