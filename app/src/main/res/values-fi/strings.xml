@@ -608,6 +608,7 @@
     <string name="action_help_guide">Ohje-opas</string>
     <string name="action_what_is_this">Mikä tämä on?</string>
     <string name="update_available_title">Päivitys saatavilla</string>
+    <string name="about_desc_your_android">Glance at your device\'s hardware and software specifications in detail. This information is fetched from GSMArena and system properties to provide a comprehensive overview of your Android device.</string>
     <string name="about_desc_ambient_music_glance">Ambient Music Glance näyttää Now Playing -peittokuvan lukitusnäytölläsi, kun musiikkia toistetaan ja toisto vaihtuu. \n\nJos laitteesi ei tue peittokuvia AOD:n yli, voit valita Android-asetuksiin lisätyn Ambience-näytönsäästäjän vaihtoehtona latauksen aikana.</string>
     <string name="about_desc_notification_lighting">Ilmoitusvalo lisää kauniin reunavalaistuksen, kun saat ilmoituksia.\n\nVoit mukauttaa animaation tyyliä, värejä ja käyttäytymistä. Se toimii myös silloin, kun näyttö on pois päältä (OEM-riippuvainen) tai nykyisen sovelluksesi päällä. Valitse tietyistä säätimistä sovellukset, ilmoitusten prioriteetti tai toimintatapa, jonka sen pitäisi käynnistää. Jos OEM-valmistajasi ei tue peittokuvia AOD:n yläpuolella, haasta alla oleva ympäristönäyttövaihtoehto oikeuteen.</string>
     <string name="about_desc_screen_off_widget">Sammuta näyttö helposti napauttamalla läpinäkyvää, kokoa muutettavaa widgetiä, joka ei lisää kuvakkeita tai sotkua aloitusnäyttöön.</string>
@@ -1025,6 +1026,7 @@
     <string name="download_airsync_summary">Pakollinen Macin akun synkronointiin</string>
     <string name="feat_battery_notification_title">Akun ilmoitus</string>
     <string name="feat_battery_notification_desc">Jatkuva akun tilailmoitus</string>
+    <string name="battery_notification_hint">This notification displays battery levels for your connected Mac and Bluetooth devices. You can configure which devices to show in the Battery Widget settings.</string>
     <string name="about_desc_battery_notification">Toista akku-widget-kokemus ilmoitusalueellasi. Se näyttää kaikkien yhdistettyjen laitteiden akun varaustason yhdessä jatkuvassa ilmoituksessa, joka päivitetään reaaliajassa. Tämä sisältää Macin (AirSyncin kautta) ja Bluetooth-lisävarusteet.</string>
     <string name="battery_notification_channel_name">Akun tilailmoitus</string>
     <string name="battery_notification_channel_desc">Jatkuva ilmoitus, joka näyttää yhdistettyjen laitteiden akun varaustason</string>
