@@ -1093,6 +1093,7 @@
 
     <string name="feat_battery_notification_title">Battery notification</string>
     <string name="feat_battery_notification_desc">Persistent battery status notification</string>
+    <string name="battery_notification_hint">This notification displays battery levels for your connected Mac and Bluetooth devices. You can configure which devices to show in the Battery Widget settings.</string>
     <string name="about_desc_battery_notification">Replicate the battery widget experience in your notification shade. It will show the battery levels of all your connected devices in a single persistent notification, updated in real-time. This includes your Mac (via AirSync) and Bluetooth accessories.</string>
     <string name="battery_notification_channel_name">Battery Status Notification</string>
     <string name="battery_notification_channel_desc">Persistent notification showing connected devices battery levels</string>
