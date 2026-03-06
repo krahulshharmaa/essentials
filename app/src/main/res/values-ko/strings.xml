@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">골자</string>
+    <string name="app_name">Essentials</string>
     <string name="label_beta">베타</string>
-    <string name="accessibility_service_description"><b>Essentials Accessibility Service</b>\n\nThis service is required for the following advanced features:\n\n<b>• Physical Button Remapping:</b>\nDetects volume button presses even when the screen is off to trigger actions like the Flashlight.\n\n<b>• Per-App Settings:</b>\nMonitors the currently active app to apply specific profiles for Dynamic Night Light, Notification Lighting Colors, and App Lock.\n\n<b>• Screen Control:</b>\nAllows the app to lock the screen (e.g. via Double Tap or Widgets) and detect screen state changes.\n\n<b>• Security:</b>\nPrevents unauthorized changes by detecting window content when the device is locked.\n\n<small>No input text or sensitive user data is collected or transmitted.</small></string>
-    <string name="freeze_activity_title">앱 정지</string>
-    <string name="freeze_activity_subtitle">거의 사용하지 않는 앱 비활성화</string>
-    <string name="freeze_shortcut_short_label">앱 정지</string>
+    <string name="accessibility_service_description"><b>Essentials 접근성 서비스</b>\n\n이 서비스는 다음 고급기능을 사용하기 위해 필요합니다:\n\n<b>• 물리 버튼 매핑:</b>\n화면이 꺼져있을 때도 음량 버튼 입력을 감지하여 손전등 실행 등의 동작을 실행합니다.\n\n<b>• 앱별 개별 설정:</b>\n현재 실행중인 앱을 감지하여 다이나믹 야간모드, 알림 조명 색상, 앱 잠금 등의 전용 프로필을 적용합니다.\n\n<b>• 화면 제어:</b>\n화면을 두 번 두드리거나 위젯을 통한 화면 잠금을 지원하고, 화면 상태의 변화를 감지합니다.\n\n<b>• 보안:</b>\n기기가 잠겨 있을 때 화면 컨텐츠를 감지하여 승인되지 않은 변경을 방지합니다.\n\n<small>입력 텍스트나 민감한 사용자 데이터는 수집하거나 전송하지 않습니다.</small></string>
+    <string name="freeze_activity_title">앱 정지하기</string>
+    <string name="freeze_activity_subtitle">사용하지 않는 앱 비활성화</string>
+    <string name="freeze_shortcut_short_label">앱 정지하기</string>
     <string name="freeze_shortcut_long_label">앱 정지 열기</string>
-    <string name="frozen_app_shortcut_label">겨울왕국 앱</string>
+    <string name="frozen_app_shortcut_label">정지된 앱</string>
     <string name="screen_off_widget_label">빈 화면 꺼짐 위젯</string>
     <string name="app_freezing_tile_label">앱 정지</string>
     <string name="flashlight_pulse_tile_label">손전등 펄스</string>
-    <string name="check_pre_releases_label">시험판 확인</string>
+    <string name="check_pre_releases_label">프리 릴리즈 확인</string>
     <string name="check_pre_releases_desc">불안정할 수도 있음</string>
     <!-- App Lock -->
     <string name="settings_section_security">보안</string>
     <string name="app_lock_enable_title">앱 잠금 활성화</string>
     <string name="app_lock_auth_title">앱 잠금 보안</string>
-    <string name="app_lock_enable_auth_subtitle">앱 잠금을 활성화하려면 인증하세요.</string>
-    <string name="app_lock_disable_auth_subtitle">앱 잠금을 비활성화하려면 인증하세요.</string>
+    <string name="app_lock_enable_auth_subtitle">앱 잠금을 활성화하려면 인증하세요</string>
+    <string name="app_lock_disable_auth_subtitle">앱 잠금을 비활성화하려면 인증하세요</string>
     <string name="app_lock_select_apps_title">잠긴 앱 선택</string>
     <string name="app_lock_select_apps_desc">인증이 필요한 앱 선택</string>
-    <string name="app_lock_description">생체 인증으로 앱을 보호하세요. 잠긴 앱은 실행 시 인증이 필요하며, 화면이 꺼질 때까지 잠금 해제 상태를 유지합니다.</string>
+    <string name="app_lock_description">생체 인식으로 앱을 보호하세요. 잠긴 앱을 실행할 때 인증이 필요하며, 화면이 꺼지기 전까지는 잠금 해제 상태가 유지됩니다.</string>
     <string name="app_lock_warning">이는 타사 응용 프로그램일 뿐이므로 강력한 솔루션이 아니라는 점에 유의하세요. 강력한 보안이 필요한 경우 개인 공간 또는 기타 유사한 기능을 사용해 보세요.</string>
     <string name="app_lock_biometric_note">또 다른 참고 사항은 생체 인증 프롬프트에서는 STRONG 보안 클래스 방법만 사용할 수 있다는 것입니다. Pixel 7과 같은 기기에서 WEAK 클래스의 얼굴 잠금 해제 보안 방법은 지문이나 핀과 같은 사용 가능한 다른 STRONG 인증 방법만 활용할 수 있습니다.</string>
     <!-- Button Remap -->
@@ -96,9 +96,9 @@
     <string name="caffeinate_skip_countdown_desc">즉시 카페인을 시작하세요.</string>
     <string name="caffeinate_timeout_presets_title">시간 초과 사전 설정</string>
     <string name="caffeinate_timeout_presets_desc">QS 타일에 사용 가능한 기간 선택</string>
-    <string name="caffeinate_timeout_5m">5m</string>
-    <string name="caffeinate_timeout_10m">10m</string>
-    <string name="caffeinate_timeout_30m">30m</string>
+    <string name="caffeinate_timeout_5m">5분</string>
+    <string name="caffeinate_timeout_10m">10분</string>
+    <string name="caffeinate_timeout_30m">30분</string>
     <string name="perm_notif_policy_title">방해 금지 액세스</string>
     <string name="perm_notif_policy_desc">소리, 진동, 음소거 모드 간 전환이 필요함</string>
     <string name="caffeinate_timeout_1h">1시간</string>
@@ -125,9 +125,9 @@
     <string name="freeze_when_locked_title">잠긴 상태에서 동결</string>
     <string name="freeze_delay_title">동결 지연</string>
     <string name="delay_immediate">즉각적인</string>
-    <string name="delay_1m">1m</string>
-    <string name="delay_5m">5m</string>
-    <string name="delay_15m">15m</string>
+    <string name="delay_1m">1분</string>
+    <string name="delay_5m">5분</string>
+    <string name="delay_15m">15분</string>
     <string name="delay_manual">수동</string>
     <string name="freeze_auto_freeze_section">앱 자동 정지</string>
     <string name="freeze_automation_hint">기기가 잠길 때 선택한 앱을 정지합니다. 화면을 끈 직후 잠금을 해제하는 경우 앱이 정지되지 않도록 지연을 선택하세요.</string>
@@ -175,7 +175,7 @@
     <string name="tile_bubbles">거품</string>
     <string name="tile_sensitive_content">민감한 콘텐츠</string>
     <string name="tile_tap_to_wake">탭하여 깨우기</string>
-    <string name="tile_aod">AOD</string>
+    <string name="tile_aod">Always On Display</string>
     <string name="tile_caffeinate">카페인</string>
     <string name="tile_sound_mode">사운드 모드</string>
     <string name="tile_notification_lighting">알림 조명</string>
@@ -443,7 +443,7 @@
     <string name="search_qs_sensitive_desc">잠금 화면에서 알림 세부정보 숨기기</string>
     <string name="search_qs_wake_title">탭하여 깨우기</string>
     <string name="search_qs_wake_desc">절전 모드를 해제하려면 두 번 탭하세요.</string>
-    <string name="search_qs_aod_title">AOD</string>
+    <string name="search_qs_aod_title">Always On Display</string>
     <string name="search_qs_aod_desc">Always On Display 토글</string>
     <string name="search_qs_caffeinate_title">카페인</string>
     <string name="search_qs_caffeinate_desc">화면 활성 상태 유지 토글</string>
@@ -794,7 +794,7 @@
         <item>잠그다</item>
     </string-array>
     <string-array name="keywords_adb_debug">
-        <item>adb</item>
+        <item>ADB</item>
         <item>USB</item>
         <item>디버그</item>
     </string-array>
@@ -1098,8 +1098,8 @@
     <string name="desc_use_blur">UI 전반에 걸쳐 점진적인 흐림 요소를 활성화합니다.</string>
     <string name="msg_blur_compatibility_error">Android 15 이하를 실행하는 삼성 기기에서 알려진 디스플레이 버그를 방지하기 위해 이 기기에서는 흐림 기능이 비활성화되어 있습니다.</string>
     <!-- Empty State Actions -->
-    <string name="msg_no_apps_frozen">No apps selected to freeze.</string>
-    <string name="action_get_started">Get Started</string>
-    <string name="action_new_automation">New Automation</string>
-    <string name="action_add_repository">Add Repository</string>
+    <string name="msg_no_apps_frozen">정지시킬 앱이 선택되지 않았습니다.</string>
+    <string name="action_get_started">시작하기</string>
+    <string name="action_new_automation">새 자동화</string>
+    <string name="action_add_repository">레포지토리 추가</string>
 </resources>
