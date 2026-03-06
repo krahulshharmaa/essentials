@@ -608,6 +608,7 @@
     <string name="action_help_guide">Hướng dẫn trợ giúp</string>
     <string name="action_what_is_this">Đây là cái gì?</string>
     <string name="update_available_title">Cập nhật có sẵn</string>
+    <string name="about_desc_your_android">Glance at your device\'s hardware and software specifications in detail. This information is fetched from GSMArena and system properties to provide a comprehensive overview of your Android device.</string>
     <string name="about_desc_ambient_music_glance">Ambient Music Glance hiển thị lớp phủ Đang phát trên màn hình khóa của bạn khi nhạc đang phát và phát lại thay đổi. \n\nNếu thiết bị của bạn không hỗ trợ lớp phủ trên AOD, bạn có thể chọn trình bảo vệ màn hình Ambience được thêm trong cài đặt Android của mình làm giải pháp thay thế trong khi sạc.</string>
     <string name="about_desc_notification_lighting">Ánh sáng thông báo thêm hiệu ứng ánh sáng cạnh đẹp mắt khi bạn nhận được thông báo.\n\nBạn có thể tùy chỉnh kiểu hoạt ảnh, màu sắc và hành vi. Nó hoạt động ngay cả khi màn hình tắt (phụ thuộc OEM) hoặc ở trên ứng dụng hiện tại của bạn. Chọn ứng dụng, mức độ ưu tiên của thông báo hoặc hành vi nào sẽ được kích hoạt từ các điều khiển nhất định. Nếu OEM của bạn không hỗ trợ lớp phủ trên AOD, hãy kiện tùy chọn Hiển thị xung quanh được tìm thấy bên dưới.</string>
     <string name="about_desc_screen_off_widget">Dễ dàng tắt màn hình bằng một cú chạm vào tiện ích trong suốt có thể thay đổi kích thước, không thêm biểu tượng hoặc bất kỳ sự lộn xộn nào vào màn hình chính của bạn.</string>
@@ -1025,6 +1026,7 @@
     <string name="download_airsync_summary">Cần thiết để đồng bộ hóa pin Mac</string>
     <string name="feat_battery_notification_title">Thông báo pin</string>
     <string name="feat_battery_notification_desc">Thông báo trạng thái pin liên tục</string>
+    <string name="battery_notification_hint">This notification displays battery levels for your connected Mac and Bluetooth devices. You can configure which devices to show in the Battery Widget settings.</string>
     <string name="about_desc_battery_notification">Tái tạo trải nghiệm tiện ích pin trong bóng thông báo của bạn. Nó sẽ hiển thị mức pin của tất cả các thiết bị được kết nối của bạn trong một thông báo liên tục, được cập nhật theo thời gian thực. Điều này bao gồm máy Mac của bạn (thông qua AirSync) và các phụ kiện Bluetooth.</string>
     <string name="battery_notification_channel_name">Thông báo trạng thái pin</string>
     <string name="battery_notification_channel_desc">Thông báo liên tục hiển thị mức pin của thiết bị được kết nối</string>
