@@ -608,6 +608,7 @@
     <string name="action_help_guide">උපකාරක මාර්ගෝපදේශය</string>
     <string name="action_what_is_this">මේ කුමක් ද?</string>
     <string name="update_available_title">යාවත්කාලීන ලබා ගත හැක</string>
+    <string name="about_desc_your_android">Glance at your device\'s hardware and software specifications in detail. This information is fetched from GSMArena and system properties to provide a comprehensive overview of your Android device.</string>
     <string name="about_desc_ambient_music_glance">Ambient Music Glance සංගීතය වාදනය වන විට සහ පසුධාවනය වෙනස් වන විට ඔබගේ අගුළු තිරයේ Now Playing overlay එකක් පෙන්වයි. \n\nඔබගේ උපාංගය AOD හරහා උඩැතිරිවලට සහය නොදක්වන්නේ නම්, ඔබට ආරෝපණය කරන අතරතුර විකල්පයක් ලෙස ඔබේ Android සැකසීම් තුළ එකතු කරන ලද Ambience screensaver තෝරාගත හැක.</string>
     <string name="about_desc_notification_lighting">දැනුම්දීම් ආලෝකය ඔබට දැනුම්දීම් ලැබුණු විට අලංකාර දාර ආලෝකකරණ බලපෑමක් එක් කරයි.\n\nඔබට සජීවිකරණ විලාසය, වර්ණ සහ හැසිරීම අභිරුචිකරණය කළ හැකිය. එය තිරය ක්‍රියා විරහිත වූ විට (OEM මත යැපෙන) හෝ ඔබගේ වත්මන් යෙදුමට ඉහළින් ඇති විට පවා ක්‍රියා කරයි. යෙදුම්, දැනුම්දීම් ප්‍රමුඛතාව හෝ ලබා දී ඇති පාලනවලින් එය ක්‍රියාත්මක කළ යුතු හැසිරීම තෝරන්න. ඔබේ OEM AODට ඉහළින් ඇති ආවරණ සඳහා සහය නොදක්වන්නේ නම්, පහත ඇති සංසරණ සංදර්ශක විකල්පයට එරෙහිව නඩු පවරන්න.</string>
     <string name="about_desc_screen_off_widget">ඔබේ මුල් තිරයට අයිකන හෝ කිසිදු අවුල් සහගත බවක් එක් නොකරන විනිවිද පෙනෙන ප්‍රමාණය වෙනස් කළ හැකි විජට් එකක් මත තට්ටු කිරීමෙන් තිරය පහසුවෙන් ක්‍රියා විරහිත කරන්න.</string>
@@ -1025,6 +1026,7 @@
     <string name="download_airsync_summary">Mac බැටරි සමමුහුර්ත කිරීම සඳහා අවශ්‍ය වේ</string>
     <string name="feat_battery_notification_title">බැටරි දැනුම්දීම</string>
     <string name="feat_battery_notification_desc">ස්ථාවර බැටරි තත්ත්‍ව දැනුම්දීම</string>
+    <string name="battery_notification_hint">This notification displays battery levels for your connected Mac and Bluetooth devices. You can configure which devices to show in the Battery Widget settings.</string>
     <string name="about_desc_battery_notification">ඔබගේ දැනුම්දීම් සෙවනෙහි බැටරි විජට් අත්දැකීම අනුකරණය කරන්න. එය ඔබගේ සියලු සම්බන්ධිත උපාංගවල බැටරි මට්ටම් තථ්‍ය කාලීනව යාවත්කාලීන කරන ලද තනි ස්ථිර දැනුම්දීමකින් පෙන්වනු ඇත. මෙයට ඔබගේ Mac (AirSync හරහා) සහ Bluetooth උපාංග ඇතුළත් වේ.</string>
     <string name="battery_notification_channel_name">බැටරි තත්ත්වය දැනුම්දීම</string>
     <string name="battery_notification_channel_desc">සම්බන්ධිත උපාංග බැටරි මට්ටම් පෙන්වන නිරන්තර දැනුම්දීම</string>
