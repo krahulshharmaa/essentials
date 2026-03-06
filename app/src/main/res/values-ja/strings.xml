@@ -1059,7 +1059,7 @@
     <string name="watch_install_companion_action">コンパニオンをインストール</string>
     <string name="cat_interaction">Interaction</string>
     <string name="cat_interface">Interface</string>
-    <string name="cat_display">Display</string>
+    <string name="cat_display">ディスプレイ</string>
     <string name="cat_protection">Protection</string>
     <string name="label_kbd_abc">ABC</string>
     <string name="label_kbd_symbols">\?#/</string>
@@ -1094,12 +1094,12 @@
     <string name="tab_your_android">あなたのAndroid</string>
     <string name="label_device_storage">ストレージ</string>
     <string name="label_device_ram">メモリ</string>
-    <string name="label_use_blur">Use blur</string>
-    <string name="desc_use_blur">Enable progressive blur elements across the UI</string>
+    <string name="label_use_blur">ぼかしを使う</string>
+    <string name="desc_use_blur">UI全体でブラー要素を有効にする</string>
     <string name="msg_blur_compatibility_error">Blur is disabled on this device to prevent a known display bug on Samsung devices with Android 15 or below.</string>
     <!-- Empty State Actions -->
-    <string name="msg_no_apps_frozen">No apps selected to freeze.</string>
+    <string name="msg_no_apps_frozen">フリーズするアプリが選択されていません。</string>
     <string name="action_get_started">Get Started</string>
-    <string name="action_new_automation">New Automation</string>
-    <string name="action_add_repository">Add Repository</string>
+    <string name="action_new_automation">新しいオートメーション</string>
+    <string name="action_add_repository">レポジトリを追加</string>
 </resources>
