@@ -608,6 +608,7 @@
     <string name="action_help_guide">Guida di aiuto</string>
     <string name="action_what_is_this">Cos\'è questo?</string>
     <string name="update_available_title">Aggiornamento disponibile</string>
+    <string name="about_desc_your_android">Glance at your device\'s hardware and software specifications in detail. This information is fetched from GSMArena and system properties to provide a comprehensive overview of your Android device.</string>
     <string name="about_desc_ambient_music_glance">Ambient Music Glance mostra un overlay Now Playing sulla schermata di blocco quando la musica è in riproduzione e la riproduzione cambia. \n\nSe il tuo dispositivo non supporta gli overlay su AOD, puoi optare per lo screensaver Ambience aggiunto nelle impostazioni Android come alternativa durante la ricarica.</string>
     <string name="about_desc_notification_lighting">L\'illuminazione delle notifiche aggiunge un bellissimo effetto di illuminazione dei bordi quando ricevi notifiche.\n\nPuoi personalizzare lo stile, i colori e il comportamento dell\'animazione. Funziona anche quando lo schermo è spento (a seconda dell\'OEM) o sopra l\'app corrente. Scegli le app, la priorità delle notifiche o il comportamento su cui dovrebbe attivarsi da determinati controlli. Se il tuo OEM non supporta gli overlay sopra AOD, utilizza l\'opzione di visualizzazione Ambient che trovi di seguito.</string>
     <string name="about_desc_screen_off_widget">Spegni facilmente lo schermo con un tocco su un widget ridimensionabile trasparente che non aggiunge icone o elementi inutili alla schermata iniziale.</string>
@@ -1025,6 +1026,7 @@
     <string name="download_airsync_summary">Richiesto per la sincronizzazione della batteria del Mac</string>
     <string name="feat_battery_notification_title">Notifica della batteria</string>
     <string name="feat_battery_notification_desc">Notifica permanente dello stato della batteria</string>
+    <string name="battery_notification_hint">This notification displays battery levels for your connected Mac and Bluetooth devices. You can configure which devices to show in the Battery Widget settings.</string>
     <string name="about_desc_battery_notification">Replica l\'esperienza del widget della batteria nell\'area notifiche. Mostrerà i livelli della batteria di tutti i tuoi dispositivi connessi in un\'unica notifica persistente, aggiornata in tempo reale. Ciò include il tuo Mac (tramite AirSync) e gli accessori Bluetooth.</string>
     <string name="battery_notification_channel_name">Notifica sullo stato della batteria</string>
     <string name="battery_notification_channel_desc">Notifica persistente che mostra i livelli della batteria dei dispositivi collegati</string>
