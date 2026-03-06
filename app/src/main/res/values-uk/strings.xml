@@ -1097,4 +1097,9 @@
     <string name="label_use_blur">Використовуйте розмиття</string>
     <string name="desc_use_blur">Увімкніть елементи прогресивного розмиття в інтерфейсі</string>
     <string name="msg_blur_compatibility_error">Розмиття вимкнено на цьому пристрої, щоб запобігти відомій помилці відображення на пристроях Samsung з Android 15 або старіших версій.</string>
+    <!-- Empty State Actions -->
+    <string name="msg_no_apps_frozen">No apps selected to freeze.</string>
+    <string name="action_get_started">Get Started</string>
+    <string name="action_new_automation">New Automation</string>
+    <string name="action_add_repository">Add Repository</string>
 </resources>
