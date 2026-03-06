@@ -33,6 +33,9 @@ import coil.decode.ImageDecoderDecoder
 import coil.request.ImageRequest
 import com.sameerasw.essentials.R
 import com.sameerasw.essentials.ui.theme.GoogleSansFlexRounded
+import com.sameerasw.essentials.ui.components.pickers.CrashReportingPicker
+import com.sameerasw.essentials.ui.components.containers.RoundedCardContainer
+import com.sameerasw.essentials.viewmodels.MainViewModel
 import com.sameerasw.essentials.utils.HapticUtil
 import kotlinx.coroutines.launch
 import kotlin.math.PI
@@ -47,6 +50,7 @@ enum class OnboardingStep {
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun WelcomeScreen(
+    viewModel: MainViewModel,
     onBeginClick: () -> Unit
 ) {
     val view = LocalView.current
@@ -93,7 +97,10 @@ fun WelcomeScreen(
                     }
 
                     OnboardingStep.ACKNOWLEDGEMENT -> {
+                        val sentryMode by viewModel.sentryReportMode
                         AcknowledgementStepContent(
+                            sentryMode = sentryMode,
+                            onSentryModeSelected = { viewModel.setSentryReportMode(it, context) },
                             onNext = {
                                 HapticUtil.performVirtualKeyHaptic(view)
                                 currentStep = OnboardingStep.FEATURE_INTRODUCTION
@@ -302,7 +309,11 @@ fun WelcomeStepContent(
 }
 
 @Composable
-fun AcknowledgementStepContent(onNext: () -> Unit) {
+fun AcknowledgementStepContent(
+    sentryMode: String,
+    onSentryModeSelected: (String) -> Unit,
+    onNext: () -> Unit
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -361,6 +372,15 @@ fun AcknowledgementStepContent(onNext: () -> Unit) {
         )
 
         Spacer(modifier = Modifier.height(24.dp))
+
+        RoundedCardContainer {
+            CrashReportingPicker(
+                selectedMode = sentryMode,
+                onModeSelected = onSentryModeSelected
+            )
+        }
+
+        Spacer(modifier = Modifier.height(8.dp))
 
         Button(
             onClick = onNext,

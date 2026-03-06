@@ -175,6 +175,7 @@ class MainViewModel : ViewModel() {
     val isPitchBlackThemeEnabled = mutableStateOf(false)
     val isBlurEnabled = mutableStateOf(true)
     val isBlurSettingEnabled = mutableStateOf(true)
+    val sentryReportMode = mutableStateOf("auto")
     val isPowerSaveModeEnabled = mutableStateOf(false)
     private var powerSaveReceiver: BroadcastReceiver? = null
 
@@ -428,6 +429,11 @@ class MainViewModel : ViewModel() {
             }
         }
 
+    fun setSentryReportMode(mode: String, context: Context) {
+        sentryReportMode.value = mode
+        settingsRepository.putString(SettingsRepository.KEY_SENTRY_REPORT_MODE, mode)
+    }
+
     fun check(context: Context) {
         appContext = context.applicationContext
         settingsRepository = SettingsRepository(context)
@@ -628,6 +634,7 @@ class MainViewModel : ViewModel() {
         MapsState.isEnabled = isMapsPowerSavingEnabled.value
         hapticFeedbackType.value = settingsRepository.getHapticFeedbackType()
         defaultTab.value = settingsRepository.getDIYTab()
+        sentryReportMode.value = settingsRepository.getString(SettingsRepository.KEY_SENTRY_REPORT_MODE, "auto") ?: "auto"
         checkCaffeinateActive(context)
 
         // Button Remap & Migration

@@ -603,6 +603,14 @@
     <string name="content_desc_back">Back</string>
     <string name="label_settings">Settings</string>
     <string name="action_report_bug">Report a Bug</string>
+
+    <!-- Sentry Crash Reporting -->
+    <string name="sentry_report_mode_title">Crash reporting</string>
+    <string name="sentry_mode_off">Off</string>
+    <string name="sentry_mode_auto">Auto</string>
+    <string name="sentry_crash_toast">Essentials crashed, Report sent</string>
+    <string name="simulate_crash">Simulate crash</string>
+
     <string name="action_done">Done</string>
     <string name="action_preview">Preview</string>
     <string name="action_help_guide">Help Guide</string>

@@ -22,6 +22,7 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -39,8 +40,12 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -58,6 +63,7 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import androidx.core.app.ActivityCompat
@@ -68,6 +74,7 @@ import com.sameerasw.essentials.ui.components.cards.IconToggleItem
 import com.sameerasw.essentials.ui.components.cards.PermissionCard
 import com.sameerasw.essentials.ui.components.containers.RoundedCardContainer
 import com.sameerasw.essentials.ui.components.dialogs.AboutSection
+import com.sameerasw.essentials.ui.components.pickers.CrashReportingPicker
 import com.sameerasw.essentials.ui.components.pickers.DefaultTabPicker
 import com.sameerasw.essentials.ui.components.sheets.InstructionsBottomSheet
 import com.sameerasw.essentials.ui.components.sheets.UpdateBottomSheet
@@ -95,7 +102,7 @@ class SettingsActivity : ComponentActivity() {
             }
         }
 
-    @OptIn(ExperimentalMaterial3Api::class)
+    @OptIn(ExperimentalMaterial3ExpressiveApi::class, ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -208,6 +215,7 @@ class SettingsActivity : ComponentActivity() {
     }
 }
 
+@OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun SettingsContent(
     viewModel: MainViewModel,
@@ -295,6 +303,9 @@ fun SettingsContent(
         )
     }
 
+
+    val sentryMode by viewModel.sentryReportMode
+
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -364,7 +375,13 @@ fun SettingsContent(
                 isChecked = viewModel.isRootEnabled.value,
                 onCheckedChange = { viewModel.setRootEnabled(it, context) }
             )
+
+            CrashReportingPicker(
+                selectedMode = sentryMode,
+                onModeSelected = { viewModel.setSentryReportMode(it, context) }
+            )
         }
+
 
         Text(
             text = "Default tab",
@@ -788,6 +805,37 @@ fun SettingsContent(
                         modifier = Modifier.fillMaxWidth()
                     ) {
                         Text("Reset onboarding")
+                    }
+                }
+
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .background(
+                            color = MaterialTheme.colorScheme.surfaceBright
+                        )
+                        .padding(start = 12.dp, end = 12.dp, top = 4.dp, bottom = 12.dp),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    Button(
+                        onClick = {
+                            HapticUtil.performVirtualKeyHaptic(view)
+                            throw RuntimeException("Simulated crash from Developer Options")
+                        },
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(40.dp),
+                        shape = ButtonDefaults.shape,
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = MaterialTheme.colorScheme.primary,
+                            contentColor = MaterialTheme.colorScheme.onPrimary
+                        ),
+                        contentPadding = PaddingValues(0.dp)
+                    ) {
+                        Text(
+                            text = stringResource(R.string.simulate_crash),
+                            style = MaterialTheme.typography.labelLarge
+                        )
                     }
                 }
 

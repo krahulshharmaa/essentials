@@ -971,6 +971,7 @@ class MainActivity : FragmentActivity() {
                             exit = androidx.compose.animation.fadeOut() + androidx.compose.animation.slideOutVertically { it }
                         ) {
                             WelcomeScreen(
+                                viewModel = viewModel,
                                 onBeginClick = {
                                     viewModel.setOnboardingCompleted(true, context)
                                 }
