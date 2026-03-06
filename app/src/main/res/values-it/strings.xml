@@ -1097,4 +1097,9 @@
     <string name="label_use_blur">Usa la sfocatura</string>
     <string name="desc_use_blur">Abilita gli elementi di sfocatura progressiva nell\'interfaccia utente</string>
     <string name="msg_blur_compatibility_error">La sfocatura è disabilitata su questo dispositivo per prevenire un noto bug di visualizzazione sui dispositivi Samsung con Android 15 o versioni precedenti.</string>
+    <!-- Empty State Actions -->
+    <string name="msg_no_apps_frozen">No apps selected to freeze.</string>
+    <string name="action_get_started">Get Started</string>
+    <string name="action_new_automation">New Automation</string>
+    <string name="action_add_repository">Add Repository</string>
 </resources>
