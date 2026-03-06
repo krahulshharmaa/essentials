@@ -608,6 +608,7 @@
     <string name="action_help_guide">Водич за помоћ</string>
     <string name="action_what_is_this">шта је ово?</string>
     <string name="update_available_title">Ажурирање је доступно</string>
+    <string name="about_desc_your_android">Glance at your device\'s hardware and software specifications in detail. This information is fetched from GSMArena and system properties to provide a comprehensive overview of your Android device.</string>
     <string name="about_desc_ambient_music_glance">Амбиент Мусиц Гланце приказује преклоп који се тренутно репродукује на закључаном екрану када се музика репродукује и репродукција се мења. \n\nАко ваш уређај не подржава преклапања преко АОД-а, можете се одлучити за чувар екрана амбијента који је додат у вашим Андроид подешавањима као алтернативу током пуњења.</string>
     <string name="about_desc_notification_lighting">Осветљење обавештења додаје прелеп ефекат ивичног осветљења када примате обавештења.\n\nМожете прилагодити стил анимације, боје и понашање. Ради чак и када је екран искључен (зависно од ОЕМ-а) или на врху ваше тренутне апликације. Изаберите апликације, приоритет обавештења или понашање које треба да се покрене из датих контрола. Ако ваш ОЕМ не подржава преклапања изнад АОД-а, тужите опцију амбијенталног приказа која се налази испод.</string>
     <string name="about_desc_screen_off_widget">Лако искључите екран тако што ћете додирнути провидни виџет са променом величине који не додаје иконе или неред на ваш почетни екран.</string>
@@ -1025,6 +1026,7 @@
     <string name="download_airsync_summary">Потребно за синхронизацију батерије за Мац</string>
     <string name="feat_battery_notification_title">Обавештење о батерији</string>
     <string name="feat_battery_notification_desc">Трајно обавештење о статусу батерије</string>
+    <string name="battery_notification_hint">This notification displays battery levels for your connected Mac and Bluetooth devices. You can configure which devices to show in the Battery Widget settings.</string>
     <string name="about_desc_battery_notification">Поновите искуство виџета батерије у вашој сенци обавештења. Приказаће нивое батерије свих ваших повезаних уређаја у једном трајном обавештењу, ажурираном у реалном времену. Ово укључује ваш Мац (преко АирСинц) и Блуетоотх додатке.</string>
     <string name="battery_notification_channel_name">Обавештење о статусу батерије</string>
     <string name="battery_notification_channel_desc">Стално обавештење које приказује нивое батерије повезаних уређаја</string>
