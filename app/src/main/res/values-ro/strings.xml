@@ -1097,4 +1097,9 @@
     <string name="label_use_blur">Folosiți estompare</string>
     <string name="desc_use_blur">Activați elementele de estompare progresivă în interfața de utilizare</string>
     <string name="msg_blur_compatibility_error">Blur este dezactivat pe acest dispozitiv pentru a preveni o eroare de afișare cunoscută pe dispozitivele Samsung cu Android 15 sau mai puțin.</string>
+    <!-- Empty State Actions -->
+    <string name="msg_no_apps_frozen">No apps selected to freeze.</string>
+    <string name="action_get_started">Get Started</string>
+    <string name="action_new_automation">New Automation</string>
+    <string name="action_add_repository">Add Repository</string>
 </resources>
