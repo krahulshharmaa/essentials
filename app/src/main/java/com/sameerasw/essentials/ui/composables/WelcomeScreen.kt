@@ -25,8 +25,10 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import com.sameerasw.essentials.ui.components.HelpAndGuidesContent
 import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
 import coil.ImageLoader
@@ -81,8 +83,6 @@ fun WelcomeScreen(
             Box(
                 modifier = Modifier
                     .fillMaxSize()
-                    .statusBarsPadding()
-                    .navigationBarsPadding()
             ) {
                 when (step) {
                     OnboardingStep.WELCOME -> {
@@ -139,160 +139,168 @@ fun WelcomeStepContent(
     val scope = rememberCoroutineScope()
 
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .verticalScroll(rememberScrollState())
-            .padding(horizontal = 32.dp, vertical = 16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+        modifier = Modifier.fillMaxSize()
     ) {
-        Spacer(modifier = Modifier.weight(1f))
-
-        Image(
-            painter = painterResource(id = R.drawable.app_logo),
-            contentDescription = null,
+        Column(
             modifier = Modifier
-                .size(240.dp)
-                .onSizeChanged {
-                    onCenterChanged(Offset(it.width / 2f, it.height / 2f))
-                }
-                .pointerInput(Unit) {
-                    val majorStep = 60f
-                    val minorStep = 2f
-
-                    var currentRotation = 0f
-                    var lastMajorNotch = 0
-                    var lastMinorNotch = 0
-
-                    detectDragGestures(
-                        onDragStart = {
-                            scope.launch { rotationAnimatable.stop() }
-                            currentRotation = rotationAnimatable.value
-                            lastMajorNotch = kotlin.math.round(currentRotation / majorStep).toInt()
-                            lastMinorNotch = kotlin.math.round(currentRotation / minorStep).toInt()
-                        },
-                        onDrag = { change, _ ->
-                            val oldAngle = atan2(
-                                change.previousPosition.y - center.y,
-                                change.previousPosition.x - center.x
-                            )
-                            val newAngle = atan2(
-                                change.position.y - center.y,
-                                change.position.x - center.x
-                            )
-                            var delta = (newAngle - oldAngle) * 180 / PI
-
-                            if (delta > 180) delta -= 360
-                            if (delta < -180) delta += 360
-
-                            currentRotation += delta.toFloat()
-
-                            // Easter Egg logic
-                            if (!hasTriggeredEasterEgg && kotlin.math.abs(currentRotation) >= 3600f) {
-                                onEasterEggTriggered()
-                                val rickRollUrl = "https://youtu.be/dQw4w9WgXcQ"
-                                val intent = Intent(Intent.ACTION_VIEW, rickRollUrl.toUri())
-                                context.startActivity(intent)
-                            }
-
-                            // Minor notches - Subtle texture only during drag
-                            val currentMinorNotch = kotlin.math.round(currentRotation / minorStep).toInt()
-                            if (currentMinorNotch != lastMinorNotch) {
-                                HapticUtil.performMicroHaptic(view)
-                                lastMinorNotch = currentMinorNotch
-                            }
-
-                            lastMajorNotch = kotlin.math.round(currentRotation / majorStep).toInt()
-
-                            scope.launch {
-                                rotationAnimatable.snapTo(currentRotation)
-                            }
-                        },
-                        onDragEnd = {
-                            scope.launch {
-                                rotationAnimatable.animateTo(
-                                    targetValue = 0f,
-                                    animationSpec = spring(
-                                        dampingRatio = Spring.DampingRatioMediumBouncy,
-                                        stiffness = Spring.StiffnessLow
-                                    )
-                                ) {
-                                    val currentMajorNotch = kotlin.math.round(value / majorStep).toInt()
-                                    if (currentMajorNotch != lastMajorNotch) {
-                                        HapticUtil.performMediumHaptic(view)
-                                        lastMajorNotch = currentMajorNotch
-                                    }
-                                }
-                                currentRotation = 0f
-                                lastMajorNotch = 0
-                                lastMinorNotch = 0
-                            }
-                        }
-                    )
-                }
-                .graphicsLayer {
-                    rotationZ = rotationAnimatable.value
-                },
-            colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.primary)
-        )
-
-        Spacer(modifier = Modifier.height(18.dp))
-
-        Text(
-            text = "Welcome to Essentials",
-            style = MaterialTheme.typography.headlineMedium.copy(
-                fontFamily = GoogleSansFlexRounded,
-                fontWeight = FontWeight.SemiBold
-            ),
-            textAlign = TextAlign.Center,
-        )
-
-        Text(
-            text = "A Toolbox for Android Nerds",
-            textAlign = TextAlign.Center,
-        )
-
-        Spacer(modifier = Modifier.weight(1f))
-
-        Row(
-            modifier = Modifier
-                .clip(RoundedCornerShape(100.dp))
-                .background(MaterialTheme.colorScheme.primaryContainer)
-                .padding(8.dp)
-                .clickable {
-                    val websiteUrl = "https://sameerasw.com"
-                    val intent = Intent(Intent.ACTION_VIEW, websiteUrl.toUri())
-                    context.startActivity(intent)
-                },
-            horizontalArrangement = Arrangement.Center,
-            verticalAlignment = Alignment.CenterVertically
+                .weight(1f)
+                .fillMaxWidth()
+                .verticalScroll(rememberScrollState()),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
         ) {
+            Spacer(modifier = Modifier.statusBarsPadding())
+
+            Spacer(modifier = Modifier.weight(1f))
+
             Image(
-                painter = painterResource(id = R.drawable.avatar),
-                contentDescription = "Developer Avatar",
-                contentScale = ContentScale.Crop,
+                painter = painterResource(id = R.drawable.app_logo),
+                contentDescription = null,
                 modifier = Modifier
-                    .size(32.dp)
-                    .clip(RoundedCornerShape(100.dp))
-                    .background(MaterialTheme.colorScheme.surfaceContainerHigh)
+                    .size(240.dp)
+                    .onSizeChanged {
+                        onCenterChanged(Offset(it.width / 2f, it.height / 2f))
+                    }
+                    .pointerInput(Unit) {
+                        val majorStep = 60f
+                        val minorStep = 2f
+
+                        var currentRotation = 0f
+                        var lastMajorNotch = 0
+                        var lastMinorNotch = 0
+
+                        detectDragGestures(
+                            onDragStart = {
+                                scope.launch { rotationAnimatable.stop() }
+                                currentRotation = rotationAnimatable.value
+                                lastMajorNotch = kotlin.math.round(currentRotation / majorStep).toInt()
+                                lastMinorNotch = kotlin.math.round(currentRotation / minorStep).toInt()
+                            },
+                            onDrag = { change, _ ->
+                                val oldAngle = atan2(
+                                    change.previousPosition.y - center.y,
+                                    change.previousPosition.x - center.x
+                                )
+                                val newAngle = atan2(
+                                    change.position.y - center.y,
+                                    change.position.x - center.x
+                                )
+                                var delta = (newAngle - oldAngle) * 180 / PI
+
+                                if (delta > 180) delta -= 360
+                                if (delta < -180) delta += 360
+
+                                currentRotation += delta.toFloat()
+
+                                // Easter Egg logic
+                                if (!hasTriggeredEasterEgg && kotlin.math.abs(currentRotation) >= 3600f) {
+                                    onEasterEggTriggered()
+                                    val rickRollUrl = "https://youtu.be/dQw4w9WgXcQ"
+                                    val intent = Intent(Intent.ACTION_VIEW, rickRollUrl.toUri())
+                                    context.startActivity(intent)
+                                }
+
+                                // Minor notches - Subtle texture only during drag
+                                val currentMinorNotch = kotlin.math.round(currentRotation / minorStep).toInt()
+                                if (currentMinorNotch != lastMinorNotch) {
+                                    HapticUtil.performMicroHaptic(view)
+                                    lastMinorNotch = currentMinorNotch
+                                }
+
+                                lastMajorNotch = kotlin.math.round(currentRotation / majorStep).toInt()
+
+                                scope.launch {
+                                    rotationAnimatable.snapTo(currentRotation)
+                                }
+                            },
+                            onDragEnd = {
+                                scope.launch {
+                                    rotationAnimatable.animateTo(
+                                        targetValue = 0f,
+                                        animationSpec = spring(
+                                            dampingRatio = Spring.DampingRatioMediumBouncy,
+                                            stiffness = Spring.StiffnessLow
+                                        )
+                                    ) {
+                                        val currentMajorNotch = kotlin.math.round(value / majorStep).toInt()
+                                        if (currentMajorNotch != lastMajorNotch) {
+                                            HapticUtil.performMediumHaptic(view)
+                                            lastMajorNotch = currentMajorNotch
+                                        }
+                                    }
+                                    currentRotation = 0f
+                                    lastMajorNotch = 0
+                                    lastMinorNotch = 0
+                                }
+                            }
+                        )
+                    }
+                    .graphicsLayer {
+                        rotationZ = rotationAnimatable.value
+                    },
+                colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.primary)
             )
 
-            Spacer(modifier = Modifier.width(8.dp))
+            Spacer(modifier = Modifier.height(18.dp))
 
             Text(
-                text = "by sameerasw.com",
+                text = "Welcome to Essentials",
+                style = MaterialTheme.typography.headlineMedium.copy(
+                    fontFamily = GoogleSansFlexRounded,
+                    fontWeight = FontWeight.SemiBold
+                ),
                 textAlign = TextAlign.Center,
-                color = MaterialTheme.colorScheme.onPrimaryContainer,
-                modifier = Modifier.padding(end = 4.dp)
             )
-        }
 
-        Spacer(modifier = Modifier.weight(0.3f))
+            Text(
+                text = "A Toolbox for Android Nerds",
+                textAlign = TextAlign.Center,
+            )
+
+            Spacer(modifier = Modifier.weight(1f))
+
+            Row(
+                modifier = Modifier
+                    .clip(RoundedCornerShape(100.dp))
+                    .background(MaterialTheme.colorScheme.primaryContainer)
+                    .padding(8.dp)
+                    .clickable {
+                        val websiteUrl = "https://sameerasw.com"
+                        val intent = Intent(Intent.ACTION_VIEW, websiteUrl.toUri())
+                        context.startActivity(intent)
+                    },
+                horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.avatar),
+                    contentDescription = "Developer Avatar",
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier
+                        .size(32.dp)
+                        .clip(RoundedCornerShape(100.dp))
+                        .background(MaterialTheme.colorScheme.surfaceContainerHigh)
+                )
+
+                Spacer(modifier = Modifier.width(8.dp))
+
+                Text(
+                    text = "by sameerasw.com",
+                    textAlign = TextAlign.Center,
+                    color = MaterialTheme.colorScheme.onPrimaryContainer,
+                    modifier = Modifier.padding(end = 4.dp)
+                )
+            }
+
+            Spacer(modifier = Modifier.weight(0.3f))
+        }
 
         Button(
             onClick = onNext,
             modifier = Modifier
                 .fillMaxWidth()
+                .navigationBarsPadding()
+                .padding(16.dp)
                 .height(56.dp)
         ) {
             Text(
@@ -325,6 +333,8 @@ fun AcknowledgementStepContent(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Top
     ) {
+        Spacer(modifier = Modifier.statusBarsPadding())
+
         Spacer(modifier = Modifier.height(16.dp))
 
         Text(
@@ -345,9 +355,12 @@ fun AcknowledgementStepContent(
         ) {
             Column(
                 modifier = Modifier
-                    .padding(24.dp)
+                    .padding(horizontal = 24.dp)
                     .verticalScroll(rememberScrollState())
             ) {
+                
+                Spacer(modifier = Modifier.height(16.dp))
+
                 Text(
                     text = "This app is a collection of utilities that can interact deeply with your device system. Using some features might modify system settings or behavior in unexpected ways. \n\nYou only need to grant necessary permissions which are required for selected features you are using giving you full control over the app's behavior. \n\nFurther more, the app does not track or store any of your personal data, I don't need them... Keep to yourself safe. You can refer to the source code for more information. \n\nThis app is fully open source and is and always will be free to use. Do not pay or install from unknown sources.",
                     style = MaterialTheme.typography.bodyLarge
@@ -371,6 +384,7 @@ fun AcknowledgementStepContent(
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
 
+                Spacer(modifier = Modifier.height(16.dp))
             }
         }
 
@@ -389,12 +403,21 @@ fun AcknowledgementStepContent(
             onClick = onNext,
             modifier = Modifier
                 .fillMaxWidth()
+                .navigationBarsPadding()
                 .height(56.dp)
         ) {
             Text(
                 text = "I Understand",
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Bold
+            )
+
+            Spacer(modifier = Modifier.weight(1f))
+
+            Icon(
+                painter = painterResource(id = R.drawable.rounded_check_24),
+                contentDescription = null,
+                modifier = Modifier.size(24.dp)
             )
         }
     }
@@ -416,95 +439,130 @@ fun FeatureIntroStepContent(onFinish: () -> Unit) {
     }
 
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
+        modifier = Modifier.fillMaxSize()
     ) {
-        Spacer(modifier = Modifier.height(16.dp))
+        Column(
+            modifier = Modifier
+                .weight(1f)
+                .fillMaxWidth()
+                .verticalScroll(rememberScrollState())
+                .padding(horizontal = 16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Spacer(modifier = Modifier.statusBarsPadding())
 
-        Text(
-            text = "What is this?",
-            style = MaterialTheme.typography.headlineLarge.copy(
-                fontFamily = GoogleSansFlexRounded,
-                fontWeight = FontWeight.Bold
-            ),
-            textAlign = TextAlign.Center
-        )
+            Spacer(modifier = Modifier.height(16.dp))
 
-        Spacer(modifier = Modifier.height(16.dp))
+            Text(
+                text = "What is this?",
+                style = MaterialTheme.typography.headlineLarge.copy(
+                    fontFamily = GoogleSansFlexRounded,
+                    fontWeight = FontWeight.Bold
+                ),
+                textAlign = TextAlign.Center
+            )
 
-        Text(
-            text = "Anytime you are clueless on a feature or a Quick Settings Tile on what it does and what permissions may necessary for it, just long press it and pick 'What is this?' to learn more.",
-            style = MaterialTheme.typography.bodyLarge,
-            textAlign = TextAlign.Start
-        )
+            Spacer(modifier = Modifier.height(16.dp))
 
-        Spacer(modifier = Modifier.height(8.dp))
+            Text(
+                text = "Anytime you are clueless on a feature or a Quick Settings Tile on what it does and what permissions may necessary for it, just long press it and pick 'What is this?' to learn more.",
+                style = MaterialTheme.typography.bodyLarge,
+                textAlign = TextAlign.Start
+            )
 
-        Text(
-            text = "You can report bugs or find helpful guides anytime in the app settings.",
-            style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
-            textAlign = TextAlign.Start
-        )
 
-        Spacer(modifier = Modifier.height(24.dp))
+            Spacer(modifier = Modifier.height(24.dp))
 
-        val configuration = LocalConfiguration.current
-        val isLandscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
-        val isLargeScreen = configuration.screenWidthDp >= 600
+            val configuration = LocalConfiguration.current
+            val isLandscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
+            val isLargeScreen = configuration.screenWidthDp >= 600
 
-        if (isLandscape || isLargeScreen) {
-            Row(
-                modifier = Modifier
-                    .weight(1f)
-                    .fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(12.dp)
-            ) {
-                GifItem(
-                    modifier = Modifier.weight(1f),
-                    imageLoader = imageLoader,
-                    gifResId = R.drawable.feature_help
-                )
-                GifItem(
-                    modifier = Modifier.weight(1f),
-                    imageLoader = imageLoader,
-                    gifResId = R.drawable.tile_help
-                )
+            if (isLandscape || isLargeScreen) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(280.dp),
+                    horizontalArrangement = Arrangement.spacedBy(12.dp)
+                ) {
+                    GifItem(
+                        modifier = Modifier.weight(1f),
+                        imageLoader = imageLoader,
+                        gifResId = R.drawable.feature_help
+                    )
+                    GifItem(
+                        modifier = Modifier.weight(1f),
+                        imageLoader = imageLoader,
+                        gifResId = R.drawable.tile_help
+                    )
+                }
+            } else {
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    verticalArrangement = Arrangement.spacedBy(12.dp)
+                ) {
+                    GifItem(
+                        modifier = Modifier.fillMaxWidth().height(320.dp),
+                        imageLoader = imageLoader,
+                        gifResId = R.drawable.feature_help
+                    )
+                    GifItem(
+                        modifier = Modifier.fillMaxWidth().height(320.dp),
+                        imageLoader = imageLoader,
+                        gifResId = R.drawable.tile_help
+                    )
+                }
             }
-        } else {
-            Column(
-                modifier = Modifier
-                    .weight(1f)
-                    .fillMaxWidth(),
-                verticalArrangement = Arrangement.spacedBy(12.dp)
-            ) {
-                GifItem(
-                    modifier = Modifier.weight(1f),
-                    imageLoader = imageLoader,
-                    gifResId = R.drawable.feature_help
-                )
-                GifItem(
-                    modifier = Modifier.weight(1f),
-                    imageLoader = imageLoader,
-                    gifResId = R.drawable.tile_help
-                )
-            }
+
+            Spacer(modifier = Modifier.height(32.dp))
+
+            Text(
+                text = stringResource(R.string.help_guides_title),
+                style = MaterialTheme.typography.headlineSmall.copy(
+                    fontFamily = GoogleSansFlexRounded,
+                    fontWeight = FontWeight.Bold
+                ),
+                textAlign = TextAlign.Center,
+                modifier = Modifier.fillMaxWidth()
+            )
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            HelpAndGuidesContent()
+
+
+            Spacer(modifier = Modifier.height(8.dp))
+
+            Text(
+                text = "You can report bugs or find helpful guides anytime in the app settings.",
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                textAlign = TextAlign.Start
+            )
+
+            Spacer(modifier = Modifier.height(24.dp))
         }
-
-        Spacer(modifier = Modifier.height(24.dp))
 
         Button(
             onClick = onFinish,
             modifier = Modifier
                 .fillMaxWidth()
+                .navigationBarsPadding()
+                .padding(16.dp)
                 .height(56.dp)
         ) {
             Text(
                 text = "Let Me in Already",
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Bold
+            )
+
+            Spacer(modifier = Modifier.weight(1f))
+
+            Icon(
+                painter = painterResource(id = R.drawable.rounded_mobile_check_24),
+                contentDescription = null,
+                modifier = Modifier.size(24.dp)
             )
         }
     }
