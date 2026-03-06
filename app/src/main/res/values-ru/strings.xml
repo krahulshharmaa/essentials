@@ -187,7 +187,7 @@
     <string name="tile_app_freezing">Зависание приложения</string>
     <string name="tile_flashlight_pulse">Фонарик Импульс</string>
     <string name="tile_stay_awake">Бодрствуйте</string>
-    <string name="input_method_label">Основная клавиатура</string>
+    <string name="input_method_label">Клавиатура Essentials</string>
     <string name="subtype_en_us">английский (США)</string>
     <string name="tile_active">Активный</string>
     <string name="tile_inactive">Неактивный</string>
@@ -212,7 +212,7 @@
     <string name="dns_preset_google_hostname">DNS.google</string>
     <string name="dns_preset_cloudflare">Облачный DNS</string>
     <string name="dns_preset_cloudflare_hostname">1dot1dot1dot1.cloudflare-dns.com</string>
-    <string name="dns_preset_quad9">Quad9 DNS</string>
+    <string name="dns_preset_quad9">Quad9 ДНС</string>
     <string name="dns_preset_quad9_hostname">dns.quad9.net</string>
     <string name="dns_preset_cleanbrowsing">ОчиститьПросмотр</string>
     <string name="dns_preset_cleanbrowsing_hostname">Adult-filter-dns.cleanbrowsing.org</string>
@@ -314,7 +314,7 @@
     <string name="cat_visuals">Визуальные эффекты</string>
     <string name="cat_system">Система</string>
     <!-- UI Elements -->
-    <string name="search_placeholder">Основы поиска</string>
+    <string name="search_placeholder">Поиск Essentials</string>
     <string name="search_no_results">Нет результатов для \"%1$s\"</string>
     <string name="search_results_title">Результаты поиска</string>
     <string name="requires_following_permissions">%1$s требуются следующие разрешения</string>
@@ -526,7 +526,7 @@
     <string name="perm_battery_optimization_title">Оптимизация батареи</string>
     <string name="perm_battery_optimization_desc">Убедитесь, что служба не отключена системой для экономии энергии.</string>
     <!-- Tabs -->
-    <string name="tab_essentials">Основы</string>
+    <string name="tab_essentials">Essentials</string>
     <string name="tab_freeze">Заморозить</string>
     <string name="tab_freeze_title">Замороженный</string>
     <string name="tab_diy">Сделай сам</string>
@@ -551,7 +551,7 @@
     <string name="action_select_app">Выберите приложение</string>
     <string name="action_untrack">Отследить</string>
     <string name="label_pending">В ожидании</string>
-    <string name="label_up_to_date">До настоящего времени</string>
+    <string name="label_up_to_date">Актуальные</string>
     <string name="feat_app_updates_desc">Отслеживайте и загружайте последние версии ваших любимых приложений прямо с GitHub.</string>
     <string name="error_invalid_repo_format">Неверный формат. Используйте URL-адрес владельца/репозитория или GitHub.</string>
     <string name="error_generic_search">Во время поиска произошла ошибка</string>
@@ -563,7 +563,7 @@
     <!-- Keyboard Setup -->
     <string name="label_keyboard_setup">Настройка клавиатуры</string>
     <string name="btn_enable_keyboard">Включить в настройках</string>
-    <string name="btn_select_keyboard">Переключиться на Основы</string>
+    <string name="btn_select_keyboard">Переключиться на Essentials</string>
     <string name="label_enabled">Включено</string>
     <string name="label_disabled">Неполноценный</string>
     <string name="tile_adaptive_brightness">Адаптивная яркость</string>
@@ -578,31 +578,31 @@
     <string name="action_report_bug">Сообщить об ошибке</string>
     <!-- Sentry Crash Reporting -->
     <string name="sentry_report_mode_title">Crash reporting</string>
-    <string name="sentry_mode_off">Off</string>
-    <string name="sentry_mode_auto">Auto</string>
-    <string name="sentry_crash_toast">Essentials crashed, Report sent</string>
+    <string name="sentry_mode_off">Выкл</string>
+    <string name="sentry_mode_auto">Авто</string>
+    <string name="sentry_crash_toast">Сбой Essentials, Отчёт отправлен</string>
     <string name="simulate_crash">Simulate crash</string>
-    <string name="welcome_title">Welcome to Essentials</string>
-    <string name="welcome_subtitle">A Toolbox for Android Nerds</string>
-    <string name="welcome_developer_attribution">by sameerasw.com</string>
-    <string name="action_lets_begin">Let\'s Begin</string>
+    <string name="welcome_title">Добро пожаловать в Essentials</string>
+    <string name="welcome_subtitle">Инструменты для Android задротов</string>
+    <string name="welcome_developer_attribution">сделано sameerasw.com</string>
+    <string name="action_lets_begin">Давайте начнём</string>
     <string name="acknowledgement_title">Acknowledgement</string>
     <string name="acknowledgement_desc">This app is a collection of utilities that can interact deeply with your device system. Using some features might modify system settings or behavior in unexpected ways. \n\nYou only need to grant necessary permissions which are required for selected features you are using giving you full control over the app\'s behavior. \n\nFurther more, the app does not track or store any of your personal data, I don\'t need them... Keep to yourself safe. You can refer to the source code for more information. \n\nThis app is fully open source and is and always will be free to use. Do not pay or install from unknown sources.</string>
     <string name="acknowledgement_warning">WARNING: Proceed with caution. The developer takes no responsibility for any system instability, data loss, or other issues caused by the use of this app. By proceeding, you acknowledge these risks.</string>
-    <string name="acknowledgement_footer">I know you didn\'t even read this carefully but, in case you need any help, feel free to reach out the developer or the community.</string>
-    <string name="action_i_understand">I Understand</string>
+    <string name="acknowledgement_footer">Я знаю что ты даже не вчитывался, но в случае если тебе нужна помощь, не стесняйся обратиться к разработчику и сообществу.</string>
+    <string name="action_i_understand">Я понимаю</string>
     <string name="feature_intro_desc">Anytime you are clueless on a feature or a Quick Settings Tile on what it does and what permissions may necessary for it, just long press it and pick \'What is this?\' to learn more.</string>
-    <string name="feature_intro_footer">You can report bugs or find helpful guides anytime in the app settings.</string>
-    <string name="action_let_me_in">Let Me in Already</string>
+    <string name="feature_intro_footer">Вы можете сообщить об ошибке или найти полезные руководства в настройках приложения в любой момент.</string>
+    <string name="action_let_me_in">Впустите меня уже</string>
     <string name="preferences_title">Preferences</string>
-    <string name="preferences_desc">Configure some basic settings to get started.</string>
-    <string name="label_app_settings">App Settings</string>
-    <string name="label_haptic_feedback">Haptic Feedback</string>
-    <string name="label_updates">Updates</string>
-    <string name="label_auto_check_updates">Auto check for updates</string>
-    <string name="desc_auto_check_updates">Check for updates at app launch</string>
+    <string name="preferences_desc">Выберите некоторые базовые настройки, чтобы начать.</string>
+    <string name="label_app_settings">Настройки приложения</string>
+    <string name="label_haptic_feedback">Тактильная отдача</string>
+    <string name="label_updates">Обновления</string>
+    <string name="label_auto_check_updates">Автоматическая проверка обновлений</string>
+    <string name="desc_auto_check_updates">Проверять наличие обновлений при запуске приложения</string>
     <string name="action_all_set">All Set</string>
-    <string name="action_check_whats_new">Check What\'s New?</string>
+    <string name="action_check_whats_new">Проверьте Что нового?</string>
     <string name="action_done">Сделанный</string>
     <string name="action_preview">Предварительный просмотр</string>
     <string name="action_help_guide">Справочное руководство</string>
@@ -809,7 +809,7 @@
     <string-array name="keywords_visual_style">
         <item>анимация</item>
         <item>визуальный</item>
-        <item>смотреть</item>
+        <item>внешний вид</item>
     </string-array>
     <string-array name="keywords_quiet_filter">
         <item>тихий</item>
@@ -960,7 +960,7 @@
     <string name="bug_report_email_subject">Отчет об ошибке Essentials</string>
     <string name="bug_report_send_via">Отправить через</string>
     <!-- Location Reached -->
-    <string name="feat_location_reached_title">Мы уже там?</string>
+    <string name="feat_location_reached_title">Мы уже приехали?</string>
     <string name="feat_location_reached_desc">Оповещения о местах назначения поблизости</string>
     <string name="location_reached_how_to">Откройте Карты Google, выберите местоположение и поделитесь им с Essentials.</string>
     <string name="location_reached_radius_title">Радиус оповещения: %d м</string>
@@ -992,7 +992,7 @@
     <string name="location_reached_alarm_subtitle">Приготовьтесь выйти</string>
     <string name="location_reached_dismiss">Увольнять</string>
     <string name="location_reached_toast_set">Набор назначения: %1$.4f, %2$.4f</string>
-    <string name="setting_use_root_title">Использовать корень</string>
+    <string name="setting_use_root_title">Использовать Root</string>
     <string name="setting_use_root_desc">Вместо Шизуку</string>
     <string name="root_not_available_toast">Root-доступ недоступен. Пожалуйста, проверьте ваш корневой менеджер.</string>
     <!-- System Keyboard -->
@@ -1026,7 +1026,7 @@
     <string name="download_airsync_summary">Требуется для синхронизации батареи Mac</string>
     <string name="feat_battery_notification_title">Уведомление о батарее</string>
     <string name="feat_battery_notification_desc">Постоянное уведомление о состоянии батареи</string>
-    <string name="battery_notification_hint">This notification displays battery levels for your connected Mac and Bluetooth devices. You can configure which devices to show in the Battery Widget settings.</string>
+    <string name="battery_notification_hint">Это уведомление отображает уровень батареи для вашего подключённого Mac и Bluetooth устройств. Вы можете настроить какие устройства отображаются в настройках Состояния Батареи.</string>
     <string name="about_desc_battery_notification">Воспроизведите виджет батареи в панели уведомлений. Он покажет уровень заряда батареи всех ваших подключенных устройств в одном постоянном уведомлении, обновляемом в режиме реального времени. Сюда входит ваш Mac (через AirSync) и аксессуары Bluetooth.</string>
     <string name="battery_notification_channel_name">Уведомление о состоянии батареи</string>
     <string name="battery_notification_channel_desc">Постоянное уведомление, показывающее уровень заряда батареи подключенных устройств.</string>
@@ -1069,7 +1069,7 @@
     <string name="search_sound_mode_behavior_desc">Выбирайте режимы для переключения</string>
     <string name="feat_ambient_music_title">Эмбиентный музыкальный взгляд</string>
     <string name="feat_ambient_music_desc">Взгляните на СМИ на AOD</string>
-    <string name="feat_sound_haptics_title">Звук и тактильные ощущения</string>
+    <string name="feat_sound_haptics_title">Звук и тактильный отклик</string>
     <string name="feat_sound_haptics_desc">Объем и тактильные особенности</string>
     <string name="feat_security_privacy_title">Безопасность и конфиденциальность</string>
     <string name="feat_security_privacy_desc">Защитите и защитите свое устройство</string>
@@ -1079,9 +1079,9 @@
     <string name="feat_input_actions_desc">Управляйте своим устройством с легкостью</string>
     <string name="feat_widgets_title">Виджеты</string>
     <string name="feat_widgets_desc">Сразу на главном экране</string>
-    <string name="feat_display_visuals_title">Отображать</string>
+    <string name="feat_display_visuals_title">Экран</string>
     <string name="feat_display_visuals_desc">Визуальные эффекты для улучшения вашего опыта</string>
-    <string name="feat_watch_title">Смотреть</string>
+    <string name="feat_watch_title">Часы</string>
     <string name="feat_watch_desc">Интеграция с WearOS</string>
     <string name="watch_no_companion_title">Часы не обнаружены</string>
     <string name="watch_no_companion_desc">Похоже, на ваших часах не установлено сопутствующее приложение Essentials Wear.</string>
