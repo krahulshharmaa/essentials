@@ -608,6 +608,7 @@
     <string name="action_help_guide">Ghid de ajutor</string>
     <string name="action_what_is_this">Ce este asta?</string>
     <string name="update_available_title">Actualizare disponibilă</string>
+    <string name="about_desc_your_android">Glance at your device\'s hardware and software specifications in detail. This information is fetched from GSMArena and system properties to provide a comprehensive overview of your Android device.</string>
     <string name="about_desc_ambient_music_glance">Ambient Music Glance afișează o suprapunere Now Playing pe ecranul dvs. de blocare când muzica este redată și redarea se modifică. \n\nDacă dispozitivul dvs. nu acceptă suprapuneri peste AOD, puteți opta pentru economizorul de ecran Ambience adăugat în setările Android ca alternativă în timpul încărcării.</string>
     <string name="about_desc_notification_lighting">Iluminarea notificărilor adaugă un efect frumos de iluminare marginală atunci când primiți notificări.\n\nPuteți personaliza stilul, culorile și comportamentul animației. Funcționează chiar și atunci când ecranul este oprit (în funcție de OEM) sau deasupra aplicației dvs. actuale. Alegeți aplicațiile, prioritatea notificărilor sau comportamentul pe care ar trebui să se declanșeze din comenzile date. Dacă OEM-ul dvs. nu acceptă suprapuneri deasupra AOD, dați în judecată opțiunea de afișare ambientală găsită mai jos.</string>
     <string name="about_desc_screen_off_widget">Opriți cu ușurință ecranul printr-o atingere pe un widget transparent redimensionabil care nu adaugă pictograme sau orice dezordine pe ecranul dvs. de pornire.</string>
@@ -1025,6 +1026,7 @@
     <string name="download_airsync_summary">Necesar pentru sincronizarea bateriei Mac</string>
     <string name="feat_battery_notification_title">Notificare baterie</string>
     <string name="feat_battery_notification_desc">Notificare persistentă privind starea bateriei</string>
+    <string name="battery_notification_hint">This notification displays battery levels for your connected Mac and Bluetooth devices. You can configure which devices to show in the Battery Widget settings.</string>
     <string name="about_desc_battery_notification">Replicați experiența widgetului bateriei în umbra de notificare. Acesta va afișa nivelul bateriei tuturor dispozitivelor dvs. conectate într-o singură notificare persistentă, actualizată în timp real. Aceasta include Mac-ul dvs. (prin AirSync) și accesoriile Bluetooth.</string>
     <string name="battery_notification_channel_name">Notificare privind starea bateriei</string>
     <string name="battery_notification_channel_desc">Notificare persistentă care arată nivelul bateriei dispozitivelor conectate</string>
