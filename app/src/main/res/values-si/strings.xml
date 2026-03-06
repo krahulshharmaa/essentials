@@ -1097,4 +1097,9 @@
     <string name="label_use_blur">බොඳ කිරීම භාවිතා කරන්න</string>
     <string name="desc_use_blur">UI හරහා ප්‍රගතිශීලී බොඳ මූලද්‍රව්‍ය සබල කරන්න</string>
     <string name="msg_blur_compatibility_error">Android 15 හෝ ඊට අඩු Samsung උපාංගවල දන්නා සංදර්ශක දෝෂයක් වැළැක්වීමට මෙම උපාංගයේ Blur අබල කර ඇත.</string>
+    <!-- Empty State Actions -->
+    <string name="msg_no_apps_frozen">No apps selected to freeze.</string>
+    <string name="action_get_started">Get Started</string>
+    <string name="action_new_automation">New Automation</string>
+    <string name="action_add_repository">Add Repository</string>
 </resources>
