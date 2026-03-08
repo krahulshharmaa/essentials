@@ -592,17 +592,17 @@
     <string name="acknowledgement_footer">Ik weet dat je dit niet grondig hebt gelezen, maar in het geval dat je hulp nodig hebt, voel je vrij om contact op te nemen met de ontwikkelaar of de gemeenschap.</string>
     <string name="action_i_understand">Ik begrijp het</string>
     <string name="feature_intro_desc">Elke keer dat je geen idee hebt wat een functie of tegel in de Snelle instellingen doet en welke machtigingen ervoor nodig zijn, kun je gewoon lang indrukken en drukken op \"Wat is dit?\" om meer te weten te komen.</string>
-    <string name="feature_intro_footer">You can report bugs or find helpful guides anytime in the app settings.</string>
-    <string name="action_let_me_in">Let Me in Already</string>
-    <string name="preferences_title">Preferences</string>
-    <string name="preferences_desc">Configure some basic settings to get started.</string>
-    <string name="label_app_settings">App Settings</string>
-    <string name="label_haptic_feedback">Haptic Feedback</string>
+    <string name="feature_intro_footer">Je kan op elk moment fouten rapporteren en hulpvolle handleidingen vinden in de instellingen.</string>
+    <string name="action_let_me_in">Laat me er eindelijk in</string>
+    <string name="preferences_title">Voorkeuren</string>
+    <string name="preferences_desc">Stel wat simpele instellingen in om te starten.</string>
+    <string name="label_app_settings">App-instellingen</string>
+    <string name="label_haptic_feedback">Haptische feedback</string>
     <string name="label_updates">Updates</string>
-    <string name="label_auto_check_updates">Auto check for updates</string>
-    <string name="desc_auto_check_updates">Check for updates at app launch</string>
-    <string name="action_all_set">All Set</string>
-    <string name="action_check_whats_new">Check What\'s New?</string>
+    <string name="label_auto_check_updates">Automatisch checken voor updates</string>
+    <string name="desc_auto_check_updates">Checken voor updates bij het starten van de app</string>
+    <string name="action_all_set">Alles klaar</string>
+    <string name="action_check_whats_new">Wat is er nieuw?</string>
     <string name="action_done">Klaar</string>
     <string name="action_preview">Voorbeeld</string>
     <string name="action_help_guide">Hulpgids</string>
@@ -636,7 +636,7 @@
     <string name="about_desc_sensitive_content">Verberg gevoelige inhoud op het vergrendelscherm.\n\nHet weergeven van meldingsinhoud op het vergrendelscherm in-/uitschakelen.</string>
     <string name="about_desc_tap_to_wake">Tikken om te wekken in-/uitschakelen.\n\nDe mogelijkheid om je scherm te wekken met één klik in-/uitschakelen.</string>
     <string name="about_desc_aod">Always-On Display in-/uitschakelen\n\nSnel de Always-On Display in-/uitscakelen</string>
-    <string name="about_desc_notification_glance">Automatically control your Always On Display based on your notifications. When a message or alert arrives from a selected app, AOD will stay on until you dismiss the notification, ensuring you never miss important info without wasting battery when no alerts are present.</string>
+    <string name="about_desc_notification_glance">Automatisch je Always-On Display besturen op basis van je meldingen. Wanneer je een melding of waarschuwing krijgt van een geselecteerde app zal het Always-On Display aan blijven totdat je de meldingen hebt gesloten, wat ervoor zorgt dat je nooit belangrijke informatie mist zonder je batterij te verspillen wanneer er geen waarschuwingen zijn.</string>
     <string name="about_desc_mono_audio">Audiokanalen combineren naar mono.\n\nHandig bij gebruik van één oortje of voor toegankelijkheid.</string>
     <string name="about_desc_flashlight_tile">De zaklamp in-/uitschakelen\n\nLang indrukken opent de instellingen voor de aanpassing van intensiteit op ondersteunde apparaten.</string>
     <string name="about_desc_stay_awake">Houd het scherm aan tijdens het opladen.\n\nVoorkomt dat het scherm uitvalt wanneer het apparaat verbonden is met een stroombron, wat handig kan zijn voor ontwikkelaars tijdens het debuggen.</string>
@@ -645,7 +645,7 @@
     <string name="about_desc_private_dns">Privé-DNS in-/uitschakelen.\n\nDoor de Uit/Automatisch/Hostnaam privé-DNS-modi schakelen.</string>
     <string name="about_desc_usb_debugging">USB-foutopsporing in-/uitschakelen.\n\nToegang tot foutopsporing via USB in-/uitschakelen via de snelle instellingen.</string>
     <string name="about_desc_color_picker">Open het pipethulpmiddel om kleuren te kiezen, geïntroduceerd in Android 17 Bèta 2</string>
-    <string name="about_desc_charge_optimization">Optimize your battery life by limiting the maximum charge or using adaptive charging. This is specially designed for Pixel devices to ensure longevity and healthy charging cycles.\n\nCredits: TebbeUbben/ChargeQuickTile</string>
+    <string name="about_desc_charge_optimization">Optimaliseer je batterijleven door het maximum oplaadniveau te begrenzen of aanpasbaar opladen te gebruiken. Dit is speciaal ontworpen voor Pixel-apparaten om een ​​lange levensduur en gezonde laadcyclussen te garanderen.\n\nCredits: TebbeUbben/ChargeQuickTile</string>
     <string name="action_download">Downloaden</string>
     <!-- DIY Section -->
     <string name="diy_trigger_screen_off">Scherm uit</string>
@@ -875,9 +875,9 @@
         <item>gevoel</item>
     </string-array>
     <string-array name="keywords_battery">
-        <item>battery</item>
-        <item>charge</item>
-        <item>optimization</item>
+        <item>batterij</item>
+        <item>laden</item>
+        <item>optimalisatie</item>
         <item>pixel</item>
     </string-array>
     <!-- App Selection Extra -->
@@ -1026,7 +1026,7 @@
     <string name="download_airsync_summary">Vereist voor de Mac-batterijsynchronisatie</string>
     <string name="feat_battery_notification_title">Batterijmelding</string>
     <string name="feat_battery_notification_desc">Blijvende melding met de batterijstatus</string>
-    <string name="battery_notification_hint">This notification displays battery levels for your connected Mac and Bluetooth devices. You can configure which devices to show in the Battery Widget settings.</string>
+    <string name="battery_notification_hint">Deze melding laat je batterijniveaus zien van je verbonden Mac en Bluetooth-apparaten. Je kan instellen welke apparaten worden weergeven in de instellingen van de Batterijwidget.</string>
     <string name="about_desc_battery_notification">Maakt de ervaring van de batterijwidget na in je meldingenscherm. Het zal de batterijniveaus van al je verbonden apparaten laten zien in één blijvende melding, die meteen wordt bijgewerkt. Dit omvat je Mac (via AirSync) en Bluetooth-accessoires.</string>
     <string name="battery_notification_channel_name">Melding van de batterijstatus</string>
     <string name="battery_notification_channel_desc">Blijvende melding die het batterijniveau van je verbonden apparaten laat zien</string>
@@ -1115,20 +1115,20 @@
     <string name="label_transition_animation_scale">Overgangsanimatieschaal</string>
     <string name="label_window_animation_scale">Vensteranimatieschaal</string>
     <string name="about_desc_text_animations">Pas de systeemwijde lettertypegrootte, gewicht en animatiesnelheden aan. Let erop dat sommige instellingen mogelijk geavanceerde machtigingen vereisen of het herstarten van het apparaat voordat sommige apps wijzigingen weergeven. \n\nToegevoegde Shizuku- of rootmachtigingen kunnen mogelijk nodig zijn voor het wijzigen van de schaal</string>
-    <string name="feat_aod_force_turn_off_title">Force turn off AOD</string>
-    <string name="feat_aod_force_turn_off_desc">Force turn off the AOD when no notifications. Requires accessibility permission.</string>
-    <string name="feat_auto_accessibility_title">Auto accessibility</string>
-    <string name="feat_auto_accessibility_desc">Automatically grants the accessibility permission on app launch if missing using WRITE_SECURE_SETTINGS.</string>
-    <string name="label_help_guide">Help and Guides</string>
-    <string name="tab_your_android">Your Android</string>
-    <string name="label_device_storage">Storage</string>
-    <string name="label_device_ram">Memory</string>
-    <string name="label_use_blur">Use blur</string>
-    <string name="desc_use_blur">Enable progressive blur elements across the UI</string>
-    <string name="msg_blur_compatibility_error">Blur is disabled on this device to prevent a known display bug on Samsung devices with Android 15 or below.</string>
+    <string name="feat_aod_force_turn_off_title">Always-On Display geforceerd uitschakelen</string>
+    <string name="feat_aod_force_turn_off_desc">Always-On Display geforceerd uitschakelen als er geen meldingen zijn. Vereist de toegankelijkheidsmachtiging.</string>
+    <string name="feat_auto_accessibility_title">Automatische toegankelijkheid</string>
+    <string name="feat_auto_accessibility_desc">Automatisch de toegankelijkheidsmachtiging geven bij het starten van de app wanneer missend door middel van WRITE_SECURE_SETTINGS.</string>
+    <string name="label_help_guide">Hulp en handleidingen</string>
+    <string name="tab_your_android">Jouw Android</string>
+    <string name="label_device_storage">Opslag</string>
+    <string name="label_device_ram">Geheugen</string>
+    <string name="label_use_blur">Vervaging gebruiken</string>
+    <string name="desc_use_blur">Progressieve vervagingselementen gebruiken bij de hele interface</string>
+    <string name="msg_blur_compatibility_error">Vervaging is uitgeschakeld op dit apparaat om een bekende bug op Samsung-apparaten op Android 15  of lager te voorkomen.</string>
     <!-- Empty State Actions -->
-    <string name="msg_no_apps_frozen">No apps selected to freeze.</string>
-    <string name="action_get_started">Get Started</string>
-    <string name="action_new_automation">New Automation</string>
-    <string name="action_add_repository">Add Repository</string>
+    <string name="msg_no_apps_frozen">Geen apps geselecteerd om te bevriezen.</string>
+    <string name="action_get_started">Aan de slag</string>
+    <string name="action_new_automation">Nieuwe automatie</string>
+    <string name="action_add_repository">Repository toevoegen</string>
 </resources>
