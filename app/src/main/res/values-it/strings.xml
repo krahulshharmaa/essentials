@@ -52,8 +52,8 @@
     <string name="action_ai_assistant">Assistente AI</string>
     <string name="action_take_screenshot">Cattura uno screenshot</string>
     <string name="action_cycle_sound_modes">Scorri modalità audio</string>
-    <string name="action_like_song">Come la canzone attuale</string>
-    <string name="like_song_settings_title">Come le impostazioni del brano</string>
+    <string name="action_like_song">Mi Piace alla canzone attuale</string>
+    <string name="like_song_settings_title">Mi Piace Impostazioni canzone</string>
     <string name="like_song_settings_desc">Questa funzione richiede l\'accesso alle notifiche per rilevare il supporto attualmente in riproduzione e attivare l\'azione mi piace. Si prega di abilitarlo di seguito.</string>
     <string name="like_song_toast_enabled">Mostra il messaggio di avviso popup</string>
     <string name="like_song_aod_overlay_title">Mostra sovrapposizione su AOD</string>
