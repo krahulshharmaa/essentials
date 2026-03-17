@@ -28,7 +28,7 @@
     <string name="button_remap_enable_title">Включить переназначение кнопок</string>
     <string name="button_remap_use_shizuku_title">Используйте Шизуку или Root или Root</string>
     <string name="button_remap_use_shizuku_desc">Работает с выключенным экраном (рекомендуется)</string>
-    <string name="shizuku_not_running_toast">Шизуку не бежит</string>
+    <string name="shizuku_not_running_toast">Shizuku не запущен</string>
     <string name="shizuku_detected_prefix">Обнаружено %1$s</string>
     <string name="shizuku_status_prefix">Статус: %1$s</string>
     <string name="shizuku_open_button">Открыть Шизуку</string>
@@ -36,7 +36,7 @@
     <string name="flashlight_options_title">Варианты фонарика</string>
     <string name="flashlight_options_desc">Отрегулируйте затухание и другие настройки</string>
     <string name="setting_pitch_black_theme_title">Темная тема</string>
-    <string name="setting_pitch_black_theme_desc">Используйте чистый черный фон в темном режиме.</string>
+    <string name="setting_pitch_black_theme_desc">Использовать черный фон в темном режиме</string>
     <string name="settings_section_haptic">Тактильная обратная связь</string>
     <string name="button_remap_section_long_press">Переназначить долгое нажатие</string>
     <string name="screen_off">Экран выключен</string>
@@ -494,7 +494,7 @@
     <string name="perm_shizuku_install_action">Установить Сидзуку</string>
     <string name="perm_shizuku_grant_title">Предоставить разрешение</string>
     <string name="perm_shizuku_grant_desc">Требуется для запуска команд энергосбережения во время навигации по картам.</string>
-    <string name="req_shizuku">Требуется Шизуку или Root</string>
+    <string name="req_shizuku">Требуется Shizuku или Root-доступ</string>
     <string name="perm_root_title">Корневой доступ</string>
     <string name="perm_root_desc">Разрешения, необходимые для системных действий с использованием root-прав.</string>
     <string name="perm_notif_listener_title">Прослушиватель уведомлений</string>
@@ -577,7 +577,7 @@
     <string name="label_settings">Настройки</string>
     <string name="action_report_bug">Сообщить об ошибке</string>
     <!-- Sentry Crash Reporting -->
-    <string name="sentry_report_mode_title">Crash reporting</string>
+    <string name="sentry_report_mode_title">Отчеты об ошибках</string>
     <string name="sentry_mode_off">Выкл</string>
     <string name="sentry_mode_auto">Авто</string>
     <string name="sentry_crash_toast">Сбой Essentials, Отчёт отправлен</string>
@@ -588,13 +588,13 @@
     <string name="action_lets_begin">Давайте начнём</string>
     <string name="acknowledgement_title">Acknowledgement</string>
     <string name="acknowledgement_desc">Это приложение представляет собой набор утилит, которые могут глубоко взаимодействовать с системой вашего устройства. Использование некоторых функций может привести к неожиданным результатам. \n\nВам нужно предоставить приложению только необходимые разрешения для выбранных функций, которые вы используете, это обеспечит наибольшую стабильность и полный контроль над приложением. \n\nБолее того, приложение не отслеживает и не хранит ваши личные данные, они мне не нужны... Берегите себя. Вы можете обратиться к исходному коду для получения дополнительной информации. \n\nЭто приложение имеет полностью открытый исходный код и всегда будет бесплатным. Не покупайте и не устанавливайте его из неизвестных источников.</string>
-    <string name="acknowledgement_warning">WARNING: Proceed with caution. The developer takes no responsibility for any system instability, data loss, or other issues caused by the use of this app. By proceeding, you acknowledge these risks.</string>
+    <string name="acknowledgement_warning">ВНИМАНИЕ: Используйте на свой страх и риск. Разработчик не отвечает за возникновение нестабильности системы, потери данных и прочих ошибок во время использования приложения. Продолжая, вы подтверждаете свое согласие с данными рисками.</string>
     <string name="acknowledgement_footer">Я знаю что ты даже не вчитывался, но в случае если тебе нужна помощь, не стесняйся обратиться к разработчику и сообществу.</string>
     <string name="action_i_understand">Я понимаю</string>
     <string name="feature_intro_desc">Anytime you are clueless on a feature or a Quick Settings Tile on what it does and what permissions may necessary for it, just long press it and pick \'What is this?\' to learn more.</string>
     <string name="feature_intro_footer">Вы можете сообщить об ошибке или найти полезные руководства в настройках приложения в любой момент.</string>
     <string name="action_let_me_in">Впустите меня уже</string>
-    <string name="preferences_title">Preferences</string>
+    <string name="preferences_title">Свойства</string>
     <string name="preferences_desc">Выберите некоторые базовые настройки, чтобы начать.</string>
     <string name="label_app_settings">Настройки приложения</string>
     <string name="label_haptic_feedback">Тактильная отдача</string>
@@ -809,7 +809,7 @@
     <string-array name="keywords_visual_style">
         <item>анимация</item>
         <item>визуальный</item>
-        <item>внешний вид</item>
+        <item>Внешний вид</item>
     </string-array>
     <string-array name="keywords_quiet_filter">
         <item>тихий</item>
