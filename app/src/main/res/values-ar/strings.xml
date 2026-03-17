@@ -213,7 +213,7 @@
     <string name="dns_preset_cloudflare">كلاودفلير DNS</string>
     <string name="dns_preset_cloudflare_hostname">1dot1dot1dot1.cloudflare-dns.com</string>
     <string name="dns_preset_quad9">Quad9 DNS</string>
-    <string name="dns_preset_quad9_hostname">dns.quad9.net</string>
+    <string name="dns_preset_quad9_hostname">dns.quad9.ne</string>
     <string name="dns_preset_cleanbrowsing">التصفح النظيف</string>
     <string name="dns_preset_cleanbrowsing_hostname">مرشح الكبار-dns.cleanbrowsing.org</string>
     <string name="tile_charge_optimization">الشحن</string>
@@ -577,8 +577,8 @@
     <string name="label_settings">إعدادات</string>
     <string name="action_report_bug">الإبلاغ عن خطأ</string>
     <!-- Sentry Crash Reporting -->
-    <string name="sentry_report_mode_title">Crash reporting</string>
-    <string name="sentry_mode_off">Off</string>
+    <string name="sentry_report_mode_title">الإبلاغ عن الأعطال</string>
+    <string name="sentry_mode_off">غلق</string>
     <string name="sentry_mode_auto">Auto</string>
     <string name="sentry_crash_toast">Essentials crashed, Report sent</string>
     <string name="simulate_crash">Simulate crash</string>
