@@ -7,8 +7,8 @@
     <string name="freeze_activity_subtitle">قم بتعطيل التطبيقات التي نادراً ما تستخدمها</string>
     <string name="freeze_shortcut_short_label">تجميد التطبيق</string>
     <string name="freeze_shortcut_long_label">افتح تجميد التطبيقات</string>
-    <string name="frozen_app_shortcut_label">التطبيق المجمدة</string>
-    <string name="screen_off_widget_label">شاشة فارغة خارج القطعة</string>
+    <string name="frozen_app_shortcut_label">التطبيقات المجمدة</string>
+    <string name="screen_off_widget_label">غلق الشاشة ويدجيت فارغ</string>
     <string name="app_freezing_tile_label">تجميد التطبيق</string>
     <string name="flashlight_pulse_tile_label">نبض المصباح</string>
     <string name="check_pre_releases_label">التحقق من وجود الإصدارات المسبقة</string>
@@ -1130,5 +1130,5 @@
     <string name="msg_no_apps_frozen">No apps selected to freeze.</string>
     <string name="action_get_started">Get Started</string>
     <string name="action_new_automation">New Automation</string>
-    <string name="action_add_repository">Add Repository</string>
+    <string name="action_add_repository">إضافة مستودع</string>
 </resources>
