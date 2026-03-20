@@ -3,13 +3,13 @@
     <string name="app_name">Основы</string>
     <string name="label_beta">БЕТА</string>
     <string name="accessibility_service_description"><b>Служба специальных возможностей Essentials</b>\n\nЭта служба необходима для следующих функций:\n\n<b>• Переназначение физических кнопок:</b>\nОбнаруживает нажатие кнопок громкости, даже если экран выключен, чтобы вызывать такие действия, как фонарик.\n\n<b>• Индивидуальные настройки приложений:</b>\nОтслеживает текущее активное приложение для применения конкретных профилей для Динамической ночной подсветки, Цвета подсветки уведомлений и блокировку приложений.\n\n<b>• Контроль экрана:</b>\nПозволяет приложению блокировать экран (например, через двойное нажатие или виджет) и обнаруживать изменения состояния экрана.\n\n<b>• Безопасность:</b>\nПредотвращает несанкционированные изменения, обнаруживая содержимое окна, когда устройство заблокировано.\n\n<small>Никакой вводимый текст или конфиденциальные данные не собираются и не передаются.</small></string>
-    <string name="freeze_activity_title">Зависание приложения</string>
-    <string name="freeze_activity_subtitle">Отключите приложения, которые редко используются</string>
-    <string name="freeze_shortcut_short_label">Зависание приложения</string>
-    <string name="freeze_shortcut_long_label">Зависание открытого приложения</string>
-    <string name="frozen_app_shortcut_label">Замороженное приложение</string>
-    <string name="screen_off_widget_label">Виджет выключения пустого экрана</string>
-    <string name="app_freezing_tile_label">Зависание приложения</string>
+    <string name="freeze_activity_title">Заморозка приложений</string>
+    <string name="freeze_activity_subtitle">Отключить редко используемые приложения</string>
+    <string name="freeze_shortcut_short_label">Заморозка приложений</string>
+    <string name="freeze_shortcut_long_label">Открыть заморозку приложений</string>
+    <string name="frozen_app_shortcut_label">Замороженные приложения</string>
+    <string name="screen_off_widget_label">Пустой виджет для отключения экрана</string>
+    <string name="app_freezing_tile_label">Заморозка приложений</string>
     <string name="flashlight_pulse_tile_label">Фонарик Импульс</string>
     <string name="check_pre_releases_label">Проверьте наличие предварительных выпусков</string>
     <string name="check_pre_releases_desc">Может быть нестабильно</string>
@@ -46,7 +46,7 @@
     <string name="action_toggle_flashlight">Переключить фонарик</string>
     <string name="action_media_play_pause">Медиа-воспроизведение/пауза</string>
     <string name="action_media_next">СМИ дальше</string>
-    <string name="action_media_previous">СМИ предыдущие</string>
+    <string name="action_media_previous">Предыдущее медиа</string>
     <string name="action_toggle_vibrate">Переключить вибрацию</string>
     <string name="action_toggle_mute">Отключить звук</string>
     <string name="action_ai_assistant">ИИ-помощник</string>
@@ -87,7 +87,7 @@
     <string name="permission_post_notifications_title">Опубликовать уведомления</string>
     <string name="permission_post_notifications_desc">Позволяет приложению показывать уведомления</string>
     <string name="permission_grant_action">Предоставить разрешение</string>
-    <string name="caffeinate_notification_title">Кофеинат Актив</string>
+    <string name="caffeinate_notification_title">Caffeinate активен</string>
     <string name="caffeinate_active">Активный</string>
     <string name="caffeinate_notification_desc">Экран не активируется</string>
     <string name="caffeinate_battery_optimization_title">Игнорировать оптимизацию батареи</string>
@@ -96,8 +96,8 @@
     <string name="caffeinate_skip_countdown_desc">Немедленно начните принимать кофеин.</string>
     <string name="caffeinate_timeout_presets_title">Предустановки тайм-аута</string>
     <string name="caffeinate_timeout_presets_desc">Выберите доступную продолжительность для плитки QS</string>
-    <string name="caffeinate_timeout_5m">5 м</string>
-    <string name="caffeinate_timeout_10m">10 м</string>
+    <string name="caffeinate_timeout_5m">5м</string>
+    <string name="caffeinate_timeout_10m">10м</string>
     <string name="caffeinate_timeout_30m">30 м</string>
     <string name="perm_notif_policy_title">Доступ к режиму «Не беспокоить»</string>
     <string name="perm_notif_policy_desc">Требуется для переключения между режимами звука, вибрации и отключения звука.</string>
@@ -133,7 +133,7 @@
     <string name="freeze_automation_hint">Заморозить выбранные приложения при блокировке устройства. Выберите задержку, чтобы избежать зависания приложений, если вы разблокируете экран вскоре после его выключения.</string>
     <string name="freeze_warning">Замораживание системных приложений может быть опасным и может привести к неожиданному поведению.</string>
     <string name="action_enable_in_settings">Включить в настройках</string>
-    <string name="freeze_dont_freeze_active_apps_title">Не\'не блокируйте активные приложения</string>
+    <string name="freeze_dont_freeze_active_apps_title">Не блокируйте активные приложения</string>
     <string name="perm_usage_stats_title">Статистика использования</string>
     <string name="perm_usage_stats_desc">Требуется для определения того, какие приложения в данный момент находятся на переднем плане, чтобы избежать их зависания.</string>
     <string name="perm_notif_listener_desc_freeze">Требуется для обнаружения воспроизводимого мультимедиа и активных уведомлений, чтобы избежать их зависания.</string>
@@ -176,7 +176,7 @@
     <string name="tile_sensitive_content">Деликатный контент</string>
     <string name="tile_tap_to_wake">Нажмите, чтобы разбудить</string>
     <string name="tile_aod">АОД</string>
-    <string name="tile_caffeinate">Кофеинат</string>
+    <string name="tile_caffeinate">Caffeinate</string>
     <string name="tile_sound_mode">Звуковой режим</string>
     <string name="tile_notification_lighting">Освещение уведомлений</string>
     <string name="tile_dynamic_night_light">Динамический ночник</string>
@@ -188,36 +188,36 @@
     <string name="tile_flashlight_pulse">Фонарик Импульс</string>
     <string name="tile_stay_awake">Бодрствуйте</string>
     <string name="input_method_label">Клавиатура Essentials</string>
-    <string name="subtype_en_us">английский (США)</string>
+    <string name="subtype_en_us">Английский (США)</string>
     <string name="tile_active">Активный</string>
     <string name="tile_inactive">Неактивный</string>
     <string name="tile_developer_options">Параметры разработчика</string>
     <string name="about_desc_developer_options">Легко переключайте параметры разработчика системы с плитки QS. Это может привести к сбросу некоторых измененных вами настроек разработчика.</string>
-    <string name="nfc_tile_label">НФК</string>
+    <string name="nfc_tile_label">NFC</string>
     <string name="tile_private_dns">Частный DNS</string>
     <string name="tile_private_dns_auto">Авто</string>
     <string name="tile_private_dns_off">Выключенный</string>
     <string name="tile_usb_debugging">USB-отладка</string>
     <string name="tile_color_picker">Выбор цвета</string>
-    <string name="toast_eyedropper_failed">Ты уверен, что ты\'ты на Android 17? (╯°_°）╯</string>
+    <string name="toast_eyedropper_failed">Ты уверен, что у тебя Android 17? (╯°_°）╯</string>
     <string name="subtitle_eye_dropper">Глазная пипетка</string>
-    <string name="on">На</string>
-    <string name="off">Выключенный</string>
+    <string name="on">Включено</string>
+    <string name="off">Выключено</string>
     <string name="private_dns_custom_title">Пользовательский частный DNS</string>
     <string name="private_dns_presets_title">Общие настройки DNS</string>
     <string name="private_dns_hostname_label">Имя хоста поставщика</string>
-    <string name="dns_preset_adguard">АдГуард DNS</string>
+    <string name="dns_preset_adguard">AdGuard DNS</string>
     <string name="dns_preset_adguard_hostname">dns.adguard.com</string>
     <string name="dns_preset_google">Публичный DNS Google</string>
-    <string name="dns_preset_google_hostname">DNS.google</string>
-    <string name="dns_preset_cloudflare">Облачный DNS</string>
+    <string name="dns_preset_google_hostname">dns.google</string>
+    <string name="dns_preset_cloudflare">Cloudflare DNS</string>
     <string name="dns_preset_cloudflare_hostname">1dot1dot1dot1.cloudflare-dns.com</string>
-    <string name="dns_preset_quad9">Quad9 ДНС</string>
+    <string name="dns_preset_quad9">Quad9 DNS</string>
     <string name="dns_preset_quad9_hostname">dns.quad9.net</string>
-    <string name="dns_preset_cleanbrowsing">ОчиститьПросмотр</string>
-    <string name="dns_preset_cleanbrowsing_hostname">Adult-filter-dns.cleanbrowsing.org</string>
+    <string name="dns_preset_cleanbrowsing">CleanBrowsing</string>
+    <string name="dns_preset_cleanbrowsing_hostname">adult-filter-dns.cleanbrowsing.org</string>
     <string name="tile_charge_optimization">Зарядка</string>
-    <string name="limit_to_80">Ограничьте до 80%</string>
+    <string name="limit_to_80">Ограничить до 80%</string>
     <string name="adaptive_charging">Адаптивный</string>
     <string name="deactivated">Не оптимизировано</string>
     <string name="permission_missing">Разрешение отсутствует</string>
@@ -323,7 +323,7 @@
     <string name="feat_screen_off_widget_desc">Невидимый виджет для выключения экрана</string>
     <string name="feat_statusbar_icons_title">Значки в строке состояния</string>
     <string name="feat_statusbar_icons_desc">Управление видимостью значков в строке состояния</string>
-    <string name="feat_caffeinate_title">Кофеинат</string>
+    <string name="feat_caffeinate_title">Caffeinate</string>
     <string name="feat_caffeinate_desc">Держите экран включенным</string>
     <string name="feat_maps_power_saving_title">Режим энергосбережения карт</string>
     <string name="feat_maps_power_saving_desc">Для любого устройства Android</string>
@@ -422,8 +422,8 @@
     <string name="search_smart_data_desc">Скрыть мобильные данные в определенных режимах</string>
     <string name="search_reset_icons_title">Сбросить все значки</string>
     <string name="search_reset_icons_desc">Сбросить видимость значка строки состояния по умолчанию</string>
-    <string name="search_caffeinate_abort_screen_off_title">Прервать прием кофеината с выключенным экраном</string>
-    <string name="search_caffeinate_abort_screen_off_desc">Автоматически отключать кофеинат при ручной блокировке устройства.</string>
+    <string name="search_caffeinate_abort_screen_off_title">Отменить запуск Caffeinate при выключенном экране</string>
+    <string name="search_caffeinate_abort_screen_off_desc">Автоматически отключать Caffeinate при ручной блокировке устройства</string>
     <string name="search_lighting_style_title">Стиль освещения</string>
     <string name="search_lighting_style_desc">Выбирайте между «Обводкой», «Свечением», «Спиннером» и т. д.</string>
     <string name="search_corner_radius_title">Угловой радиус</string>
@@ -431,7 +431,7 @@
     <string name="search_skip_silent_title">Пропустить беззвучные уведомления</string>
     <string name="search_skip_silent_desc">Не показывать подсветку для беззвучных уведомлений</string>
     <string name="search_flashlight_pulse_title">Импульс фонарика</string>
-    <string name="search_flashlight_pulse_desc">Медленно пульсируйте фонариком для новых уведомлений</string>
+    <string name="search_flashlight_pulse_desc">Медленное мигание фонарика при появлении новых уведомлений</string>
     <string name="search_only_facing_down_title">Только лицом вниз</string>
     <string name="search_only_facing_down_desc">Импульсный фонарик только тогда, когда устройство находится лицевой стороной вниз</string>
     <string name="snooze_no_channels_discovered">Системные каналы пока не обнаружены. Они появятся здесь после обнаружения.</string>
@@ -445,7 +445,7 @@
     <string name="search_qs_wake_desc">Нажмите дважды, чтобы активировать контроль</string>
     <string name="search_qs_aod_title">АОД</string>
     <string name="search_qs_aod_desc">Переключатель «Всегда на дисплее»</string>
-    <string name="search_qs_caffeinate_title">Кофеинат</string>
+    <string name="search_qs_caffeinate_title">Caffeinate</string>
     <string name="search_qs_caffeinate_desc">Переключить экран в активный режим</string>
     <string name="search_qs_sound_title">Звуковой режим</string>
     <string name="search_qs_sound_desc">Переключение режимов звука (Звонок/Вибрация/Без звука)</string>
@@ -489,9 +489,9 @@
     <string name="search_freeze_delay_title">Задержка заморозки</string>
     <string name="search_freeze_delay_desc">Задержка перед фиксацией после блокировки</string>
     <!-- Permissions metadata -->
-    <string name="perm_shizuku_title">Шизуку</string>
+    <string name="perm_shizuku_title">Shizuku</string>
     <string name="perm_shizuku_desc">Требуется для расширенных команд. Установите Shizuku из Play Store.</string>
-    <string name="perm_shizuku_install_action">Установить Сидзуку</string>
+    <string name="perm_shizuku_install_action">Установить Shizuku</string>
     <string name="perm_shizuku_grant_title">Предоставить разрешение</string>
     <string name="perm_shizuku_grant_desc">Требуется для запуска команд энергосбережения во время навигации по картам.</string>
     <string name="req_shizuku">Требуется Shizuku или Root-доступ</string>
@@ -519,8 +519,8 @@
     <string name="perm_device_admin_title">Администратор устройства</string>
     <string name="perm_device_admin_desc">Требуется жесткая блокировка устройства (отключение биометрии) при попытках несанкционированного доступа.</string>
     <string name="perm_action_grant">Предоставить разрешение</string>
-    <string name="perm_action_copy_adb">Копировать АБР</string>
-    <string name="perm_action_check">Проверять</string>
+    <string name="perm_action_copy_adb">Копировать ADB</string>
+    <string name="perm_action_check">Проверить</string>
     <string name="perm_action_enable">Включить в настройках</string>
     <string name="perm_action_how_to">Как предоставить</string>
     <string name="perm_battery_optimization_title">Оптимизация батареи</string>
@@ -565,11 +565,11 @@
     <string name="btn_enable_keyboard">Включить в настройках</string>
     <string name="btn_select_keyboard">Переключиться на Essentials</string>
     <string name="label_enabled">Включено</string>
-    <string name="label_disabled">Неполноценный</string>
+    <string name="label_disabled">Выключено</string>
     <string name="tile_adaptive_brightness">Адаптивная яркость</string>
     <string name="tile_maps_power_saving">Карты Энергосбережение</string>
     <string name="action_search">Поиск</string>
-    <string name="action_stop">Останавливаться</string>
+    <string name="action_stop">Стоп</string>
     <string name="label_search">Поиск</string>
     <!-- UI Components General -->
     <string name="action_back">Назад</string>
@@ -583,7 +583,7 @@
     <string name="sentry_crash_toast">Сбой Essentials, Отчёт отправлен</string>
     <string name="simulate_crash">Simulate crash</string>
     <string name="welcome_title">Добро пожаловать в Essentials</string>
-    <string name="welcome_subtitle">Инструменты для Android задротов</string>
+    <string name="welcome_subtitle">Набор инструментов для фанатов Android</string>
     <string name="welcome_developer_attribution">сделано sameerasw.com</string>
     <string name="action_lets_begin">Давайте начнём</string>
     <string name="acknowledgement_title">Acknowledgement</string>
@@ -674,8 +674,8 @@
     <string name="action_save">Сохранять</string>
     <string name="action_edit">Редактировать</string>
     <string name="action_delete">Удалить</string>
-    <string name="action_enable">Давать возможность</string>
-    <string name="action_disable">Запрещать</string>
+    <string name="action_enable">Включить</string>
+    <string name="action_disable">Отключить</string>
     <string name="automation_service_channel_name">Служба автоматизации</string>
     <string name="automation_service_running_title">Автоматизация активна</string>
     <string name="automation_service_running_desc">Мониторинг системных событий для вашей автоматизации</string>
@@ -736,7 +736,7 @@
     <string-array name="keywords_restore_default">
         <item>восстановить</item>
         <item>по умолчанию</item>
-        <item>икона</item>
+        <item>значок</item>
     </string-array>
     <string-array name="keywords_keyboard">
         <item>клавиатура</item>
@@ -764,7 +764,7 @@
     <string-array name="keywords_notification_lighting">
         <item>светиться</item>
         <item>уведомление</item>
-        <item>вел</item>
+        <item>led</item>
     </string-array>
     <string-array name="keywords_round_shape">
         <item>круглый</item>
@@ -822,9 +822,9 @@
         <item>замок</item>
     </string-array>
     <string-array name="keywords_adb_debug">
-        <item>АБР</item>
+        <item>ADB</item>
         <item>USB</item>
-        <item>отлаживать</item>
+        <item>отладка</item>
     </string-array>
     <string-array name="keywords_blur_glass">
         <item>размытие</item>
@@ -843,7 +843,7 @@
     </string-array>
     <string-array name="keywords_audio_mute">
         <item>аудио</item>
-        <item>немой</item>
+        <item>беззвучный</item>
         <item>объем</item>
     </string-array>
     <string-array name="keywords_blue_filter">
@@ -853,12 +853,12 @@
     </string-array>
     <string-array name="keywords_app_freezing">
         <item>заморозить</item>
-        <item>Шизуку</item>
+        <item>Shizuku</item>
     </string-array>
     <string-array name="keywords_manual_now">
         <item>руководство</item>
         <item>сейчас</item>
-        <item>Шизуку</item>
+        <item>Shizuku</item>
     </string-array>
     <string-array name="keywords_proximity_sensor">
         <item>близость</item>
@@ -885,10 +885,10 @@
     <string name="toggle_show_system_apps">Показать системные приложения</string>
     <!-- Updates -->
     <string name="status_up_to_date">Вы в курсе</string>
-    <string name="warning_pre_release">Это предварительная версия и может быть нестабильной.</string>
+    <string name="warning_pre_release">Это предварительная версия, которая может работать нестабильно.</string>
     <string name="release_notes_format">Примечания к выпуску %1$s</string>
     <string name="action_view_on_github">Посмотреть на GitHub</string>
-    <string name="action_download_apk">Скачать АПК</string>
+    <string name="action_download_apk">Скачать APK</string>
     <!-- Haptic Types -->
     <string name="haptic_none">Никто</string>
     <string name="haptic_subtle">Тонкий</string>
@@ -896,7 +896,7 @@
     <string name="haptic_click">Нажмите</string>
     <string name="haptic_tick">Галочка</string>
     <!-- Flashlight Intensity Overlay -->
-    <string name="action_turn_off">Выключать</string>
+    <string name="action_turn_off">Выключить</string>
     <string name="feature_flashlight_brightness_title">Яркость фонарика</string>
     <!-- QS / Activities -->
     <string name="error_unlock_network_settings">Разблокируйте телефон, чтобы изменить настройки сети</string>
@@ -904,7 +904,7 @@
     <string name="developed_by_format">Разработано %1$s\nс ❤\uFE0F из \uD83C\uDDF1\uD83C\uDDF0</string>
     <string name="action_website">Веб-сайт</string>
     <string name="action_contact">Контакт</string>
-    <string name="action_telegram">Телеграмма</string>
+    <string name="action_telegram">Телеграм</string>
     <string name="action_support">Поддерживать</string>
     <string name="label_other_apps">Другие приложения</string>
     <string name="app_airsync">AirSync</string>
@@ -914,8 +914,8 @@
     <string name="app_zero">Ноль</string>
     <!-- Help & Guides -->
     <string name="help_guides_title">Помощь и руководства</string>
-    <string name="need_more_support_reach_out">Нужна дополнительная поддержка? Протяни руку,</string>
-    <string name="action_collapse">Крах</string>
+    <string name="need_more_support_reach_out">Нужна дополнительная помощь? Обратитесь к нам,</string>
+    <string name="action_collapse">Свернуть</string>
     <string name="action_expand">Расширять</string>
     <string name="support_group_label">Группа поддержки</string>
     <string name="email_label">Электронная почта</string>
@@ -971,7 +971,7 @@
     <string name="location_reached_notification_title">Пункт назначения достигнут!</string>
     <string name="location_reached_notification_desc">Вы прибыли в пункт назначения.</string>
     <string name="location_reached_processing">Место обработки…</string>
-    <string name="location_reached_dist_remaining">ОСТАЛОСЬ ДИСТАНЦИЯ</string>
+    <string name="location_reached_dist_remaining">ОСТАВШЕЕСЯ РАССТОЯНИЕ</string>
     <string name="location_reached_calculating">Расчет…</string>
     <string name="location_reached_stop_tracking">Прекратить отслеживание</string>
     <string name="location_reached_dest_ready">Пункт назначения готов</string>
@@ -980,8 +980,8 @@
     <string name="location_reached_clear">Прозрачный</string>
     <string name="location_reached_no_dest">Нет пункта назначения</string>
     <string name="location_reached_open_maps">Открыть карты</string>
-    <string name="location_reached_fsi_title">Разрешение полноэкранного режима тревоги</string>
-    <string name="location_reached_fsi_desc">Требуется для пробуждения вашего устройства по прибытии. Нажмите, чтобы предоставить.</string>
+    <string name="location_reached_fsi_title">Разрешение на отображение полноэкранных уведомлений</string>
+    <string name="location_reached_fsi_desc">Требуется разрешение на пробуждение устройства по прибытии. Нажмите, чтобы разрешить.</string>
     <string name="location_reached_dist_m">%1$d м</string>
     <string name="location_reached_dist_km">%1$.1f км</string>
     <string name="location_reached_service_title">Сигнализация движения активна</string>
@@ -990,11 +990,11 @@
     <string name="location_reached_channel_desc">Показывает расстояние до пункта назначения в режиме реального времени</string>
     <string name="location_reached_alarm_title">Пункт назначения поблизости</string>
     <string name="location_reached_alarm_subtitle">Приготовьтесь выйти</string>
-    <string name="location_reached_dismiss">Увольнять</string>
+    <string name="location_reached_dismiss">Отклонить</string>
     <string name="location_reached_toast_set">Набор назначения: %1$.4f, %2$.4f</string>
     <string name="setting_use_root_title">Использовать Root</string>
-    <string name="setting_use_root_desc">Вместо Шизуку</string>
-    <string name="root_not_available_toast">Root-доступ недоступен. Пожалуйста, проверьте ваш корневой менеджер.</string>
+    <string name="setting_use_root_desc">Вместо Shizuku</string>
+    <string name="root_not_available_toast">Доступ к root-правам отсутствует. Проверьте настройки менеджера root-прав.</string>
     <!-- System Keyboard -->
     <string name="feat_system_keyboard_title">Клавиатура</string>
     <string name="feat_system_keys">Ключи</string>
@@ -1108,7 +1108,7 @@
     <string name="label_reset_default">Перезагрузить</string>
     <string name="settings_section_scale">Шкала</string>
     <string name="label_smallest_width">Наименьшая ширина</string>
-    <string name="msg_shizuku_permission_required">Для настройки масштаба требуется разрешение Шизуку</string>
+    <string name="msg_shizuku_permission_required">Для настройки масштаба требуется разрешение Shizuku</string>
     <string name="label_grant_permission">Предоставить разрешение</string>
     <string name="settings_section_animations">Анимации</string>
     <string name="label_animator_duration_scale">Шкала продолжительности анимации</string>
