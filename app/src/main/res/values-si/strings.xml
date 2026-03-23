@@ -204,7 +204,12 @@
     <string name="on">ක්‍රියාත්මකයි</string>
     <string name="off">අක්රියයි</string>
     <string name="private_dns_custom_title">අභිරුචි පුද්ගලික DNS</string>
-    <string name="private_dns_presets_title">පොදු DNS පෙරසිටුවීම්</string>
+    <string name="private_dns_presets_title">DNS Presets</string>
+    <string name="dns_preset_add_title">Add DNS Preset</string>
+    <string name="dns_preset_name_label">Preset name</string>
+    <string name="dns_preset_reset_action">Reset</string>
+    <string name="dns_preset_delete_content_description">Delete preset</string>
+    <string name="dns_preset_reset_confirm">Are you sure you want to reset all DNS presets to defaults? This will remove all your custom presets.</string>
     <string name="private_dns_hostname_label">සපයන්නාගේ සත්කාරක නාමය</string>
     <string name="dns_preset_adguard">AdGuard DNS</string>
     <string name="dns_preset_adguard_hostname">dns.adguard.com</string>
@@ -653,6 +658,13 @@
     <string name="diy_trigger_device_unlock">උපාංගය අගුළු හැරීම</string>
     <string name="diy_trigger_charger_connected">චාජර් සම්බන්ධ කර ඇත</string>
     <string name="diy_trigger_charger_disconnected">ආරෝපණය විසන්ධි විය</string>
+    <string name="diy_trigger_schedule">Schedule</string>
+    <string name="diy_state_time_period">Time Period</string>
+    <string name="diy_time_selection_title">Select Time</string>
+    <string name="diy_time_range_selection_title">Select Time Range</string>
+    <string name="diy_start_time_label">Start Time</string>
+    <string name="diy_end_time_label">End Time</string>
+    <string name="diy_repeat_days_label">Repeat on</string>
     <string name="diy_state_charging">අයකිරීම</string>
     <string name="diy_state_screen_on">තිරය ​​ක්‍රියාත්මකයි</string>
     <string name="diy_action_haptic">කම්පනය කරන්න</string>
