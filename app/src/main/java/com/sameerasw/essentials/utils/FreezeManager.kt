@@ -1,6 +1,13 @@
 package com.sameerasw.essentials.utils
 
 import android.content.Context
+import android.os.Build
+import android.os.IBinder
+import android.os.PersistableBundle
+import org.lsposed.hiddenapibypass.HiddenApiBypass
+import rikka.shizuku.Shizuku
+import rikka.shizuku.ShizukuBinderWrapper
+import rikka.shizuku.SystemServiceHelper
 
 object FreezeManager {
     private const val TAG = "FreezeManager"
@@ -242,6 +249,10 @@ object FreezeManager {
     }
 
     private fun suspendApp(context: Context, packageName: String): Boolean {
+        if (ShizukuUtils.isShizukuAvailable() && ShizukuUtils.hasPermission()) {
+            if (setAppSuspendedWithShizuku(packageName, true)) return true
+        }
+
         if (!ShellUtils.hasPermission(context)) return false
         return try {
             ShellUtils.runCommand(context, "pm suspend --user 0 $packageName")
@@ -253,6 +264,10 @@ object FreezeManager {
     }
 
     private fun unsuspendApp(context: Context, packageName: String): Boolean {
+        if (ShizukuUtils.isShizukuAvailable() && ShizukuUtils.hasPermission()) {
+            if (setAppSuspendedWithShizuku(packageName, false)) return true
+        }
+
         if (!ShellUtils.hasPermission(context)) return false
         return try {
             ShellUtils.runCommand(context, "pm unsuspend --user 0 $packageName")
@@ -263,14 +278,112 @@ object FreezeManager {
         }
     }
 
+    private fun setAppSuspendedWithShizuku(packageName: String, suspended: Boolean): Boolean {
+        return try {
+            if (suspended) forceStopAppWithShizuku(packageName)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                setAppRestrictedWithShizuku(packageName, suspended)
+            }
+
+            val pm = getService("package", "android.content.pm.IPackageManager\$Stub") ?: return false
+            val callerPackage = getSuspenderPackage()
+            val userId = getUserId()
+
+            val dialogInfo = if (suspended) {
+                val builderClass = Class.forName("android.content.pm.SuspendDialogInfo\$Builder")
+                val builder = HiddenApiBypass.newInstance(builderClass)
+                HiddenApiBypass.invoke(builderClass, builder, "setNeutralButtonAction", 1 /*BUTTON_ACTION_UNSUSPEND*/)
+                HiddenApiBypass.invoke(builderClass, builder, "build")
+            } else null
+
+            fun callSetPackagesSuspended(version: Int): Array<*>? {
+                return try {
+                    when (version) {
+                        0 -> HiddenApiBypass.invoke(
+                            pm.javaClass, pm, "setPackagesSuspendedAsUser",
+                            arrayOf(packageName), suspended, null, null, dialogInfo, 0, callerPackage, userId, userId
+                        ) as? Array<*>
+                        1 -> HiddenApiBypass.invoke(
+                            pm.javaClass, pm, "setPackagesSuspendedAsUser",
+                            arrayOf(packageName), suspended, null, null, dialogInfo, callerPackage, userId
+                        ) as? Array<*>
+                        2 -> HiddenApiBypass.invoke(
+                            pm.javaClass, pm, "setPackagesSuspendedAsUser",
+                            arrayOf(packageName), suspended, null, null, null, callerPackage, userId
+                        ) as? Array<*>
+                        else -> pm.javaClass.getMethod("setPackagesSuspendedAsUser", Array<String>::class.java, Boolean::class.javaPrimitiveType, Int::class.javaPrimitiveType)
+                            .invoke(pm, arrayOf(packageName), suspended, userId) as? Array<*>
+                    }
+                } catch (_: Exception) { null }
+            }
+
+            val result = when {
+                Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE -> callSetPackagesSuspended(0) ?: callSetPackagesSuspended(1)
+                Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q -> callSetPackagesSuspended(1) ?: callSetPackagesSuspended(2)
+                Build.VERSION.SDK_INT >= Build.VERSION_CODES.P -> callSetPackagesSuspended(2)
+                else -> callSetPackagesSuspended(3)
+            }
+
+            result?.isEmpty() ?: false
+        } catch (e: Exception) {
+            e.printStackTrace()
+            false
+        }
+    }
+
+    private fun forceStopAppWithShizuku(packageName: String) {
+        val am = getService(Context.ACTIVITY_SERVICE, "android.app.IActivityManager\$Stub") ?: return
+        try {
+            HiddenApiBypass.invoke(am.javaClass, am, "forceStopPackage", packageName, getUserId())
+        } catch (e: Exception) { e.printStackTrace() }
+    }
+
+    private fun setAppRestrictedWithShizuku(packageName: String, restricted: Boolean) {
+        val appops = getService(Context.APP_OPS_SERVICE, "com.android.internal.app.IAppOpsService\$Stub") ?: return
+        try {
+            val appOpsManagerClass = Class.forName("android.app.AppOpsManager")
+            val op = HiddenApiBypass.invoke(appOpsManagerClass, null, "strOpToOp", "android:run_any_in_background") as Int
+            val uid = getPackageUid(packageName)
+            if (uid != -1) {
+                val mode = if (restricted) 1 /*MODE_IGNORED*/ else 0 /*MODE_ALLOWED*/
+                HiddenApiBypass.invoke(appops.javaClass, appops, "setMode", op, uid, packageName, mode)
+            }
+        } catch (e: Exception) { e.printStackTrace() }
+    }
+
+    private fun getPackageUid(packageName: String): Int {
+        val pm = getService("package", "android.content.pm.IPackageManager\$Stub") ?: return -1
+        return try {
+            HiddenApiBypass.invoke(pm.javaClass, pm, "getPackageUid", packageName, 0, 0) as Int
+        } catch (e: Exception) {
+            e.printStackTrace()
+            -1
+        }
+    }
+
+    private fun getService(serviceName: String, stubClassName: String): Any? {
+        return try {
+            val binder = SystemServiceHelper.getSystemService(serviceName) ?: return null
+            val stubClass = Class.forName(stubClassName)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                HiddenApiBypass.invoke(stubClass, null, "asInterface", ShizukuBinderWrapper(binder))
+            } else {
+                stubClass.getMethod("asInterface", IBinder::class.java).invoke(null, ShizukuBinderWrapper(binder))
+            }
+        } catch (_: Exception) { null }
+    }
+
+    private fun getSuspenderPackage(): String =
+        if (Shizuku.getUid() == 0) "com.sameerasw.essentials" else "com.android.shell"
+
+    private fun getUserId(): Int = android.os.Process.myUserHandle().hashCode()
+
     private fun setApplicationEnabledSetting(
         context: Context,
         packageName: String,
         newState: Int
     ): Boolean {
-        if (!ShellUtils.hasPermission(context)) {
-            return false
-        }
+        if (!ShellUtils.hasPermission(context)) return false
 
         val cmd = when (newState) {
             COMPONENT_ENABLED_STATE_DISABLED_USER -> "pm disable-user --user 0 $packageName"
