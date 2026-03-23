@@ -673,6 +673,8 @@
     <string name="diy_action_flashlight_on">Taschenlampe aktivieren</string>
     <string name="diy_action_flashlight_off">Taschenlampe deaktivieren</string>
     <string name="diy_action_flashlight_toggle">Taschenlampe ein-/ausschalten</string>
+    <string name="diy_action_low_power_on">Turn On Low Power Mode</string>
+    <string name="diy_action_low_power_off">Turn Off Low Power Mode</string>
     <string name="diy_action_dim_wallpaper">Hintergrund dimmen</string>
     <string name="diy_dim_wallpaper_desc">Diese Aktion erfordert Shizuku oder einen Root-Zugang um den Hintergrund zu dimmen.</string>
     <string name="diy_select_trigger">Auslöser auswählen</string>
