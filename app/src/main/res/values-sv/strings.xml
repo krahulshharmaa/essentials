@@ -673,6 +673,8 @@
     <string name="diy_action_flashlight_on">Slå på ficklampan</string>
     <string name="diy_action_flashlight_off">Stäng av ficklampan</string>
     <string name="diy_action_flashlight_toggle">Växla ficklampa</string>
+    <string name="diy_action_low_power_on">Turn On Low Power Mode</string>
+    <string name="diy_action_low_power_off">Turn Off Low Power Mode</string>
     <string name="diy_action_dim_wallpaper">Dimmig tapet</string>
     <string name="diy_dim_wallpaper_desc">Den här åtgärden kräver Shizuku eller Root för att justera systemets tapetdämpning.</string>
     <string name="diy_select_trigger">Välj Trigger</string>
