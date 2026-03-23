@@ -105,18 +105,30 @@ class YourAndroidViewModel : ViewModel() {
                 } else {
                     queries.add("$manufacturer $model")
                 }
+
+                // 2. User-defined device name (often it's the marketing name like "Galaxy S21 FE 5G")
+                if (deviceName.isNotBlank() && !queries.contains(deviceName)) {
+                    queries.add(deviceName)
+                }
+
+                // 3. Handle model numbers by stripping common prefixes (SM-, Redmi, Mi, POCO, etc.)
+                val prefixes = listOf("SM-", "Redmi ", "Mi ", "POCO ")
+                for (prefix in prefixes) {
+                    if (model.startsWith(prefix, ignoreCase = true)) {
+                        val stripped = model.substring(prefix.length).trim()
+                        if (stripped.isNotBlank() && !queries.contains(stripped)) {
+                            queries.add(stripped)
+                            queries.add("$manufacturer $stripped")
+                        }
+                    }
+                }
                 
-                // 2. Model number directly if it's different from marketing name
+                // 4. Model number directly if it's different from marketing name
                 if (!queries.contains(model)) {
                     queries.add(model)
                 }
                 
-                // 3. User-defined device name (sometimes it's the marketing name)
-                if (deviceName.isNotBlank() && !queries.contains(deviceName)) {
-                    queries.add(deviceName)
-                }
-                
-                // 4. Device codename (e.g., "shiba", "a51")
+                // 5. Device codename (e.g., "shiba", "a51", "r9q")
                 if (deviceCodename.isNotBlank() && !queries.contains(deviceCodename)) {
                     queries.add(deviceCodename)
                 }
