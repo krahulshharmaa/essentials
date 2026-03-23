@@ -673,6 +673,8 @@
     <string name="diy_action_flashlight_on">Yab mac ma ki lwongo ni Flashlight</string>
     <string name="diy_action_flashlight_off">Neko mac ma ki lwongo ni Flashlight</string>
     <string name="diy_action_flashlight_toggle">Lok mac ma ki lwongo ni Flashlight</string>
+    <string name="diy_action_low_power_on">Turn On Low Power Mode</string>
+    <string name="diy_action_low_power_off">Turn Off Low Power Mode</string>
     <string name="diy_action_dim_wallpaper">Karatac me cel ma nen maber</string>
     <string name="diy_dim_wallpaper_desc">Tic man mito Shizuku onyo Root me loko rangi pa cal ma ki keto i cim.</string>
     <string name="diy_select_trigger">Yer Trigger</string>
