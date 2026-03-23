@@ -673,6 +673,8 @@
     <string name="diy_action_flashlight_on">Zapněte svítilnu</string>
     <string name="diy_action_flashlight_off">Vypnout svítilnu</string>
     <string name="diy_action_flashlight_toggle">Přepnout svítilnu</string>
+    <string name="diy_action_low_power_on">Turn On Low Power Mode</string>
+    <string name="diy_action_low_power_off">Turn Off Low Power Mode</string>
     <string name="diy_action_dim_wallpaper">Ztlumit tapety</string>
     <string name="diy_dim_wallpaper_desc">Tato akce vyžaduje, aby Shizuku nebo Root upravili stmívání tapety systému.</string>
     <string name="diy_select_trigger">Vyberte možnost Spustit</string>
