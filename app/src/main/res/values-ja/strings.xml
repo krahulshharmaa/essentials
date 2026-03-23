@@ -673,6 +673,8 @@
     <string name="diy_action_flashlight_on">フラッシュライトを点灯</string>
     <string name="diy_action_flashlight_off">フラッシュライトを消灯</string>
     <string name="diy_action_flashlight_toggle">フラッシュライトを切り替える</string>
+    <string name="diy_action_low_power_on">Turn On Low Power Mode</string>
+    <string name="diy_action_low_power_off">Turn Off Low Power Mode</string>
     <string name="diy_action_dim_wallpaper">暗い壁紙</string>
     <string name="diy_dim_wallpaper_desc">このアクションでは、壁紙を暗くするために、ShizukuまたはRootが必要です。</string>
     <string name="diy_select_trigger">トリガーを選択</string>
