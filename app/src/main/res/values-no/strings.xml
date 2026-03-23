@@ -137,6 +137,10 @@
     <string name="perm_usage_stats_title">Bruksstatistikk</string>
     <string name="perm_usage_stats_desc">Nødvendig for å oppdage hvilke apper som er i forgrunnen for å unngå å fryse dem</string>
     <string name="perm_notif_listener_desc_freeze">Nødvendig for å oppdage avspillingsmedier og aktive varsler for å unngå å fryse dem</string>
+    <string name="freeze_mode_title">Freeze mode</string>
+    <string name="freeze_mode_freeze">Freezing</string>
+    <string name="freeze_mode_suspend">App suspension</string>
+    <string name="freeze_mode_warning_desc">Can not switch mode while apps are frozen. Please unfreeze all and try again.</string>
     <!-- Notification Lighting -->
     <string name="notification_lighting_screen_off_title">Vises bare når skjermen er av</string>
     <string name="notification_lighting_skip_silent_title">Hopp over stille varsler</string>
