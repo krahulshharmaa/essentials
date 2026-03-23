@@ -137,6 +137,10 @@
     <string name="perm_usage_stats_title">Wel ma ki tiyo kwede</string>
     <string name="perm_usage_stats_desc">Mitte me ngeyo app mene ma tye i nyim me gengo juku gi</string>
     <string name="perm_notif_listener_desc_freeze">Mitte me neno jami ma tye ka tuko ki ngec ma tye ka tic me gengo juku gi</string>
+    <string name="freeze_mode_title">Freeze mode</string>
+    <string name="freeze_mode_freeze">Freezing</string>
+    <string name="freeze_mode_suspend">App suspension</string>
+    <string name="freeze_mode_warning_desc">Can not switch mode while apps are frozen. Please unfreeze all and try again.</string>
     <!-- Notification Lighting -->
     <string name="notification_lighting_screen_off_title">Nyut keken ka gin ma ki neno ni tye ka tic</string>
     <string name="notification_lighting_skip_silent_title">Wek lok ma ki cwalo ma pe ki lok</string>
