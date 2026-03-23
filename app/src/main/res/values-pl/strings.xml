@@ -673,6 +673,8 @@
     <string name="diy_action_flashlight_on">Włącz latarkę</string>
     <string name="diy_action_flashlight_off">Wyłącz latarkę</string>
     <string name="diy_action_flashlight_toggle">Przełącz latarkę</string>
+    <string name="diy_action_low_power_on">Turn On Low Power Mode</string>
+    <string name="diy_action_low_power_off">Turn Off Low Power Mode</string>
     <string name="diy_action_dim_wallpaper">Ciemna tapeta</string>
     <string name="diy_dim_wallpaper_desc">Ta czynność wymaga Shizuku lub Roota, aby dostosować przyciemnienie tapety systemowej.</string>
     <string name="diy_select_trigger">Wybierz opcję Wyzwalacz</string>
