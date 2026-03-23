@@ -673,6 +673,8 @@
     <string name="diy_action_flashlight_on">Ενεργοποιήστε τον φακό</string>
     <string name="diy_action_flashlight_off">Απενεργοποιήστε τον φακό</string>
     <string name="diy_action_flashlight_toggle">Εναλλαγή φακού</string>
+    <string name="diy_action_low_power_on">Turn On Low Power Mode</string>
+    <string name="diy_action_low_power_off">Turn Off Low Power Mode</string>
     <string name="diy_action_dim_wallpaper">Θαμπή ταπετσαρία</string>
     <string name="diy_dim_wallpaper_desc">Αυτή η ενέργεια απαιτεί το Shizuku ή το Root για να προσαρμόσουν τη μείωση της φωτεινότητας της ταπετσαρίας του συστήματος.</string>
     <string name="diy_select_trigger">Επιλέξτε Trigger</string>
