@@ -673,6 +673,8 @@
     <string name="diy_action_flashlight_on">Encender la linterna</string>
     <string name="diy_action_flashlight_off">Apagar la linterna</string>
     <string name="diy_action_flashlight_toggle">Alternar linterna</string>
+    <string name="diy_action_low_power_on">Turn On Low Power Mode</string>
+    <string name="diy_action_low_power_off">Turn Off Low Power Mode</string>
     <string name="diy_action_dim_wallpaper">Fondo de pantalla oscuro</string>
     <string name="diy_dim_wallpaper_desc">Esta acción requiere que Shizuku o Root ajusten la atenuación del fondo de pantalla del sistema.</string>
     <string name="diy_select_trigger">Seleccionar disparador</string>
