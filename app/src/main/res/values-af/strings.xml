@@ -673,6 +673,8 @@
     <string name="diy_action_flashlight_on">Skakel flitslig aan</string>
     <string name="diy_action_flashlight_off">Skakel flitslig af</string>
     <string name="diy_action_flashlight_toggle">Wissel flitslig</string>
+    <string name="diy_action_low_power_on">Turn On Low Power Mode</string>
+    <string name="diy_action_low_power_off">Turn Off Low Power Mode</string>
     <string name="diy_action_dim_wallpaper">Dowwe muurpapier</string>
     <string name="diy_dim_wallpaper_desc">Hierdie aksie vereis Shizuku of Root om stelselpapierverduistering aan te pas.</string>
     <string name="diy_select_trigger">Kies Sneller</string>
