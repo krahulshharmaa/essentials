@@ -137,6 +137,10 @@
     <string name="perm_usage_stats_title">Käyttötilastot</string>
     <string name="perm_usage_stats_desc">Pakollinen tunnistamaan, mitkä sovellukset ovat tällä hetkellä etualalla, jotta ne eivät jäädy</string>
     <string name="perm_notif_listener_desc_freeze">Vaaditaan toistavan median ja aktiivisten ilmoitusten havaitsemiseksi niiden jäätymisen välttämiseksi</string>
+    <string name="freeze_mode_title">Freeze mode</string>
+    <string name="freeze_mode_freeze">Freezing</string>
+    <string name="freeze_mode_suspend">App suspension</string>
+    <string name="freeze_mode_warning_desc">Can not switch mode while apps are frozen. Please unfreeze all and try again.</string>
     <!-- Notification Lighting -->
     <string name="notification_lighting_screen_off_title">Näytä vain näytön ollessa pois päältä</string>
     <string name="notification_lighting_skip_silent_title">Ohita äänettömät ilmoitukset</string>
