@@ -204,7 +204,12 @@
     <string name="on">~에</string>
     <string name="off">끄다</string>
     <string name="private_dns_custom_title">맞춤형 프라이빗 DNS</string>
-    <string name="private_dns_presets_title">일반적인 DNS 사전 설정</string>
+    <string name="private_dns_presets_title">DNS Presets</string>
+    <string name="dns_preset_add_title">Add DNS Preset</string>
+    <string name="dns_preset_name_label">Preset name</string>
+    <string name="dns_preset_reset_action">Reset</string>
+    <string name="dns_preset_delete_content_description">Delete preset</string>
+    <string name="dns_preset_reset_confirm">Are you sure you want to reset all DNS presets to defaults? This will remove all your custom presets.</string>
     <string name="private_dns_hostname_label">공급자 호스트 이름</string>
     <string name="dns_preset_adguard">AdGuard DNS</string>
     <string name="dns_preset_adguard_hostname">dns.adguard.com</string>
@@ -653,6 +658,13 @@
     <string name="diy_trigger_device_unlock">장치 잠금 해제</string>
     <string name="diy_trigger_charger_connected">충전기 연결됨</string>
     <string name="diy_trigger_charger_disconnected">충전기 연결 끊김</string>
+    <string name="diy_trigger_schedule">Schedule</string>
+    <string name="diy_state_time_period">Time Period</string>
+    <string name="diy_time_selection_title">Select Time</string>
+    <string name="diy_time_range_selection_title">Select Time Range</string>
+    <string name="diy_start_time_label">Start Time</string>
+    <string name="diy_end_time_label">End Time</string>
+    <string name="diy_repeat_days_label">Repeat on</string>
     <string name="diy_state_charging">충전 중</string>
     <string name="diy_state_screen_on">화면 켜짐</string>
     <string name="diy_action_haptic">떨리다</string>
