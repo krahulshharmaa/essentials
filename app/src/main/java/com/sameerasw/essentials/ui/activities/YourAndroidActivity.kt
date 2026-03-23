@@ -80,17 +80,36 @@ class YourAndroidViewModel : ViewModel() {
     private val _isSpecsLoading = MutableStateFlow(true)
     val isSpecsLoading = _isSpecsLoading.asStateFlow()
 
+    private val _isRefreshing = MutableStateFlow(false)
+    val isRefreshing = _isRefreshing.asStateFlow()
+
     var hasRunStartupAnimation = false
 
-    fun loadDeviceSpecs(deviceInfo: DeviceInfo) {
-        if (_deviceSpecs.value != null) {
+    fun loadDeviceSpecs(context: android.content.Context, deviceInfo: com.sameerasw.essentials.utils.DeviceInfo, forceRefresh: Boolean = false) {
+        if (!forceRefresh && _deviceSpecs.value != null) {
             _isSpecsLoading.value = false
             return
         }
 
         viewModelScope.launch {
-            _isSpecsLoading.value = true
-            val specs = withContext(Dispatchers.IO) {
+            if (forceRefresh) {
+                _isRefreshing.value = true
+            } else {
+                _isSpecsLoading.value = true
+                
+                // Try to load from cache first
+                val cached = withContext(Dispatchers.IO) {
+                    com.sameerasw.essentials.utils.DeviceSpecsCache.getCachedSpecs(context)
+                }
+                
+                if (cached != null) {
+                    _deviceSpecs.value = cached
+                    _isSpecsLoading.value = false
+                    return@launch
+                }
+            }
+
+            val fetchedSpecs = withContext(Dispatchers.IO) {
                 val manufacturer = deviceInfo.manufacturer
                 val model = deviceInfo.model
                 val deviceName = deviceInfo.deviceName
@@ -133,14 +152,21 @@ class YourAndroidViewModel : ViewModel() {
                     queries.add(deviceCodename)
                 }
 
-                GSMArenaService.fetchSpecs(
+                com.sameerasw.essentials.utils.GSMArenaService.fetchSpecs(
                     preferredName = manufacturer,
                     preferredModel = model,
                     queries = queries.toTypedArray()
                 )
             }
-            _deviceSpecs.value = specs
+
+            if (fetchedSpecs != null) {
+                // Download and cache images
+                val specsWithImages = com.sameerasw.essentials.utils.DeviceSpecsCache.downloadImages(context, fetchedSpecs)
+                _deviceSpecs.value = specsWithImages
+            }
+            
             _isSpecsLoading.value = false
+            _isRefreshing.value = false
         }
     }
 }
@@ -162,6 +188,8 @@ class YourAndroidActivity : ComponentActivity() {
             val viewModel: YourAndroidViewModel = androidx.lifecycle.viewmodel.compose.viewModel()
             val deviceSpecs by viewModel.deviceSpecs.collectAsState()
             val isSpecsLoading by viewModel.isSpecsLoading.collectAsState()
+            val isRefreshing by viewModel.isRefreshing.collectAsState()
+            
             val context = androidx.compose.ui.platform.LocalContext.current
             val deviceInfo = remember { DeviceUtils.getDeviceInfo(context) }
             var showHelpSheet by remember { mutableStateOf(false) }
@@ -184,7 +212,7 @@ class YourAndroidActivity : ComponentActivity() {
 
             LaunchedEffect(Unit) {
                 mainViewModel.check(context)
-                viewModel.loadDeviceSpecs(deviceInfo)
+                viewModel.loadDeviceSpecs(context, deviceInfo)
             }
 
             EssentialsTheme(pitchBlackTheme = isPitchBlackThemeEnabled) {
@@ -206,14 +234,22 @@ class YourAndroidActivity : ComponentActivity() {
                             } else Modifier
                         )
                 ) {
-                    YourAndroidContent(
-                        deviceInfo = deviceInfo,
-                        deviceSpecs = deviceSpecs,
-                        isSpecsLoading = isSpecsLoading,
-                        hasRunStartupAnimation = viewModel.hasRunStartupAnimation,
-                        onAnimationRun = { viewModel.hasRunStartupAnimation = true },
+                    androidx.compose.material3.pulltorefresh.PullToRefreshBox(
+                        isRefreshing = isRefreshing,
+                        onRefresh = {
+                            viewModel.loadDeviceSpecs(context, deviceInfo, forceRefresh = true)
+                        },
                         modifier = Modifier.fillMaxSize()
-                    )
+                    ) {
+                        YourAndroidContent(
+                            deviceInfo = deviceInfo,
+                            deviceSpecs = deviceSpecs,
+                            isSpecsLoading = isSpecsLoading,
+                            hasRunStartupAnimation = viewModel.hasRunStartupAnimation,
+                            onAnimationRun = { viewModel.hasRunStartupAnimation = true },
+                            modifier = Modifier.fillMaxSize()
+                        )
+                    }
 
                     EssentialsFloatingToolbar(
                         title = stringResource(R.string.tab_your_android),
