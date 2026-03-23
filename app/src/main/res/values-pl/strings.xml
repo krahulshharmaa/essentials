@@ -137,6 +137,10 @@
     <string name="perm_usage_stats_title">Statystyki użytkowania</string>
     <string name="perm_usage_stats_desc">Wymagane do wykrycia, które aplikacje są aktualnie na pierwszym planie, aby uniknąć ich zablokowania</string>
     <string name="perm_notif_listener_desc_freeze">Wymagane do wykrywania odtwarzanych multimediów i aktywnych powiadomień, aby uniknąć ich zablokowania</string>
+    <string name="freeze_mode_title">Freeze mode</string>
+    <string name="freeze_mode_freeze">Freezing</string>
+    <string name="freeze_mode_suspend">App suspension</string>
+    <string name="freeze_mode_warning_desc">Can not switch mode while apps are frozen. Please unfreeze all and try again.</string>
     <!-- Notification Lighting -->
     <string name="notification_lighting_screen_off_title">Pokazuj tylko przy wyłączonym ekranie</string>
     <string name="notification_lighting_skip_silent_title">Pomiń ciche powiadomienia</string>
