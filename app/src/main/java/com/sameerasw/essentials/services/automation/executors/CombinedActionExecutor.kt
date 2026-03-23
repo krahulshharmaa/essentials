@@ -11,6 +11,8 @@ object CombinedActionExecutor {
     suspend fun execute(context: Context, action: com.sameerasw.essentials.domain.diy.Action) {
         kotlinx.coroutines.withContext(kotlinx.coroutines.Dispatchers.Main) {
             when (action) {
+            is Action.TurnOnLowPower -> setLowPowerMode(context, true)
+            is Action.TurnOffLowPower -> setLowPowerMode(context, false)
             is Action.HapticVibration -> {
                 val vibrator = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                     val manager =
@@ -199,6 +201,15 @@ object CombinedActionExecutor {
         try {
             val cameraId = camManager.cameraIdList[0]
             camManager.setTorchMode(cameraId, on)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    private fun setLowPowerMode(context: Context, on: Boolean) {
+        val value = if (on) 1 else 0
+        try {
+            android.provider.Settings.Global.putInt(context.contentResolver, "low_power", value)
         } catch (e: Exception) {
             e.printStackTrace()
         }

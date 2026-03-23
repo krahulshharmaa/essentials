@@ -551,7 +551,9 @@ class AutomationEditorActivity : ComponentActivity() {
                                                 Action.ToggleFlashlight,
                                                 Action.HapticVibration,
                                                 Action.DimWallpaper(),
-                                                Action.SoundMode()
+                                                Action.SoundMode(),
+                                                Action.TurnOnLowPower,
+                                                Action.TurnOffLowPower
                                             )
                                             // Only show Device Effects on Android 15+ 
                                             actions.add(Action.DeviceEffects())
