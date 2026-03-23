@@ -673,6 +673,8 @@
     <string name="diy_action_flashlight_on">Zaklamp aanzetten</string>
     <string name="diy_action_flashlight_off">Zaklamp uitzetten</string>
     <string name="diy_action_flashlight_toggle">Zaklamp in-/uitschakelen</string>
+    <string name="diy_action_low_power_on">Turn On Low Power Mode</string>
+    <string name="diy_action_low_power_off">Turn Off Low Power Mode</string>
     <string name="diy_action_dim_wallpaper">Achtergrond dimmen</string>
     <string name="diy_dim_wallpaper_desc">Deze actie vereist Shizuku of Root om de achtergrond te dimmen.</string>
     <string name="diy_select_trigger">Selecteer trigger</string>
