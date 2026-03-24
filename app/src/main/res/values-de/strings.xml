@@ -606,6 +606,7 @@
     <string name="preferences_title">Einstellungen</string>
     <string name="preferences_desc">Lege einige Grundeinstellungen fest, um loszulegen.</string>
     <string name="label_app_settings">App-Einstellungen</string>
+    <string name="label_app_language">Language</string>
     <string name="label_haptic_feedback">Haptisches Feedback</string>
     <string name="label_updates">Updates</string>
     <string name="label_auto_check_updates">Automatische Suche nach Updates</string>
@@ -1191,4 +1192,10 @@
     <string name="action_get_started">Loslegen</string>
     <string name="action_new_automation">Neue Automatisierung</string>
     <string name="action_add_repository">Repository hinzufügen</string>
+    <!-- Bug Report Enhancement -->
+    <string name="bug_report_feedback_placeholder">Describe the issue or provide feedback…</string>
+    <string name="bug_report_contact_email_label">Contact email</string>
+    <string name="action_send_feedback">Send Feedback</string>
+    <string name="msg_feedback_sent">Feedback sent successfully! Thanks for helping us improve the app.</string>
+    <string name="label_alternatively">Alternatively</string>
 </resources>
