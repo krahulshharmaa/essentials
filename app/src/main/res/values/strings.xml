@@ -1276,5 +1276,11 @@
     <string name="action_get_started">Get Started</string>
     <string name="action_new_automation">New Automation</string>
     <string name="action_add_repository">Add Repository</string>
+    <!-- Bug Report Enhancement -->
+    <string name="bug_report_feedback_placeholder">Describe the issue or provide feedback…</string>
+    <string name="bug_report_contact_email_label">Contact email</string>
+    <string name="action_send_feedback">Send Feedback</string>
+    <string name="msg_feedback_sent">Feedback sent successfully! Thanks for helping us improve the app.</string>
+    <string name="label_alternatively">Alternatively</string>
 
 </resources>
