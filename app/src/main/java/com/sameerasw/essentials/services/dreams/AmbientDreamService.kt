@@ -272,8 +272,6 @@ class AmbientDreamService : DreamService() {
                 override fun getOutline(view: View, outline: android.graphics.Outline) {
                     if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
                         outline.setPath(petalPath)
-                    } else if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.Q) {
-                        outline.setPath(petalPath)
                     } else {
                         outline.setOval(0, 0, view.width, view.height)
                     }
