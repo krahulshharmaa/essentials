@@ -12,9 +12,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.runtime.State
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import androidx.annotation.Keep
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
+@Keep
 data class KaomojiObject(
     @SerializedName("category") val category: String,
     @SerializedName("value") val value: String
@@ -25,6 +27,7 @@ data class KaomojiCategory(
     val kaomojis: List<KaomojiObject>
 )
 
+@Keep
 data class KaomojiDataResponse(
     @SerializedName("kaomoji") val kaomoji: List<KaomojiObject>
 )
