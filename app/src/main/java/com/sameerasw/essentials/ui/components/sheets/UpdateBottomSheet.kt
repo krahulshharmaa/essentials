@@ -16,8 +16,8 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
-import androidx.compose.material3.Icon
-import androidx.compose.material3.LoadingIndicator
+import androidx.compose.material3.ListItem
+import androidx.compose.material3.ListItemDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.OutlinedButton
@@ -33,6 +33,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.material3.Icon
+import androidx.compose.material3.LoadingIndicator
 import androidx.core.net.toUri
 import com.sameerasw.essentials.R
 import com.sameerasw.essentials.domain.model.UpdateInfo
@@ -101,26 +104,33 @@ fun UpdateBottomSheet(
 
                     if (isPreRelease) {
                         RoundedCardContainer {
-                            Row(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .background(MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.5f))
-                                    .padding(12.dp),
-                                horizontalArrangement = Arrangement.spacedBy(8.dp),
-                                verticalAlignment = Alignment.CenterVertically
-                            ) {
-                                Icon(
-                                    painter = painterResource(id = R.drawable.rounded_mobile_code_24),
-                                    contentDescription = null,
-                                    tint = MaterialTheme.colorScheme.error,
-                                    modifier = Modifier.size(24.dp)
-                                )
-                                Text(
-                                    text = stringResource(R.string.warning_pre_release),
-                                    style = MaterialTheme.typography.labelMedium,
-                                    color = MaterialTheme.colorScheme.onErrorContainer
-                                )
-                            }
+                            ListItem(
+                                onClick = {},
+                                modifier = Modifier.fillMaxWidth(),
+                                leadingContent = {
+                                    Icon(
+                                        painter = painterResource(id = R.drawable.rounded_mobile_code_24),
+                                        contentDescription = null,
+                                        tint = MaterialTheme.colorScheme.error,
+                                        modifier = Modifier.size(24.dp),
+                                    )
+                                },
+                                contentPadding = PaddingValues(
+                                    horizontal = 16.dp,
+                                    vertical = 16.dp
+                                ),
+                                verticalAlignment = Alignment.CenterVertically,
+                                colors = ListItemDefaults.colors(
+                                    containerColor = MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.5f)
+                                ),
+                                content = {
+                                    Text(
+                                        text = stringResource(R.string.warning_pre_release),
+                                        style = MaterialTheme.typography.labelMedium,
+                                        color = MaterialTheme.colorScheme.onErrorContainer
+                                    )
+                                }
+                            )
                         }
                         Spacer(modifier = Modifier.height(8.dp))
                     }

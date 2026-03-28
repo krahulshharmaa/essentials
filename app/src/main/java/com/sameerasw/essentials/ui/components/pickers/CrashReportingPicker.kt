@@ -33,37 +33,42 @@ fun CrashReportingPicker(
     Column(
         modifier = modifier
             .fillMaxWidth()
-            .background(
-                color = MaterialTheme.colorScheme.surfaceBright,
-                shape = RoundedCornerShape(MaterialTheme.shapes.extraSmall.bottomEnd)
-            )
-            .padding(12.dp),
-        verticalArrangement = Arrangement.spacedBy(10.dp)
+            .background(MaterialTheme.colorScheme.surfaceBright),
+        verticalArrangement = Arrangement.spacedBy(0.dp)
     ) {
-        Row(
+        ListItem(
+            onClick = {},
+            modifier = Modifier.fillMaxWidth(),
+            leadingContent = {
+                Icon(
+                    painter = painterResource(id = iconRes),
+                    contentDescription = null,
+                    modifier = Modifier.size(24.dp),
+                    tint = MaterialTheme.colorScheme.primary
+                )
+            },
+            contentPadding = PaddingValues(
+                horizontal = 16.dp,
+                vertical = 16.dp
+            ),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(12.dp)
-        ) {
-            Spacer(modifier = Modifier.size(2.dp))
-            Icon(
-                painter = painterResource(id = iconRes),
-                contentDescription = null,
-                modifier = Modifier.size(24.dp),
-                tint = MaterialTheme.colorScheme.primary
-            )
-            Spacer(modifier = Modifier.size(2.dp))
-
-            Text(
-                text = stringResource(R.string.sentry_report_mode_title),
-                style = MaterialTheme.typography.bodyMedium,
-                modifier = Modifier.weight(1f),
-                color = MaterialTheme.colorScheme.onSurface
-            )
-        }
+            colors = ListItemDefaults.colors(
+                containerColor = MaterialTheme.colorScheme.surfaceBright
+            ),
+            content = {
+                Text(
+                    text = stringResource(R.string.sentry_report_mode_title),
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurface
+                )
+            }
+        )
 
         Row(
             modifier = Modifier
-                .fillMaxWidth(),
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp)
+                .padding(bottom = 16.dp),
             horizontalArrangement = Arrangement.spacedBy(ButtonGroupDefaults.ConnectedSpaceBetween),
         ) {
             options.forEachIndexed { index, option ->

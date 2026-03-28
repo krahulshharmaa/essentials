@@ -382,13 +382,6 @@ fun SettingsContent(
         }
 
 
-        Text(
-            text = "Default tab",
-            style = MaterialTheme.typography.titleMedium,
-            modifier = Modifier.padding(start = 16.dp, top = 8.dp, bottom = 8.dp),
-            color = MaterialTheme.colorScheme.onSurfaceVariant
-        )
-
         val defaultTab by viewModel.defaultTab
         RoundedCardContainer {
             val availableTabs = remember { DIYTabs.entries }
@@ -760,8 +753,8 @@ fun SettingsContent(
                         .background(
                             color = MaterialTheme.colorScheme.surfaceBright
                         )
-                        .padding(start = 12.dp, end = 12.dp, top = 12.dp, bottom = 4.dp),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                        .padding(16.dp),
+                    horizontalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
                     Button(
                         onClick = {
@@ -791,19 +784,21 @@ fun SettingsContent(
                         .background(
                             color = MaterialTheme.colorScheme.surfaceBright
                         )
-                        .padding(start = 12.dp, end = 12.dp, top = 4.dp, bottom = 12.dp),
+                        .padding(start = 16.dp, end = 16.dp, bottom = 16.dp),
                     horizontalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
                     Button(
                         onClick = {
                             HapticUtil.performVirtualKeyHaptic(view)
                             viewModel.resetOnboarding(context)
-                            // Navigate back to main screen
-                            (context as? ComponentActivity)?.finish()
+                            Toast.makeText(context, "Onboarding reset", Toast.LENGTH_SHORT).show()
                         },
-                        modifier = Modifier.fillMaxWidth()
+                        modifier = Modifier.fillMaxWidth(),
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = MaterialTheme.colorScheme.error
+                        )
                     ) {
-                        Text("Reset onboarding")
+                        Text("Reset App Data", color = MaterialTheme.colorScheme.onError)
                     }
                 }
 
