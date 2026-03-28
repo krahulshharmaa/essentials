@@ -79,8 +79,8 @@ dependencies {
     // Android 12+ SplashScreen API with backward compatibility attributes
     implementation("androidx.core:core-splashscreen:1.0.1")
 
-    // Force latest Material3 1.5.0-alpha12 for ToggleButton & ButtonGroup support
-    implementation("androidx.compose.material3:material3:1.5.0-alpha12")
+    // Force latest Material3 1.5.0-alpha16 for new ListItem expressive overloads
+    implementation("androidx.compose.material3:material3:1.5.0-alpha16")
 
     implementation(libs.androidx.compose.ui)
     implementation(libs.androidx.compose.ui.graphics)

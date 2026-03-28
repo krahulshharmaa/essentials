@@ -23,6 +23,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.sameerasw.essentials.utils.HapticUtil
 
+@OptIn(androidx.compose.material3.ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun IconToggleItem(
     iconRes: Int,
@@ -37,80 +38,108 @@ fun IconToggleItem(
 ) {
     val view = LocalView.current
 
-    Row(
-        modifier = modifier
-            .fillMaxWidth()
-            .background(
-                color = MaterialTheme.colorScheme.surfaceBright,
-                shape = RoundedCornerShape(MaterialTheme.shapes.extraSmall.bottomEnd)
-            )
-            .clickable(enabled = !showToggle && enabled) {
+    val onClickAction = {
+        if (enabled) {
+            HapticUtil.performVirtualKeyHaptic(view)
+            onCheckedChange(!isChecked)
+        } else if (onDisabledClick != null) {
+            HapticUtil.performVirtualKeyHaptic(view)
+            onDisabledClick()
+        }
+    }
+
+    if (showToggle) {
+        androidx.compose.material3.ListItem(
+             checked = isChecked && enabled,
+            onCheckedChange = { checked ->
                 if (enabled) {
                     HapticUtil.performVirtualKeyHaptic(view)
-                    onCheckedChange(!isChecked)
+                    onCheckedChange(checked)
                 } else if (onDisabledClick != null) {
                     HapticUtil.performVirtualKeyHaptic(view)
                     onDisabledClick()
                 }
-            }
-            .padding(12.dp),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(12.dp)
-    ) {
-        Spacer(modifier = Modifier.size(2.dp))
-        Icon(
-            painter = painterResource(id = iconRes),
-            contentDescription = title,
-            modifier = Modifier.size(24.dp),
-            tint = MaterialTheme.colorScheme.primary
-        )
-        Spacer(modifier = Modifier.size(2.dp))
-
-        if (description != null) {
-            Column(modifier = Modifier.weight(1f)) {
+            },
+            enabled = enabled,
+            modifier = modifier.fillMaxWidth(),
+            verticalAlignment = androidx.compose.ui.Alignment.CenterVertically,
+            leadingContent = {
+                Icon(
+                    painter = painterResource(id = iconRes),
+                    contentDescription = title,
+                    modifier = Modifier.size(32.dp),
+                    tint = MaterialTheme.colorScheme.primary
+                )
+            },
+            contentPadding = androidx.compose.foundation.layout.PaddingValues(
+                horizontal = 16.dp,
+                vertical = 16.dp
+            ),
+            supportingContent = if (description != null) {
+                {
+                    Text(
+                        text = description,
+                        style = MaterialTheme.typography.labelMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
+            } else null,
+            trailingContent = {
+                Switch(
+                    checked = if (enabled) isChecked else false,
+                    onCheckedChange = null, // Handled by ListItem
+                    enabled = enabled
+                )
+            },
+            colors = androidx.compose.material3.ListItemDefaults.colors(
+                containerColor = MaterialTheme.colorScheme.surfaceBright
+            ),
+            content = {
                 Text(
                     text = title,
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurface
                 )
-                Text(
-                    text = description,
-                    style = MaterialTheme.typography.labelMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                )
             }
-        } else {
-            Text(
-                text = title,
-                style = MaterialTheme.typography.bodyMedium,
-                modifier = Modifier.weight(1f),
-                color = MaterialTheme.colorScheme.onSurface
-            )
-        }
-
-        if (showToggle) {
-            Box {
-                Switch(
-                    checked = if (enabled) isChecked else false,
-                    onCheckedChange = { checked ->
-                        if (enabled) {
-                            HapticUtil.performVirtualKeyHaptic(view)
-                            onCheckedChange(checked)
-                        }
-                    },
-                    enabled = enabled
+        )
+    } else {
+        androidx.compose.material3.ListItem(
+            onClick = onClickAction,
+            enabled = enabled,
+            modifier = modifier.fillMaxWidth(),
+            verticalAlignment = androidx.compose.ui.Alignment.CenterVertically,
+            leadingContent = {
+                Icon(
+                    painter = painterResource(id = iconRes),
+                    contentDescription = title,
+                    modifier = Modifier.size(32.dp),
+                    tint = MaterialTheme.colorScheme.primary
                 )
-
-                if (!enabled && onDisabledClick != null) {
-                    Box(modifier = Modifier
-                        .matchParentSize()
-                        .clickable {
-                            HapticUtil.performVirtualKeyHaptic(view)
-                            onDisabledClick()
-                        })
+            },
+            contentPadding = androidx.compose.foundation.layout.PaddingValues(
+                horizontal = 16.dp,
+                vertical = 16.dp
+            ),
+            supportingContent = if (description != null) {
+                {
+                    Text(
+                        text = description,
+                        style = MaterialTheme.typography.labelMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
                 }
+            } else null,
+            colors = androidx.compose.material3.ListItemDefaults.colors(
+                containerColor = MaterialTheme.colorScheme.surfaceBright
+            ),
+            content = {
+                Text(
+                    text = title,
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurface
+                )
             }
-        }
+        )
     }
 }
 
