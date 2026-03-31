@@ -580,6 +580,7 @@
     <string name="action_search">يبحث</string>
     <string name="action_stop">قف</string>
     <string name="label_search">يبحث</string>
+    <string name="search_frozen_apps_placeholder">Search frozen apps</string>
     <!-- UI Components General -->
     <string name="action_back">خلف</string>
     <string name="content_desc_back">خلف</string>
