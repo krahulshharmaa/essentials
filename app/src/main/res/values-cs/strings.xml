@@ -580,6 +580,7 @@
     <string name="action_search">Vyhledávání</string>
     <string name="action_stop">Zastávka</string>
     <string name="label_search">Vyhledávání</string>
+    <string name="search_frozen_apps_placeholder">Search frozen apps</string>
     <!-- UI Components General -->
     <string name="action_back">Zadní</string>
     <string name="content_desc_back">Zadní</string>
