@@ -16,6 +16,7 @@ import com.google.android.gms.location.Priority
 import com.sameerasw.essentials.MainActivity
 import com.sameerasw.essentials.R
 import com.sameerasw.essentials.data.repository.LocationReachedRepository
+import com.sameerasw.essentials.domain.model.LocationAlarm
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -79,26 +80,36 @@ class LocationReachedService : Service() {
         trackingJob?.cancel()
         trackingJob = serviceScope.launch {
             while (isActive) {
-                val alarm = repository.getAlarm()
-                if (alarm.isEnabled && alarm.latitude != 0.0 && alarm.longitude != 0.0) {
+                val activeId = repository.getActiveAlarmId()
+                val alarms = repository.getAlarms()
+                val alarm = alarms.find { it.id == activeId }
+                
+                if (alarm != null) {
                     updateProgress(alarm)
                 } else {
                     stopSelf()
                     break
                 }
-                delay(10000) // Update every 10 seconds for better responsiveness
+                delay(10000)
             }
         }
     }
 
     private fun stopTracking() {
-        val alarm = repository.getAlarm()
-        repository.saveAlarm(alarm.copy(isEnabled = false))
+        val activeId = repository.getActiveAlarmId()
+        val alarms = repository.getAlarms()
+        val alarm = alarms.find { it.id == activeId }
+        
+        if (alarm != null) {
+            repository.saveLastTrip(alarm)
+        }
+        
+        repository.saveActiveAlarmId(null)
         stopSelf()
     }
 
     @android.annotation.SuppressLint("MissingPermission")
-    private fun updateProgress(alarm: com.sameerasw.essentials.domain.model.LocationAlarm) {
+    private fun updateProgress(alarm: LocationAlarm) {
         fusedLocationClient.getCurrentLocation(Priority.PRIORITY_BALANCED_POWER_ACCURACY, null)
             .addOnSuccessListener { location ->
                 location?.let {
@@ -292,11 +303,11 @@ class LocationReachedService : Service() {
             val channel = NotificationChannel(
                 CHANNEL_ID,
                 getString(R.string.location_reached_channel_name),
-                NotificationManager.IMPORTANCE_HIGH // Increased importance
+                NotificationManager.IMPORTANCE_HIGH
             ).apply {
                 description = getString(R.string.location_reached_channel_desc)
                 setShowBadge(false)
-                lockscreenVisibility = Notification.VISIBILITY_PUBLIC // Ensure it's visible on lockscreen
+                lockscreenVisibility = Notification.VISIBILITY_PUBLIC
                 setSound(null, null)
                 enableVibration(false)
             }

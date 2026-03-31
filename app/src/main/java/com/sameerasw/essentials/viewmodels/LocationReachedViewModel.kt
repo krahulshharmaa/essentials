@@ -1,6 +1,8 @@
 package com.sameerasw.essentials.viewmodels
 
 import android.app.Application
+import android.content.Intent
+import android.widget.Toast
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
@@ -27,7 +29,19 @@ class LocationReachedViewModel(application: Application) : AndroidViewModel(appl
     private val repository = LocationReachedRepository(application)
     private val fusedLocationClient = LocationServices.getFusedLocationProviderClient(application)
 
-    var alarm = mutableStateOf(repository.getAlarm())
+    var savedAlarms = mutableStateOf<List<LocationAlarm>>(emptyList())
+        private set
+
+    var activeAlarmId = mutableStateOf<String?>(null)
+        private set
+
+    var lastTrip = mutableStateOf<LocationAlarm?>(repository.getLastTrip())
+        private set
+
+    var tempAlarm = mutableStateOf<LocationAlarm?>(null)
+        private set
+
+    var showBottomSheet = mutableStateOf(false)
         private set
 
     var isProcessingCoordinates = mutableStateOf(false)
@@ -40,11 +54,6 @@ class LocationReachedViewModel(application: Application) : AndroidViewModel(appl
         private set
 
     init {
-        // Initial distance check
-        if (alarm.value.latitude != 0.0 && alarm.value.longitude != 0.0) {
-            updateCurrentDistance()
-        }
-
         // Observe shared state for real-time updates across activities
         viewModelScope.launch {
             LocationReachedRepository.isProcessing.collect {
@@ -53,56 +62,108 @@ class LocationReachedViewModel(application: Application) : AndroidViewModel(appl
         }
 
         viewModelScope.launch {
-            LocationReachedRepository.alarmFlow.collect { newAlarm ->
-                newAlarm?.let {
-                    alarm.value = it
-                    // Start distance might need refresh if destination changed
+            LocationReachedRepository.tempAlarm.collect {
+                tempAlarm.value = it
+            }
+        }
+
+        viewModelScope.launch {
+            LocationReachedRepository.showBottomSheet.collect {
+                showBottomSheet.value = it
+            }
+        }
+
+        viewModelScope.launch {
+            LocationReachedRepository.alarmsFlow.collect { alarms ->
+                savedAlarms.value = alarms
+            }
+        }
+
+        viewModelScope.launch {
+            LocationReachedRepository.activeAlarmId.collect { id ->
+                activeAlarmId.value = id
+                if (id != null) {
+                    updateCurrentDistance()
+                } else {
+                    currentDistance.value = null
                 }
             }
         }
     }
 
-    fun clearAlarm() {
-        val clearedAlarm = LocationAlarm(0.0, 0.0, 1000, false)
-        alarm.value = clearedAlarm
-        startDistance.value = 0f
-        repository.saveAlarm(clearedAlarm)
-        repository.saveStartDistance(0f)
-        LocationReachedService.stop(getApplication())
-        currentDistance.value = null
+    fun setShowBottomSheet(show: Boolean) {
+        repository.setShowBottomSheet(show)
     }
 
-    fun startTracking() {
-        val currentAlarm = alarm.value
-        if (currentAlarm.latitude != 0.0 && currentAlarm.longitude != 0.0) {
-            val enabledAlarm = currentAlarm.copy(isEnabled = true)
-            alarm.value = enabledAlarm
-            repository.saveAlarm(enabledAlarm)
-            LocationReachedService.start(getApplication())
+    fun setTempAlarm(alarm: LocationAlarm?) {
+        repository.setTempAlarm(alarm)
+    }
 
-            // Refreshed start distance logic
-            fusedLocationClient.getCurrentLocation(Priority.PRIORITY_BALANCED_POWER_ACCURACY, null)
-                .addOnSuccessListener { location ->
-                    location?.let {
-                        val dist = calculateDistance(
-                            it.latitude, it.longitude,
-                            enabledAlarm.latitude, enabledAlarm.longitude
-                        )
-                        startDistance.value = dist
-                        repository.saveStartDistance(dist)
-                    }
-                }
+    fun saveAlarm(alarm: LocationAlarm) {
+        val currentList = savedAlarms.value.toMutableList()
+        val index = currentList.indexOfFirst { it.id == alarm.id }
+        if (index != -1) {
+            currentList[index] = alarm
+        } else {
+            currentList.add(alarm)
         }
+        repository.saveAlarms(currentList)
+        repository.setShowBottomSheet(false)
+        repository.setTempAlarm(null)
+    }
+
+    fun deleteAlarm(alarmId: String) {
+        if (activeAlarmId.value == alarmId) {
+            stopTracking()
+        }
+        val currentList = savedAlarms.value.filter { it.id != alarmId }
+        repository.saveAlarms(currentList)
+    }
+
+    fun startTracking(alarmId: String) {
+        val alarm = savedAlarms.value.find { it.id == alarmId } ?: return
+        
+        // Stop any previous tracking
+        if (activeAlarmId.value != null && activeAlarmId.value != alarmId) {
+            stopTracking()
+        }
+
+        repository.saveActiveAlarmId(alarmId)
+        LocationReachedService.start(getApplication())
+
+        // Refreshed start distance logic
+        fusedLocationClient.getCurrentLocation(Priority.PRIORITY_BALANCED_POWER_ACCURACY, null)
+            .addOnSuccessListener { location ->
+                location?.let {
+                    val dist = calculateDistance(
+                        it.latitude, it.longitude,
+                        alarm.latitude, alarm.longitude
+                    )
+                    startDistance.value = dist
+                    repository.saveStartDistance(dist)
+                }
+            }
+        
+        // Clear last trip when starting new
+        lastTrip.value = null
+        repository.saveLastTrip(null)
     }
 
     fun stopTracking() {
-        val currentAlarm = alarm.value
-        val disabledAlarm = currentAlarm.copy(isEnabled = false)
-        alarm.value = disabledAlarm
-        repository.saveAlarm(disabledAlarm)
+        val id = activeAlarmId.value ?: return
+        val alarm = savedAlarms.value.find { it.id == id }
+        
+        if (alarm != null) {
+            // Save as last trip
+            lastTrip.value = alarm
+            repository.saveLastTrip(alarm)
+        }
+
+        repository.saveActiveAlarmId(null)
         LocationReachedService.stop(getApplication())
-        // Keep start distance for potential restart? Or maybe just keep coordinates.
-        // User said "keep last track in memory (only destination)".
+        currentDistance.value = null
+        startDistance.value = 0f
+        repository.saveStartDistance(0f)
     }
 
     private var distanceTrackingJob: kotlinx.coroutines.Job? = null
@@ -112,8 +173,7 @@ class LocationReachedViewModel(application: Application) : AndroidViewModel(appl
 
         distanceTrackingJob = viewModelScope.launch {
             while (true) {
-                // Tracking should only happen if coordinates exist
-                if (alarm.value.latitude != 0.0 && alarm.value.longitude != 0.0) {
+                if (activeAlarmId.value != null) {
                     updateCurrentDistance()
                 } else {
                     currentDistance.value = null
@@ -134,20 +194,23 @@ class LocationReachedViewModel(application: Application) : AndroidViewModel(appl
     }
 
     @android.annotation.SuppressLint("MissingPermission")
-    private fun updateCurrentDistance() {
+    fun updateCurrentDistance() {
+        val id = activeAlarmId.value
+        val activeAlarm = savedAlarms.value.find { it.id == id } ?: tempAlarm.value ?: return
+
         fusedLocationClient.getCurrentLocation(Priority.PRIORITY_BALANCED_POWER_ACCURACY, null)
             .addOnSuccessListener { location ->
                 location?.let {
                     val distance = calculateDistance(
                         it.latitude, it.longitude,
-                        alarm.value.latitude, alarm.value.longitude
+                        activeAlarm.latitude, activeAlarm.longitude
                     )
                     currentDistance.value = distance
                 }
             }
     }
 
-    private fun calculateDistance(lat1: Double, lon1: Double, lat2: Double, lon2: Double): Float {
+    fun calculateDistance(lat1: Double, lon1: Double, lat2: Double, lon2: Double): Float {
         val r = 6371e3 // Earth's radius in meters
         val phi1 = lat1 * PI / 180
         val phi2 = lat2 * PI / 180
@@ -162,18 +225,7 @@ class LocationReachedViewModel(application: Application) : AndroidViewModel(appl
         return (r * c).toFloat()
     }
 
-    fun updateAlarm(newAlarm: LocationAlarm) {
-        val oldAlarm = alarm.value
-        alarm.value = newAlarm
-        repository.saveAlarm(newAlarm)
-
-        // If coordinates changed, refresh distance immediately
-        if (oldAlarm.latitude != newAlarm.latitude || oldAlarm.longitude != newAlarm.longitude) {
-            updateCurrentDistance()
-        }
-    }
-
-    fun handleIntent(intent: android.content.Intent): Boolean {
+    fun handleIntent(intent: Intent): Boolean {
         val action = intent.action
         val type = intent.type
         val data = intent.data
@@ -184,15 +236,15 @@ class LocationReachedViewModel(application: Application) : AndroidViewModel(appl
         )
 
         val textToParse = when {
-            action == android.content.Intent.ACTION_SEND && type == "text/plain" -> {
-                intent.getStringExtra(android.content.Intent.EXTRA_TEXT)
+            action == Intent.ACTION_SEND && type == "text/plain" -> {
+                intent.getStringExtra(Intent.EXTRA_TEXT)
             }
 
-            action == android.content.Intent.ACTION_VIEW && data?.scheme == "geo" -> {
+            action == Intent.ACTION_VIEW && data?.scheme == "geo" -> {
                 data.toString()
             }
 
-            action == android.content.Intent.ACTION_VIEW && (data?.host?.contains("google.com") == true || data?.host?.contains(
+            action == Intent.ACTION_VIEW && (data?.host?.contains("google.com") == true || data?.host?.contains(
                 "goo.gl"
             ) == true) -> {
                 data.toString()
@@ -205,19 +257,16 @@ class LocationReachedViewModel(application: Application) : AndroidViewModel(appl
 
         // Check if it's a shortened URL that needs resolution
         if (textToParse.contains("maps.app.goo.gl") || textToParse.contains("goo.gl/maps")) {
+            repository.setShowBottomSheet(true)
             resolveAndParse(textToParse)
-            return true // Navigate to settings while resolving
+            return true
         }
 
         return tryParseAndSet(textToParse)
     }
 
     private fun tryParseAndSet(text: String): Boolean {
-        // Broad regex for coordinates: looks for two floats separated by a comma
-        // Supports: "40.7127, -74.0059", "geo:40.7127,-74.0059", "@40.7127,-74.0059", "q=40.7127,-74.0059"
         val commaRegex = Regex("(-?\\d+\\.\\d+)\\s*,\\s*(-?\\d+\\.\\d+)")
-
-        // Pattern for Google Maps data URLs: !3d40.7127!4d-74.0059
         val dataRegex = Regex("!3d(-?\\d+\\.\\d+)!4d(-?\\d+\\.\\d+)")
 
         val match = commaRegex.find(text) ?: dataRegex.find(text)
@@ -228,13 +277,14 @@ class LocationReachedViewModel(application: Application) : AndroidViewModel(appl
 
             if (lat != 0.0 && lng != 0.0) {
                 android.util.Log.d("LocationReachedVM", "Parsed coordinates: $lat, $lng")
-                // Staging mode: don't enable yet
-                updateAlarm(alarm.value.copy(latitude = lat, longitude = lng, isEnabled = false))
-                android.widget.Toast.makeText(
-                    getApplication(), getApplication<Application>().getString(
-                        R.string.location_reached_toast_set, lat, lng
-                    ), android.widget.Toast.LENGTH_SHORT
-                ).show()
+                repository.setTempAlarm(LocationAlarm(
+                    latitude = lat,
+                    longitude = lng,
+                    name = "New Destination",
+                    isEnabled = false
+                ))
+                repository.setShowBottomSheet(true)
+                updateCurrentDistance()
                 repository.setIsProcessing(false)
                 return true
             }
@@ -263,30 +313,20 @@ class LocationReachedViewModel(application: Application) : AndroidViewModel(appl
             }
             android.util.Log.d("LocationReachedVM", "Resolved URL: $resolvedUrl")
             if (!tryParseAndSet(resolvedUrl)) {
-                // Additional check for @lat,lng which might not have spaces or exactly match the above
                 val pathRegex = Regex("@(-?\\d+\\.\\d+),(-?\\d+\\.\\d+)")
                 val pathMatch = pathRegex.find(resolvedUrl)
                 if (pathMatch != null) {
                     val lat = pathMatch.groupValues[1].toDoubleOrNull() ?: 0.0
                     val lng = pathMatch.groupValues[2].toDoubleOrNull() ?: 0.0
                     if (lat != 0.0 && lng != 0.0) {
-                        // Staging mode: don't enable yet
-                        updateAlarm(
-                            alarm.value.copy(
-                                latitude = lat,
-                                longitude = lng,
-                                isEnabled = false
-                            )
-                        )
-                        android.widget.Toast.makeText(
-                            getApplication(),
-                            getApplication<Application>().getString(
-                                R.string.location_reached_toast_set,
-                                lat,
-                                lng
-                            ),
-                            android.widget.Toast.LENGTH_SHORT
-                        ).show()
+                        repository.setTempAlarm(LocationAlarm(
+                            latitude = lat,
+                            longitude = lng,
+                            name = "New Destination",
+                            isEnabled = false
+                        ))
+                        repository.setShowBottomSheet(true)
+                        updateCurrentDistance()
                     }
                 }
                 repository.setIsProcessing(false)

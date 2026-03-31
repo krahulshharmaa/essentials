@@ -1,0 +1,90 @@
+package com.sameerasw.essentials.ui.components.cards
+
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.*
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import com.sameerasw.essentials.R
+import com.sameerasw.essentials.domain.model.LocationAlarm
+
+@Composable
+fun LocationAlarmCard(
+    alarm: LocationAlarm,
+    isActive: Boolean,
+    isAnyTracking: Boolean,
+    onStart: () -> Unit,
+    onStop: () -> Unit,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    val view = androidx.compose.ui.platform.LocalView.current
+    
+    ListItem(
+        modifier = modifier
+            .fillMaxWidth()
+            .background(MaterialTheme.colorScheme.surfaceBright, MaterialTheme.shapes.extraSmall)
+            .clickable {
+                com.sameerasw.essentials.utils.HapticUtil.performVirtualKeyHaptic(view)
+                onClick()
+            },
+        headlineContent = {
+            Text(
+                text = alarm.name.ifEmpty { "Destination" },
+                style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.onSurface
+            )
+        },
+        supportingContent = {
+            Text(
+                text = "Radius: ${alarm.radius}m",
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+        },
+        trailingContent = {
+            if (isActive) {
+                IconButton(
+                    onClick = {
+                        com.sameerasw.essentials.utils.HapticUtil.performVirtualKeyHaptic(view)
+                        onStop()
+                    },
+                    colors = IconButtonDefaults.iconButtonColors(
+                        containerColor = MaterialTheme.colorScheme.errorContainer,
+                        contentColor = MaterialTheme.colorScheme.error
+                    )
+                ) {
+                    Icon(
+                        painter = painterResource(R.drawable.rounded_close_24),
+                        contentDescription = "Stop"
+                    )
+                }
+            } else if (!isAnyTracking) {
+                IconButton(
+                    onClick = {
+                        com.sameerasw.essentials.utils.HapticUtil.performVirtualKeyHaptic(view)
+                        onStart()
+                    },
+                    colors = IconButtonDefaults.iconButtonColors(
+                        containerColor = MaterialTheme.colorScheme.primary,
+                        contentColor = MaterialTheme.colorScheme.onPrimary
+                    ),
+                    modifier = Modifier.size(48.dp)
+                ) {
+                    Icon(
+                        painter = painterResource(R.drawable.rounded_play_arrow_24),
+                        contentDescription = "Start"
+                    )
+                }
+            }
+        },
+        colors = ListItemDefaults.colors(containerColor = Color.Transparent)
+    )
+}
