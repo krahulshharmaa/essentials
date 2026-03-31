@@ -25,8 +25,18 @@ object DeviceSpecsCache {
             val file = File(context.filesDir, SPECS_FILE)
             if (!file.exists()) return null
             val json = file.readText()
-            gson.fromJson(json, DeviceSpecs::class.java)
+            val specs = gson.fromJson(json, DeviceSpecs::class.java)
+            
+            // Validate essential data integrity or refetch
+            @Suppress("SENSELESS_COMPARISON")
+            if (specs == null || specs.detailSpec == null) {
+                clearCache(context)
+                null
+            } else {
+                specs
+            }
         } catch (e: Exception) {
+            clearCache(context)
             null
         }
     }

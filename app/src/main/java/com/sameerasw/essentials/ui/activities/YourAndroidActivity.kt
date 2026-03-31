@@ -92,81 +92,92 @@ class YourAndroidViewModel : ViewModel() {
         }
 
         viewModelScope.launch {
-            if (forceRefresh) {
-                _isRefreshing.value = true
-            } else {
-                _isSpecsLoading.value = true
-                
-                // Try to load from cache first
-                val cached = withContext(Dispatchers.IO) {
-                    com.sameerasw.essentials.utils.DeviceSpecsCache.getCachedSpecs(context)
-                }
-                
-                if (cached != null) {
-                    _deviceSpecs.value = cached
-                    _isSpecsLoading.value = false
-                    return@launch
-                }
-            }
-
-            val fetchedSpecs = withContext(Dispatchers.IO) {
-                val manufacturer = deviceInfo.manufacturer
-                val model = deviceInfo.model
-                val deviceName = deviceInfo.deviceName
-                val deviceCodename = deviceInfo.device
-
-                // Generate a prioritized list of search queries
-                val queries = mutableListOf<String>()
-                
-                // 1. Marketing name (Manufacturer + Model)
-                if (model.contains(manufacturer, ignoreCase = true)) {
-                    queries.add(model)
+            try {
+                if (forceRefresh) {
+                    _isRefreshing.value = true
                 } else {
-                    queries.add("$manufacturer $model")
-                }
-
-                // 2. User-defined device name (often it's the marketing name like "Galaxy S21 FE 5G")
-                if (deviceName.isNotBlank() && !queries.contains(deviceName)) {
-                    queries.add(deviceName)
-                }
-
-                // 3. Handle model numbers by stripping common prefixes (SM-, Redmi, Mi, POCO, etc.)
-                val prefixes = listOf("SM-", "Redmi ", "Mi ", "POCO ")
-                for (prefix in prefixes) {
-                    if (model.startsWith(prefix, ignoreCase = true)) {
-                        val stripped = model.substring(prefix.length).trim()
-                        if (stripped.isNotBlank() && !queries.contains(stripped)) {
-                            queries.add(stripped)
-                            queries.add("$manufacturer $stripped")
-                        }
+                    _isSpecsLoading.value = true
+                    
+                    // Try to load from cache first
+                    val cached = withContext(Dispatchers.IO) {
+                        com.sameerasw.essentials.utils.DeviceSpecsCache.getCachedSpecs(context)
+                    }
+                    
+                    if (cached != null) {
+                        _deviceSpecs.value = cached
+                        _isSpecsLoading.value = false
+                        return@launch
                     }
                 }
-                
-                // 4. Model number directly if it's different from marketing name
-                if (!queries.contains(model)) {
-                    queries.add(model)
-                }
-                
-                // 5. Device codename (e.g., "shiba", "a51", "r9q")
-                if (deviceCodename.isNotBlank() && !queries.contains(deviceCodename)) {
-                    queries.add(deviceCodename)
+
+                val fetchedSpecs = withContext(Dispatchers.IO) {
+                    val manufacturer = deviceInfo.manufacturer
+                    val model = deviceInfo.model
+                    val deviceName = deviceInfo.deviceName
+                    val deviceCodename = deviceInfo.device
+
+                    // Generate a prioritized list of search queries
+                    val queries = mutableListOf<String>()
+                    
+                    // 1. Marketing name (Manufacturer + Model)
+                    if (model.contains(manufacturer, ignoreCase = true)) {
+                        queries.add(model)
+                    } else {
+                        queries.add("$manufacturer $model")
+                    }
+
+                    // 2. User-defined device name (often it's the marketing name like "Galaxy S21 FE 5G")
+                    if (deviceName.isNotBlank() && !queries.contains(deviceName)) {
+                        queries.add(deviceName)
+                    }
+
+                    // 3. Handle model numbers by stripping common prefixes (SM-, Redmi, Mi, POCO, etc.)
+                    val prefixes = listOf("SM-", "Redmi ", "Mi ", "POCO ")
+                    for (prefix in prefixes) {
+                        if (model.startsWith(prefix, ignoreCase = true)) {
+                            val stripped = model.substring(prefix.length).trim()
+                            if (stripped.isNotBlank() && !queries.contains(stripped)) {
+                                queries.add(stripped)
+                                queries.add("$manufacturer $stripped")
+                            }
+                        }
+                    }
+                    
+                    // 4. Model number directly if it's different from marketing name
+                    if (!queries.contains(model)) {
+                        queries.add(model)
+                    }
+                    
+                    // 5. Device codename (e.g., "shiba", "a51", "r9q")
+                    if (deviceCodename.isNotBlank() && !queries.contains(deviceCodename)) {
+                        queries.add(deviceCodename)
+                    }
+
+                    com.sameerasw.essentials.utils.GSMArenaService.fetchSpecs(
+                        preferredName = manufacturer,
+                        preferredModel = model,
+                        queries = queries.toTypedArray()
+                    )
                 }
 
-                com.sameerasw.essentials.utils.GSMArenaService.fetchSpecs(
-                    preferredName = manufacturer,
-                    preferredModel = model,
-                    queries = queries.toTypedArray()
-                )
+                if (fetchedSpecs != null) {
+                    // Download and cache images
+                    val specsWithImages = com.sameerasw.essentials.utils.DeviceSpecsCache.downloadImages(context, fetchedSpecs)
+                    _deviceSpecs.value = specsWithImages
+                }
+                
+                _isSpecsLoading.value = false
+                _isRefreshing.value = false
+            } catch (e: Exception) {
+                // If anything goes wrong (corrupted cache, etc.), clear cache and force refresh once
+                com.sameerasw.essentials.utils.DeviceSpecsCache.clearCache(context)
+                if (!forceRefresh) {
+                    loadDeviceSpecs(context, deviceInfo, forceRefresh = true)
+                } else {
+                    _isSpecsLoading.value = false
+                    _isRefreshing.value = false
+                }
             }
-
-            if (fetchedSpecs != null) {
-                // Download and cache images
-                val specsWithImages = com.sameerasw.essentials.utils.DeviceSpecsCache.downloadImages(context, fetchedSpecs)
-                _deviceSpecs.value = specsWithImages
-            }
-            
-            _isSpecsLoading.value = false
-            _isRefreshing.value = false
         }
     }
 }
