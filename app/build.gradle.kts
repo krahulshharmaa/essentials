@@ -21,8 +21,8 @@ android {
         applicationId = "com.sameerasw.essentials"
         minSdk = 26
         targetSdk = 36
-        versionCode = 35
-        versionName = "12.4"
+        versionCode = 36
+        versionName = "12.5"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
