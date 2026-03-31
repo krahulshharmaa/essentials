@@ -1294,4 +1294,11 @@
     <string name="msg_feedback_sent">Feedback sent successfully! Thanks for helping us improve the app.</string>
     <string name="label_alternatively">Alternatively</string>
 
+    <!-- Pixel Diagnostics -->
+    <string name="label_diagnostics">Diagnostics</string>
+    <string name="label_device_check">Device Check</string>
+    <string name="msg_flashbang">Get ready to be flashbanged!</string>
+    <string name="action_abort">Abort</string>
+    <string name="action_continue">Continue</string>
+
 </resources>
