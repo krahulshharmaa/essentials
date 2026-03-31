@@ -34,11 +34,34 @@ import coil.compose.AsyncImage
 import com.sameerasw.essentials.R
 import com.sameerasw.essentials.data.model.DeviceSpecs
 import com.sameerasw.essentials.ui.components.containers.RoundedCardContainer
+import android.content.ComponentName
+import android.content.Intent
+import android.os.Build
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.IntrinsicSize
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.width
+import androidx.compose.material.ripple.rememberRipple
+import androidx.compose.material3.Surface
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalView
+import androidx.compose.ui.window.Dialog
+import coil.ImageLoader
+import coil.decode.GifDecoder
+import coil.decode.ImageDecoderDecoder
+import coil.request.ImageRequest
 import com.sameerasw.essentials.ui.theme.Shapes
 import com.sameerasw.essentials.ui.components.modifiers.shimmer
 import com.sameerasw.essentials.utils.DeviceInfo
 import com.sameerasw.essentials.utils.DeviceUtils
 import com.sameerasw.essentials.utils.DeviceImageMapper
+import com.sameerasw.essentials.utils.HapticUtil
 
 @Composable
 fun DeviceHeroCard(
@@ -49,8 +72,34 @@ fun DeviceHeroCard(
     contentOffset: () -> Dp = { 0.dp },
     modifier: Modifier = Modifier
 ) {
+    val context = LocalContext.current
+    val view = LocalView.current
     val imageUrls = deviceSpecs?.imageUrls ?: emptyList()
     val isPixel = deviceInfo.manufacturer.contains("Google", ignoreCase = true)
+    
+    var showFlashbangDialog by remember { mutableStateOf(false) }
+
+    val launchIntent = { packageName: String, className: String ->
+        try {
+            val intent = Intent(Intent.ACTION_MAIN).apply {
+                component = ComponentName(packageName, className)
+                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            }
+            context.startActivity(intent)
+        } catch (e: Exception) {
+            
+        }
+    }
+
+    if (showFlashbangDialog) {
+        FlashbangDialog(
+            onDismiss = { showFlashbangDialog = false },
+            onContinue = {
+                showFlashbangDialog = false
+                launchIntent("com.google.android.apps.diagnosticstool", "com.google.android.apps.diagnosticstool.login.EndUserLoginActivity")
+            }
+        )
+    }
     
     // Only show the illustration page if it's a Pixel AND we have a mapping
     val illustrationRes = DeviceImageMapper.getDeviceDrawable(deviceInfo.model)
@@ -310,6 +359,141 @@ fun DeviceHeroCard(
                     }
                 }
             }
+
+        }
+
+        if (isPixel) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                        .background(
+                            MaterialTheme.colorScheme.surfaceBright,
+                            shape = Shapes.extraSmall
+                        )
+                    .padding(16.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(4.dp)
+            ) {
+                PixelToolButton(
+                    iconRes = R.drawable.rounded_diagnosis_24,
+                    label = stringResource(id = R.string.label_diagnostics),
+                    onClick = {
+                        HapticUtil.performVirtualKeyHaptic(view)
+                        launchIntent("com.android.devicediagnostics", "com.android.devicediagnostics.MainActivity")
+                    }
+                )
+                PixelToolButton(
+                    iconRes = R.drawable.rounded_search_check_2_24,
+                    label = stringResource(id = R.string.label_device_check),
+                    onClick = {
+                        HapticUtil.performVirtualKeyHaptic(view)
+                        showFlashbangDialog = true
+                    }
+                )
+            }
         }
     }
+}
+
+@Composable
+private fun PixelToolButton(
+    iconRes: Int,
+    label: String,
+    onClick: () -> Unit
+) {
+    androidx.compose.material3.Button(
+        onClick = onClick,
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(56.dp),
+        contentPadding = androidx.compose.foundation.layout.PaddingValues(horizontal = 16.dp)
+    ) {
+        Icon(
+            painter = painterResource(id = iconRes),
+            contentDescription = null,
+            modifier = Modifier.size(24.dp)
+        )
+        Spacer(modifier = Modifier.width(12.dp))
+        Text(
+            text = label,
+            style = MaterialTheme.typography.titleMedium,
+            fontWeight = FontWeight.SemiBold
+        )
+    }
+}
+
+@Composable
+private fun FlashbangDialog(
+    onDismiss: () -> Unit,
+    onContinue: () -> Unit
+) {
+    val context = LocalContext.current
+    val view = LocalView.current
+    val imageLoader = remember {
+        ImageLoader.Builder(context)
+            .components {
+                if (Build.VERSION.SDK_INT >= 28) {
+                    add(ImageDecoderDecoder.Factory())
+                } else {
+                    add(GifDecoder.Factory())
+                }
+            }
+            .build()
+    }
+
+    androidx.compose.material3.AlertDialog(
+        onDismissRequest = onDismiss,
+        title = {
+            Text(
+                text = stringResource(id = R.string.label_device_check),
+                style = MaterialTheme.typography.titleLarge,
+                fontWeight = FontWeight.Bold
+            )
+        },
+        text = {
+            Column(
+                modifier = Modifier.fillMaxWidth(),
+                verticalArrangement = Arrangement.spacedBy(16.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(
+                    text = stringResource(id = R.string.msg_flashbang),
+                    style = MaterialTheme.typography.bodyLarge,
+                    textAlign = androidx.compose.ui.text.style.TextAlign.Center
+                )
+                AsyncImage(
+                    model = ImageRequest.Builder(context)
+                        .data(R.drawable.flashbang)
+                        .build(),
+                    imageLoader = imageLoader,
+                    contentDescription = null,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .aspectRatio(1f)
+                        .clip(MaterialTheme.shapes.medium),
+                    contentScale = ContentScale.Crop
+                )
+            }
+        },
+        confirmButton = {
+            androidx.compose.material3.Button(
+                onClick = {
+                    HapticUtil.performVirtualKeyHaptic(view)
+                    onContinue()
+                }
+            ) {
+                Text(text = stringResource(id = R.string.action_continue))
+            }
+        },
+        dismissButton = {
+            androidx.compose.material3.OutlinedButton(
+                onClick = {
+                    HapticUtil.performVirtualKeyHaptic(view)
+                    onDismiss()
+                }
+            ) {
+                Text(text = stringResource(id = R.string.action_abort))
+            }
+        }
+    )
 }

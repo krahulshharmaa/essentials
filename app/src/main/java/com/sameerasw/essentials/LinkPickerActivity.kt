@@ -16,6 +16,16 @@ class LinkPickerActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        val locationViewModel = com.sameerasw.essentials.viewmodels.LocationReachedViewModel(application)
+        if (locationViewModel.handleIntent(intent)) {
+            val settingsIntent = Intent(this, FeatureSettingsActivity::class.java).apply {
+                putExtra("feature", "Location reached")
+            }
+            startActivity(settingsIntent)
+            finish()
+            return
+        }
+
         val uri = when (intent.action) {
             Intent.ACTION_SEND -> {
                 val text = intent.getStringExtra(Intent.EXTRA_TEXT) ?: ""

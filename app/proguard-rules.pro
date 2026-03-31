@@ -42,3 +42,12 @@
 -keep class com.sameerasw.essentials.ui.ime.EmojiObject { *; }
 -keep class com.sameerasw.essentials.ui.ime.EmojiCategory { *; }
 -keep class com.sameerasw.essentials.ui.ime.EmojiDataResponse { *; }
+# Keep ViewModel constructors for reflection-based instantiation
+-keepclassmembers class * extends androidx.lifecycle.ViewModel {
+    public <init>(...);
+}
+
+# Ensure anonymous TypeToken subclasses (used for GSON generic lists) are kept
+-keepclassmembers class * extends com.google.gson.reflect.TypeToken {
+    protected <init>(...);
+}

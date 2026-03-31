@@ -329,33 +329,25 @@ class FeatureSettingsActivity : AppCompatActivity() {
                         modifier = Modifier
                             .fillMaxSize()
                             .background(MaterialTheme.colorScheme.surfaceContainer)
-                            .then(
-                                if (isBlurEnabled) {
-                                    Modifier.progressiveBlur(
-                                        blurRadius = 40f,
-                                        height = statusBarHeightPx * 1.15f,
-                                        direction = BlurDirection.TOP
-                                    )
-                                } else Modifier
+                            .progressiveBlur(
+                                blurRadius = if (isBlurEnabled) 40f else 0f,
+                                height = statusBarHeightPx * 1.15f,
+                                direction = BlurDirection.TOP
                             )
                     ) {
-                        val hasScroll = featureId != "Sound mode tile" && featureId != "Quick settings tiles"
+                        val hasScroll = featureId != "Sound mode tile" && featureId != "Quick settings tiles" && featureId != "Location reached"
                         Column(
                             modifier = Modifier
                                 .fillMaxSize()
-                                .then(
-                                    if (isBlurEnabled) {
-                                        Modifier.progressiveBlur(
-                                            blurRadius = 40f,
-                                            height = with(LocalDensity.current) { 150.dp.toPx() },
-                                            direction = BlurDirection.BOTTOM
-                                        )
-                                    } else Modifier
+                                .progressiveBlur(
+                                    blurRadius = if (isBlurEnabled) 40f else 0f,
+                                    height = with(LocalDensity.current) { 150.dp.toPx() },
+                                    direction = BlurDirection.BOTTOM
                                 )
                                 .then(if (hasScroll) Modifier.verticalScroll(rememberScrollState()) else Modifier)
                         ) {
                             // Top padding for status bar
-                            if (featureId != "Quick settings tiles") {
+                            if (featureId != "Quick settings tiles" && featureId != "Location reached") {
                                 androidx.compose.foundation.layout.Spacer(modifier = Modifier.height(statusBarHeight))
                             }
 
@@ -566,7 +558,7 @@ class FeatureSettingsActivity : AppCompatActivity() {
                                     "Location reached" -> {
                                         LocationReachedSettingsUI(
                                             mainViewModel = viewModel,
-                                            modifier = Modifier.padding(top = 16.dp),
+                                            modifier = Modifier.fillMaxSize(),
                                             highlightSetting = highlightSetting
                                         )
                                     }
@@ -645,7 +637,7 @@ class FeatureSettingsActivity : AppCompatActivity() {
 
                             }
                             // Bottom padding for toolbar
-                            if (featureId != "Quick settings tiles") {
+                            if (featureId != "Quick settings tiles" && featureId != "Location reached") {
                                 androidx.compose.foundation.layout.Spacer(modifier = Modifier.height(150.dp))
                             }
                         }

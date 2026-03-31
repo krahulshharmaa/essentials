@@ -20,6 +20,10 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
+import androidx.compose.material3.VerticalDivider
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -40,6 +44,7 @@ import com.sameerasw.essentials.ui.components.menus.SegmentedDropdownMenuItem
 import com.sameerasw.essentials.utils.ColorUtil
 import com.sameerasw.essentials.utils.HapticUtil
 
+@OptIn(androidx.compose.material3.ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun FeatureCard(
     title: Any, // Can be Int (Resource ID) or String
@@ -90,122 +95,73 @@ fun FeatureCard(
         label = "alpha"
     )
 
-    Card(
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surfaceBright
-        ),
-        shape = MaterialTheme.shapes.extraSmall,
+    val resolvedTitle = when (title) {
+        is Int -> stringResource(id = title)
+        is String -> title
+        else -> ""
+    }
+
+    androidx.compose.material3.ListItem(
+        onClick = {
+            HapticUtil.performVirtualKeyHaptic(view)
+            onClick()
+        },
+        onLongClick = {
+            HapticUtil.performVirtualKeyHaptic(view)
+            showMenu = true
+        },
+        verticalAlignment = androidx.compose.ui.Alignment.CenterVertically,
         modifier = modifier
             .alpha(alpha)
-            .combinedClickable(
-                onClick = {
-                    HapticUtil.performVirtualKeyHaptic(view)
-                    onClick()
-                },
-                onLongClick = {
-                    HapticUtil.performVirtualKeyHaptic(view)
-                    showMenu = true
-                }
-            )) {
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .blur(blurRadius)
-                .padding(16.dp)
-        ) {
-
-            val resolvedTitle = when (title) {
-                is Int -> stringResource(id = title)
-                is String -> title
-                else -> ""
-            }
-
-            Row(
-                modifier = Modifier.align(Alignment.CenterStart),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(10.dp)
-            ) {
-                if (iconRes != null) {
-                    Box(
-                        modifier = Modifier
-                            .size(40.dp)
-                            .background(
-                                color = ColorUtil.getPastelColorFor(resolvedTitle),
-                                shape = CircleShape
-                            ),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Icon(
-                            painter = painterResource(id = iconRes),
-                            contentDescription = resolvedTitle,
-                            modifier = Modifier.size(24.dp),
-                            tint = ColorUtil.getVibrantColorFor(resolvedTitle)
-                        )
-                    }
-                }
-                Column(
-                    modifier = Modifier.weight(1f),
-                    verticalArrangement = Arrangement.spacedBy(2.dp)
+            .blur(blurRadius),
+        leadingContent = if (iconRes != null) {
+            {
+                Box(
+                    modifier = Modifier
+                        .size(40.dp)
+                        .background(
+                            color = ColorUtil.getPastelColorFor(resolvedTitle),
+                            shape = CircleShape
+                        ),
+                    contentAlignment = Alignment.Center
                 ) {
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(8.dp)
-                    ) {
-                        Text(
-                            text = resolvedTitle,
-                            color = MaterialTheme.colorScheme.onSurface
-                        )
-                        if (isBeta) {
-                            Card(
-                                colors = CardDefaults.cardColors(
-                                    containerColor = MaterialTheme.colorScheme.background
-                                ),
-                                shape = MaterialTheme.shapes.extraSmall
-                            ) {
-                                Text(
-                                    text = stringResource(R.string.label_beta),
-                                    modifier = Modifier.padding(horizontal = 4.dp, vertical = 2.dp),
-                                    style = MaterialTheme.typography.labelSmall,
-                                    color = MaterialTheme.colorScheme.primary
-                                )
-                            }
-                        }
-                    }
-                    if (descriptionOverride != null) {
-                        Text(
-                            text = descriptionOverride,
-                            style = MaterialTheme.typography.bodyMedium,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                        )
-                    } else if (description != null) {
-                        val resolvedDescription = when (description) {
-                            is Int -> stringResource(id = description)
-                            is String -> description
-                            else -> ""
-                        }
-                        Text(
-                            text = resolvedDescription,
-                            style = MaterialTheme.typography.bodyMedium,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                        )
-                    }
+                    Icon(
+                        painter = painterResource(id = iconRes),
+                        contentDescription = resolvedTitle,
+                        modifier = Modifier.size(24.dp),
+                        tint = ColorUtil.getVibrantColorFor(resolvedTitle)
+                    )
                 }
             }
-
+        } else null,
+        supportingContent = if (descriptionOverride != null || description != null) {
+            {
+                val desc = descriptionOverride ?: description
+                val resolvedDescription = when (desc) {
+                    is Int -> stringResource(id = desc)
+                    is String -> desc
+                    else -> ""
+                }
+                Text(
+                    text = resolvedDescription,
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
+        } else null,
+        trailingContent = {
             Row(
-                modifier = Modifier.align(Alignment.CenterEnd),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.End
             ) {
-                if (hasMoreSettings) {
-                    Icon(
+                if (showToggle && hasMoreSettings) {
+                    VerticalDivider(
                         modifier = Modifier
-                            .padding(end = 12.dp)
-                            .size(24.dp),
-                        painter = painterResource(id = R.drawable.rounded_chevron_right_24),
-                        contentDescription = "More settings",
-                        tint = MaterialTheme.colorScheme.onSurfaceVariant
+                            .height(32.dp)
+                            .width(1.dp),
+                        color = MaterialTheme.colorScheme.outlineVariant
                     )
+                    Spacer(modifier = Modifier.width(16.dp))
                 }
 
                 if (showToggle) {
@@ -222,7 +178,6 @@ fun FeatureCard(
                         )
 
                         if (!isToggleEnabled && onDisabledToggleClick != null) {
-                            // Invisible overlay catches taps even if the child consumes them
                             Box(modifier = Modifier
                                 .matchParentSize()
                                 .clickable {
@@ -230,6 +185,39 @@ fun FeatureCard(
                                     onDisabledToggleClick()
                                 })
                         }
+                    }
+                }
+            }
+        },
+        colors = androidx.compose.material3.ListItemDefaults.colors(
+            containerColor = MaterialTheme.colorScheme.surfaceBright
+        ),
+        contentPadding = androidx.compose.foundation.layout.PaddingValues(
+            horizontal = 16.dp,
+            vertical = 16.dp
+        ),
+        content = {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                Text(
+                    text = resolvedTitle,
+                    color = MaterialTheme.colorScheme.onSurface
+                )
+                if (isBeta) {
+                    Card(
+                        colors = CardDefaults.cardColors(
+                            containerColor = MaterialTheme.colorScheme.background
+                        ),
+                        shape = MaterialTheme.shapes.extraSmall
+                    ) {
+                        Text(
+                            text = stringResource(R.string.label_beta),
+                            modifier = Modifier.padding(horizontal = 4.dp, vertical = 2.dp),
+                            style = MaterialTheme.typography.labelSmall,
+                            color = MaterialTheme.colorScheme.primary
+                        )
                     }
                 }
             }
@@ -279,5 +267,5 @@ fun FeatureCard(
                 }
             }
         }
-    }
+    )
 }

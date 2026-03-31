@@ -27,69 +27,69 @@ fun LanguagePicker(
     val languages = LanguageUtils.languages
     val selectedLanguage = languages.find { it.code == selectedLanguageCode } ?: languages.first()
 
-    Row(
-        modifier = modifier
-            .fillMaxWidth()
-            .background(
-                color = MaterialTheme.colorScheme.surfaceBright,
-                shape = RoundedCornerShape(MaterialTheme.shapes.extraSmall.bottomEnd)
-            )
-            .padding(12.dp),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(8.dp)
-    ) {
-        Spacer(modifier = Modifier.size(0.dp))
-
+    ListItem(
+        onClick = {},
+        modifier = modifier.fillMaxWidth(),
+        leadingContent = {
             Icon(
                 painter = painterResource(id = R.drawable.rounded_globe_24),
                 contentDescription = null,
                 modifier = Modifier.size(24.dp),
                 tint = MaterialTheme.colorScheme.primary
             )
-
-            Column {
-                Text(
-                    text = stringResource(R.string.label_app_language),
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurface
-                )
-            }
-
-        ExposedDropdownMenuBox(
-            expanded = expanded,
-            onExpandedChange = { expanded = !expanded },
-            // modifier = Modifier.fillMaxWidth()
-        ) {
-            OutlinedTextField(
-                value = "${selectedLanguage.nativeName} (${selectedLanguage.name})",
-                onValueChange = {},
-                readOnly = true,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .menuAnchor(MenuAnchorType.PrimaryEditable, true),
-                trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) },
-                colors = ExposedDropdownMenuDefaults.outlinedTextFieldColors(),
-                shape = RoundedCornerShape(12.dp)
-            )
-
-            ExposedDropdownMenu(
+        },
+        contentPadding = PaddingValues(
+            horizontal = 16.dp,
+            vertical = 16.dp
+        ),
+        verticalAlignment = Alignment.CenterVertically,
+        colors = ListItemDefaults.colors(
+            containerColor = MaterialTheme.colorScheme.surfaceBright
+        ),
+        trailingContent = {
+            ExposedDropdownMenuBox(
                 expanded = expanded,
-                onDismissRequest = { expanded = false }
+                onExpandedChange = { expanded = !expanded },
             ) {
-                languages.forEach { language ->
-                    DropdownMenuItem(
-                        text = {
-                            Text(text = "${language.nativeName} (${language.name})")
-                        },
-                        onClick = {
-                            HapticUtil.performVirtualKeyHaptic(view)
-                            onLanguageSelected(language.code)
-                            expanded = false
-                        },
-                        contentPadding = ExposedDropdownMenuDefaults.ItemContentPadding
-                    )
+                OutlinedTextField(
+                    value = "${selectedLanguage.nativeName} (${selectedLanguage.name})",
+                    onValueChange = {},
+                    readOnly = true,
+                    modifier = Modifier
+                        .widthIn(max = 200.dp) // Limit width to prevent overflow
+                        .menuAnchor(MenuAnchorType.PrimaryEditable, true),
+                    trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) },
+                    colors = ExposedDropdownMenuDefaults.outlinedTextFieldColors(),
+                    shape = RoundedCornerShape(12.dp),
+                    textStyle = MaterialTheme.typography.bodySmall
+                )
+
+                ExposedDropdownMenu(
+                    expanded = expanded,
+                    onDismissRequest = { expanded = false }
+                ) {
+                    languages.forEach { language ->
+                        DropdownMenuItem(
+                            text = {
+                                Text(text = "${language.nativeName} (${language.name})")
+                            },
+                            onClick = {
+                                HapticUtil.performVirtualKeyHaptic(view)
+                                onLanguageSelected(language.code)
+                                expanded = false
+                            },
+                            contentPadding = ExposedDropdownMenuDefaults.ItemContentPadding
+                        )
+                    }
                 }
             }
+        },
+        content = {
+            Text(
+                text = stringResource(R.string.label_app_language),
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurface
+            )
         }
-    }
+    )
 }

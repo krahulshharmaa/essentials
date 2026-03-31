@@ -66,6 +66,7 @@ private val GOOGLE_SYSTEM_USER_APPS = setOf(
     "com.google.android.cellbroadcastreceiver"
 )
 
+@OptIn(androidx.compose.material3.ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun AppToggleItem(
     icon: ImageBitmap?,
@@ -85,42 +86,67 @@ fun AppToggleItem(
         isSystemApp || (packageName != null && GOOGLE_SYSTEM_USER_APPS.contains(packageName))
     }
 
-    Row(
-        modifier = modifier
-            .fillMaxWidth()
-            .background(
-                color = MaterialTheme.colorScheme.surfaceBright,
-                shape = RoundedCornerShape(MaterialTheme.shapes.extraSmall.bottomEnd)
-            )
-            .clickable(enabled = !showToggle && enabled) {
+    val onClickAction = {
+        if (enabled) {
+            HapticUtil.performVirtualKeyHaptic(view)
+            onCheckedChange(!isChecked)
+        } else if (onDisabledClick != null) {
+            HapticUtil.performVirtualKeyHaptic(view)
+            onDisabledClick()
+        }
+    }
+
+    if (showToggle) {
+        androidx.compose.material3.ListItem(
+            checked = isChecked && enabled,
+            onCheckedChange = { checked ->
                 if (enabled) {
                     HapticUtil.performVirtualKeyHaptic(view)
-                    onCheckedChange(!isChecked)
+                    onCheckedChange(checked)
                 } else if (onDisabledClick != null) {
                     HapticUtil.performVirtualKeyHaptic(view)
                     onDisabledClick()
                 }
-            }
-            .padding(12.dp),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(12.dp)
-    ) {
-        Spacer(modifier = Modifier.size(2.dp))
-        if (icon != null) {
-            Image(
-                bitmap = icon,
-                contentDescription = title,
-                modifier = Modifier.size(24.dp),
-                contentScale = ContentScale.Fit
-            )
-        } else {
-            // Fallback placeholder if needed, or just space
-            Spacer(modifier = Modifier.size(24.dp))
-        }
-        Spacer(modifier = Modifier.size(2.dp))
-
-        if (description != null) {
-            Column(modifier = Modifier.weight(1f)) {
+            },
+            enabled = enabled,
+            modifier = modifier.fillMaxWidth(),
+            verticalAlignment = androidx.compose.ui.Alignment.CenterVertically,
+            leadingContent = {
+                if (icon != null) {
+                    Image(
+                        bitmap = icon,
+                        contentDescription = title,
+                        modifier = Modifier.size(32.dp),
+                        contentScale = ContentScale.Fit
+                    )
+                } else {
+                    Spacer(modifier = Modifier.size(32.dp))
+                }
+            },
+            supportingContent = if (description != null) {
+                {
+                    Text(
+                        text = description,
+                        style = MaterialTheme.typography.labelMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
+            } else null,
+            trailingContent = {
+                Switch(
+                    checked = if (enabled) isChecked else false,
+                    onCheckedChange = null, // Handled by ListItem
+                    enabled = enabled
+                )
+            },
+            colors = androidx.compose.material3.ListItemDefaults.colors(
+                containerColor = MaterialTheme.colorScheme.surfaceBright
+            ),
+            contentPadding = androidx.compose.foundation.layout.PaddingValues(
+                horizontal = 16.dp,
+                vertical = 16.dp
+            ),
+            content = {
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.spacedBy(4.dp)
@@ -149,66 +175,72 @@ fun AppToggleItem(
                         }
                     }
                 }
-                Text(
-                    text = description,
-                    style = MaterialTheme.typography.labelMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                )
             }
-        } else {
-            Row(
-                modifier = Modifier.weight(1f),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(4.dp)
-            ) {
-                Text(
-                    text = title,
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurface
-                )
-                if (shouldShowSystemTag) {
-                    Box(
-                        modifier = Modifier
-                            .size(18.dp)
-                            .background(
-                                color = MaterialTheme.colorScheme.primary,
-                                shape = CircleShape
-                            ),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        androidx.compose.material3.Icon(
-                            painter = painterResource(id = R.drawable.round_android_24),
-                            contentDescription = null,
-                            modifier = Modifier.size(12.dp),
-                            tint = MaterialTheme.colorScheme.surfaceBright
-                        )
+        )
+    } else {
+        androidx.compose.material3.ListItem(
+            onClick = onClickAction,
+            enabled = enabled,
+            modifier = modifier.fillMaxWidth(),
+            verticalAlignment = androidx.compose.ui.Alignment.CenterVertically,
+            leadingContent = {
+                if (icon != null) {
+                    Image(
+                        bitmap = icon,
+                        contentDescription = title,
+                        modifier = Modifier.size(24.dp),
+                        contentScale = ContentScale.Fit
+                    )
+                } else {
+                    Spacer(modifier = Modifier.size(24.dp))
+                }
+            },
+            supportingContent = if (description != null) {
+                {
+                    Text(
+                        text = description,
+                        style = MaterialTheme.typography.labelMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
+            } else null,
+            colors = androidx.compose.material3.ListItemDefaults.colors(
+                containerColor = MaterialTheme.colorScheme.surfaceBright
+            ),
+            contentPadding = androidx.compose.foundation.layout.PaddingValues(
+                horizontal = 16.dp,
+                vertical = 16.dp
+            ),
+            content = {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(4.dp)
+                ) {
+                    Text(
+                        text = title,
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurface
+                    )
+                    if (shouldShowSystemTag) {
+                        Box(
+                            modifier = Modifier
+                                .size(18.dp)
+                                .background(
+                                    color = MaterialTheme.colorScheme.primary,
+                                    shape = CircleShape
+                                ),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            androidx.compose.material3.Icon(
+                                painter = painterResource(id = R.drawable.round_android_24),
+                                contentDescription = null,
+                                modifier = Modifier.size(12.dp),
+                                tint = MaterialTheme.colorScheme.surfaceBright
+                            )
+                        }
                     }
                 }
             }
-        }
-
-        if (showToggle) {
-            Box {
-                Switch(
-                    checked = if (enabled) isChecked else false,
-                    onCheckedChange = { checked ->
-                        if (enabled) {
-                            HapticUtil.performVirtualKeyHaptic(view)
-                            onCheckedChange(checked)
-                        }
-                    },
-                    enabled = enabled
-                )
-
-                if (!enabled && onDisabledClick != null) {
-                    Box(modifier = Modifier
-                        .matchParentSize()
-                        .clickable {
-                            HapticUtil.performVirtualKeyHaptic(view)
-                            onDisabledClick()
-                        })
-                }
-            }
-        }
+        )
     }
 }

@@ -145,8 +145,14 @@ class LocationAlarmActivity : ComponentActivity() {
 
         // Disable alarm in repo
         val repo = LocationReachedRepository(this)
-        val alarm = repo.getAlarm()
-        repo.saveAlarm(alarm.copy(isEnabled = false))
+        val activeId = repo.getActiveAlarmId()
+        val alarms = repo.getAlarms()
+        val alarm = alarms.find { it.id == activeId }
+        
+        if (alarm != null) {
+            repo.saveLastTrip(alarm)
+        }
+        repo.saveActiveAlarmId(null)
 
         // Stop the progress service
         LocationReachedService.stop(this)

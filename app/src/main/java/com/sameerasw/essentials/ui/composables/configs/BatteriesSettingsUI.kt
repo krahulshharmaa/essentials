@@ -14,12 +14,15 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Slider
 import androidx.compose.material3.Text
+import androidx.compose.material3.ListItem
+import androidx.compose.material3.ListItemDefaults
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -69,49 +72,58 @@ fun BatteriesSettingsUI(
                     }
                 )
             } else {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .background(MaterialTheme.colorScheme.surfaceBright)
-                        .padding(12.dp),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(12.dp)
-                ) {
-                    Spacer(modifier = Modifier.size(2.dp))
-                    Icon(
-                        painter = painterResource(R.drawable.rounded_laptop_mac_24),
-                        contentDescription = null,
-                        modifier = Modifier.size(24.dp),
-                        tint = MaterialTheme.colorScheme.primary
-                    )
-                    Spacer(modifier = Modifier.size(2.dp))
-                    Column(modifier = Modifier.weight(1f)) {
-                        Text(
-                            text = stringResource(R.string.download_airsync),
-                            style = MaterialTheme.typography.bodyMedium,
-                            color = MaterialTheme.colorScheme.onSurface
+                ListItem(
+                    onClick = {},
+                    modifier = Modifier.fillMaxWidth(),
+                    leadingContent = {
+                        Icon(
+                            painter = painterResource(R.drawable.rounded_laptop_mac_24),
+                            contentDescription = null,
+                            modifier = Modifier.size(24.dp),
+                            tint = MaterialTheme.colorScheme.primary
                         )
+                    },
+                    contentPadding = PaddingValues(
+                        horizontal = 16.dp,
+                        vertical = 16.dp
+                    ),
+                    verticalAlignment = Alignment.CenterVertically,
+                    colors = ListItemDefaults.colors(
+                        containerColor = MaterialTheme.colorScheme.surfaceBright
+                    ),
+                    trailingContent = {
+                        Button(
+                            onClick = {
+                                HapticUtil.performVirtualKeyHaptic(view)
+                                val intent = Intent(
+                                    Intent.ACTION_VIEW,
+                                    Uri.parse("https://play.google.com/store/apps/details?id=com.sameerasw.airsync")
+                                )
+                                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                                context.startActivity(intent)
+                            },
+                            colors = ButtonDefaults.filledTonalButtonColors()
+                        ) {
+                            Text(stringResource(R.string.action_download))
+                        }
+                    },
+                    content = {
+                        Column {
+                            Text(
+                                text = stringResource(R.string.download_airsync),
+                                style = MaterialTheme.typography.bodyMedium,
+                                color = MaterialTheme.colorScheme.onSurface
+                            )
+                        }
+                    },
+                    supportingContent = {
                         Text(
                             text = stringResource(R.string.download_airsync_summary),
                             style = MaterialTheme.typography.labelMedium,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                     }
-                    Button(
-                        onClick = {
-                            HapticUtil.performVirtualKeyHaptic(view)
-                            val intent = Intent(
-                                Intent.ACTION_VIEW,
-                                Uri.parse("https://play.google.com/store/apps/details?id=com.sameerasw.airsync")
-                            )
-                            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                            context.startActivity(intent)
-                        },
-                        colors = ButtonDefaults.filledTonalButtonColors()
-                    ) {
-                        Text(stringResource(R.string.action_download))
-                    }
-                }
+                )
             }
 
             // Bluetooth Devices
@@ -176,43 +188,50 @@ fun BatteriesSettingsUI(
         )
 
         RoundedCardContainer {
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .background(MaterialTheme.colorScheme.surfaceBright)
-                    .padding(horizontal = 16.dp, vertical = 12.dp)
-            ) {
-                Text(
-                    text = stringResource(R.string.limit_max_devices_summary),
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                )
-                Spacer(modifier = Modifier.height(8.dp))
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    Slider(
-                        value = viewModel.batteryWidgetMaxDevices.intValue.toFloat(),
-                        onValueChange = {
-                            val newInt = it.toInt()
-                            if (newInt != viewModel.batteryWidgetMaxDevices.intValue) {
-                                HapticUtil.performVirtualKeyHaptic(view)
-                                viewModel.setBatteryWidgetMaxDevices(newInt, context)
-                            }
-                        },
-                        valueRange = 1f..8f,
-                        steps = 6,
-                        modifier = Modifier.weight(1f)
-                    )
-                    Spacer(modifier = Modifier.width(12.dp))
+            ListItem(
+                onClick = {},
+                modifier = Modifier.fillMaxWidth(),
+                contentPadding = PaddingValues(
+                    horizontal = 16.dp,
+                    vertical = 16.dp
+                ),
+                colors = ListItemDefaults.colors(
+                    containerColor = MaterialTheme.colorScheme.surfaceBright
+                ),
+                content = {
                     Text(
-                        text = viewModel.batteryWidgetMaxDevices.intValue.toString(),
-                        style = MaterialTheme.typography.titleMedium,
-                        color = MaterialTheme.colorScheme.primary
+                        text = stringResource(R.string.limit_max_devices_summary),
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
+                },
+                supportingContent = {
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Slider(
+                            value = viewModel.batteryWidgetMaxDevices.intValue.toFloat(),
+                            onValueChange = {
+                                val newInt = it.toInt()
+                                if (newInt != viewModel.batteryWidgetMaxDevices.intValue) {
+                                    HapticUtil.performVirtualKeyHaptic(view)
+                                    viewModel.setBatteryWidgetMaxDevices(newInt, context)
+                                }
+                            },
+                            valueRange = 1f..8f,
+                            steps = 6,
+                            modifier = Modifier.weight(1f)
+                        )
+                        Spacer(modifier = Modifier.width(12.dp))
+                        Text(
+                            text = viewModel.batteryWidgetMaxDevices.intValue.toString(),
+                            style = MaterialTheme.typography.titleMedium,
+                            color = MaterialTheme.colorScheme.primary
+                        )
+                    }
                 }
-            }
+            )
         }
     }
 }

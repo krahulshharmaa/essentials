@@ -10,6 +10,8 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -48,6 +50,15 @@ fun EssentialsFloatingToolbar(
     expanded: Boolean = true
 ) {
     val view = LocalView.current
+    val configuration = LocalConfiguration.current
+    val fontScale = LocalDensity.current.fontScale
+    val screenWidth = configuration.screenWidthDp
+    
+    // Hide label if font scale is large or screen width is too small
+    val isLargeFont = fontScale > 1.25f
+    val isCompactScreen = screenWidth < 400 
+    
+    val shouldHideLabel = isLargeFont || (isCompactScreen && items.size > 3)
 
     val finalFab: (@Composable () -> Unit)? = when {
         floatingActionButton != null -> floatingActionButton
@@ -151,7 +162,7 @@ fun EssentialsFloatingToolbar(
                     )
 
                     val labelWidth by animateDpAsState(
-                        targetValue = if (isSelected) 80.dp else 0.dp,
+                        targetValue = if (isSelected && !shouldHideLabel) 80.dp else 0.dp,
                         animationSpec = spring(
                             dampingRatio = Spring.DampingRatioMediumBouncy,
                             stiffness = Spring.StiffnessLow
@@ -217,7 +228,7 @@ fun EssentialsFloatingToolbar(
                                         }
                                     }
                                 }
-                                if (isSelected) {
+                                if (isSelected && !shouldHideLabel) {
                                     Spacer(modifier = Modifier.width(8.dp))
                                     Text(
                                         text = stringResource(id = item.labelRes),

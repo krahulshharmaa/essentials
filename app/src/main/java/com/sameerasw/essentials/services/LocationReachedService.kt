@@ -16,6 +16,7 @@ import com.google.android.gms.location.Priority
 import com.sameerasw.essentials.MainActivity
 import com.sameerasw.essentials.R
 import com.sameerasw.essentials.data.repository.LocationReachedRepository
+import com.sameerasw.essentials.domain.model.LocationAlarm
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -79,26 +80,36 @@ class LocationReachedService : Service() {
         trackingJob?.cancel()
         trackingJob = serviceScope.launch {
             while (isActive) {
-                val alarm = repository.getAlarm()
-                if (alarm.isEnabled && alarm.latitude != 0.0 && alarm.longitude != 0.0) {
+                val activeId = repository.getActiveAlarmId()
+                val alarms = repository.getAlarms()
+                val alarm = alarms.find { it.id == activeId }
+                
+                if (alarm != null) {
                     updateProgress(alarm)
                 } else {
                     stopSelf()
                     break
                 }
-                delay(10000) // Update every 10 seconds for better responsiveness
+                delay(10000)
             }
         }
     }
 
     private fun stopTracking() {
-        val alarm = repository.getAlarm()
-        repository.saveAlarm(alarm.copy(isEnabled = false))
+        val activeId = repository.getActiveAlarmId()
+        val alarms = repository.getAlarms()
+        val alarm = alarms.find { it.id == activeId }
+        
+        if (alarm != null) {
+            repository.saveLastTrip(alarm)
+        }
+        
+        repository.saveActiveAlarmId(null)
         stopSelf()
     }
 
     @android.annotation.SuppressLint("MissingPermission")
-    private fun updateProgress(alarm: com.sameerasw.essentials.domain.model.LocationAlarm) {
+    private fun updateProgress(alarm: LocationAlarm) {
         fusedLocationClient.getCurrentLocation(Priority.PRIORITY_BALANCED_POWER_ACCURACY, null)
             .addOnSuccessListener { location ->
                 location?.let {
@@ -163,19 +174,39 @@ class LocationReachedService : Service() {
 
     private fun updateNotification(distanceKm: Float) {
         val startDist = repository.getStartDistance()
+        val startTime = repository.getStartTime()
         val progressPercent = if (startDist > 0) {
             ((1.0f - (distanceKm * 1000f / startDist)) * 100).toInt().coerceIn(0, 100)
         } else 0
 
-        val notification = buildOngoingNotification(distanceKm, progressPercent)
+        var etaText: String? = null
+        if (startDist > 0 && startTime > 0) {
+            val elapsed = System.currentTimeMillis() - startTime
+            val currentDistMeters = distanceKm * 1000f
+            val distanceTravelled = startDist - currentDistMeters
+            if (distanceTravelled > 0 && elapsed > 0) {
+                val remainingMillis = (currentDistMeters * elapsed / distanceTravelled).toLong()
+                val remainingMinutes = (remainingMillis / 60000).toInt().coerceAtLeast(1)
+                
+                etaText = if (remainingMinutes >= 60) {
+                    val hrs = remainingMinutes / 60
+                    val mins = remainingMinutes % 60
+                    getString(R.string.location_reached_eta_hr_min, hrs, mins)
+                } else {
+                    getString(R.string.location_reached_eta_min, remainingMinutes)
+                }
+            }
+        }
+
+        val notification = buildOngoingNotification(distanceKm, progressPercent, etaText)
         notificationManager.notify(NOTIFICATION_ID, notification)
     }
 
     private fun buildInitialNotification(): Notification {
-        return buildOngoingNotification(null, 0)
+        return buildOngoingNotification(null, 0, null)
     }
 
-    private fun buildOngoingNotification(distanceKm: Float?, progress: Int): Notification {
+    private fun buildOngoingNotification(distanceKm: Float?, progress: Int, etaText: String?): Notification {
         val stopIntent = Intent(this, LocationReachedService::class.java).apply {
             action = ACTION_STOP
         }
@@ -201,12 +232,21 @@ class LocationReachedService : Service() {
             else getString(R.string.location_reached_dist_km, it)
         } ?: getString(R.string.location_reached_calculating)
 
-        val contentText =
+        val contentText = if (etaText != null) {
+            getString(R.string.location_reached_service_remaining_with_eta, distanceText, progress, etaText)
+        } else {
             getString(R.string.location_reached_service_remaining, distanceText, progress)
+        }
 
         if (Build.VERSION.SDK_INT >= 35) {
+            val activeId = repository.getActiveAlarmId()
+            val alarm = repository.getAlarms().find { it.id == activeId }
+            val iconResName = alarm?.iconResName ?: "round_navigation_24"
+            val iconResId = resources.getIdentifier(iconResName, "drawable", packageName)
+            val finalIconId = if (iconResId != 0) iconResId else R.drawable.round_navigation_24
+
             val builder = Notification.Builder(this, CHANNEL_ID)
-                .setSmallIcon(R.drawable.rounded_navigation_24)
+                .setSmallIcon(finalIconId)
                 .setContentTitle(getString(R.string.location_reached_service_title))
                 .setContentText(contentText)
                 .setOngoing(true)
@@ -228,8 +268,8 @@ class LocationReachedService : Service() {
                         .setProgressTrackerIcon(
                             Icon.createWithResource(
                                 this,
-                                R.drawable.rounded_navigation_24
-                            )
+                                R.drawable.round_play_arrow_24
+                            ).setTint(getColor(android.R.color.system_accent1_300))
                         )
                     builder.style = progressStyle
                 } catch (_: Throwable) {
@@ -262,8 +302,14 @@ class LocationReachedService : Service() {
             return builder.build()
         }
 
+        val activeId = repository.getActiveAlarmId()
+        val alarm = repository.getAlarms().find { it.id == activeId }
+        val iconResName = alarm?.iconResName ?: "round_navigation_24"
+        val iconResId = resources.getIdentifier(iconResName, "drawable", packageName)
+        val finalIconId = if (iconResId != 0) iconResId else R.drawable.round_navigation_24
+
         val builder = NotificationCompat.Builder(this, CHANNEL_ID)
-            .setSmallIcon(R.drawable.rounded_navigation_24)
+            .setSmallIcon(finalIconId)
             .setContentTitle(getString(R.string.location_reached_service_title))
             .setContentText(contentText)
             .setOngoing(true)
@@ -292,11 +338,11 @@ class LocationReachedService : Service() {
             val channel = NotificationChannel(
                 CHANNEL_ID,
                 getString(R.string.location_reached_channel_name),
-                NotificationManager.IMPORTANCE_HIGH // Increased importance
+                NotificationManager.IMPORTANCE_HIGH
             ).apply {
                 description = getString(R.string.location_reached_channel_desc)
                 setShowBadge(false)
-                lockscreenVisibility = Notification.VISIBILITY_PUBLIC // Ensure it's visible on lockscreen
+                lockscreenVisibility = Notification.VISIBILITY_PUBLIC
                 setSound(null, null)
                 enableVibration(false)
             }
