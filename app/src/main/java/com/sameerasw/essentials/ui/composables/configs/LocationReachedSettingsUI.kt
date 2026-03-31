@@ -171,7 +171,8 @@ fun LocationReachedSettingsUI(
                         Text(
                             text = stringResource(R.string.location_reached_dest_ready),
                             style = MaterialTheme.typography.titleLarge,
-                            fontWeight = FontWeight.Bold
+                            fontWeight = FontWeight.Bold,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                         Spacer(modifier = Modifier.height(8.dp))
                         Text(
