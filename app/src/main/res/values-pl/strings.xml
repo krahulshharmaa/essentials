@@ -580,6 +580,7 @@
     <string name="action_search">Szukaj</string>
     <string name="action_stop">Zatrzymywać się</string>
     <string name="label_search">Szukaj</string>
+    <string name="search_frozen_apps_placeholder">Search frozen apps</string>
     <!-- UI Components General -->
     <string name="action_back">Z powrotem</string>
     <string name="content_desc_back">Z powrotem</string>
