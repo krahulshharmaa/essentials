@@ -25,6 +25,7 @@ import kotlin.math.pow
 import kotlin.math.sin
 import kotlin.math.sqrt
 
+@androidx.annotation.Keep
 class LocationReachedViewModel(application: Application) : AndroidViewModel(application) {
     private val repository = LocationReachedRepository(application)
     private val fusedLocationClient = LocationServices.getFusedLocationProviderClient(application)

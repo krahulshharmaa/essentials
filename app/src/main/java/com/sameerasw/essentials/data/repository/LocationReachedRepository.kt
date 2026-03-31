@@ -9,6 +9,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import java.util.UUID
 
+@androidx.annotation.Keep
 class LocationReachedRepository(context: Context) {
     private val prefs: SharedPreferences =
         context.getSharedPreferences("essentials_prefs", Context.MODE_PRIVATE)
