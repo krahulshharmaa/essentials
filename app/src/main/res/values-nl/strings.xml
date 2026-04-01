@@ -212,12 +212,12 @@
     <string name="tile_private_dns_off">Uit</string>
     <string name="tile_usb_debugging">USB-foutopsporing</string>
     <string name="tile_color_picker">Kleurenkiezer</string>
-    <string name="toast_eyedropper_failed">Weet je zeker dat je op Android 17 bent? (╯°_°）╯</string>
+    <string name="toast_eyedropper_failed">Are you sure you\'re on Androdi 17? (╯°_°）╯</string>
     <string name="subtitle_eye_dropper">Pipet</string>
     <string name="on">Aan</string>
     <string name="off">Uit</string>
     <string name="private_dns_custom_title">Aangepaste Privé-DNS</string>
-    <string name="private_dns_presets_title">DNS-voorinstellingen</string>
+    <string name="private_dns_presets_title">Aangepaste DNS-voorinstellingen</string>
     <string name="dns_preset_add_title">DNS-voorinstelling toevoegen</string>
     <string name="dns_preset_name_label">Naam van voorinstelling</string>
     <string name="dns_preset_reset_action">Resetten</string>
@@ -332,7 +332,7 @@
     <string name="cat_visuals">Beelden</string>
     <string name="cat_system">Systeem</string>
     <!-- UI Elements -->
-    <string name="search_placeholder">Zoeken in Essentials</string>
+    <string name="search_placeholder">Zoeken naar hulpmiddelen, modificaties en aanpassingen</string>
     <string name="search_no_results">Geen resultaten voor \"%1$s\"</string>
     <string name="search_results_title">Zoekresultaten</string>
     <string name="requires_following_permissions">%1$s vereist de volgende machtiging:</string>
