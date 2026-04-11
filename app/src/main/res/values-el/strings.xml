@@ -24,6 +24,8 @@
     <string name="app_lock_description">Ασφαλίστε τις εφαρμογές σας με βιομετρικό έλεγχο ταυτότητας. Οι κλειδωμένες εφαρμογές θα απαιτούν έλεγχο ταυτότητας κατά την εκκίνηση. Παραμένει ξεκλείδωτη μέχρι να απενεργοποιηθεί η οθόνη.</string>
     <string name="app_lock_warning">Προσέξτε ότι αυτή δεν είναι μια ισχυρή λύση, καθώς πρόκειται μόνο για μια εφαρμογή τρίτου κατασκευαστή. Εάν χρειάζεστε ισχυρή ασφάλεια, σκεφτείτε να χρησιμοποιήσετε τον ιδιωτικό χώρο ή άλλες τέτοιες λειτουργίες.</string>
     <string name="app_lock_biometric_note">Μια άλλη σημείωση, η προτροπή βιομετρικού ελέγχου ταυτότητας σάς επιτρέπει να χρησιμοποιείτε μόνο μεθόδους STRONG ασφαλούς κλάσης. Οι μέθοδοι ασφαλείας με το Face Unlock στην κατηγορία WEAK σε συσκευές όπως το Pixel 7 θα μπορούν να χρησιμοποιούν μόνο τις διαθέσιμες άλλες μεθόδους STRONG auth, όπως το δακτυλικό αποτύπωμα ή η καρφίτσα.</string>
+    <string name="app_lock_use_usage_access_title">Use usage access</string>
+    <string name="app_lock_use_usage_access_desc">Instead of accessibility</string>
     <!-- Button Remap -->
     <string name="button_remap_enable_title">Ενεργοποίηση επαναχάρτωσης κουμπιών</string>
     <string name="button_remap_use_shizuku_title">Χρησιμοποιήστε Shizuku ή Root ή Root</string>
@@ -145,6 +147,7 @@
     <string name="freeze_dont_freeze_active_apps_title">Κύριος\'t παγώσει τις ενεργές εφαρμογές</string>
     <string name="perm_usage_stats_title">Στατιστικά χρήσης</string>
     <string name="perm_usage_stats_desc">Απαιτείται για τον εντοπισμό των εφαρμογών που βρίσκονται αυτήν τη στιγμή στο προσκήνιο για την αποφυγή παγώματος</string>
+    <string name="perm_usage_stats_desc_app_lock">Required to detect foreground apps for App Lock features when accessibility is not used.</string>
     <string name="perm_notif_listener_desc_freeze">Απαιτείται για την ανίχνευση πολυμέσων αναπαραγωγής και ενεργών ειδοποιήσεων για την αποφυγή παγώματος</string>
     <string name="freeze_mode_title">Freeze mode</string>
     <string name="freeze_mode_freeze">Freezing</string>
@@ -731,6 +734,9 @@
     <string name="automation_service_channel_name">Υπηρεσία Αυτοματισμού</string>
     <string name="automation_service_running_title">Αυτοματισμοί Ενεργοί</string>
     <string name="automation_service_running_desc">Παρακολούθηση συμβάντων συστήματος για τους αυτοματισμούς σας</string>
+    <string name="app_lock_service_channel_name">App Lock Service</string>
+    <string name="app_lock_service_running_title">App Lock Active</string>
+    <string name="app_lock_service_running_desc">Monitoring app activity</string>
     <string name="diy_action_device_effects">Εφέ συσκευής</string>
     <string name="diy_device_effects_desc">Ελέγξτε τα εφέ σε επίπεδο συστήματος, όπως κλίμακα του γκρι, καταστολή AOD, μείωση φωτισμού ταπετσαρίας και νυχτερινή λειτουργία.</string>
     <string name="diy_effect_grayscale">Κλίμακα του γκρι</string>
