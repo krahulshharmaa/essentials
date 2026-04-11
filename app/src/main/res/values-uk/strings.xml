@@ -24,6 +24,8 @@
     <string name="app_lock_description">Захистіть свої програми за допомогою біометричної автентифікації. Заблоковані програми вимагатимуть автентифікації під час запуску. Залишаються розблокованими, доки екран не вимкнеться.</string>
     <string name="app_lock_warning">Майте на увазі, що це не надійне рішення, оскільки це лише стороння програма. Якщо вам потрібна надійна безпека, подумайте про використання Private Space або інших подібних функцій.</string>
     <string name="app_lock_biometric_note">Ще одна примітка: підказка біометричної автентифікації дозволяє використовувати лише методи безпечного класу STRONG. Методи безпеки фейсконтролю класу WEAK на таких пристроях, як Pixel 7, зможуть використовувати лише доступні інші СИЛЬНІ методи авторизації, як-от відбиток пальця або PIN-код.</string>
+    <string name="app_lock_use_usage_access_title">Use usage access</string>
+    <string name="app_lock_use_usage_access_desc">Instead of accessibility</string>
     <!-- Button Remap -->
     <string name="button_remap_enable_title">Увімкнути перепризначення кнопки</string>
     <string name="button_remap_use_shizuku_title">Використовуйте Shizuku або Root або Root</string>
@@ -145,6 +147,7 @@
     <string name="freeze_dont_freeze_active_apps_title">Не\'не заморожувати активні програми</string>
     <string name="perm_usage_stats_title">Статистика використання</string>
     <string name="perm_usage_stats_desc">Потрібен для виявлення програм, які зараз працюють на передньому плані, щоб уникнути їх зависання</string>
+    <string name="perm_usage_stats_desc_app_lock">Required to detect foreground apps for App Lock features when accessibility is not used.</string>
     <string name="perm_notif_listener_desc_freeze">Необхідний для виявлення відтворюваних медіафайлів і активних сповіщень, щоб уникнути їх зависання</string>
     <string name="freeze_mode_title">Freeze mode</string>
     <string name="freeze_mode_freeze">Freezing</string>
@@ -731,6 +734,9 @@
     <string name="automation_service_channel_name">Служба автоматизації</string>
     <string name="automation_service_running_title">Автоматизація активна</string>
     <string name="automation_service_running_desc">Моніторинг системних подій для вашої автоматизації</string>
+    <string name="app_lock_service_channel_name">App Lock Service</string>
+    <string name="app_lock_service_running_title">App Lock Active</string>
+    <string name="app_lock_service_running_desc">Monitoring app activity</string>
     <string name="diy_action_device_effects">Ефекти пристрою</string>
     <string name="diy_device_effects_desc">Керуйте ефектами на рівні системи, як-от відтінки сірого, придушення AOD, затемнення шпалер і нічний режим.</string>
     <string name="diy_effect_grayscale">Відтінки сірого</string>
