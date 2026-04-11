@@ -42,9 +42,16 @@ class AmbientGlanceHandler(
     private var volumeReceiver: BroadcastReceiver? = null
     private val handler = Handler(Looper.getMainLooper())
 
+    private val volumeHideRunnable = Runnable {
+        volumeStrokeView?.animate()?.alpha(0f)?.setDuration(500)?.start()
+    }
+
     private var clockView: View? = null
     private var centerContainer: FrameLayout? = null
+    private var clipContainer: FrameLayout? = null
     private var textContainer: LinearLayout? = null
+    
+    private var currentShapePath: android.graphics.Path? = null
 
     private var imageView: ImageView? = null
     private var titleView: TextView? = null
@@ -70,40 +77,19 @@ class AmbientGlanceHandler(
 
     private val progressUpdateRunnable = object : Runnable {
         override fun run() {
-            if (overlayView == null || eventType == EVENT_VOLUME) return
-
-            val mediaSessionManager =
-                service.getSystemService(Context.MEDIA_SESSION_SERVICE) as MediaSessionManager
-            val sessions = mediaSessionManager.getActiveSessions(
-                android.content.ComponentName(
-                    service,
-                    ScreenOffAccessibilityService::class.java
-                )
-            )
-
-            // Find playing session
-            val activeSession = sessions.firstOrNull {
-                it.playbackState?.state == android.media.session.PlaybackState.STATE_PLAYING
-            }
-
-            if (activeSession != null) {
-                val position = activeSession.playbackState?.position ?: 0L
-                val duration =
-                    activeSession.metadata?.getLong(android.media.MediaMetadata.METADATA_KEY_DURATION)
-                        ?: 0L
-
-                if (duration > 0) {
-                    val progress = (position * 100 / duration).toInt()
-                    volumeStrokeView?.updatePercentage(progress)
-                }
-            } else {
-                // No active playing session
-                if (isDockedMode) {
-                    fadeOutAndRemove() // Hide if music stops/pauses in docked mode
-                }
-            }
-
             if (overlayView == null || isDetached) return
+            
+            // Dismiss if music stops/pauses
+            val mediaSessionManager = service.getSystemService(Context.MEDIA_SESSION_SERVICE) as MediaSessionManager
+            val componentName = android.content.ComponentName(service, ScreenOffAccessibilityService::class.java)
+            val sessions = mediaSessionManager.getActiveSessions(componentName)
+            val anyPlaying = sessions.any { it.playbackState?.state == android.media.session.PlaybackState.STATE_PLAYING }
+            
+            if (!anyPlaying) {
+                fadeOutAndRemove()
+                return
+            }
+
             handler.postDelayed(this, 1000L)
         }
     }
@@ -187,6 +173,11 @@ class AmbientGlanceHandler(
                     else if (volumeKey == 25) volumeIconView?.setImageResource(R.drawable.rounded_volume_down_24)
                     volumeIconView?.animate()?.alpha(1f)?.setDuration(200)?.start()
                     volumeStrokeView?.setColor(Color.WHITE)
+                    
+                    // Show and schedule hide
+                    volumeStrokeView?.animate()?.alpha(1f)?.setDuration(300)?.start()
+                    handler.removeCallbacks(volumeHideRunnable)
+                    handler.postDelayed(volumeHideRunnable, 3000)
                 }
 
                 // Update like status
@@ -228,6 +219,15 @@ class AmbientGlanceHandler(
         artistView?.text = artistName ?: "Unknown Artist"
 
         likeStatusView?.setImageResource(if (isAlreadyLiked) R.drawable.round_favorite_24 else R.drawable.rounded_favorite_24)
+
+        // Update Dynamic Shape
+        val size = dpToPx(320f).toFloat()
+        currentShapePath = com.sameerasw.essentials.utils.AmbientMusicShapeHelper.getShapePath(
+            "${trackTitle}_${artistName}",
+            size
+        )
+        volumeStrokeView?.updatePath(currentShapePath!!)
+        clipContainer?.invalidateOutline()
 
         // Reload Bitmap
         try {
@@ -323,16 +323,15 @@ class AmbientGlanceHandler(
 
         val size = dpToPx(320f)
 
-        // Path for both clipping and stroke
-        val petalPath = createScallopPath(size.toFloat(), size.toFloat(), 12, 0.10f)
+        currentShapePath = com.sameerasw.essentials.utils.AmbientMusicShapeHelper.getRandomShapePath(size.toFloat())
 
         // Container for clipping
-        val clipContainer = FrameLayout(context).apply {
+        clipContainer = FrameLayout(context).apply {
             layoutParams = FrameLayout.LayoutParams(size, size, Gravity.CENTER)
             outlineProvider = object : android.view.ViewOutlineProvider() {
                 override fun getOutline(view: View, outline: android.graphics.Outline) {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                        outline.setPath(petalPath)
+                        currentShapePath?.let { outline.setPath(it) }
                     } else {
                         outline.setOval(0, 0, view.width, view.height)
                     }
@@ -365,8 +364,8 @@ class AmbientGlanceHandler(
             setBackgroundColor(0x40000000.toInt())
         }
 
-        clipContainer.addView(imageView)
-        clipContainer.addView(scrim)
+        clipContainer?.addView(imageView)
+        clipContainer?.addView(scrim)
         centerContainer?.addView(clipContainer)
 
         // Volume Icon 
@@ -389,11 +388,17 @@ class AmbientGlanceHandler(
 
         // Volume Stroke 
         val initialPerc = if (eventType == EVENT_VOLUME) volumePercentage else 0
-        volumeStrokeView = VolumeStrokeView(context, petalPath, initialPerc)
+        volumeStrokeView = VolumeStrokeView(context, currentShapePath!!, initialPerc)
         volumeStrokeView?.layoutParams =
             FrameLayout.LayoutParams(size + dpToPx(20f), size + dpToPx(20f), Gravity.CENTER)
         volumeStrokeView?.setColor(if (eventType == EVENT_VOLUME) Color.WHITE else Color.GRAY)
+        volumeStrokeView?.alpha = if (eventType == EVENT_VOLUME) 1f else 0f
         centerContainer?.addView(volumeStrokeView)
+        
+        if (eventType == EVENT_VOLUME) {
+            handler.removeCallbacks(volumeHideRunnable)
+            handler.postDelayed(volumeHideRunnable, 3000)
+        }
 
         // Start progress polling if not a volume notification
         if (eventType != EVENT_VOLUME) {
@@ -478,6 +483,11 @@ class AmbientGlanceHandler(
                             val max = it.getStreamMaxVolume(android.media.AudioManager.STREAM_MUSIC)
                             val perc = (current.toFloat() / max.toFloat() * 100).toInt()
                             volumeStrokeView?.updatePercentage(perc)
+
+                            // Show and schedule hide
+                            volumeStrokeView?.animate()?.alpha(1f)?.setDuration(300)?.start()
+                            handler.removeCallbacks(volumeHideRunnable)
+                            handler.postDelayed(volumeHideRunnable, 3000)
                         }
                     }
                 }
@@ -701,7 +711,7 @@ class AmbientGlanceHandler(
 
     private inner class VolumeStrokeView(
         context: Context,
-        private val petalPath: Path,
+        private var petalPath: android.graphics.Path,
         private val percentage: Int
     ) : View(context) {
         private var currentPercentage: Float = percentage.toFloat()
@@ -713,9 +723,15 @@ class AmbientGlanceHandler(
             strokeWidth = dpToPx(6f).toFloat()
             strokeCap = Paint.Cap.ROUND
         }
-        private val pathMeasure = PathMeasure(petalPath, false)
+        private var pathMeasure = PathMeasure(petalPath, false)
         private val progressPath = Path()
         private var isDetached = false
+
+        fun updatePath(newPath: android.graphics.Path) {
+            this.petalPath = newPath
+            this.pathMeasure = PathMeasure(newPath, false)
+            invalidate()
+        }
 
         fun cleanup() {
             isDetached = true
