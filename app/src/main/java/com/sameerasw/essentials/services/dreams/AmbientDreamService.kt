@@ -63,8 +63,11 @@ class AmbientDreamService : DreamService() {
     private var musicContainer: FrameLayout? = null
     private var centerContainer: FrameLayout? = null
     private var clipContainer: FrameLayout? = null
+    private var currentPolygon: androidx.graphics.shapes.RoundedPolygon? = null
+    private var morphAnimator: android.animation.ValueAnimator? = null
     private var textContainer: LinearLayout? = null
     private var imageView: ImageView? = null
+    private var nextImageView: ImageView? = null
     private var titleView: TextView? = null
     private var artistView: TextView? = null
     private var likeStatusView: ImageView? = null
@@ -245,6 +248,7 @@ class AmbientDreamService : DreamService() {
 
         val size = dpToPx(320f)
 
+        currentPolygon = com.sameerasw.essentials.utils.AmbientMusicShapeHelper.getRandomPolygon()
         currentShapePath = com.sameerasw.essentials.utils.AmbientMusicShapeHelper.getRandomShapePath(size.toFloat())
 
         // Container for clipping
@@ -268,6 +272,16 @@ class AmbientDreamService : DreamService() {
                 FrameLayout.LayoutParams.MATCH_PARENT
             )
             scaleType = ImageView.ScaleType.CENTER_CROP
+            setImageDrawable(ColorDrawable(Color.DKGRAY))
+        }
+
+        nextImageView = ImageView(this).apply {
+            layoutParams = FrameLayout.LayoutParams(
+                FrameLayout.LayoutParams.MATCH_PARENT,
+                FrameLayout.LayoutParams.MATCH_PARENT
+            )
+            scaleType = ImageView.ScaleType.CENTER_CROP
+            alpha = 0f
         }
 
         // Dark overlay
@@ -280,6 +294,7 @@ class AmbientDreamService : DreamService() {
         }
 
         clipContainer?.addView(imageView)
+        clipContainer?.addView(nextImageView)
         clipContainer?.addView(scrim)
         centerContainer?.addView(clipContainer)
 
@@ -599,17 +614,52 @@ class AmbientDreamService : DreamService() {
         artistView?.text = artistName ?: "Unknown Artist"
         likeStatusView?.setImageResource(if (isAlreadyLiked) R.drawable.round_favorite_24 else R.drawable.rounded_favorite_24)
 
-        // Update Dynamic Shape
+        // Update Dynamic Shape with Morphing
         val size = dpToPx(320f).toFloat()
-        currentShapePath = com.sameerasw.essentials.utils.AmbientMusicShapeHelper.getShapePath(
-            "${trackTitle}_${artistName}",
-            size
-        )
-        volumeStrokeView?.updatePath(currentShapePath!!)
-        clipContainer?.invalidateOutline()
+        val newPolygon = com.sameerasw.essentials.utils.AmbientMusicShapeHelper.getPolygon("${trackTitle}_${artistName}")
+        
+        if (currentPolygon != null && currentPolygon != newPolygon) {
+            val morph = androidx.graphics.shapes.Morph(currentPolygon!!, newPolygon)
+            morphAnimator?.cancel()
+            morphAnimator = android.animation.ValueAnimator.ofFloat(0f, 1f).apply {
+                duration = 800
+                interpolator = android.view.animation.PathInterpolator(0.4f, 0f, 0.2f, 1f)
+                addUpdateListener { animator ->
+                    val progress = animator.animatedValue as Float
+                    currentShapePath?.let { path ->
+                        com.sameerasw.essentials.utils.AmbientMusicShapeHelper.updatePathFromMorph(
+                            morph, progress, size, path, progress * 360f
+                        )
+                        volumeStrokeView?.updatePath(path)
+                        clipContainer?.invalidateOutline()
+                    }
+                    
+                    nextImageView?.alpha = progress
+                }
+                addListener(object : android.animation.AnimatorListenerAdapter() {
+                    override fun onAnimationEnd(animation: android.animation.Animator) {
+                        imageView?.setImageDrawable(nextImageView?.drawable)
+                        nextImageView?.alpha = 0f
+                    }
+                })
+                start()
+            }
+        } else {
+            // ... (rest of the else block)
+            currentShapePath = com.sameerasw.essentials.utils.AmbientMusicShapeHelper.getShapePath(
+                "${trackTitle}_${artistName}",
+                size
+            )
+            volumeStrokeView?.updatePath(currentShapePath!!)
+            clipContainer?.invalidateOutline()
+        }
+        currentPolygon = newPolygon
 
         if (directBitmap != null) {
-            imageView?.setImageBitmap(directBitmap)
+            nextImageView?.setImageBitmap(directBitmap)
+            if (morphAnimator?.isRunning != true) {
+                imageView?.setImageBitmap(directBitmap)
+            }
             return
         }
 

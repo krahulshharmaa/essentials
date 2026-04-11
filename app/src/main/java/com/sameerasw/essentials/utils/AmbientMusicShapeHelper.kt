@@ -41,32 +41,42 @@ object AmbientMusicShapeHelper {
     )
 
     fun getShapePath(seed: String?, size: Float): Path {
-        val hash = seed?.hashCode() ?: 0
-        val random = Random(hash.toLong())
-        val shape = allShapes[random.nextInt(allShapes.size)]
-        
-        return shape.toAndroidPath(size)
+        return getPolygon(seed).toAndroidPath(size)
     }
 
     fun getRandomShapePath(size: Float): Path {
+        return getRandomPolygon().toAndroidPath(size)
+    }
+
+    fun getPolygon(seed: String?): RoundedPolygon {
+        val hash = seed?.hashCode() ?: 0
+        val random = Random(hash.toLong())
+        return allShapes[random.nextInt(allShapes.size)]
+    }
+
+    fun getRandomPolygon(): RoundedPolygon {
         val random = Random()
-        val shape = allShapes[random.nextInt(allShapes.size)]
-        return shape.toAndroidPath(size)
+        return allShapes[random.nextInt(allShapes.size)]
+    }
+
+    fun updatePathFromMorph(morph: androidx.graphics.shapes.Morph, progress: Float, size: Float, targetPath: Path, rotation: Float = 0f) {
+        val rawPath = morph.toPath(progress)
+        val matrix = android.graphics.Matrix()
+        matrix.postScale(size, size)
+        if (rotation != 0f) {
+            matrix.postRotate(rotation, size / 2f, size / 2f)
+        }
+        
+        targetPath.reset()
+        targetPath.set(rawPath)
+        targetPath.transform(matrix)
     }
 
     private fun RoundedPolygon.toAndroidPath(size: Float): Path {
-        val path = Path()
-        val composePath = this.toPath()
-        val matrix = Matrix()
-        
-        matrix.postScale(size, size)
-        
-        val androidPath = Path()
         val resultPath = this.toPath()
         val matrixObj = android.graphics.Matrix()
         matrixObj.postScale(size, size)
         resultPath.transform(matrixObj)
-        
         return resultPath
     }
 }
