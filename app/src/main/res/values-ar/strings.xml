@@ -24,6 +24,8 @@
     <string name="app_lock_description">قم بتأمين تطبيقاتك من خلال المصادقة البيومترية. ستتطلب التطبيقات المقفلة المصادقة عند التشغيل، وتظل مفتوحة حتى يتم إيقاف تشغيل الشاشة.</string>
     <string name="app_lock_warning">احذر من أن هذا ليس حلاً قويًا لأنه مجرد تطبيق تابع لجهة خارجية. إذا كنت بحاجة إلى أمان قوي، ففكر في استخدام المساحة الخاصة أو ميزات أخرى من هذا القبيل.</string>
     <string name="app_lock_biometric_note">ملاحظة أخرى، تتيح لك مطالبة المصادقة البيومترية فقط استخدام أساليب الفئة الآمنة القوية. لن تتمكن طرق أمان فتح القفل بالوجه من فئة WEAK في أجهزة مثل Pixel 7 إلا من استخدام طرق المصادقة القوية الأخرى المتاحة مثل بصمة الإصبع أو الدبوس.</string>
+    <string name="app_lock_use_usage_access_title">Use usage access</string>
+    <string name="app_lock_use_usage_access_desc">Instead of accessibility</string>
     <!-- Button Remap -->
     <string name="button_remap_enable_title">تمكين زر إعادة التعيين</string>
     <string name="button_remap_use_shizuku_title">استخدم Shizuku أو Root أو Root</string>
@@ -145,6 +147,7 @@
     <string name="freeze_dont_freeze_active_apps_title">لا تجمد التطبيقات النشطة</string>
     <string name="perm_usage_stats_title">إحصائيات الاستخدام</string>
     <string name="perm_usage_stats_desc">مطلوب لاكتشاف التطبيقات الموجودة حاليًا في المقدمة لتجنب تجميدها</string>
+    <string name="perm_usage_stats_desc_app_lock">Required to detect foreground apps for App Lock features when accessibility is not used.</string>
     <string name="perm_notif_listener_desc_freeze">مطلوب لاكتشاف تشغيل الوسائط والإشعارات النشطة لتجنب تجميدها</string>
     <string name="freeze_mode_title">وضع التجميد</string>
     <string name="freeze_mode_freeze">التجميد </string>
@@ -731,6 +734,9 @@
     <string name="automation_service_channel_name">خدمة الأتمنة</string>
     <string name="automation_service_running_title">الأتمنة نشطة</string>
     <string name="automation_service_running_desc">مراقبة أحداث النظام لعمليات التشغيل الآلي الخاصة بك</string>
+    <string name="app_lock_service_channel_name">App Lock Service</string>
+    <string name="app_lock_service_running_title">App Lock Active</string>
+    <string name="app_lock_service_running_desc">Monitoring app activity</string>
     <string name="diy_action_device_effects">تأثيرات الجهاز</string>
     <string name="diy_device_effects_desc">تحكم في التأثيرات على مستوى النظام مثل التدرج الرمادي وقمع AOD وتعتيم الخلفية والوضع الليلي.</string>
     <string name="diy_effect_grayscale">تدرج الرمادي</string>
