@@ -138,6 +138,7 @@ class MainViewModel : ViewModel() {
 
 
     val isScreenLockedSecurityEnabled = mutableStateOf(false)
+    val isDisableQsWhenLockedEnabled = mutableStateOf(false)
     val isDeviceAdminEnabled = mutableStateOf(false)
     val isDeveloperModeEnabled = mutableStateOf(false)
     val isNotificationPolicyAccessGranted = mutableStateOf(false)
@@ -278,6 +279,9 @@ class MainViewModel : ViewModel() {
                         settingsRepository.getBoolean(key)
 
                     SettingsRepository.KEY_SCREEN_LOCKED_SECURITY_ENABLED -> isScreenLockedSecurityEnabled.value =
+                        settingsRepository.getBoolean(key)
+
+                    SettingsRepository.KEY_DISABLE_QS_WHEN_LOCKED -> isDisableQsWhenLockedEnabled.value =
                         settingsRepository.getBoolean(key)
 
                     SettingsRepository.KEY_MAPS_POWER_SAVING_ENABLED -> {
@@ -842,6 +846,8 @@ class MainViewModel : ViewModel() {
 
         isScreenLockedSecurityEnabled.value =
             settingsRepository.getBoolean(SettingsRepository.KEY_SCREEN_LOCKED_SECURITY_ENABLED)
+        isDisableQsWhenLockedEnabled.value =
+            settingsRepository.getBoolean(SettingsRepository.KEY_DISABLE_QS_WHEN_LOCKED, false)
         isDeviceAdminEnabled.value = isDeviceAdminActive(context)
 
         isAutoUpdateEnabled.value =
@@ -2282,6 +2288,11 @@ class MainViewModel : ViewModel() {
             SettingsRepository.KEY_SCREEN_LOCKED_SECURITY_ENABLED,
             enabled
         )
+    }
+
+    fun setDisableQsWhenLockedEnabled(enabled: Boolean, context: Context) {
+        isDisableQsWhenLockedEnabled.value = enabled
+        settingsRepository.putBoolean(SettingsRepository.KEY_DISABLE_QS_WHEN_LOCKED, enabled)
     }
 
     fun setNotificationLightingGlowSides(sides: Set<NotificationLightingSide>, context: Context) {

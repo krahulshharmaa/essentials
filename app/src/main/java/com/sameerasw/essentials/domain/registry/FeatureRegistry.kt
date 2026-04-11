@@ -541,6 +541,13 @@ object FeatureRegistry {
                     R.string.feat_qs_tiles_title
                 ),
                 SearchSetting(
+                    R.string.search_disable_qs_locked_title,
+                    R.string.search_disable_qs_locked_desc,
+                    "Disable QS Locked",
+                    R.array.keywords_network_visibility,
+                    R.string.feat_qs_tiles_title
+                ),
+                SearchSetting(
                     R.string.search_qs_mono_title,
                     R.string.search_qs_mono_desc,
                     "Mono Audio",
