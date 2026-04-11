@@ -251,6 +251,10 @@
     <string name="screen_locked_security_warning_text">Ez a funkció nem bolondbiztos. Előfordulhatnak olyan szélsőséges esetek, amikor valaki még mindig képes kommunikálni a csempével. \nNe feledje, hogy az Android mindig engedélyezi a kényszerített újraindítást, a Pixels pedig mindig lehetővé teszi az eszköz kikapcsolását a lezárási képernyőről is.</string>
     <string name="screen_locked_security_airplane_warning">Ügyeljen arra, hogy eltávolítsa a repülőgép üzemmód csempét a gyorsbeállításokból, mivel ez nem akadályozható meg, mivel nem nyit meg párbeszédablakot.</string>
     <string name="screen_locked_security_description">Ha engedélyezve van, a Gyorsbeállítások panel azonnal bezárul, és az eszköz zárolva lesz, ha valaki internetes csempékkel próbál kommunikálni, miközben az eszköz zárolva van. \n\nEz a biometrikus feloldást is letiltja, hogy megakadályozza a további jogosulatlan hozzáférést. Az animáció skálája 0,1-szeresére csökken, miközben zárolva van, hogy még nehezebb legyen vele kommunikálni.</string>
+    <string name="disable_qs_when_locked_title">Disable QS when locked</string>
+    <string name="disable_qs_when_locked_desc">Immediately close the Quick Settings panel if someone tries to expand it while the device is locked.</string>
+    <string name="search_disable_qs_locked_title">Disable QS Locked</string>
+    <string name="search_disable_qs_locked_desc">Prevent expanding Quick Settings when device is locked</string>
     <!-- Sound Mode -->
     <string name="sound_mode_reorder_title">Újrarendelési módok</string>
     <string name="sound_mode_long_press_hint">Nyomja meg hosszan a váltáshoz</string>
