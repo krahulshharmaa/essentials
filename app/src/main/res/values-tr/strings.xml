@@ -24,6 +24,8 @@
     <string name="app_lock_description">Uygulamalarınızı biyometrik kimlik doğrulamayla koruyun. Kilitli uygulamalar başlatılırken kimlik doğrulama gerektirir. Ekran kapanana kadar kilit açık kalır.</string>
     <string name="app_lock_warning">Bu yalnızca 3. taraf bir uygulama olduğundan bunun sağlam bir çözüm olmadığını unutmayın. Güçlü bir güvenliğe ihtiyacınız varsa Özel Alan\'ı veya benzeri diğer özellikleri kullanmayı düşünün.</string>
     <string name="app_lock_biometric_note">Başka bir not, biyometrik kimlik doğrulama istemi yalnızca GÜÇLÜ güvenli sınıf yöntemlerini kullanmanıza izin verir. Pixel 7 gibi cihazlarda ZAYIF sınıfındaki yüz kilidi açma güvenlik yöntemleri yalnızca parmak izi veya pin gibi mevcut diğer GÜÇLÜ kimlik doğrulama yöntemlerinden yararlanabilecektir.</string>
+    <string name="app_lock_use_usage_access_title">Use usage access</string>
+    <string name="app_lock_use_usage_access_desc">Instead of accessibility</string>
     <!-- Button Remap -->
     <string name="button_remap_enable_title">Düğme Yeniden Eşlemesini Etkinleştir</string>
     <string name="button_remap_use_shizuku_title">Shizuku veya Kök veya Kök kullanın</string>
@@ -145,6 +147,7 @@
     <string name="freeze_dont_freeze_active_apps_title">Giymek\'etkin uygulamaları dondurma</string>
     <string name="perm_usage_stats_title">Kullanım İstatistikleri</string>
     <string name="perm_usage_stats_desc">Donmasını önlemek amacıyla hangi uygulamaların ön planda olduğunu tespit etmek için gereklidir</string>
+    <string name="perm_usage_stats_desc_app_lock">Required to detect foreground apps for App Lock features when accessibility is not used.</string>
     <string name="perm_notif_listener_desc_freeze">Dondurulmalarını önlemek amacıyla oynatılan medyayı ve aktif bildirimleri tespit etmek için gereklidir</string>
     <string name="freeze_mode_title">Freeze mode</string>
     <string name="freeze_mode_freeze">Freezing</string>
@@ -731,6 +734,9 @@
     <string name="automation_service_channel_name">Otomasyon Hizmeti</string>
     <string name="automation_service_running_title">Otomasyonlar Aktif</string>
     <string name="automation_service_running_desc">Otomasyonlarınız için sistem olaylarını izleme</string>
+    <string name="app_lock_service_channel_name">App Lock Service</string>
+    <string name="app_lock_service_running_title">App Lock Active</string>
+    <string name="app_lock_service_running_desc">Monitoring app activity</string>
     <string name="diy_action_device_effects">Cihaz Efektleri</string>
     <string name="diy_device_effects_desc">Gri tonlama, AOD bastırma, duvar kağıdı karartma ve gece modu gibi sistem düzeyindeki efektleri kontrol edin.</string>
     <string name="diy_effect_grayscale">Gri tonlamalı</string>
