@@ -18,7 +18,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class AppFlowHandler(
-    private val service: AccessibilityService
+    private val context: Context,
+    private val service: AccessibilityService? = null
 ) {
     private val handler = Handler(Looper.getMainLooper())
     private val scope = CoroutineScope(Dispatchers.Main)
@@ -44,14 +45,23 @@ class AppFlowHandler(
         "com.google.android.inputmethod.latin"
     )
 
-    fun onPackageChanged(packageName: String) {
-        if (packageName != service.packageName && packageName != lockingPackage) {
+    fun onPackageChanged(packageName: String, isFromUsageStats: Boolean = false) {
+        val prefs = context.getSharedPreferences("essentials_prefs", Context.MODE_PRIVATE)
+        val useUsageAccess = prefs.getBoolean("app_lock_use_usage_access", false)
+
+        if (packageName != context.packageName && packageName != lockingPackage) {
             lockingPackage = null
         }
 
-        checkAppLock(packageName)
-        checkHighlightNightLight(packageName)
-        checkAppAutomations(packageName)
+        if (isFromUsageStats == useUsageAccess) {
+            checkAppLock(packageName)
+        }
+
+        // Night light and automations still require Accessibility
+        if (!isFromUsageStats) {
+            checkHighlightNightLight(packageName)
+            checkAppAutomations(packageName)
+        }
     }
 
     fun onAuthenticated(packageName: String) {
@@ -66,11 +76,11 @@ class AppFlowHandler(
     }
 
     private fun checkAppLock(packageName: String) {
-        val prefs = service.getSharedPreferences("essentials_prefs", Context.MODE_PRIVATE)
+        val prefs = context.getSharedPreferences("essentials_prefs", Context.MODE_PRIVATE)
         val isEnabled = prefs.getBoolean("app_lock_enabled", false)
         if (!isEnabled) return
 
-        if (packageName == service.packageName) {
+        if (packageName == context.packageName) {
             return
         }
 
@@ -102,18 +112,18 @@ class AppFlowHandler(
                 "App $packageName is locked and not authenticated. Showing lock screen."
             )
             val intent = Intent().apply {
-                component = ComponentName(service, "com.sameerasw.essentials.AppLockActivity")
+                component = ComponentName(context, "com.sameerasw.essentials.AppLockActivity")
                 putExtra("package_to_lock", packageName)
                 flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_NO_ANIMATION
             }
-            service.startActivity(intent)
+            context.startActivity(intent)
         }
     }
 
     private fun checkHighlightNightLight(packageName: String) {
-        val prefs = service.getSharedPreferences("essentials_prefs", Context.MODE_PRIVATE)
+        val prefs = context.getSharedPreferences("essentials_prefs", Context.MODE_PRIVATE)
         val isEnabled = prefs.getBoolean("dynamic_night_light_enabled", false)
-        if (!isEnabled) return
+        if (!isEnabled || service == null) return
 
         pendingNLRunnable?.let { handler.removeCallbacks(it) }
 
@@ -130,7 +140,7 @@ class AppFlowHandler(
     }
 
     private fun processNightLightChange(packageName: String) {
-        val prefs = service.getSharedPreferences("essentials_prefs", Context.MODE_PRIVATE)
+        val prefs = context.getSharedPreferences("essentials_prefs", Context.MODE_PRIVATE)
 
         val json = prefs.getString("dynamic_night_light_selected_apps", null)
         val selectedApps: List<AppSelection> = if (json != null) {
@@ -167,7 +177,7 @@ class AppFlowHandler(
 
     private fun isNightLightEnabled(): Boolean {
         return try {
-            Settings.Secure.getInt(service.contentResolver, "night_display_activated", 0) == 1
+            Settings.Secure.getInt(context.contentResolver, "night_display_activated", 0) == 1
         } catch (_: Exception) {
             false
         }
@@ -176,7 +186,7 @@ class AppFlowHandler(
     private fun setNightLightEnabled(enabled: Boolean) {
         try {
             Settings.Secure.putInt(
-                service.contentResolver,
+                context.contentResolver,
                 "night_display_activated",
                 if (enabled) 1 else 0
             )
@@ -189,6 +199,7 @@ class AppFlowHandler(
     }
 
     private fun checkAppAutomations(packageName: String) {
+        if (service == null) return
         scope.launch {
             val automations = DIYRepository.automations.value
             val appAutomations =

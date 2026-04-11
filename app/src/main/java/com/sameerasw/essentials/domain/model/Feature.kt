@@ -27,7 +27,7 @@ abstract class Feature(
     @DrawableRes val iconRes: Int,
     @StringRes val category: Int,
     @StringRes val description: Int,
-    val permissionKeys: List<String> = emptyList(),
+    open val permissionKeys: List<String> = emptyList(),
     val searchableSettings: List<SearchSetting> = emptyList(),
     val showToggle: Boolean = true,
     val hasMoreSettings: Boolean = true,

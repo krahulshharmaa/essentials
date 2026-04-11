@@ -245,7 +245,7 @@ class FeatureSettingsActivity : AppCompatActivity() {
                             "Dynamic night light" -> !isAccessibilityEnabled || !isWriteSecureSettingsEnabled
                             "Snooze system notifications" -> !isNotificationListenerEnabled
                             "Screen locked security" -> !isAccessibilityEnabled || !isWriteSecureSettingsEnabled || !viewModel.isDeviceAdminEnabled.value
-                            "App lock" -> !isAccessibilityEnabled
+                            "App lock" -> if (viewModel.isAppLockUseUsageAccess.value) !viewModel.isUsageStatsPermissionGranted.value else !isAccessibilityEnabled
                             "Freeze" -> !com.sameerasw.essentials.utils.ShellUtils.hasPermission(
                                 context
                             )
@@ -376,7 +376,7 @@ class FeatureSettingsActivity : AppCompatActivity() {
                                                 "Dynamic night light" -> !isAccessibilityEnabled || !isWriteSecureSettingsEnabled
                                                 "Snooze system notifications" -> !isNotificationListenerEnabled
                                                 "Screen locked security" -> !isAccessibilityEnabled || !isWriteSecureSettingsEnabled || !viewModel.isDeviceAdminEnabled.value
-                                                "App lock" -> !isAccessibilityEnabled
+                                                "App lock" -> if (viewModel.isAppLockUseUsageAccess.value) !viewModel.isUsageStatsPermissionGranted.value else !isAccessibilityEnabled
                                                 "Freeze" -> !com.sameerasw.essentials.utils.ShellUtils.hasPermission(
                                                     context
                                                 )

@@ -488,6 +488,15 @@
         </service>
 
         <service
+            android:name=".services.AppLockUsageService"
+            android:enabled="true"
+            android:exported="false"
+            android:foregroundServiceType="specialUse">
+            <property android:name="android.app.property.FOREGROUND_SERVICE_TYPE_SPECIAL_USE_DESCRIPTION"
+                      android:value="App Lock Service" />
+        </service>
+
+        <service
             android:name=".services.EssentialsConditionProvider"
             android:label="Essentials Focus"
             android:permission="android.permission.BIND_CONDITION_PROVIDER_SERVICE"

@@ -700,7 +700,6 @@ object FeatureRegistry {
             category = R.string.cat_protection,
             description = R.string.feat_app_lock_desc,
             aboutDescription = R.string.about_desc_app_lock,
-            permissionKeys = listOf("ACCESSIBILITY"),
             searchableSettings = listOf(
                 SearchSetting(
                     R.string.search_app_lock_enable_title,
@@ -717,9 +716,17 @@ object FeatureRegistry {
             ),
             parentFeatureId = "Security"
         ) {
+            override val permissionKeys: List<String>
+                get() = if (com.sameerasw.essentials.data.repository.SettingsRepository(com.sameerasw.essentials.EssentialsApp.context)
+                        .getBoolean(com.sameerasw.essentials.data.repository.SettingsRepository.KEY_APP_LOCK_USE_USAGE_ACCESS))
+                    listOf("USAGE_STATS") else listOf("ACCESSIBILITY")
+
             override fun isEnabled(viewModel: MainViewModel) = viewModel.isAppLockEnabled.value
             override fun isToggleEnabled(viewModel: MainViewModel, context: Context) =
-                viewModel.isAccessibilityEnabled.value
+                if (viewModel.isAppLockUseUsageAccess.value)
+                    viewModel.isUsageStatsPermissionGranted.value
+                else
+                    viewModel.isAccessibilityEnabled.value
 
             override fun onToggle(viewModel: MainViewModel, context: Context, enabled: Boolean) =
                 viewModel.setAppLockEnabled(enabled, context)

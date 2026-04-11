@@ -101,6 +101,7 @@ fun QuickSettingsTilesSettingsUI(
     var selectedHelpTile by remember { mutableStateOf<QSTileInfo?>(null) }
 
 
+    val isAppLockUseUsageStats by viewModel.isAppLockUseUsageAccess
     val tiles = listOf(
         QSTileInfo(
             R.string.tile_ui_blur,
@@ -178,7 +179,7 @@ fun QuickSettingsTilesSettingsUI(
             R.string.tile_app_lock,
             R.drawable.rounded_shield_lock_24,
             AppLockTileService::class.java,
-            listOf("ACCESSIBILITY"),
+            if (isAppLockUseUsageStats) listOf("USAGE_STATS") else listOf("ACCESSIBILITY"),
             R.string.about_desc_app_lock
         ),
         QSTileInfo(

@@ -13,6 +13,7 @@ import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.database.ContentObserver
 import android.net.Uri
+import android.os.Build
 import android.os.Handler
 import android.os.Looper
 import android.os.PowerManager
@@ -153,6 +154,7 @@ class MainViewModel : ViewModel() {
         mutableStateOf(setOf(NotificationLightingSide.LEFT, NotificationLightingSide.RIGHT))
     val skipPersistentNotifications = mutableStateOf(false)
     val isAppLockEnabled = mutableStateOf(false)
+    val isAppLockUseUsageAccess = mutableStateOf(false)
     val isFreezeWhenLockedEnabled = mutableStateOf(false)
     val freezeLockDelayIndex = mutableIntStateOf(1) // Default: 1 minute
     val freezePickedApps = mutableStateOf<List<NotificationApp>>(emptyList())
@@ -289,8 +291,15 @@ class MainViewModel : ViewModel() {
                     SettingsRepository.KEY_BUTTON_REMAP_ENABLED -> isButtonRemapEnabled.value =
                         settingsRepository.getBoolean(key)
 
-                    SettingsRepository.KEY_APP_LOCK_ENABLED -> isAppLockEnabled.value =
-                        settingsRepository.getBoolean(key)
+                    SettingsRepository.KEY_APP_LOCK_ENABLED -> {
+                        isAppLockEnabled.value = settingsRepository.getBoolean(key)
+                        appContext?.let { updateAppLockService(it) }
+                    }
+
+                    SettingsRepository.KEY_APP_LOCK_USE_USAGE_ACCESS -> {
+                        isAppLockUseUsageAccess.value = settingsRepository.getBoolean(key)
+                        appContext?.let { updateAppLockService(it) }
+                    }
 
                     SettingsRepository.KEY_FREEZE_WHEN_LOCKED_ENABLED -> isFreezeWhenLockedEnabled.value =
                         settingsRepository.getBoolean(key)
@@ -640,6 +649,7 @@ class MainViewModel : ViewModel() {
 
         notificationLightingStyle.value = settingsRepository.getNotificationLightingStyle()
         notificationLightingColorMode.value = settingsRepository.getNotificationLightingColorMode()
+        isAppLockUseUsageAccess.value = settingsRepository.getBoolean(SettingsRepository.KEY_APP_LOCK_USE_USAGE_ACCESS)
         isOnboardingCompleted.value = settingsRepository.getBoolean(SettingsRepository.KEY_ONBOARDING_COMPLETED, false)
         notificationLightingCustomColor.intValue = settingsRepository.getInt(
             SettingsRepository.KEY_EDGE_LIGHTING_CUSTOM_COLOR,
@@ -1256,6 +1266,32 @@ class MainViewModel : ViewModel() {
     fun setAppLockEnabled(enabled: Boolean, context: Context) {
         isAppLockEnabled.value = enabled
         settingsRepository.putBoolean(SettingsRepository.KEY_APP_LOCK_ENABLED, enabled)
+        updateAppLockService(context)
+    }
+
+    fun setAppLockUseUsageAccess(enabled: Boolean, context: Context) {
+        isAppLockUseUsageAccess.value = enabled
+        settingsRepository.putBoolean(SettingsRepository.KEY_APP_LOCK_USE_USAGE_ACCESS, enabled)
+        updateAppLockService(context)
+    }
+
+    private fun updateAppLockService(context: Context) {
+        val intent = Intent(context, com.sameerasw.essentials.services.AppLockUsageService::class.java)
+        val shouldRun = isAppLockEnabled.value && isAppLockUseUsageAccess.value
+        
+        if (shouldRun) {
+            try {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    context.startForegroundService(intent)
+                } else {
+                    context.startService(intent)
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        } else {
+            context.stopService(intent)
+        }
     }
 
     val isLikeSongToastEnabled = mutableStateOf(false)
