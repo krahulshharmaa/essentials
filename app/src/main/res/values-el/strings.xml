@@ -251,6 +251,10 @@
     <string name="screen_locked_security_warning_text">Αυτή η δυνατότητα δεν είναι αλάνθαστη. Μπορεί να υπάρχουν περιπτώσεις αιχμής όπου κάποιος εξακολουθεί να μπορεί να αλληλεπιδράσει με το πλακίδιο. \nΈχετε επίσης υπόψη ότι το Android θα επιτρέπει πάντα την αναγκαστική επανεκκίνηση και τα Pixel θα επιτρέπουν πάντα την απενεργοποίηση της συσκευής και από την οθόνη κλειδώματος.</string>
     <string name="screen_locked_security_airplane_warning">Βεβαιωθείτε ότι έχετε αφαιρέσει το πλακίδιο λειτουργίας πτήσης από τις γρήγορες ρυθμίσεις, καθώς αυτό δεν μπορεί να αποφευχθεί επειδή δεν ανοίγει παράθυρο διαλόγου.</string>
     <string name="screen_locked_security_description">Όταν ενεργοποιηθεί, ο πίνακας Γρήγορων ρυθμίσεων θα κλείσει αμέσως και η συσκευή θα κλειδωθεί εάν κάποιος επιχειρήσει να αλληλεπιδράσει με πλακίδια Διαδικτύου ενώ η συσκευή είναι κλειδωμένη. \n\nΑυτό θα απενεργοποιήσει επίσης το βιομετρικό ξεκλείδωμα για να αποτρέψει περαιτέρω μη εξουσιοδοτημένη πρόσβαση. Η κλίμακα κινούμενων εικόνων θα μειωθεί στο 0,1x ενώ θα είναι κλειδωμένη για να γίνει ακόμα πιο δύσκολη η αλληλεπίδραση.</string>
+    <string name="disable_qs_when_locked_title">Disable QS when locked</string>
+    <string name="disable_qs_when_locked_desc">Immediately close the Quick Settings panel if someone tries to expand it while the device is locked.</string>
+    <string name="search_disable_qs_locked_title">Disable QS Locked</string>
+    <string name="search_disable_qs_locked_desc">Prevent expanding Quick Settings when device is locked</string>
     <!-- Sound Mode -->
     <string name="sound_mode_reorder_title">Επαναπαραγγελία τρόπων λειτουργίας</string>
     <string name="sound_mode_long_press_hint">Πατήστε παρατεταμένα για εναλλαγή</string>
