@@ -79,6 +79,51 @@ class AmbientDreamService : DreamService() {
     private var eventType: String? = null
     private var targetPackage: String? = null
 
+    private var currentController: android.media.session.MediaController? = null
+
+    private val sessionListener = MediaSessionManager.OnActiveSessionsChangedListener { sessions ->
+        updateActiveSession(sessions)
+    }
+
+    private val mediaCallback = object : android.media.session.MediaController.Callback() {
+        override fun onMetadataChanged(metadata: android.media.MediaMetadata?) {
+            handler.post {
+                val title = metadata?.getString(android.media.MediaMetadata.METADATA_KEY_TITLE)
+                val artist = metadata?.getString(android.media.MediaMetadata.METADATA_KEY_ARTIST)
+                
+                if (title != trackTitle || artist != artistName) {
+                    trackTitle = title
+                    artistName = artist
+                    
+                    currentController?.let { isAlreadyLiked = checkIsLiked(it) }
+                    
+                    var artBitmap = metadata?.getBitmap(android.media.MediaMetadata.METADATA_KEY_ALBUM_ART)
+                    if (artBitmap == null) {
+                        artBitmap = metadata?.getBitmap(android.media.MediaMetadata.METADATA_KEY_ART)
+                    }
+                    updateMetadata(artBitmap)
+                }
+            }
+        }
+
+        override fun onPlaybackStateChanged(state: android.media.session.PlaybackState?) {
+            handler.post {
+                val isPlaying = state?.state == android.media.session.PlaybackState.STATE_PLAYING
+                if (isPlaying && !isMusicMode) {
+                    switchToMusicMode()
+                } else if (!isPlaying && isMusicMode) {
+                    // We might want to wait a bit before switching to clock mode to handle transitions
+                    handler.postDelayed({
+                        val mediaSessionManager = getSystemService(MEDIA_SESSION_SERVICE) as MediaSessionManager
+                        val sessions = getMediaSessions(mediaSessionManager)
+                        val stillPlaying = sessions.any { it.playbackState?.state == android.media.session.PlaybackState.STATE_PLAYING }
+                        if (!stillPlaying) switchToClockMode()
+                    }, 2000)
+                }
+            }
+        }
+    }
+
     private val handler = Handler(Looper.getMainLooper())
 
     private val burnInProtectionRunnable = object : Runnable {
@@ -94,81 +139,17 @@ class AmbientDreamService : DreamService() {
                 handler.postDelayed(this, 1000)
                 return
             }
-
-            try {
-                val mediaSessionManager =
-                    getSystemService(MEDIA_SESSION_SERVICE) as MediaSessionManager
-                val sessions = getMediaSessions(mediaSessionManager)
-
-                // Find playing session matching target package if possible
-                val activeSession = sessions.firstOrNull { session ->
-                    val isPlaying =
-                        session.playbackState?.state == android.media.session.PlaybackState.STATE_PLAYING
-                    if (targetPackage != null) {
-                        try {
-                            isPlaying && session.packageName == targetPackage
-                        } catch (e: Exception) {
-                            isPlaying
-                        }
-                    } else {
-                        isPlaying
-                    }
-                }
-                    ?: sessions.firstOrNull { it.playbackState?.state == android.media.session.PlaybackState.STATE_PLAYING }
-
-                if (activeSession != null) {
-                    // Update Progress
-                    val position = activeSession.playbackState?.position ?: 0L
-                    val duration =
-                        activeSession.metadata?.getLong(android.media.MediaMetadata.METADATA_KEY_DURATION)
-                            ?: 0L
+            currentController?.let { controller ->
+                val playbackState = controller.playbackState
+                if (playbackState?.state == android.media.session.PlaybackState.STATE_PLAYING) {
+                    val position = playbackState.position
+                    val duration = controller.metadata?.getLong(android.media.MediaMetadata.METADATA_KEY_DURATION) ?: 0L
 
                     if (duration > 0) {
                         val progress = (position.toFloat() / duration.toFloat() * 100).toInt()
                         volumeStrokeView?.updatePercentage(progress)
                     }
-
-                    // Update Metadata Direct from Session (Real-time)
-                    val metadata = activeSession.metadata
-                    val currentTitle =
-                        metadata?.getString(android.media.MediaMetadata.METADATA_KEY_TITLE)
-                    val currentArtist =
-                        metadata?.getString(android.media.MediaMetadata.METADATA_KEY_ARTIST)
-
-                    // Check Like Status directly
-                    val isLikedNow = checkIsLiked(activeSession)
-                    if (isLikedNow != isAlreadyLiked) {
-                        isAlreadyLiked = isLikedNow
-                        likeStatusView?.setImageResource(if (isAlreadyLiked) R.drawable.round_favorite_24 else R.drawable.rounded_favorite_24)
-                    }
-
-                    if (currentTitle != trackTitle) {
-                        trackTitle = currentTitle
-                        artistName = currentArtist
-
-                        // Get Bitmap directly
-                        var artBitmap =
-                            metadata?.getBitmap(android.media.MediaMetadata.METADATA_KEY_ALBUM_ART)
-                        if (artBitmap == null) {
-                            artBitmap =
-                                metadata?.getBitmap(android.media.MediaMetadata.METADATA_KEY_ART)
-                        }
-
-                        updateMetadata(artBitmap)
-                    }
-
-                    // Ensure we are in music mode
-                    if (!isMusicMode) {
-                        switchToMusicMode()
-                    }
-                } else {
-                    // No active playing session
-                    if (isMusicMode) {
-                        switchToClockMode()
-                    }
                 }
-            } catch (e: Exception) {
-                e.printStackTrace()
             }
 
             if (isDetached) return
@@ -204,6 +185,16 @@ class AmbientDreamService : DreamService() {
         // Register receiver
         val filter = IntentFilter("SHOW_AMBIENT_GLANCE")
         registerReceiver(receiver, filter, RECEIVER_EXPORTED)
+
+        // Register Media Session Listener
+        try {
+            val mediaSessionManager = getSystemService(MEDIA_SESSION_SERVICE) as MediaSessionManager
+            val componentName = android.content.ComponentName(this, com.sameerasw.essentials.services.NotificationListener::class.java)
+            mediaSessionManager.addOnActiveSessionsChangedListener(sessionListener, componentName)
+            updateActiveSession(mediaSessionManager.getActiveSessions(componentName))
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
 
         // Request initial state
         val requestIntent = Intent("com.sameerasw.essentials.ACTION_REQUEST_AMBIENT_GLANCE").apply {
@@ -434,6 +425,17 @@ class AmbientDreamService : DreamService() {
         isDreaming = false
         unregisterReceiver(receiver)
         if (volumeReceiver != null) unregisterReceiver(volumeReceiver)
+
+        // Unregister Media Session Listener
+        try {
+            val mediaSessionManager = getSystemService(MEDIA_SESSION_SERVICE) as MediaSessionManager
+            mediaSessionManager.removeOnActiveSessionsChangedListener(sessionListener)
+            currentController?.unregisterCallback(mediaCallback)
+            currentController = null
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
         handler.removeCallbacksAndMessages(null)
 
         // Cancel all View animators
@@ -482,24 +484,47 @@ class AmbientDreamService : DreamService() {
         volumeStrokeView?.setColor(Color.GRAY)
     }
 
+    private fun updateActiveSession(sessions: List<android.media.session.MediaController>?) {
+        if (isDetached) return
+        val playingSession = sessions?.firstOrNull { it.playbackState?.state == android.media.session.PlaybackState.STATE_PLAYING }
+            ?: sessions?.firstOrNull()
+
+        if (playingSession != null) {
+            if (currentController?.sessionToken != playingSession.sessionToken) {
+                currentController?.unregisterCallback(mediaCallback)
+                currentController = playingSession
+                currentController?.registerCallback(mediaCallback)
+
+                // Initial UI update for new controller
+                val metadata = currentController?.metadata
+                trackTitle = metadata?.getString(android.media.MediaMetadata.METADATA_KEY_TITLE)
+                artistName = metadata?.getString(android.media.MediaMetadata.METADATA_KEY_ARTIST)
+                isAlreadyLiked = checkIsLiked(playingSession)
+                
+                var artBitmap = metadata?.getBitmap(android.media.MediaMetadata.METADATA_KEY_ALBUM_ART)
+                if (artBitmap == null) {
+                    artBitmap = metadata?.getBitmap(android.media.MediaMetadata.METADATA_KEY_ART)
+                }
+
+                if (playingSession.playbackState?.state == android.media.session.PlaybackState.STATE_PLAYING) {
+                    switchToMusicMode()
+                }
+                updateMetadata(artBitmap)
+            }
+        } else {
+            currentController?.unregisterCallback(mediaCallback)
+            currentController = null
+            switchToClockMode()
+        }
+    }
+
     private fun checkDirectly() {
         if (isDetached) return
         try {
             val mediaSessionManager =
                 getSystemService(MEDIA_SESSION_SERVICE) as MediaSessionManager
             val sessions = getMediaSessions(mediaSessionManager)
-            val playingSession =
-                sessions.firstOrNull { it.playbackState?.state == android.media.session.PlaybackState.STATE_PLAYING }
-
-            if (playingSession != null) {
-                val metadata = playingSession.metadata
-                trackTitle = metadata?.getString(android.media.MediaMetadata.METADATA_KEY_TITLE)
-                artistName = metadata?.getString(android.media.MediaMetadata.METADATA_KEY_ARTIST)
-                switchToMusicMode()
-                updateMetadata()
-            } else {
-                switchToClockMode()
-            }
+            updateActiveSession(sessions)
         } catch (_: Exception) {
             switchToClockMode()
         }
@@ -573,8 +598,6 @@ class AmbientDreamService : DreamService() {
 
         centerContainer?.animate()?.alpha(0f)?.setDuration(300)?.start()
         textContainer?.animate()?.alpha(0f)?.setDuration(300)?.start()
-
-        handler.removeCallbacks(progressUpdateRunnable)
     }
 
     private fun updateMetadata(directBitmap: android.graphics.Bitmap? = null) {
