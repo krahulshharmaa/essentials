@@ -42,6 +42,7 @@ import com.sameerasw.essentials.domain.model.NotificationApp
 import com.sameerasw.essentials.domain.model.NotificationLightingColorMode
 import com.sameerasw.essentials.domain.model.NotificationLightingSide
 import com.sameerasw.essentials.domain.model.NotificationLightingStyle
+import com.sameerasw.essentials.domain.model.NotificationLightingSweepPosition
 import com.sameerasw.essentials.domain.model.SearchableItem
 import com.sameerasw.essentials.domain.model.UpdateInfo
 import com.sameerasw.essentials.domain.registry.SearchRegistry
@@ -153,6 +154,8 @@ class MainViewModel : ViewModel() {
     val notificationLightingIndicatorScale = mutableStateOf(1.0f)
     val notificationLightingGlowSides =
         mutableStateOf(setOf(NotificationLightingSide.LEFT, NotificationLightingSide.RIGHT))
+    val notificationLightingSweepPosition = mutableStateOf(NotificationLightingSweepPosition.CENTER)
+    val notificationLightingSweepThickness = mutableFloatStateOf(8f)
     val skipPersistentNotifications = mutableStateOf(false)
     val isAppLockEnabled = mutableStateOf(false)
     val isUseUsageAccess = mutableStateOf(false)
@@ -683,6 +686,8 @@ class MainViewModel : ViewModel() {
         notificationLightingIndicatorScale.value =
             settingsRepository.getFloat(SettingsRepository.KEY_EDGE_LIGHTING_INDICATOR_SCALE, 1.0f)
         notificationLightingGlowSides.value = settingsRepository.getNotificationLightingGlowSides()
+        notificationLightingSweepPosition.value = settingsRepository.getNotificationLightingSweepPosition()
+        notificationLightingSweepThickness.floatValue = settingsRepository.getFloat(SettingsRepository.KEY_EDGE_LIGHTING_SWEEP_THICKNESS, 8f)
 
         MapsState.isEnabled = isMapsPowerSavingEnabled.value
         hapticFeedbackType.value = settingsRepository.getHapticFeedbackType()
@@ -1550,32 +1555,41 @@ class MainViewModel : ViewModel() {
         )
     }
 
-    // Helper to show the overlay service for testing/triggering
+    private fun Intent.addLightingExtras(
+        cornerRadiusDp: Float? = null,
+        strokeThicknessDp: Float? = null,
+        isPreview: Boolean = true,
+        styleOverride: NotificationLightingStyle? = null
+    ) {
+        val radius = cornerRadiusDp
+            ?: settingsRepository.getFloat(SettingsRepository.KEY_EDGE_LIGHTING_CORNER_RADIUS, 20f)
+        val thickness = strokeThicknessDp
+            ?: settingsRepository.getFloat(SettingsRepository.KEY_EDGE_LIGHTING_STROKE_THICKNESS, 8f)
+
+        putExtra("corner_radius_dp", radius)
+        putExtra("stroke_thickness_dp", thickness)
+        putExtra("is_preview", isPreview)
+        putExtra("ignore_screen_state", true)
+        putExtra("style", (styleOverride ?: notificationLightingStyle.value).name)
+        putExtra("color_mode", notificationLightingColorMode.value.name)
+        putExtra("custom_color", notificationLightingCustomColor.intValue)
+        putExtra("pulse_count", notificationLightingPulseCount.value.toInt())
+        putExtra("pulse_duration", notificationLightingPulseDuration.value.toLong())
+        putExtra(
+            "glow_sides",
+            notificationLightingGlowSides.value.map { it.name }.toTypedArray()
+        )
+        putExtra("indicator_x", notificationLightingIndicatorX.value)
+        putExtra("indicator_y", notificationLightingIndicatorY.value)
+        putExtra("indicator_scale", notificationLightingIndicatorScale.value)
+        putExtra("sweep_position", notificationLightingSweepPosition.value.name)
+        putExtra("sweep_thickness", notificationLightingSweepThickness.floatValue)
+    }
+
     fun triggerNotificationLighting(context: Context) {
-        val radius =
-            settingsRepository.getFloat(SettingsRepository.KEY_EDGE_LIGHTING_CORNER_RADIUS, 20f)
-        val thickness =
-            settingsRepository.getFloat(SettingsRepository.KEY_EDGE_LIGHTING_STROKE_THICKNESS, 8f)
         try {
-            val intent = Intent(
-                context,
-                NotificationLightingService::class.java
-            ).apply {
-                putExtra("corner_radius_dp", radius)
-                putExtra("stroke_thickness_dp", thickness)
-                putExtra("ignore_screen_state", true)
-                putExtra("style", notificationLightingStyle.value.name)
-                putExtra("color_mode", notificationLightingColorMode.value.name)
-                putExtra("custom_color", notificationLightingCustomColor.intValue)
-                putExtra("pulse_count", notificationLightingPulseCount.value.toInt())
-                putExtra("pulse_duration", notificationLightingPulseDuration.value.toLong())
-                putExtra(
-                    "glow_sides",
-                    notificationLightingGlowSides.value.map { it.name }.toTypedArray()
-                )
-                putExtra("indicator_x", notificationLightingIndicatorX.value)
-                putExtra("indicator_y", notificationLightingIndicatorY.value)
-                putExtra("indicator_scale", notificationLightingIndicatorScale.value)
+            val intent = Intent(context, NotificationLightingService::class.java).apply {
+                addLightingExtras(isPreview = false)
             }
             context.startService(intent)
         } catch (e: Exception) {
@@ -1583,34 +1597,17 @@ class MainViewModel : ViewModel() {
         }
     }
 
-    // Helper to show the overlay service with custom corner radius
-    fun triggerNotificationLightingWithRadius(context: Context, cornerRadiusDp: Float) {
+    // Helper to show the overlay service
+    fun triggerNotificationLightingPreview(context: Context) {
         try {
-            val intent = Intent(
-                context,
-                NotificationLightingService::class.java
-            ).apply {
-                putExtra("corner_radius_dp", cornerRadiusDp)
-                putExtra("is_preview", true)
-                putExtra("ignore_screen_state", true)
-                putExtra("style", notificationLightingStyle.value.name)
-                putExtra("color_mode", notificationLightingColorMode.value.name)
-                putExtra("custom_color", notificationLightingCustomColor.intValue)
-                putExtra(
-                    "glow_sides",
-                    notificationLightingGlowSides.value.map { it.name }.toTypedArray()
-                )
-                putExtra("indicator_x", notificationLightingIndicatorX.value)
-                putExtra("indicator_y", notificationLightingIndicatorY.value)
-                putExtra("indicator_scale", notificationLightingIndicatorScale.value)
+            val intent = Intent(context, NotificationLightingService::class.java).apply {
+                addLightingExtras(isPreview = true)
             }
             context.startService(intent)
         } catch (e: Exception) {
             // ignore
         }
     }
-
-    // Helper to show the overlay service with custom corner radius and stroke thickness
 
     fun openImeSettings(context: Context) {
         val intent = Intent(Settings.ACTION_INPUT_METHOD_SETTINGS)
@@ -1623,30 +1620,10 @@ class MainViewModel : ViewModel() {
         imm.showInputMethodPicker()
     }
 
-    fun triggerNotificationLightingWithRadiusAndThickness(
-        context: Context,
-        cornerRadiusDp: Float,
-        strokeThicknessDp: Float
-    ) {
+    fun triggerNotificationLightingWithRadius(context: Context, cornerRadiusDp: Float) {
         try {
-            val intent = Intent(
-                context,
-                NotificationLightingService::class.java
-            ).apply {
-                putExtra("corner_radius_dp", cornerRadiusDp)
-                putExtra("stroke_thickness_dp", strokeThicknessDp)
-                putExtra("is_preview", true)
-                putExtra("ignore_screen_state", true)
-                putExtra("style", notificationLightingStyle.value.name)
-                putExtra("color_mode", notificationLightingColorMode.value.name)
-                putExtra("custom_color", notificationLightingCustomColor.intValue)
-                putExtra(
-                    "glow_sides",
-                    notificationLightingGlowSides.value.map { it.name }.toTypedArray()
-                )
-                putExtra("indicator_x", notificationLightingIndicatorX.value)
-                putExtra("indicator_y", notificationLightingIndicatorY.value)
-                putExtra("indicator_scale", notificationLightingIndicatorScale.value)
+            val intent = Intent(context, NotificationLightingService::class.java).apply {
+                addLightingExtras(cornerRadiusDp = cornerRadiusDp)
             }
             context.startService(intent)
         } catch (e: Exception) {
@@ -1654,6 +1631,20 @@ class MainViewModel : ViewModel() {
         }
     }
 
+    fun triggerNotificationLightingWithRadiusAndThickness(
+        context: Context,
+        cornerRadiusDp: Float,
+        strokeThicknessDp: Float
+    ) {
+        try {
+            val intent = Intent(context, NotificationLightingService::class.java).apply {
+                addLightingExtras(cornerRadiusDp, strokeThicknessDp)
+            }
+            context.startService(intent)
+        } catch (e: Exception) {
+            // ignore
+        }
+    }
 
     fun triggerNotificationLightingForIndicator(
         context: Context,
@@ -1661,19 +1652,31 @@ class MainViewModel : ViewModel() {
         y: Float,
         scale: Float
     ) {
+        notificationLightingIndicatorX.value = x
+        notificationLightingIndicatorY.value = y
+        notificationLightingIndicatorScale.value = scale
+        
         try {
-            val intent = Intent(
-                context,
-                NotificationLightingService::class.java
-            ).apply {
-                putExtra("indicator_x", x)
-                putExtra("indicator_y", y)
-                putExtra("indicator_scale", scale)
-                putExtra("is_preview", true)
-                putExtra("ignore_screen_state", true)
-                putExtra("style", NotificationLightingStyle.INDICATOR.name)
-                putExtra("color_mode", notificationLightingColorMode.value.name)
-                putExtra("custom_color", notificationLightingCustomColor.intValue)
+            val intent = Intent(context, NotificationLightingService::class.java).apply {
+                addLightingExtras(styleOverride = NotificationLightingStyle.INDICATOR)
+            }
+            context.startService(intent)
+        } catch (e: Exception) {
+            // ignore
+        }
+    }
+
+    fun triggerNotificationLightingForSweep(
+        context: Context,
+        position: NotificationLightingSweepPosition,
+        thickness: Float
+    ) {
+        notificationLightingSweepPosition.value = position
+        notificationLightingSweepThickness.floatValue = thickness
+        
+        try {
+            val intent = Intent(context, NotificationLightingService::class.java).apply {
+                addLightingExtras(styleOverride = NotificationLightingStyle.SWEEP)
             }
             context.startService(intent)
         } catch (e: Exception) {
@@ -2314,6 +2317,17 @@ class MainViewModel : ViewModel() {
         notificationLightingIndicatorScale.value = scale
         settingsRepository.putFloat(SettingsRepository.KEY_EDGE_LIGHTING_INDICATOR_SCALE, scale)
     }
+
+    fun setNotificationLightingSweepPosition(position: NotificationLightingSweepPosition, context: Context) {
+        notificationLightingSweepPosition.value = position
+        settingsRepository.saveNotificationLightingSweepPosition(position)
+    }
+
+    fun saveNotificationLightingSweepThickness(context: Context, thickness: Float) {
+        notificationLightingSweepThickness.floatValue = thickness
+        settingsRepository.putFloat(SettingsRepository.KEY_EDGE_LIGHTING_SWEEP_THICKNESS, thickness)
+    }
+
 
 
     fun exportConfigs(context: Context, outputStream: java.io.OutputStream) {

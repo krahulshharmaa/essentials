@@ -34,12 +34,14 @@ fun NotificationLightingStylePicker(
     val styles = listOf(
         NotificationLightingStyle.STROKE,
         NotificationLightingStyle.GLOW,
-        NotificationLightingStyle.INDICATOR
+        NotificationLightingStyle.INDICATOR,
+        NotificationLightingStyle.SWEEP
     )
     val icons = listOf(
         R.drawable.rounded_rounded_corner_24,
         R.drawable.rounded_blur_linear_24,
-        R.drawable.rounded_circles_24
+        R.drawable.rounded_circles_24,
+        R.drawable.rounded_target_24
     )
     val view = LocalView.current
 

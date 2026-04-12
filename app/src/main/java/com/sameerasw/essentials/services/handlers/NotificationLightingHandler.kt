@@ -39,6 +39,8 @@ class NotificationLightingHandler(
     private var indicatorX: Float = 50f
     private var indicatorY: Float = 2f
     private var indicatorScale: Float = 1.0f
+    private var sweepPosition: String = "CENTER"
+    private var sweepThickness: Float = 8f
 
     private var isAmbientDisplayRequested: Boolean = false
     private var isAmbientShowLockScreen: Boolean = false
@@ -79,6 +81,9 @@ class NotificationLightingHandler(
             indicatorScale = intent.getFloatExtra("indicator_scale", 1.0f)
             isAmbientDisplayRequested = intent.getBooleanExtra("is_ambient_display", false)
             isAmbientShowLockScreen = intent.getBooleanExtra("is_ambient_show_lock_screen", false)
+            sweepPosition = intent.getStringExtra("sweep_position") ?: "CENTER"
+            sweepThickness = intent.getFloatExtra("sweep_thickness", 8f)
+            sweepThickness = intent.getFloatExtra("sweep_thickness", 8f)
             isInterrupted = false
 
             val removePreview = intent.getBooleanExtra("remove_preview", false)
@@ -102,26 +107,34 @@ class NotificationLightingHandler(
             val prefs = service.getSharedPreferences("essentials_prefs", Context.MODE_PRIVATE)
             val onlyShowWhenScreenOff = prefs.getBoolean("edge_lighting_only_screen_off", true)
             if (onlyShowWhenScreenOff) {
-                removeOverlay()
+                removeOverlay(immediate = true)
             }
         }
     }
 
-    fun removeOverlay() {
-        for (overlay in overlayViews) {
-            try {
-                OverlayHelper.fadeOutAndRemoveOverlay(windowManager, overlay, overlayViews)
-            } catch (e: Exception) {
-                e.printStackTrace()
+    fun removeOverlay(immediate: Boolean = false) {
+        val iterator = overlayViews.iterator()
+        while (iterator.hasNext()) {
+            val overlay = iterator.next()
+            if (immediate) {
+                try {
+                    windowManager?.removeView(overlay)
+                } catch (_: Exception) {}
+                iterator.remove()
+            } else {
+                try {
+                    OverlayHelper.fadeOutAndRemoveOverlay(windowManager, overlay, overlayViews)
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
             }
         }
-        overlayViews.clear()
     }
 
     private fun showNotificationLighting() {
-        // For preview mode, remove existing overlays first
-        if (overlayViews.isNotEmpty()) {
-            removeOverlay()
+        // For preview mode, remove existing overlays
+        if (overlayViews.isNotEmpty() && isPreview) {
+            removeOverlay(immediate = true)
         }
         windowManager = service.getSystemService(Context.WINDOW_SERVICE) as WindowManager
         val powerManager = service.getSystemService(Context.POWER_SERVICE) as PowerManager
@@ -156,11 +169,12 @@ class NotificationLightingHandler(
             val overlay = OverlayHelper.createOverlayView(
                 service,
                 color,
-                strokeDp = strokeThicknessDp,
+//                strokeDp = strokeThicknessDp,
                 cornerRadiusDp = cornerRadiusDp,
                 style = edgeLightingStyle,
                 glowSides = glowSides,
-                indicatorScale = indicatorScale
+                indicatorScale = indicatorScale,
+                strokeDp = if (edgeLightingStyle == NotificationLightingStyle.SWEEP) sweepThickness else strokeThicknessDp,
             )
             val params = OverlayHelper.createOverlayLayoutParams(overlayType)
 
@@ -246,14 +260,21 @@ class NotificationLightingHandler(
 
                 if (OverlayHelper.addOverlayView(windowManager, overlay, params)) {
                     overlayViews.add(overlay)
-                    if (isPreview) {
+                    if (isPreview && edgeLightingStyle != NotificationLightingStyle.SWEEP) {
                         OverlayHelper.showPreview(
                             overlay,
                             edgeLightingStyle,
                             strokeThicknessDp,
-                            indicatorX,
+                            indicatorX = if (edgeLightingStyle == NotificationLightingStyle.SWEEP) {
+                                when (sweepPosition) {
+                                    "LEFT" -> 0f
+                                    "RIGHT" -> 100f
+                                    else -> 50f
+                                }
+                            } else indicatorX,
                             indicatorY,
-                            indicatorScale
+                            indicatorScale,
+                            pulseDurationMillis = pulseDuration
                         )
                     } else {
                         startPulsing(overlay)
@@ -265,16 +286,22 @@ class NotificationLightingHandler(
         }
     }
 
-    private fun startPulsing(overlay: View) {
+    private fun startPulsing(overlay: View, intent: Intent? = null) {
         OverlayHelper.pulseOverlay(
             overlay,
-            maxPulses = pulseCount,
+            maxPulses = if (isPreview) 1 else pulseCount,
             pulseDurationMillis = pulseDuration,
             style = edgeLightingStyle,
-            strokeWidthDp = strokeThicknessDp,
-            indicatorX = indicatorX,
+            strokeWidthDp = if (edgeLightingStyle == NotificationLightingStyle.SWEEP) sweepThickness else strokeThicknessDp,
+            indicatorX = if (edgeLightingStyle == NotificationLightingStyle.SWEEP) {
+                when (sweepPosition) {
+                    "LEFT" -> 0f
+                    "RIGHT" -> 100f
+                    else -> 50f
+                }
+            } else indicatorX,
             indicatorY = indicatorY,
-            indicatorScale = indicatorScale
+            indicatorScale = indicatorScale,
         ) {
             if (isAmbientDisplayRequested && !isInterrupted && !isPreview && !isAmbientShowLockScreen) {
                 service.performGlobalAction(AccessibilityService.GLOBAL_ACTION_LOCK_SCREEN)

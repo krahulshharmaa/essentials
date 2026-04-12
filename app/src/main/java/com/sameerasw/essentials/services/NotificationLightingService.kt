@@ -46,6 +46,8 @@ class NotificationLightingService : Service() {
     private var indicatorY: Float = 2f
     private var indicatorScale: Float = 1.0f
     private var isAmbientDisplay: Boolean = false
+    private var sweepPosition: String = "CENTER"
+    private var sweepThickness: Float = 8f
 
     private var screenReceiver: BroadcastReceiver? = null
 
@@ -145,6 +147,8 @@ class NotificationLightingService : Service() {
         indicatorY = intent?.getFloatExtra("indicator_y", 2f) ?: 2f
         indicatorScale = intent?.getFloatExtra("indicator_scale", 1.0f) ?: 1.0f
         isAmbientDisplay = intent?.getBooleanExtra("is_ambient_display", false) ?: false
+        sweepPosition = intent?.getStringExtra("sweep_position") ?: "CENTER"
+        sweepThickness = intent?.getFloatExtra("sweep_thickness", 8f) ?: 8f
         val ignoreScreenState = intent?.getBooleanExtra("ignore_screen_state", false) ?: false
         val removePreview = intent?.getBooleanExtra("remove_preview", false) ?: false
 
@@ -199,6 +203,8 @@ class NotificationLightingService : Service() {
                         putExtra("indicator_x", indicatorX)
                         putExtra("indicator_y", indicatorY)
                         putExtra("indicator_scale", indicatorScale)
+                        putExtra("sweep_position", sweepPosition)
+                        putExtra("sweep_thickness", sweepThickness)
                         if (intent?.hasExtra("resolved_color") == true) {
                             putExtra("resolved_color", intent.getIntExtra("resolved_color", 0))
                         }
@@ -281,9 +287,9 @@ class NotificationLightingService : Service() {
     }
 
     private fun showOverlay() {
-        // For preview mode, remove existing overlays first to update with new corner radius
+        // For preview mode, remove existing overlays immediately to facilitate rapid re-triggering
         if (isPreview && overlayViews.isNotEmpty()) {
-            removeOverlay()
+            removeOverlay(immediate = true)
         }
 
         if (overlayViews.isNotEmpty()) return
@@ -317,24 +323,31 @@ class NotificationLightingService : Service() {
             if (OverlayHelper.addOverlayView(windowManager, overlay, params)) {
                 overlayViews.add(overlay)
                 if (isPreview) {
-                    // For preview mode, show static preview
+                    // For preview mode
                     OverlayHelper.showPreview(
                         overlay,
                         edgeLightingStyle,
                         strokeThicknessDp,
                         indicatorX,
                         indicatorY,
-                        indicatorScale
+                        indicatorScale,
+                        pulseDurationMillis = pulseDuration
                     )
                 } else {
-                    // Normal mode: pulse the overlay
+                    // Normal mode
                     OverlayHelper.pulseOverlay(
                         overlay,
-                        maxPulses = pulseCount,
+                        maxPulses = if (isPreview) 1 else pulseCount,
                         pulseDurationMillis = pulseDuration,
                         style = edgeLightingStyle,
                         strokeWidthDp = strokeThicknessDp,
-                        indicatorX = indicatorX,
+                        indicatorX = if (edgeLightingStyle == NotificationLightingStyle.SWEEP) {
+                            when (sweepPosition) {
+                                "LEFT" -> 0f
+                                "RIGHT" -> 100f
+                                else -> 50f
+                            }
+                        } else indicatorX,
                         indicatorY = indicatorY,
                         indicatorScale = indicatorScale
                     ) {
@@ -398,19 +411,34 @@ class NotificationLightingService : Service() {
         }
     }
 
-    private fun removeOverlay() {
-        // Use fade-out animation for each overlay view
-        overlayViews.forEach { view ->
-            OverlayHelper.fadeOutAndRemoveOverlay(windowManager, view, overlayViews) {
-                // When all overlays are removed, stop foreground
-                if (overlayViews.isEmpty()) {
-                    try {
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                            stopForeground(true)
+    private fun removeOverlay(immediate: Boolean = false) {
+        val iterator = overlayViews.iterator()
+        while (iterator.hasNext()) {
+            val view = iterator.next()
+            if (immediate) {
+                OverlayHelper.removeOverlayView(windowManager, view)
+                iterator.remove()
+            } else {
+                OverlayHelper.fadeOutAndRemoveOverlay(windowManager, view, overlayViews) {
+                    // When all overlays are removed, stop foreground
+                    if (overlayViews.isEmpty()) {
+                        try {
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                                stopForeground(true)
+                            }
+                        } catch (_: Exception) {
                         }
-                    } catch (_: Exception) {
                     }
                 }
+            }
+        }
+
+        if (immediate && overlayViews.isEmpty()) {
+            try {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    stopForeground(true)
+                }
+            } catch (_: Exception) {
             }
         }
     }

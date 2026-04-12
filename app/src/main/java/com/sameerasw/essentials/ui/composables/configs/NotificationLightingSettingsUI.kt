@@ -16,9 +16,11 @@ import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonGroupDefaults
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.ToggleButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
@@ -34,10 +36,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.role
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import com.sameerasw.essentials.R
 import com.sameerasw.essentials.domain.model.NotificationLightingColorMode
+import com.sameerasw.essentials.domain.model.NotificationLightingSide
 import com.sameerasw.essentials.domain.model.NotificationLightingStyle
+import com.sameerasw.essentials.domain.model.NotificationLightingSweepPosition
 import com.sameerasw.essentials.ui.components.cards.IconToggleItem
 import com.sameerasw.essentials.ui.components.containers.RoundedCardContainer
 import com.sameerasw.essentials.ui.components.pickers.GlowSidesPicker
@@ -263,6 +270,61 @@ fun NotificationLightingSettingsUI(
             }
         }
 
+        // Sweep Adjustment
+        if (style == NotificationLightingStyle.SWEEP) {
+            Text(
+                text = stringResource(R.string.notification_lighting_sweep_position_title),
+                style = MaterialTheme.typography.titleMedium,
+                modifier = Modifier.padding(start = 16.dp, top = 16.dp, bottom = 8.dp),
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+
+            RoundedCardContainer(modifier = Modifier) {
+                SweepPositionPicker(
+                    selectedPosition = viewModel.notificationLightingSweepPosition.value,
+                    onPositionSelected = { pos ->
+                        viewModel.setNotificationLightingSweepPosition(pos, context)
+                        viewModel.triggerNotificationLightingForSweep(
+                            context,
+                            pos,
+                            viewModel.notificationLightingSweepThickness.floatValue
+                        )
+                        // Auto remove preview
+                        coroutineScope.launch {
+                            delay(5000)
+                            viewModel.removePreviewOverlay(context)
+                        }
+                    }
+                )
+
+                ConfigSliderItem(
+                    title = stringResource(R.string.notification_lighting_sweep_thickness_title),
+                    value = viewModel.notificationLightingSweepThickness.floatValue,
+                    onValueChange = { newValue ->
+                        viewModel.notificationLightingSweepThickness.floatValue = newValue
+                        HapticUtil.performSliderHaptic(view)
+                        viewModel.triggerNotificationLightingForSweep(
+                            context,
+                            viewModel.notificationLightingSweepPosition.value,
+                            newValue
+                        )
+                    },
+                    valueRange = 1f..50f,
+                    valueFormatter = { "%.1f".format(it) },
+                    onValueChangeFinished = {
+                        viewModel.saveNotificationLightingSweepThickness(
+                            context,
+                            viewModel.notificationLightingSweepThickness.floatValue
+                        )
+                        coroutineScope.launch {
+                            delay(5000)
+                            viewModel.removePreviewOverlay(context)
+                        }
+                    }
+                )
+            }
+        }
+
         // Indicator Adjustment Section (For INDICATOR style)
         if (style == NotificationLightingStyle.INDICATOR) {
             Text(
@@ -370,8 +432,8 @@ fun NotificationLightingSettingsUI(
         }
 
 
-        // Animation Settings (Only for STROKE and GLOW)
-        if (style == NotificationLightingStyle.STROKE || style == NotificationLightingStyle.GLOW) {
+        // Animation Settings (Only for STROKE, GLOW and SWEEP)
+        if (style == NotificationLightingStyle.STROKE || style == NotificationLightingStyle.GLOW || style == NotificationLightingStyle.SWEEP) {
             Text(
                 text = stringResource(R.string.settings_section_animation),
                 style = MaterialTheme.typography.titleMedium,
@@ -427,6 +489,7 @@ fun NotificationLightingSettingsUI(
                 onModeSelected = { mode ->
                     HapticUtil.performVirtualKeyHaptic(view)
                     viewModel.setNotificationLightingColorMode(mode, context)
+                    viewModel.triggerNotificationLighting(context)
                 }
             )
 
@@ -528,6 +591,7 @@ fun NotificationLightingSettingsUI(
                                                     colorInt,
                                                     context
                                                 )
+                                                viewModel.triggerNotificationLighting(context)
                                             }
                                         )
                                     }
@@ -660,6 +724,60 @@ fun ColorCircle(
                     .clip(CircleShape)
                     .background(Color.White.copy(alpha = 0.8f))
             )
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3ExpressiveApi::class)
+@Composable
+private fun SweepPositionPicker(
+    selectedPosition: NotificationLightingSweepPosition,
+    onPositionSelected: (NotificationLightingSweepPosition) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    val positions = listOf(
+        NotificationLightingSweepPosition.LEFT,
+        NotificationLightingSweepPosition.CENTER,
+        NotificationLightingSweepPosition.RIGHT
+    )
+    val labels = listOf(
+        stringResource(R.string.notification_lighting_sweep_pos_left),
+        stringResource(R.string.notification_lighting_sweep_pos_center),
+        stringResource(R.string.notification_lighting_sweep_pos_right)
+    )
+    val view = LocalView.current
+
+    val selectedIndex = positions.indexOf(selectedPosition).coerceAtLeast(0)
+
+    Row(
+        modifier = modifier
+            .background(
+                color = MaterialTheme.colorScheme.surfaceBright
+            )
+            .padding(10.dp),
+        horizontalArrangement = Arrangement.spacedBy(ButtonGroupDefaults.ConnectedSpaceBetween),
+    ) {
+        val modifiers = List(positions.size) { Modifier.weight(1f) }
+
+        positions.forEachIndexed { index, pos ->
+            ToggleButton(
+                checked = selectedIndex == index,
+                onCheckedChange = {
+                    HapticUtil.performVirtualKeyHaptic(view)
+                    onPositionSelected(pos)
+                },
+                modifier = modifiers[index].semantics { role = Role.RadioButton },
+                shapes = when (index) {
+                    0 -> ButtonGroupDefaults.connectedLeadingButtonShapes()
+                    positions.lastIndex -> ButtonGroupDefaults.connectedTrailingButtonShapes()
+                    else -> ButtonGroupDefaults.connectedMiddleButtonShapes()
+                },
+            ) {
+                Text(
+                    text = labels[index],
+                    style = MaterialTheme.typography.labelLarge
+                )
+            }
         }
     }
 }
