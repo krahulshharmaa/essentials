@@ -192,6 +192,7 @@
     <string name="ambient_show_lock_screen_desc">Žádné černé překrytí</string>
     <!-- Tiles -->
     <string name="action_add">Přidat</string>
+    <string name="action_added">Added</string>
     <string name="qs_tile_already_added">Již přidáno</string>
     <string name="qs_tile_requires_android_13">Vyžaduje Android 13+</string>
     <string name="tile_ui_blur">Rozostření uživatelského rozhraní</string>
@@ -1166,6 +1167,10 @@
     <string name="cat_interface">Rozhraní</string>
     <string name="cat_display">Zobrazit</string>
     <string name="cat_protection">Ochrana</string>
+    <string name="cat_accessibility">Accessibility</string>
+    <string name="cat_connectivity">Connectivity</string>
+    <string name="cat_privacy">Privacy</string>
+    <string name="cat_utils">Utilities</string>
     <string name="label_kbd_abc">ABC</string>
     <string name="label_kbd_symbols">\?#/</string>
     <string name="label_kaomoji">Kaomoji</string>
