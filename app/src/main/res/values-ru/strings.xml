@@ -25,7 +25,7 @@
     <string name="app_lock_warning">Имейте в виду, что это не надежное решение, поскольку это всего лишь стороннее приложение. Если вам нужна надежная защита, рассмотрите возможность использования личного пространства или других подобных функций.</string>
     <string name="app_lock_biometric_note">Обратите внимание, что запрос на биометрическую аутентификацию позволяет использовать только методы класса STRONG secure. Методы разблокировки по лицу, относящиеся к классу WEAK, на устройствах, таких как Pixel 7, смогут использовать только другие доступные методы надежной аутентификации, такие как отпечаток пальца или PIN-код.</string>
     <string name="setting_use_usage_access_title">Использовать доступ к использованию</string>
-    <string name="setting_use_usage_access_desc">Instead of accessibility (Freeze, App Lock, Dynamic Night Light)</string>
+    <string name="setting_use_usage_access_desc">Вместо специальных возможностей (Заморозка, блокировка приложения, динамическая ночная подсветка)</string>
     <!-- Button Remap -->
     <string name="button_remap_enable_title">Включить переназначение кнопок</string>
     <string name="button_remap_use_shizuku_title">Использовать Shizuku или Root</string>
@@ -769,8 +769,8 @@
     <string name="app_description">Универсальный набор инструментов для вашего Pixel и Android</string>
     <!-- Edge Lighting -->
     <string name="color_mode_system">Система</string>
-    <string name="color_mode_custom">Обычай</string>
-    <string name="color_mode_app_specific">Специально для приложения</string>
+    <string name="color_mode_custom">Кастомный</string>
+    <string name="color_mode_app_specific">Особое приложения</string>
     <!-- Biometric & Security -->
     <string name="error_auth_failed">Не удалось выполнить аутентификацию</string>
     <string name="shortcut_creation_hint_toast">Нажмите и удерживайте приложение в сетке, чтобы добавить ярлык</string>
@@ -1174,7 +1174,7 @@
     <string name="cat_accessibility">Доступность</string>
     <string name="cat_connectivity">Возможности подключения</string>
     <string name="cat_privacy">Конфиденциальность</string>
-    <string name="cat_utils">Utilities</string>
+    <string name="cat_utils">Утилиты</string>
     <string name="label_kbd_abc">АВС</string>
     <string name="label_kbd_symbols">\?#/</string>
     <string name="label_kaomoji">Kaomoji</string>
@@ -1268,9 +1268,9 @@
     <string name="msg_flashbang">Приготовься к вспышке!</string>
     <string name="action_abort">Отменить</string>
     <string name="action_continue">Продолжить</string>
-    <string name="prank_trial_expired_title">Your Essentials trial has expired</string>
-    <string name="prank_trial_expired_desc">Your free trial period of Essentials has ended. Access to advanced features like Button Remap, App Freezing, and DIY Automations with Premium.</string>
-    <string name="prank_button_premium">What\'s in Premium?</string>
-    <string name="prank_reveal_title">April Fools!</string>
-    <string name="prank_reveal_desc">Just kidding, Essentials is and will always be free and open source. Enjoy! (っ◕‿◕)っ</string>
+    <string name="prank_trial_expired_title">Срок действия вашей пробной версии Essentials истек</string>
+    <string name="prank_trial_expired_desc">Ваш бесплатный ознакомительный период с Essentials закончился. Получите доступ к расширенным функциям, таким как переназначение кнопок, замораживание приложений и автоматизация \"своими руками\" вместе с Premium.</string>
+    <string name="prank_button_premium">Что в Premium?</string>
+    <string name="prank_reveal_title">С 1 апреля!</string>
+    <string name="prank_reveal_desc">Шучу, Essentials есть и всегда будет бесплатным и с открытым исходным кодом. Наслаждайтесь! (っ◕‿◕)っ</string>
 </resources>
