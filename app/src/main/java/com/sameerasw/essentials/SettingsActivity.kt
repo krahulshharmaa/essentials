@@ -71,6 +71,7 @@ import androidx.core.app.ActivityCompat
 import com.sameerasw.essentials.domain.DIYTabs
 import com.sameerasw.essentials.domain.registry.PermissionRegistry
 import com.sameerasw.essentials.ui.components.EssentialsFloatingToolbar
+import com.sameerasw.essentials.ui.components.MadebySameeraswCard
 import com.sameerasw.essentials.ui.components.cards.IconToggleItem
 import com.sameerasw.essentials.ui.components.cards.PermissionCard
 import com.sameerasw.essentials.ui.components.containers.RoundedCardContainer
@@ -728,6 +729,10 @@ fun SettingsContent(
 
         Spacer(modifier = Modifier.height(16.dp))
 
+        MadebySameeraswCard()
+
+        Spacer(modifier = Modifier.height(4.dp))
+
         RoundedCardContainer {
             AboutSection(
                 onAvatarLongClick = {
@@ -791,8 +796,8 @@ fun SettingsContent(
                         .background(
                             color = MaterialTheme.colorScheme.surfaceBright
                         )
-                        .padding(start = 16.dp, end = 16.dp, bottom = 16.dp),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                        .padding(16.dp),
+                    horizontalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
                     Button(
                         onClick = {
@@ -800,12 +805,27 @@ fun SettingsContent(
                             viewModel.resetOnboarding(context)
                             Toast.makeText(context, "Onboarding reset", Toast.LENGTH_SHORT).show()
                         },
-                        modifier = Modifier.fillMaxWidth(),
+                        modifier = Modifier.weight(1f),
                         colors = ButtonDefaults.buttonColors(
                             containerColor = MaterialTheme.colorScheme.error
                         )
                     ) {
-                        Text("Reset Onboarding", color = MaterialTheme.colorScheme.onError)
+                        Text("Reset onboarding", color = MaterialTheme.colorScheme.onError)
+                    }
+
+
+                    Button(
+                        onClick = {
+                            HapticUtil.performVirtualKeyHaptic(view)
+                            viewModel.resetUpdateNote(context)
+                            Toast.makeText(context, "Update note reset", Toast.LENGTH_SHORT).show()
+                        },
+                        modifier = Modifier.weight(1f),
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = MaterialTheme.colorScheme.error
+                        )
+                    ) {
+                        Text("Reset update note", color = MaterialTheme.colorScheme.onError)
                     }
                 }
 

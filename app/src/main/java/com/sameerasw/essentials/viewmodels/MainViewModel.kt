@@ -2495,6 +2495,10 @@ class MainViewModel : ViewModel() {
         setDefaultTab(com.sameerasw.essentials.domain.DIYTabs.ESSENTIALS, context)
     }
 
+    fun resetUpdateNote(context: Context) {
+        settingsRepository.putInt(SettingsRepository.KEY_WHATS_NEW_LAST_SHOWN_COUNTER, 0)
+    }
+
     fun resetDnsPresets() {
         settingsRepository.resetPrivateDnsPresets()
     }

@@ -51,7 +51,7 @@ fun MadebySameeraswCard(
                 val intent = Intent(Intent.ACTION_VIEW, redditUrl.toUri())
                 context.startActivity(intent)
             },
-        color = MaterialTheme.colorScheme.surfaceContainerHigh,
+        color = MaterialTheme.colorScheme.surfaceBright,
         shape = RoundedCornerShape(32.dp)
     ) {
         Column {
@@ -75,8 +75,8 @@ fun MadebySameeraswCard(
                         .offset(y = 32.dp)
                         .size(84.dp)
                         .clip(CircleShape)
-                        .background(MaterialTheme.colorScheme.surfaceContainerHigh)
-                        .border(4.dp, MaterialTheme.colorScheme.surfaceContainerHigh, CircleShape)
+                        .background(MaterialTheme.colorScheme.surfaceBright)
+                        .border(4.dp, MaterialTheme.colorScheme.surfaceBright, CircleShape)
                         .border(6.dp, accentColor.copy(alpha = 0.5f), CircleShape) // Subtle outer ring
                         .padding(4.dp)
                         .border(2.dp, Color(0xFF49FCBB), CircleShape) // Sharper inner stroke
