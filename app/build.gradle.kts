@@ -24,6 +24,9 @@ android {
         versionCode = 36
         versionName = "12.5"
 
+        val whatsNewCounter = 1
+        buildConfigField("int", "WHATS_NEW_COUNTER", whatsNewCounter.toString())
+
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 

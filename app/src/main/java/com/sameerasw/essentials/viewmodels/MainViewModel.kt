@@ -124,6 +124,7 @@ class MainViewModel : ViewModel() {
     val isAutoAccessibilityEnabled = mutableStateOf(false)
     val isNotificationGlanceSameAsLightingEnabled = mutableStateOf(true)
     val isOnboardingCompleted = mutableStateOf(true) // Default to true so it doesn't flash on first check if not loaded
+    val isWhatsNewVisible = mutableStateOf(false)
     val dnsPresets = mutableStateListOf<DnsPreset>()
     val addedQSTiles = mutableStateOf<Set<String>>(emptySet())
 
@@ -669,6 +670,10 @@ class MainViewModel : ViewModel() {
         notificationLightingColorMode.value = settingsRepository.getNotificationLightingColorMode()
         isUseUsageAccess.value = settingsRepository.getBoolean(SettingsRepository.KEY_USE_USAGE_ACCESS)
         isOnboardingCompleted.value = settingsRepository.getBoolean(SettingsRepository.KEY_ONBOARDING_COMPLETED, false)
+        
+        val lastShownCounter = settingsRepository.getInt(SettingsRepository.KEY_WHATS_NEW_LAST_SHOWN_COUNTER, 0)
+        isWhatsNewVisible.value = isOnboardingCompleted.value && lastShownCounter < com.sameerasw.essentials.BuildConfig.WHATS_NEW_COUNTER
+
         notificationLightingCustomColor.intValue = settingsRepository.getInt(
             SettingsRepository.KEY_EDGE_LIGHTING_CUSTOM_COLOR,
             0xFF6200EE.toInt()
@@ -2472,8 +2477,16 @@ class MainViewModel : ViewModel() {
     }
 
     fun setOnboardingCompleted(completed: Boolean, context: Context) {
-        settingsRepository.putBoolean(SettingsRepository.KEY_ONBOARDING_COMPLETED, completed)
         isOnboardingCompleted.value = completed
+        settingsRepository.putBoolean(SettingsRepository.KEY_ONBOARDING_COMPLETED, completed)
+        if (completed) {
+            settingsRepository.putInt(SettingsRepository.KEY_WHATS_NEW_LAST_SHOWN_COUNTER, com.sameerasw.essentials.BuildConfig.WHATS_NEW_COUNTER)
+        }
+    }
+
+    fun completeWhatsNew() {
+        isWhatsNewVisible.value = false
+        settingsRepository.putInt(SettingsRepository.KEY_WHATS_NEW_LAST_SHOWN_COUNTER, com.sameerasw.essentials.BuildConfig.WHATS_NEW_COUNTER)
     }
 
     fun resetOnboarding(context: Context) {
