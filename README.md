@@ -7,7 +7,13 @@ Essential tools, mods and workarounds for Pixels and other Androids
 </p>
 
 <p align="center">
-  <a href="https://github.com/sameerasw/essentials/releases/latest"><img alt="GitHub Downloads (specific asset, all releases)" src="https://img.shields.io/github/downloads/sameerasw/essentials/app-release.apk?displayAssetName=false&style=for-the-badge&logo=android&logoColor=%23fff&labelColor=%2348C&color=%2348C">
+  <a href="https://github.com/sameerasw/essentials/releases/latest"><img  width="99%"  alt=" reddit-banner" src="https://github.com/user-attachments/assets/a5197458-d64a-4c6a-a6a3-9e1f36030205" /></a>
+</p>
+
+<br>
+
+<p align="center">
+  <a href="https://github.com/sameerasw/essentials/releases/latest"><img alt="GitHub Downloads (specific asset, all releases)" src="https://img.shields.io/github/downloads/sameerasw/essentials/app-release.apk?displayAssetName=false&style=for-the-badge&logo=android&logoColor=%23fff&labelColor=%2348C&color=%2348C">      
 </a>
   <a href="https://github.com/sameerasw/essentials/issues/new?template=bug_report.md"><img alt="GitHub Issues or Pull Requests by label" src="https://img.shields.io/github/issues/sameerasw/essentials/bug?style=for-the-badge&logo=openbugbounty&logoColor=%23fff&label=bug%3F&labelColor=%232a6&color=%232a6">
 </a>
