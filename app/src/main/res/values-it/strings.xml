@@ -638,6 +638,10 @@
     <string name="desc_auto_check_updates">Controlla aggiornamenti all\'apertura dell\'app</string>
     <string name="action_all_set">Fatto</string>
     <string name="action_check_whats_new">Cosa c\'è di nuovo?</string>
+    <string name="welcome_back_title">Welcome back to Essentials</string>
+    <string name="action_see_whats_new">See what\'s new</string>
+    <string name="msg_error_load_release_notes">Couldn\'t load the release note</string>
+    <string name="action_view_on_web">View on web</string>
     <string name="action_done">Fatto</string>
     <string name="action_preview">Anteprima</string>
     <string name="action_help_guide">Guida di aiuto</string>
