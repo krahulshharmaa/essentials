@@ -192,6 +192,7 @@
     <string name="ambient_show_lock_screen_desc">黒いオーバーレイなし</string>
     <!-- Tiles -->
     <string name="action_add">追加</string>
+    <string name="action_added">Added</string>
     <string name="qs_tile_already_added">追加済みです</string>
     <string name="qs_tile_requires_android_13">Android 13 以上が必要です</string>
     <string name="tile_ui_blur">UIブラー</string>
@@ -1166,6 +1167,10 @@
     <string name="cat_interface">Interface</string>
     <string name="cat_display">ディスプレイ</string>
     <string name="cat_protection">プロテクション</string>
+    <string name="cat_accessibility">Accessibility</string>
+    <string name="cat_connectivity">Connectivity</string>
+    <string name="cat_privacy">Privacy</string>
+    <string name="cat_utils">Utilities</string>
     <string name="label_kbd_abc">ABC</string>
     <string name="label_kbd_symbols">\?#/</string>
     <string name="label_kaomoji">顔文字</string>
