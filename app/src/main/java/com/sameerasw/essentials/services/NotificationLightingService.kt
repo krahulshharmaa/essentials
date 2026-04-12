@@ -314,7 +314,7 @@ class NotificationLightingService : Service() {
             val overlay = OverlayHelper.createOverlayView(
                 this,
                 color,
-                strokeDp = strokeThicknessDp,
+                strokeDp = if (edgeLightingStyle == NotificationLightingStyle.SWEEP) sweepThickness else strokeThicknessDp,
                 cornerRadiusDp = cornerRadiusDp,
                 style = edgeLightingStyle,
                 glowSides = glowSides,
@@ -345,7 +345,7 @@ class NotificationLightingService : Service() {
                         maxPulses = if (isPreview) 1 else pulseCount,
                         pulseDurationMillis = pulseDuration,
                         style = edgeLightingStyle,
-                        strokeWidthDp = strokeThicknessDp,
+                        strokeWidthDp = if (edgeLightingStyle == NotificationLightingStyle.SWEEP) sweepThickness else strokeThicknessDp,
                         indicatorX = if (edgeLightingStyle == NotificationLightingStyle.SWEEP) {
                             when (sweepPosition) {
                                 "LEFT" -> 0f

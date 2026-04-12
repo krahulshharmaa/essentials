@@ -684,6 +684,14 @@ class NotificationListener : NotificationListenerService() {
                             prefs.getInt("edge_lighting_indicator_scale", 1).toFloat()
                         }
 
+                        val sweepThickness = try {
+                            prefs.getFloat("edge_lighting_sweep_thickness", 8f)
+                        } catch (e: ClassCastException) {
+                            prefs.getInt("edge_lighting_sweep_thickness", 8).toFloat()
+                        }
+                        val sweepPosition = prefs.getString("edge_lighting_sweep_position", "CENTER") ?: "CENTER"
+                        val randomShapes = prefs.getBoolean("edge_lighting_sweep_random_shapes", true)
+
                         fun startNotificationLighting(resolvedColor: Int? = null) {
                             val intent = Intent(
                                 applicationContext,
@@ -721,6 +729,9 @@ class NotificationListener : NotificationListenerService() {
                                         false
                                     )
                                 )
+                                putExtra("sweep_position", sweepPosition)
+                                putExtra("sweep_thickness", sweepThickness)
+                                putExtra("random_shapes", randomShapes)
                             }
                             if (PermissionUtils.isAccessibilityServiceEnabled(applicationContext)) {
                                 applicationContext.startService(intent)
