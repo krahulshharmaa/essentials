@@ -192,6 +192,7 @@
     <string name="ambient_show_lock_screen_desc">Χωρίς μαύρη επικάλυψη</string>
     <!-- Tiles -->
     <string name="action_add">Προσθέτω</string>
+    <string name="action_added">Added</string>
     <string name="qs_tile_already_added">Προστέθηκε ήδη</string>
     <string name="qs_tile_requires_android_13">Απαιτεί Android 13+</string>
     <string name="tile_ui_blur">Θάμπωμα διεπαφής χρήστη</string>
@@ -1166,6 +1167,10 @@
     <string name="cat_interface">Διασύνδεση</string>
     <string name="cat_display">Επίδειξη</string>
     <string name="cat_protection">Προστασία</string>
+    <string name="cat_accessibility">Accessibility</string>
+    <string name="cat_connectivity">Connectivity</string>
+    <string name="cat_privacy">Privacy</string>
+    <string name="cat_utils">Utilities</string>
     <string name="label_kbd_abc">αλφάβητο</string>
     <string name="label_kbd_symbols">\?#/</string>
     <string name="label_kaomoji">Kaomoji</string>
