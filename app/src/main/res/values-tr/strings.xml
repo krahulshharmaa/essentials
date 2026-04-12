@@ -192,6 +192,7 @@
     <string name="ambient_show_lock_screen_desc">Siyah kaplama yok</string>
     <!-- Tiles -->
     <string name="action_add">Eklemek</string>
+    <string name="action_added">Added</string>
     <string name="qs_tile_already_added">Zaten eklendi</string>
     <string name="qs_tile_requires_android_13">Android 13+ gerektirir</string>
     <string name="tile_ui_blur">Kullanıcı Arayüzü Bulanıklığı</string>
@@ -1166,6 +1167,10 @@
     <string name="cat_interface">Arayüz</string>
     <string name="cat_display">Görüntülemek</string>
     <string name="cat_protection">Koruma</string>
+    <string name="cat_accessibility">Accessibility</string>
+    <string name="cat_connectivity">Connectivity</string>
+    <string name="cat_privacy">Privacy</string>
+    <string name="cat_utils">Utilities</string>
     <string name="label_kbd_abc">ABC</string>
     <string name="label_kbd_symbols">\?#/</string>
     <string name="label_kaomoji">Kaomoji</string>
