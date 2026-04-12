@@ -192,6 +192,7 @@
     <string name="ambient_show_lock_screen_desc">Nessuna sovrapposizione nera</string>
     <!-- Tiles -->
     <string name="action_add">Aggiungi</string>
+    <string name="action_added">Added</string>
     <string name="qs_tile_already_added">Già aggiunto</string>
     <string name="qs_tile_requires_android_13">Richiede Android 13 o successivo</string>
     <string name="tile_ui_blur">Sfocatura dell\'interfaccia utente</string>
@@ -1166,6 +1167,10 @@
     <string name="cat_interface">Interfaccia</string>
     <string name="cat_display">Display</string>
     <string name="cat_protection">Protezione</string>
+    <string name="cat_accessibility">Accessibility</string>
+    <string name="cat_connectivity">Connectivity</string>
+    <string name="cat_privacy">Privacy</string>
+    <string name="cat_utils">Utilities</string>
     <string name="label_kbd_abc">ABC</string>
     <string name="label_kbd_symbols">\?#/</string>
     <string name="label_kaomoji">Kaomoji</string>
