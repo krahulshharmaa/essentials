@@ -8,6 +8,7 @@ import com.sameerasw.essentials.domain.model.AppSelection
 import com.sameerasw.essentials.domain.model.NotificationLightingColorMode
 import com.sameerasw.essentials.domain.model.NotificationLightingSide
 import com.sameerasw.essentials.domain.model.NotificationLightingStyle
+import com.sameerasw.essentials.domain.model.NotificationLightingSweepPosition
 import com.sameerasw.essentials.domain.model.DnsPreset
 import com.sameerasw.essentials.domain.model.TrackedRepo
 import com.sameerasw.essentials.domain.model.github.GitHubUser
@@ -22,6 +23,21 @@ class SettingsRepository(private val context: Context) {
     private val prefs: SharedPreferences =
         context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
     private val gson = Gson()
+    
+    init {
+        migrateUsageAccessKey()
+    }
+
+    private fun migrateUsageAccessKey() {
+        val oldKey = "app_lock_use_usage_access"
+        if (prefs.contains(oldKey)) {
+            val value = prefs.getBoolean(oldKey, false)
+            if (!prefs.contains(KEY_USE_USAGE_ACCESS)) {
+                putBoolean(KEY_USE_USAGE_ACCESS, value)
+            }
+            remove(oldKey)
+        }
+    }
 
     companion object {
         const val PREFS_NAME = "essentials_prefs"
@@ -51,6 +67,10 @@ class SettingsRepository(private val context: Context) {
         const val KEY_EDGE_LIGHTING_CORNER_RADIUS = "edge_lighting_corner_radius"
         const val KEY_EDGE_LIGHTING_STROKE_THICKNESS = "edge_lighting_stroke_thickness"
         const val KEY_EDGE_LIGHTING_SELECTED_APPS = "edge_lighting_selected_apps"
+        const val KEY_EDGE_LIGHTING_SWEEP_POSITION = "edge_lighting_sweep_position"
+        const val KEY_EDGE_LIGHTING_SWEEP_THICKNESS = "edge_lighting_sweep_thickness"
+        const val KEY_EDGE_LIGHTING_SWEEP_RANDOM_SHAPES = "edge_lighting_sweep_random_shapes"
+        const val KEY_LOCK_SCREEN_WALLPAPER_SOURCE = "lock_screen_wallpaper_source"
 
         const val KEY_CALL_VIBRATIONS_ENABLED = "call_vibrations_enabled"
         const val KEY_LAST_CALL_STATE = "last_call_state"
@@ -87,6 +107,7 @@ class SettingsRepository(private val context: Context) {
         const val KEY_FLASHLIGHT_PULSE_FACEDOWN_ONLY = "flashlight_pulse_facedown_only"
 
         const val KEY_SCREEN_LOCKED_SECURITY_ENABLED = "screen_locked_security_enabled"
+        const val KEY_DISABLE_QS_WHEN_LOCKED = "disable_qs_when_locked"
 
         const val KEY_AUTO_UPDATE_ENABLED = "auto_update_enabled"
         const val KEY_UPDATE_NOTIFICATION_ENABLED = "update_notification_enabled"
@@ -95,6 +116,7 @@ class SettingsRepository(private val context: Context) {
 
         const val KEY_APP_LOCK_ENABLED = "app_lock_enabled"
         const val KEY_APP_LOCK_SELECTED_APPS = "app_lock_selected_apps"
+        const val KEY_USE_USAGE_ACCESS = "use_usage_access"
 
         const val KEY_FREEZE_WHEN_LOCKED_ENABLED = "freeze_when_locked_enabled"
         const val KEY_FREEZE_LOCK_DELAY_INDEX = "freeze_lock_delay_index"
@@ -171,6 +193,7 @@ class SettingsRepository(private val context: Context) {
         const val KEY_ONBOARDING_COMPLETED = "onboarding_completed"
         const val KEY_PRIVATE_DNS_PRESETS = "private_dns_presets"
         const val KEY_APRIL_FOOLS_SHOWN = "april_fools_shown"
+        const val KEY_WHATS_NEW_LAST_SHOWN_COUNTER = "whats_new_last_shown_counter"
     }
 
     // Observe changes
@@ -269,9 +292,28 @@ class SettingsRepository(private val context: Context) {
         }
     }
 
+
     fun saveNotificationLightingGlowSides(sides: Set<NotificationLightingSide>) {
         val json = gson.toJson(sides)
         putString(KEY_EDGE_LIGHTING_GLOW_SIDES, json)
+    }
+
+    fun getNotificationLightingSweepPosition(): NotificationLightingSweepPosition {
+        val posName = prefs.getString(
+            KEY_EDGE_LIGHTING_SWEEP_POSITION,
+            NotificationLightingSweepPosition.CENTER.name
+        )
+        return try {
+            NotificationLightingSweepPosition.valueOf(
+                posName ?: NotificationLightingSweepPosition.CENTER.name
+            )
+        } catch (e: Exception) {
+            NotificationLightingSweepPosition.CENTER
+        }
+    }
+
+    fun saveNotificationLightingSweepPosition(position: NotificationLightingSweepPosition) {
+        putString(KEY_EDGE_LIGHTING_SWEEP_POSITION, position.name)
     }
 
     fun getFreezeAutoExcludedApps(): Set<String> {
@@ -361,6 +403,7 @@ class SettingsRepository(private val context: Context) {
     }
 
     // Feature specific App selections
+
     fun loadNotificationLightingSelectedApps() = loadAppSelection(KEY_EDGE_LIGHTING_SELECTED_APPS)
     fun saveNotificationLightingSelectedApps(apps: List<AppSelection>) =
         saveAppSelection(KEY_EDGE_LIGHTING_SELECTED_APPS, apps)

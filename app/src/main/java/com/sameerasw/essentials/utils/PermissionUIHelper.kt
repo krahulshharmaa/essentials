@@ -225,7 +225,8 @@ object PermissionUIHelper {
             "USAGE_STATS" -> PermissionItem(
                 iconRes = R.drawable.rounded_data_usage_24,
                 title = R.string.perm_usage_stats_title,
-                description = R.string.perm_usage_stats_desc,
+                description = if (viewModel.isUseUsageAccess.value)
+                    R.string.perm_usage_stats_desc_app_lock else R.string.perm_usage_stats_desc,
                 dependentFeatures = PermissionRegistry.getFeatures("USAGE_STATS"),
                 actionLabel = R.string.perm_action_grant,
                 action = { PermissionUtils.openUsageStatsSettings(context) },

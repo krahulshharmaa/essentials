@@ -21,8 +21,11 @@ android {
         applicationId = "com.sameerasw.essentials"
         minSdk = 26
         targetSdk = 36
-        versionCode = 36
-        versionName = "12.5"
+        versionCode = 37
+        versionName = "12.6"
+
+        val whatsNewCounter = 1
+        buildConfigField("int", "WHATS_NEW_COUNTER", whatsNewCounter.toString())
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -79,8 +82,8 @@ dependencies {
     // Android 12+ SplashScreen API with backward compatibility attributes
     implementation("androidx.core:core-splashscreen:1.0.1")
 
-    // Force latest Material3 1.5.0-alpha16 for new ListItem expressive overloads
-    implementation("androidx.compose.material3:material3:1.5.0-alpha16")
+    // Force latest Material3 1.5.0-alpha17 for new MaterialShapes
+    implementation("androidx.compose.material3:material3:1.5.0-alpha17")
 
     implementation(libs.androidx.compose.ui)
     implementation(libs.androidx.compose.ui.graphics)
@@ -144,4 +147,5 @@ dependencies {
     // GSMArena Parsing
     implementation("org.jsoup:jsoup:1.15.3")
     implementation(libs.sentry.android)
+    implementation(libs.androidx.graphics.shapes)
 }

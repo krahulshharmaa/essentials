@@ -159,11 +159,13 @@ class AppLockActivity : AppCompatActivity() {
             putExtra("package_name", packageToLock)
         }
         sendBroadcast(intent)
-        val serviceIntent = Intent(this, ScreenOffAccessibilityService::class.java).apply {
+        
+        val accessibilityIntent = Intent(this, ScreenOffAccessibilityService::class.java).apply {
             action = "APP_AUTHENTICATED"
             putExtra("package_name", packageToLock)
         }
-        startService(serviceIntent)
+        startService(accessibilityIntent)
+
         finish()
         if (Build.VERSION.SDK_INT >= 34) {
             overrideActivityTransition(OVERRIDE_TRANSITION_CLOSE, 0, 0)
@@ -174,6 +176,11 @@ class AppLockActivity : AppCompatActivity() {
     }
 
     private fun notifyFailureAndFinish() {
+        val intent = Intent("APP_AUTHENTICATION_FAILED").apply {
+            `package` = packageName
+        }
+        sendBroadcast(intent)
+
         val serviceIntent = Intent(this, ScreenOffAccessibilityService::class.java).apply {
             action = "APP_AUTHENTICATION_FAILED"
         }

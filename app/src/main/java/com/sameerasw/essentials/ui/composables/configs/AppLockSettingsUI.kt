@@ -37,7 +37,11 @@ fun AppLockSettingsUI(
     var isAppSelectionSheetOpen by remember { mutableStateOf(false) }
 
     val isAppLockEnabled by viewModel.isAppLockEnabled
+    val isUseUsageAccess by viewModel.isUseUsageAccess
     val isAccessibilityEnabled by viewModel.isAccessibilityEnabled
+    val isUsageStatsPermissionGranted by viewModel.isUsageStatsPermissionGranted
+    
+    val canEnableAppLock = if (isUseUsageAccess) isUsageStatsPermissionGranted else isAccessibilityEnabled
 
     Column(
         modifier = modifier
@@ -75,7 +79,7 @@ fun AppLockSettingsUI(
                         viewModel.setAppLockEnabled(enabled, context)
                     }
                 },
-                enabled = isAccessibilityEnabled,
+                enabled = canEnableAppLock,
                 onDisabledClick = {},
                 modifier = Modifier.highlight(highlightKey == "app_lock_enabled")
             )

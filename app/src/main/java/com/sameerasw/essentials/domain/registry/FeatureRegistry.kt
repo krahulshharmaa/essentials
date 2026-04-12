@@ -49,7 +49,6 @@ object FeatureRegistry {
             aboutDescription = R.string.about_desc_ambient_music_glance,
             permissionKeys = listOf("ACCESSIBILITY", "NOTIFICATION_LISTENER"),
             showToggle = true,
-            isBeta = true,
             parentFeatureId = "Sound"
         ) {
             override fun isEnabled(viewModel: MainViewModel) =
@@ -541,6 +540,13 @@ object FeatureRegistry {
                     R.string.feat_qs_tiles_title
                 ),
                 SearchSetting(
+                    R.string.search_disable_qs_locked_title,
+                    R.string.search_disable_qs_locked_desc,
+                    "Disable QS Locked",
+                    R.array.keywords_network_visibility,
+                    R.string.feat_qs_tiles_title
+                ),
+                SearchSetting(
                     R.string.search_qs_mono_title,
                     R.string.search_qs_mono_desc,
                     "Mono Audio",
@@ -651,7 +657,6 @@ object FeatureRegistry {
             category = R.string.cat_display,
             description = R.string.feat_dynamic_night_light_desc,
             aboutDescription = R.string.about_desc_dynamic_night_light,
-            permissionKeys = listOf("ACCESSIBILITY", "WRITE_SECURE_SETTINGS"),
             searchableSettings = listOf(
                 SearchSetting(
                     R.string.search_night_light_enable_title,
@@ -663,11 +668,19 @@ object FeatureRegistry {
             showToggle = true,
             parentFeatureId = "Display"
         ) {
+            override val permissionKeys: List<String>
+                get() = if (com.sameerasw.essentials.data.repository.SettingsRepository(com.sameerasw.essentials.EssentialsApp.context)
+                        .getBoolean(com.sameerasw.essentials.data.repository.SettingsRepository.KEY_USE_USAGE_ACCESS))
+                    listOf("USAGE_STATS", "WRITE_SECURE_SETTINGS") else listOf("ACCESSIBILITY", "WRITE_SECURE_SETTINGS")
+
             override fun isEnabled(viewModel: MainViewModel) =
                 viewModel.isDynamicNightLightEnabled.value
 
             override fun isToggleEnabled(viewModel: MainViewModel, context: Context) =
-                viewModel.isAccessibilityEnabled.value && viewModel.isWriteSecureSettingsEnabled.value
+                (if (viewModel.isUseUsageAccess.value)
+                    viewModel.isUsageStatsPermissionGranted.value
+                else
+                    viewModel.isAccessibilityEnabled.value) && viewModel.isWriteSecureSettingsEnabled.value
 
             override fun onToggle(viewModel: MainViewModel, context: Context, enabled: Boolean) =
                 viewModel.setDynamicNightLightEnabled(enabled, context)
@@ -700,7 +713,6 @@ object FeatureRegistry {
             category = R.string.cat_protection,
             description = R.string.feat_app_lock_desc,
             aboutDescription = R.string.about_desc_app_lock,
-            permissionKeys = listOf("ACCESSIBILITY"),
             searchableSettings = listOf(
                 SearchSetting(
                     R.string.search_app_lock_enable_title,
@@ -717,9 +729,17 @@ object FeatureRegistry {
             ),
             parentFeatureId = "Security"
         ) {
+            override val permissionKeys: List<String>
+                get() = if (com.sameerasw.essentials.data.repository.SettingsRepository(com.sameerasw.essentials.EssentialsApp.context)
+                        .getBoolean(com.sameerasw.essentials.data.repository.SettingsRepository.KEY_USE_USAGE_ACCESS))
+                    listOf("USAGE_STATS") else listOf("ACCESSIBILITY")
+
             override fun isEnabled(viewModel: MainViewModel) = viewModel.isAppLockEnabled.value
             override fun isToggleEnabled(viewModel: MainViewModel, context: Context) =
-                viewModel.isAccessibilityEnabled.value
+                if (viewModel.isUseUsageAccess.value)
+                    viewModel.isUsageStatsPermissionGranted.value
+                else
+                    viewModel.isAccessibilityEnabled.value
 
             override fun onToggle(viewModel: MainViewModel, context: Context, enabled: Boolean) =
                 viewModel.setAppLockEnabled(enabled, context)
@@ -833,7 +853,6 @@ object FeatureRegistry {
             permissionKeys = listOf("BLUETOOTH_CONNECT", "BLUETOOTH_SCAN"),
             showToggle = false,
             hasMoreSettings = true,
-            isBeta = true,
             parentFeatureId = "Widgets"
         ) {
             override fun isEnabled(viewModel: MainViewModel) = true
@@ -881,7 +900,6 @@ object FeatureRegistry {
             permissionKeys = listOf("ACCESSIBILITY", "NOTIFICATION_LISTENER"),
             hasMoreSettings = true,
             showToggle = true,
-            isBeta = true,
             isVisibleInMain = false
         ) {
             override fun isEnabled(viewModel: MainViewModel) =

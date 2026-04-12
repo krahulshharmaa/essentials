@@ -269,6 +269,7 @@ class MainActivity : AppCompatActivity() {
                     val gitHubToken by viewModel.gitHubToken
                     val gitHubUser by gitHubAuthViewModel.currentUser
                     val isOnboardingCompleted by viewModel.isOnboardingCompleted
+                    val isWhatsNewVisible by viewModel.isWhatsNewVisible
 
                     LaunchedEffect(Unit) {
                         gitHubAuthViewModel.loadCachedUser(context)
@@ -990,14 +991,19 @@ class MainActivity : AppCompatActivity() {
                         }
 
                         androidx.compose.animation.AnimatedVisibility(
-                            visible = !isOnboardingCompleted,
+                            visible = !isOnboardingCompleted || isWhatsNewVisible,
                             enter = androidx.compose.animation.fadeIn() + androidx.compose.animation.slideInVertically { it },
                             exit = androidx.compose.animation.fadeOut() + androidx.compose.animation.slideOutVertically { it }
                         ) {
                             WelcomeScreen(
                                 viewModel = viewModel,
+                                isWhatsNewFlow = isWhatsNewVisible,
                                 onBeginClick = {
-                                    viewModel.setOnboardingCompleted(true, context)
+                                    if (isWhatsNewVisible) {
+                                        viewModel.completeWhatsNew()
+                                    } else {
+                                        viewModel.setOnboardingCompleted(true, context)
+                                    }
                                 }
                             )
                         }

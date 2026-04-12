@@ -13,6 +13,7 @@ import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.database.ContentObserver
 import android.net.Uri
+import android.os.Build
 import android.os.Handler
 import android.os.Looper
 import android.os.PowerManager
@@ -41,6 +42,7 @@ import com.sameerasw.essentials.domain.model.NotificationApp
 import com.sameerasw.essentials.domain.model.NotificationLightingColorMode
 import com.sameerasw.essentials.domain.model.NotificationLightingSide
 import com.sameerasw.essentials.domain.model.NotificationLightingStyle
+import com.sameerasw.essentials.domain.model.NotificationLightingSweepPosition
 import com.sameerasw.essentials.domain.model.SearchableItem
 import com.sameerasw.essentials.domain.model.UpdateInfo
 import com.sameerasw.essentials.domain.registry.SearchRegistry
@@ -122,7 +124,9 @@ class MainViewModel : ViewModel() {
     val isAutoAccessibilityEnabled = mutableStateOf(false)
     val isNotificationGlanceSameAsLightingEnabled = mutableStateOf(true)
     val isOnboardingCompleted = mutableStateOf(true) // Default to true so it doesn't flash on first check if not loaded
+    val isWhatsNewVisible = mutableStateOf(false)
     val dnsPresets = mutableStateListOf<DnsPreset>()
+    val addedQSTiles = mutableStateOf<Set<String>>(emptySet())
 
 
     data class CalendarAccount(
@@ -137,6 +141,7 @@ class MainViewModel : ViewModel() {
 
 
     val isScreenLockedSecurityEnabled = mutableStateOf(false)
+    val isDisableQsWhenLockedEnabled = mutableStateOf(false)
     val isDeviceAdminEnabled = mutableStateOf(false)
     val isDeveloperModeEnabled = mutableStateOf(false)
     val isNotificationPolicyAccessGranted = mutableStateOf(false)
@@ -151,8 +156,12 @@ class MainViewModel : ViewModel() {
     val notificationLightingIndicatorScale = mutableStateOf(1.0f)
     val notificationLightingGlowSides =
         mutableStateOf(setOf(NotificationLightingSide.LEFT, NotificationLightingSide.RIGHT))
+    val notificationLightingSweepPosition = mutableStateOf(NotificationLightingSweepPosition.CENTER)
+    val notificationLightingSweepThickness = mutableFloatStateOf(8f)
+    val notificationLightingSweepRandomShapes = mutableStateOf(false)
     val skipPersistentNotifications = mutableStateOf(false)
     val isAppLockEnabled = mutableStateOf(false)
+    val isUseUsageAccess = mutableStateOf(false)
     val isFreezeWhenLockedEnabled = mutableStateOf(false)
     val freezeLockDelayIndex = mutableIntStateOf(1) // Default: 1 minute
     val freezePickedApps = mutableStateOf<List<NotificationApp>>(emptyList())
@@ -258,6 +267,9 @@ class MainViewModel : ViewModel() {
                     Settings.Secure.getUriFor("doze_always_on") -> {
                         isAodEnabled.value = settingsRepository.isAodEnabled()
                     }
+                    Settings.Secure.getUriFor("sysui_qs_tiles") -> {
+                        appContext?.let { updateAddedQSTiles(it) }
+                    }
                 }
             }
         }
@@ -278,6 +290,9 @@ class MainViewModel : ViewModel() {
                     SettingsRepository.KEY_SCREEN_LOCKED_SECURITY_ENABLED -> isScreenLockedSecurityEnabled.value =
                         settingsRepository.getBoolean(key)
 
+                    SettingsRepository.KEY_DISABLE_QS_WHEN_LOCKED -> isDisableQsWhenLockedEnabled.value =
+                        settingsRepository.getBoolean(key)
+
                     SettingsRepository.KEY_MAPS_POWER_SAVING_ENABLED -> {
                         isMapsPowerSavingEnabled.value = settingsRepository.getBoolean(key)
                         MapsState.isEnabled = isMapsPowerSavingEnabled.value
@@ -289,8 +304,15 @@ class MainViewModel : ViewModel() {
                     SettingsRepository.KEY_BUTTON_REMAP_ENABLED -> isButtonRemapEnabled.value =
                         settingsRepository.getBoolean(key)
 
-                    SettingsRepository.KEY_APP_LOCK_ENABLED -> isAppLockEnabled.value =
-                        settingsRepository.getBoolean(key)
+                    SettingsRepository.KEY_APP_LOCK_ENABLED -> {
+                        isAppLockEnabled.value = settingsRepository.getBoolean(key)
+                        appContext?.let { updateAppDetectionService(it) }
+                    }
+
+                    SettingsRepository.KEY_USE_USAGE_ACCESS -> {
+                        isUseUsageAccess.value = settingsRepository.getBoolean(key)
+                        appContext?.let { updateAppDetectionService(it) }
+                    }
 
                     SettingsRepository.KEY_FREEZE_WHEN_LOCKED_ENABLED -> isFreezeWhenLockedEnabled.value =
                         settingsRepository.getBoolean(key)
@@ -580,9 +602,15 @@ class MainViewModel : ViewModel() {
             false,
             contentObserver
         )
+        context.contentResolver.registerContentObserver(
+            Settings.Secure.getUriFor("sysui_qs_tiles"),
+            false,
+            contentObserver
+        )
 
         isPowerSaveModeEnabled.value = DeviceUtils.isPowerSaveMode(context)
         updateBlurState(context)
+        updateAddedQSTiles(context)
 
         if (powerSaveReceiver == null) {
             powerSaveReceiver = object : BroadcastReceiver() {
@@ -640,7 +668,12 @@ class MainViewModel : ViewModel() {
 
         notificationLightingStyle.value = settingsRepository.getNotificationLightingStyle()
         notificationLightingColorMode.value = settingsRepository.getNotificationLightingColorMode()
+        isUseUsageAccess.value = settingsRepository.getBoolean(SettingsRepository.KEY_USE_USAGE_ACCESS)
         isOnboardingCompleted.value = settingsRepository.getBoolean(SettingsRepository.KEY_ONBOARDING_COMPLETED, false)
+        
+        val lastShownCounter = settingsRepository.getInt(SettingsRepository.KEY_WHATS_NEW_LAST_SHOWN_COUNTER, 0)
+        isWhatsNewVisible.value = isOnboardingCompleted.value && lastShownCounter < com.sameerasw.essentials.BuildConfig.WHATS_NEW_COUNTER
+
         notificationLightingCustomColor.intValue = settingsRepository.getInt(
             SettingsRepository.KEY_EDGE_LIGHTING_CUSTOM_COLOR,
             0xFF6200EE.toInt()
@@ -669,6 +702,9 @@ class MainViewModel : ViewModel() {
         notificationLightingIndicatorScale.value =
             settingsRepository.getFloat(SettingsRepository.KEY_EDGE_LIGHTING_INDICATOR_SCALE, 1.0f)
         notificationLightingGlowSides.value = settingsRepository.getNotificationLightingGlowSides()
+        notificationLightingSweepPosition.value = settingsRepository.getNotificationLightingSweepPosition()
+        notificationLightingSweepThickness.floatValue = settingsRepository.getFloat(SettingsRepository.KEY_EDGE_LIGHTING_SWEEP_THICKNESS, 8f)
+        notificationLightingSweepRandomShapes.value = settingsRepository.getBoolean(SettingsRepository.KEY_EDGE_LIGHTING_SWEEP_RANDOM_SHAPES, true)
 
         MapsState.isEnabled = isMapsPowerSavingEnabled.value
         hapticFeedbackType.value = settingsRepository.getHapticFeedbackType()
@@ -832,6 +868,8 @@ class MainViewModel : ViewModel() {
 
         isScreenLockedSecurityEnabled.value =
             settingsRepository.getBoolean(SettingsRepository.KEY_SCREEN_LOCKED_SECURITY_ENABLED)
+        isDisableQsWhenLockedEnabled.value =
+            settingsRepository.getBoolean(SettingsRepository.KEY_DISABLE_QS_WHEN_LOCKED, false)
         isDeviceAdminEnabled.value = isDeviceAdminActive(context)
 
         isAutoUpdateEnabled.value =
@@ -1251,11 +1289,40 @@ class MainViewModel : ViewModel() {
     fun setDynamicNightLightEnabled(enabled: Boolean, context: Context) {
         isDynamicNightLightEnabled.value = enabled
         settingsRepository.putBoolean(SettingsRepository.KEY_DYNAMIC_NIGHT_LIGHT_ENABLED, enabled)
+        updateAppDetectionService(context)
     }
 
     fun setAppLockEnabled(enabled: Boolean, context: Context) {
         isAppLockEnabled.value = enabled
         settingsRepository.putBoolean(SettingsRepository.KEY_APP_LOCK_ENABLED, enabled)
+        updateAppDetectionService(context)
+    }
+
+    fun setUseUsageAccess(enabled: Boolean, context: Context) {
+        isUseUsageAccess.value = enabled
+        settingsRepository.putBoolean(SettingsRepository.KEY_USE_USAGE_ACCESS, enabled)
+        updateAppDetectionService(context)
+    }
+
+    private fun updateAppDetectionService(context: Context) {
+        val intent = Intent(context, com.sameerasw.essentials.services.AppDetectionService::class.java)
+        
+        val hasAppAutomations = com.sameerasw.essentials.domain.diy.DIYRepository.automations.value.any { it.isEnabled && it.type == com.sameerasw.essentials.domain.diy.Automation.Type.APP }
+        val shouldRun = isUseUsageAccess.value && (isAppLockEnabled.value || isDynamicNightLightEnabled.value || hasAppAutomations)
+        
+        if (shouldRun) {
+            try {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    context.startForegroundService(intent)
+                } else {
+                    context.startService(intent)
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        } else {
+            context.stopService(intent)
+        }
     }
 
     val isLikeSongToastEnabled = mutableStateOf(false)
@@ -1505,32 +1572,42 @@ class MainViewModel : ViewModel() {
         )
     }
 
-    // Helper to show the overlay service for testing/triggering
+    private fun Intent.addLightingExtras(
+        cornerRadiusDp: Float? = null,
+        strokeThicknessDp: Float? = null,
+        isPreview: Boolean = true,
+        styleOverride: NotificationLightingStyle? = null
+    ) {
+        val radius = cornerRadiusDp
+            ?: settingsRepository.getFloat(SettingsRepository.KEY_EDGE_LIGHTING_CORNER_RADIUS, 20f)
+        val thickness = strokeThicknessDp
+            ?: settingsRepository.getFloat(SettingsRepository.KEY_EDGE_LIGHTING_STROKE_THICKNESS, 8f)
+
+        putExtra("corner_radius_dp", radius)
+        putExtra("stroke_thickness_dp", thickness)
+        putExtra("is_preview", isPreview)
+        putExtra("ignore_screen_state", true)
+        putExtra("style", (styleOverride ?: notificationLightingStyle.value).name)
+        putExtra("color_mode", notificationLightingColorMode.value.name)
+        putExtra("custom_color", notificationLightingCustomColor.intValue)
+        putExtra("pulse_count", notificationLightingPulseCount.value.toInt())
+        putExtra("pulse_duration", notificationLightingPulseDuration.value.toLong())
+        putExtra(
+            "glow_sides",
+            notificationLightingGlowSides.value.map { it.name }.toTypedArray()
+        )
+        putExtra("indicator_x", notificationLightingIndicatorX.value)
+        putExtra("indicator_y", notificationLightingIndicatorY.value)
+        putExtra("indicator_scale", notificationLightingIndicatorScale.value)
+        putExtra("sweep_position", notificationLightingSweepPosition.value.name)
+        putExtra("sweep_thickness", notificationLightingSweepThickness.floatValue)
+        putExtra("random_shapes", notificationLightingSweepRandomShapes.value)
+    }
+
     fun triggerNotificationLighting(context: Context) {
-        val radius =
-            settingsRepository.getFloat(SettingsRepository.KEY_EDGE_LIGHTING_CORNER_RADIUS, 20f)
-        val thickness =
-            settingsRepository.getFloat(SettingsRepository.KEY_EDGE_LIGHTING_STROKE_THICKNESS, 8f)
         try {
-            val intent = Intent(
-                context,
-                NotificationLightingService::class.java
-            ).apply {
-                putExtra("corner_radius_dp", radius)
-                putExtra("stroke_thickness_dp", thickness)
-                putExtra("ignore_screen_state", true)
-                putExtra("style", notificationLightingStyle.value.name)
-                putExtra("color_mode", notificationLightingColorMode.value.name)
-                putExtra("custom_color", notificationLightingCustomColor.intValue)
-                putExtra("pulse_count", notificationLightingPulseCount.value.toInt())
-                putExtra("pulse_duration", notificationLightingPulseDuration.value.toLong())
-                putExtra(
-                    "glow_sides",
-                    notificationLightingGlowSides.value.map { it.name }.toTypedArray()
-                )
-                putExtra("indicator_x", notificationLightingIndicatorX.value)
-                putExtra("indicator_y", notificationLightingIndicatorY.value)
-                putExtra("indicator_scale", notificationLightingIndicatorScale.value)
+            val intent = Intent(context, NotificationLightingService::class.java).apply {
+                addLightingExtras(isPreview = false)
             }
             context.startService(intent)
         } catch (e: Exception) {
@@ -1538,34 +1615,17 @@ class MainViewModel : ViewModel() {
         }
     }
 
-    // Helper to show the overlay service with custom corner radius
-    fun triggerNotificationLightingWithRadius(context: Context, cornerRadiusDp: Float) {
+    // Helper to show the overlay service
+    fun triggerNotificationLightingPreview(context: Context) {
         try {
-            val intent = Intent(
-                context,
-                NotificationLightingService::class.java
-            ).apply {
-                putExtra("corner_radius_dp", cornerRadiusDp)
-                putExtra("is_preview", true)
-                putExtra("ignore_screen_state", true)
-                putExtra("style", notificationLightingStyle.value.name)
-                putExtra("color_mode", notificationLightingColorMode.value.name)
-                putExtra("custom_color", notificationLightingCustomColor.intValue)
-                putExtra(
-                    "glow_sides",
-                    notificationLightingGlowSides.value.map { it.name }.toTypedArray()
-                )
-                putExtra("indicator_x", notificationLightingIndicatorX.value)
-                putExtra("indicator_y", notificationLightingIndicatorY.value)
-                putExtra("indicator_scale", notificationLightingIndicatorScale.value)
+            val intent = Intent(context, NotificationLightingService::class.java).apply {
+                addLightingExtras(isPreview = true)
             }
             context.startService(intent)
         } catch (e: Exception) {
             // ignore
         }
     }
-
-    // Helper to show the overlay service with custom corner radius and stroke thickness
 
     fun openImeSettings(context: Context) {
         val intent = Intent(Settings.ACTION_INPUT_METHOD_SETTINGS)
@@ -1578,30 +1638,10 @@ class MainViewModel : ViewModel() {
         imm.showInputMethodPicker()
     }
 
-    fun triggerNotificationLightingWithRadiusAndThickness(
-        context: Context,
-        cornerRadiusDp: Float,
-        strokeThicknessDp: Float
-    ) {
+    fun triggerNotificationLightingWithRadius(context: Context, cornerRadiusDp: Float) {
         try {
-            val intent = Intent(
-                context,
-                NotificationLightingService::class.java
-            ).apply {
-                putExtra("corner_radius_dp", cornerRadiusDp)
-                putExtra("stroke_thickness_dp", strokeThicknessDp)
-                putExtra("is_preview", true)
-                putExtra("ignore_screen_state", true)
-                putExtra("style", notificationLightingStyle.value.name)
-                putExtra("color_mode", notificationLightingColorMode.value.name)
-                putExtra("custom_color", notificationLightingCustomColor.intValue)
-                putExtra(
-                    "glow_sides",
-                    notificationLightingGlowSides.value.map { it.name }.toTypedArray()
-                )
-                putExtra("indicator_x", notificationLightingIndicatorX.value)
-                putExtra("indicator_y", notificationLightingIndicatorY.value)
-                putExtra("indicator_scale", notificationLightingIndicatorScale.value)
+            val intent = Intent(context, NotificationLightingService::class.java).apply {
+                addLightingExtras(cornerRadiusDp = cornerRadiusDp)
             }
             context.startService(intent)
         } catch (e: Exception) {
@@ -1609,6 +1649,20 @@ class MainViewModel : ViewModel() {
         }
     }
 
+    fun triggerNotificationLightingWithRadiusAndThickness(
+        context: Context,
+        cornerRadiusDp: Float,
+        strokeThicknessDp: Float
+    ) {
+        try {
+            val intent = Intent(context, NotificationLightingService::class.java).apply {
+                addLightingExtras(cornerRadiusDp, strokeThicknessDp)
+            }
+            context.startService(intent)
+        } catch (e: Exception) {
+            // ignore
+        }
+    }
 
     fun triggerNotificationLightingForIndicator(
         context: Context,
@@ -1616,19 +1670,31 @@ class MainViewModel : ViewModel() {
         y: Float,
         scale: Float
     ) {
+        notificationLightingIndicatorX.value = x
+        notificationLightingIndicatorY.value = y
+        notificationLightingIndicatorScale.value = scale
+        
         try {
-            val intent = Intent(
-                context,
-                NotificationLightingService::class.java
-            ).apply {
-                putExtra("indicator_x", x)
-                putExtra("indicator_y", y)
-                putExtra("indicator_scale", scale)
-                putExtra("is_preview", true)
-                putExtra("ignore_screen_state", true)
-                putExtra("style", NotificationLightingStyle.INDICATOR.name)
-                putExtra("color_mode", notificationLightingColorMode.value.name)
-                putExtra("custom_color", notificationLightingCustomColor.intValue)
+            val intent = Intent(context, NotificationLightingService::class.java).apply {
+                addLightingExtras(styleOverride = NotificationLightingStyle.INDICATOR)
+            }
+            context.startService(intent)
+        } catch (e: Exception) {
+            // ignore
+        }
+    }
+
+    fun triggerNotificationLightingForSweep(
+        context: Context,
+        position: NotificationLightingSweepPosition,
+        thickness: Float
+    ) {
+        notificationLightingSweepPosition.value = position
+        notificationLightingSweepThickness.floatValue = thickness
+        
+        try {
+            val intent = Intent(context, NotificationLightingService::class.java).apply {
+                addLightingExtras(styleOverride = NotificationLightingStyle.SWEEP)
             }
             context.startService(intent)
         } catch (e: Exception) {
@@ -2245,6 +2311,11 @@ class MainViewModel : ViewModel() {
         )
     }
 
+    fun setDisableQsWhenLockedEnabled(enabled: Boolean, context: Context) {
+        isDisableQsWhenLockedEnabled.value = enabled
+        settingsRepository.putBoolean(SettingsRepository.KEY_DISABLE_QS_WHEN_LOCKED, enabled)
+    }
+
     fun setNotificationLightingGlowSides(sides: Set<NotificationLightingSide>, context: Context) {
         notificationLightingGlowSides.value = sides
         settingsRepository.saveNotificationLightingGlowSides(sides)
@@ -2264,6 +2335,22 @@ class MainViewModel : ViewModel() {
         notificationLightingIndicatorScale.value = scale
         settingsRepository.putFloat(SettingsRepository.KEY_EDGE_LIGHTING_INDICATOR_SCALE, scale)
     }
+
+    fun setNotificationLightingSweepPosition(position: NotificationLightingSweepPosition, context: Context) {
+        notificationLightingSweepPosition.value = position
+        settingsRepository.saveNotificationLightingSweepPosition(position)
+    }
+
+    fun saveNotificationLightingSweepThickness(context: Context, thickness: Float) {
+        notificationLightingSweepThickness.floatValue = thickness
+        settingsRepository.putFloat(SettingsRepository.KEY_EDGE_LIGHTING_SWEEP_THICKNESS, thickness)
+    }
+
+    fun saveNotificationLightingSweepRandomShapes(context: Context, enabled: Boolean) {
+        notificationLightingSweepRandomShapes.value = enabled
+        settingsRepository.putBoolean(SettingsRepository.KEY_EDGE_LIGHTING_SWEEP_RANDOM_SHAPES, enabled)
+    }
+
 
 
     fun exportConfigs(context: Context, outputStream: java.io.OutputStream) {
@@ -2390,14 +2477,26 @@ class MainViewModel : ViewModel() {
     }
 
     fun setOnboardingCompleted(completed: Boolean, context: Context) {
-        settingsRepository.putBoolean(SettingsRepository.KEY_ONBOARDING_COMPLETED, completed)
         isOnboardingCompleted.value = completed
+        settingsRepository.putBoolean(SettingsRepository.KEY_ONBOARDING_COMPLETED, completed)
+        if (completed) {
+            settingsRepository.putInt(SettingsRepository.KEY_WHATS_NEW_LAST_SHOWN_COUNTER, com.sameerasw.essentials.BuildConfig.WHATS_NEW_COUNTER)
+        }
+    }
+
+    fun completeWhatsNew() {
+        isWhatsNewVisible.value = false
+        settingsRepository.putInt(SettingsRepository.KEY_WHATS_NEW_LAST_SHOWN_COUNTER, com.sameerasw.essentials.BuildConfig.WHATS_NEW_COUNTER)
     }
 
     fun resetOnboarding(context: Context) {
         setOnboardingCompleted(false, context)
         // Reset tab to ESSENTIALS
         setDefaultTab(com.sameerasw.essentials.domain.DIYTabs.ESSENTIALS, context)
+    }
+
+    fun resetUpdateNote(context: Context) {
+        settingsRepository.putInt(SettingsRepository.KEY_WHATS_NEW_LAST_SHOWN_COUNTER, 0)
     }
 
     fun resetDnsPresets() {
@@ -2414,5 +2513,10 @@ class MainViewModel : ViewModel() {
         val current = settingsRepository.getPrivateDnsPresets().toMutableList()
         current.removeAll { it.id == preset.id }
         settingsRepository.savePrivateDnsPresets(current)
+    }
+
+    private fun updateAddedQSTiles(context: Context) {
+        val tilesString = Settings.Secure.getString(context.contentResolver, "sysui_qs_tiles") ?: ""
+        addedQSTiles.value = tilesString.split(",").map { it.trim() }.filter { it.isNotBlank() }.toSet()
     }
 }

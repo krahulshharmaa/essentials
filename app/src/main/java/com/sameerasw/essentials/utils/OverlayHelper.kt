@@ -19,6 +19,7 @@ import androidx.compose.material3.LoadingIndicator
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.core.view.updateLayoutParams
+import androidx.graphics.shapes.toPath
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LifecycleRegistry
@@ -32,6 +33,7 @@ import androidx.savedstate.SavedStateRegistryOwner
 import androidx.savedstate.setViewTreeSavedStateRegistryOwner
 import com.sameerasw.essentials.domain.model.NotificationLightingSide
 import com.sameerasw.essentials.domain.model.NotificationLightingStyle
+import com.sameerasw.essentials.domain.model.NotificationLightingSweepPosition
 import androidx.compose.ui.graphics.Color as ComposeColor
 
 /**
@@ -65,6 +67,7 @@ object OverlayHelper {
             NotificationLightingSide.RIGHT
         ),
         indicatorScale: Float = 1.0f,
+        randomShapes: Boolean = false,
         showBackground: Boolean = false
     ): FrameLayout {
         if (style == NotificationLightingStyle.GLOW) {
@@ -72,6 +75,9 @@ object OverlayHelper {
         }
         if (style == NotificationLightingStyle.INDICATOR) {
             return createIndicatorOverlayView(context, color, indicatorScale, showBackground)
+        }
+        if (style == NotificationLightingStyle.SWEEP) {
+            return createSweepOverlayView(context, color, strokeDp, randomShapes, showBackground)
         }
 
         val overlay = FrameLayout(context)
@@ -109,71 +115,55 @@ object OverlayHelper {
         sides: Set<NotificationLightingSide>,
         showBackground: Boolean
     ): FrameLayout {
+        val blurRadiusDp = 15f
         val overlay = FrameLayout(context)
         if (showBackground) {
             overlay.setBackgroundColor(Color.BLACK)
         }
 
+        val density = context.resources.displayMetrics.density
+        val glowSizePx = (80 * density).toInt() 
+
         if (sides.contains(NotificationLightingSide.LEFT)) {
-            val leftGlow = View(context).apply {
+            val leftGlow = GlowSideView(context, color, NotificationLightingSide.LEFT, blurRadiusDp).apply {
                 tag = "left_glow"
                 alpha = 0.5f
-                layoutParams =
-                    FrameLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT).apply {
-                        gravity = Gravity.START
-                    }
-                background = GradientDrawable(
-                    GradientDrawable.Orientation.LEFT_RIGHT,
-                    intArrayOf(color, Color.TRANSPARENT)
-                )
+                layoutParams = FrameLayout.LayoutParams(glowSizePx, ViewGroup.LayoutParams.MATCH_PARENT).apply {
+                    gravity = Gravity.START
+                }
             }
             overlay.addView(leftGlow)
         }
 
         if (sides.contains(NotificationLightingSide.RIGHT)) {
-            val rightGlow = View(context).apply {
+            val rightGlow = GlowSideView(context, color, NotificationLightingSide.RIGHT, blurRadiusDp).apply {
                 tag = "right_glow"
                 alpha = 0.5f
-                layoutParams =
-                    FrameLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT).apply {
-                        gravity = Gravity.END
-                    }
-                background = GradientDrawable(
-                    GradientDrawable.Orientation.RIGHT_LEFT,
-                    intArrayOf(color, Color.TRANSPARENT)
-                )
+                layoutParams = FrameLayout.LayoutParams(glowSizePx, ViewGroup.LayoutParams.MATCH_PARENT).apply {
+                    gravity = Gravity.END
+                }
             }
             overlay.addView(rightGlow)
         }
 
         if (sides.contains(NotificationLightingSide.TOP)) {
-            val topGlow = View(context).apply {
+            val topGlow = GlowSideView(context, color, NotificationLightingSide.TOP, blurRadiusDp).apply {
                 tag = "top_glow"
                 alpha = 0.5f
-                layoutParams =
-                    FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0).apply {
-                        gravity = Gravity.TOP
-                    }
-                background = GradientDrawable(
-                    GradientDrawable.Orientation.TOP_BOTTOM,
-                    intArrayOf(color, Color.TRANSPARENT)
-                )
+                layoutParams = FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, glowSizePx).apply {
+                    gravity = Gravity.TOP
+                }
             }
             overlay.addView(topGlow)
         }
 
         if (sides.contains(NotificationLightingSide.BOTTOM)) {
-            val bottomGlow = View(context).apply {
+            val bottomGlow = GlowSideView(context, color, NotificationLightingSide.BOTTOM, blurRadiusDp).apply {
                 tag = "bottom_glow"
                 alpha = 0.5f
-                layoutParams =
-                    FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0).apply {
-                        gravity = Gravity.BOTTOM
-                    }
-                background = GradientDrawable(
-                    GradientDrawable.Orientation.BOTTOM_TOP,
-                    intArrayOf(color, Color.TRANSPARENT)
-                )
+                layoutParams = FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, glowSizePx).apply {
+                    gravity = Gravity.BOTTOM
+                }
             }
             overlay.addView(bottomGlow)
         }
@@ -224,6 +214,139 @@ object OverlayHelper {
 
         overlay.addView(composeView)
         return overlay
+    }
+
+    private fun createSweepOverlayView(
+        context: Context,
+        color: Int,
+        strokeDp: Float,
+        randomShapes: Boolean,
+        showBackground: Boolean
+    ): FrameLayout {
+        val glowRadiusDp = 15f
+        val overlay = FrameLayout(context)
+        if (showBackground) {
+            overlay.setBackgroundColor(Color.BLACK)
+        }
+
+        val sweepView = SweepShapeView(context, color, strokeDp, randomShapes).apply {
+            tag = "sweep_view"
+            alpha = 0f
+            layoutParams = FrameLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT
+            )
+        }
+        overlay.addView(sweepView)
+
+        return overlay
+    }
+
+    private class SweepShapeView(
+        context: Context,
+        val color: Int,
+        val strokeDp: Float,
+        val useRandomShapes: Boolean
+    ) : View(context) {
+        var centerX: Float = 0f
+        var centerY: Float = 0f
+
+        private val polygon = if (useRandomShapes) {
+            AmbientMusicShapeHelper.getRandomPolygon()
+        } else null
+
+        private val paint = android.graphics.Paint(android.graphics.Paint.ANTI_ALIAS_FLAG).apply {
+            style = android.graphics.Paint.Style.STROKE
+            this.color = this@SweepShapeView.color
+            strokeWidth = context.resources.displayMetrics.density * strokeDp
+            
+            maskFilter = android.graphics.BlurMaskFilter(
+                context.resources.displayMetrics.density * 15f,
+                android.graphics.BlurMaskFilter.Blur.NORMAL
+            )
+        }
+
+        init {
+            setLayerType(LAYER_TYPE_SOFTWARE, null)
+        }
+
+        var currentRadius: Float = 0f
+            set(value) {
+                field = value
+                invalidate()
+            }
+
+        override fun onDraw(canvas: android.graphics.Canvas) {
+            super.onDraw(canvas)
+            if (currentRadius <= 0) return
+
+            if (polygon != null) {
+                // Get path from polygon scaled to size
+                val shapePath = polygon.toPath()
+                
+                // Scale and move path
+                val matrix = android.graphics.Matrix()
+                // Shapes from toPath() are normalized to [0, 1] range.
+                // Scale to currentRadius * 2 and center it.
+                matrix.postScale(currentRadius * 2f, currentRadius * 2f)
+                matrix.postTranslate(centerX - currentRadius, centerY - currentRadius)
+                
+                shapePath.transform(matrix)
+                canvas.drawPath(shapePath, paint)
+            } else {
+                canvas.drawCircle(centerX, centerY, currentRadius, paint)
+            }
+        }
+    }
+
+    private class GlowSideView(
+        context: Context,
+        val color: Int,
+        val side: NotificationLightingSide,
+        val blurRadiusDp: Float
+    ) : View(context) {
+        private val paint = android.graphics.Paint(android.graphics.Paint.ANTI_ALIAS_FLAG).apply {
+            style = android.graphics.Paint.Style.FILL
+            if (blurRadiusDp > 0) {
+                maskFilter = android.graphics.BlurMaskFilter(
+                    context.resources.displayMetrics.density * blurRadiusDp,
+                    android.graphics.BlurMaskFilter.Blur.NORMAL
+                )
+            }
+        }
+
+        init {
+            setLayerType(LAYER_TYPE_SOFTWARE, null)
+        }
+
+        override fun onDraw(canvas: android.graphics.Canvas) {
+            super.onDraw(canvas)
+            val w = width.toFloat()
+            val h = height.toFloat()
+
+            // Define the gradient based on side
+            val shader = when (side) {
+                NotificationLightingSide.LEFT -> android.graphics.LinearGradient(
+                    0f, 0f, w, 0f,
+                    color, Color.TRANSPARENT, android.graphics.Shader.TileMode.CLAMP
+                )
+                NotificationLightingSide.RIGHT -> android.graphics.LinearGradient(
+                    w, 0f, 0f, 0f,
+                    color, Color.TRANSPARENT, android.graphics.Shader.TileMode.CLAMP
+                )
+                NotificationLightingSide.TOP -> android.graphics.LinearGradient(
+                    0f, 0f, 0f, h,
+                    color, Color.TRANSPARENT, android.graphics.Shader.TileMode.CLAMP
+                )
+                NotificationLightingSide.BOTTOM -> android.graphics.LinearGradient(
+                    0f, h, 0f, 0f,
+                    color, Color.TRANSPARENT, android.graphics.Shader.TileMode.CLAMP
+                )
+            }
+            paint.shader = shader
+
+            canvas.drawRect(0f, 0f, w, h, paint)
+        }
     }
 
     /**
@@ -360,8 +483,12 @@ object OverlayHelper {
         strokeWidthDp: Float,
         indicatorX: Float = 50f,
         indicatorY: Float = 2f,
-        indicatorScale: Float = 1.0f
+        indicatorScale: Float = 1.0f,
+        randomShapes: Boolean = false,
+        pulseDurationMillis: Long = 3000L,
+        onAnimationEnd: (() -> Unit)? = null
     ) {
+        val sweepGlowRadiusDp = 15f
         if (style == NotificationLightingStyle.GLOW) {
             val vg = view as? ViewGroup
             if (vg != null) {
@@ -391,9 +518,18 @@ object OverlayHelper {
                 scaleX = indicatorScale
                 scaleY = indicatorScale
             }
+        } else if (style == NotificationLightingStyle.SWEEP) {
+            pulseSweepOverlay(
+                view as ViewGroup,
+                maxPulses = 1,
+                pulseDurationMillis = pulseDurationMillis,
+                strokeWidthDp = strokeWidthDp,
+                sweepPositionX = indicatorX,
+                onAnimationEnd = onAnimationEnd
+            )
         }
 
-        fadeInOverlay(view)
+        fadeInOverlay(view, onAnimationEnd)
     }
 
     /**
@@ -459,6 +595,7 @@ object OverlayHelper {
         indicatorX: Float = 50f,
         indicatorY: Float = 2f,
         indicatorScale: Float = 1.0f,
+        randomShapes: Boolean = false,
         onAnimationEnd: (() -> Unit)? = null
     ) {
         if (style == NotificationLightingStyle.GLOW) {
@@ -479,6 +616,18 @@ object OverlayHelper {
                 indicatorX,
                 indicatorY,
                 indicatorScale,
+                onAnimationEnd
+            )
+            return
+        }
+
+        if (style == NotificationLightingStyle.SWEEP) {
+            pulseSweepOverlay(
+                view as ViewGroup,
+                maxPulses,
+                pulseDurationMillis,
+                strokeWidthDp,
+                indicatorX,
                 onAnimationEnd
             )
             return
@@ -635,5 +784,65 @@ object OverlayHelper {
                     }, (durationMillis - 800).coerceAtLeast(0))
                 }
             }).start()
+    }
+
+    private fun pulseSweepOverlay(
+        view: ViewGroup,
+        maxPulses: Int,
+        pulseDurationMillis: Long,
+        strokeWidthDp: Float,
+        sweepPositionX: Float,
+        onAnimationEnd: (() -> Unit)? = null
+    ) {
+        val sweepView = view.findViewWithTag<View>("sweep_view") as? SweepShapeView ?: return
+        val displayMetrics = view.resources.displayMetrics
+        val screenWidth = displayMetrics.widthPixels
+        val screenHeight = displayMetrics.heightPixels
+
+        val startX = when {
+            sweepPositionX < 34f -> 0f
+            sweepPositionX > 66f -> screenWidth.toFloat()
+            else -> screenWidth / 2f
+        }
+        val startY = 16f * displayMetrics.density // top gap
+
+        sweepView.centerX = startX
+        sweepView.centerY = startY
+
+        // Max radius to cover the whole screen from the start point
+        val maxDistX = Math.max(startX, screenWidth - startX)
+        val maxDistY = Math.max(startY, screenHeight - startY)
+        val maxRadius = Math.sqrt((maxDistX * maxDistX + maxDistY * maxDistY).toDouble()).toFloat() + (15f * displayMetrics.density)
+
+        var pulseCount = 0
+
+        fun startPulse() {
+            if (pulseCount >= maxPulses) {
+                onAnimationEnd?.invoke()
+                return
+            }
+            pulseCount++
+
+            sweepView.alpha = 1f
+            sweepView.currentRadius = 0f
+
+            val animator = ValueAnimator.ofFloat(0f, maxRadius).apply {
+                duration = pulseDurationMillis
+                interpolator = AccelerateDecelerateInterpolator()
+                addUpdateListener { anim ->
+                    val radius = anim.animatedValue as Float
+                    sweepView.currentRadius = radius
+                    sweepView.alpha = 1f - (radius / maxRadius)
+                }
+                addListener(object : AnimatorListenerAdapter() {
+                    override fun onAnimationEnd(animation: Animator) {
+                        startPulse()
+                    }
+                })
+            }
+            animator.start()
+        }
+
+        startPulse()
     }
 }
