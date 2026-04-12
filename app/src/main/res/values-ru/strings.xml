@@ -12,7 +12,7 @@
     <string name="flashlight_pulse_tile_label">Мигание фонариком</string>
     <string name="check_pre_releases_label">Проверять наличие pre-releases</string>
     <string name="check_pre_releases_desc">Могут быть нестабильны</string>
-    <string name="label_default_tab">Default tab</string>
+    <string name="label_default_tab">Вкладка по умолчанию</string>
     <!-- App Lock -->
     <string name="settings_section_security">Безопасность</string>
     <string name="app_lock_enable_title">Включить блокировку приложения</string>
@@ -24,7 +24,7 @@
     <string name="app_lock_description">Защитите свои приложения с помощью биометрической аутентификации. Заблокированные приложения требуют аутентификации при запуске и остаются разблокированными до тех пор, пока экран не погаснет.</string>
     <string name="app_lock_warning">Имейте в виду, что это не надежное решение, поскольку это всего лишь стороннее приложение. Если вам нужна надежная защита, рассмотрите возможность использования личного пространства или других подобных функций.</string>
     <string name="app_lock_biometric_note">Обратите внимание, что запрос на биометрическую аутентификацию позволяет использовать только методы класса STRONG secure. Методы разблокировки по лицу, относящиеся к классу WEAK, на устройствах, таких как Pixel 7, смогут использовать только другие доступные методы надежной аутентификации, такие как отпечаток пальца или PIN-код.</string>
-    <string name="setting_use_usage_access_title">Use usage access</string>
+    <string name="setting_use_usage_access_title">Использовать доступ к использованию</string>
     <string name="setting_use_usage_access_desc">Instead of accessibility (Freeze, App Lock, Dynamic Night Light)</string>
     <!-- Button Remap -->
     <string name="button_remap_enable_title">Включить переназначение кнопок</string>
@@ -116,15 +116,15 @@
     <string name="settings_section_app_control">Управление приложением</string>
     <string name="action_freeze">Заморозка</string>
     <string name="action_unfreeze">Разморозить</string>
-    <string name="action_remove">Remove</string>
-    <string name="action_create_shortcut">Create shortcut</string>
-    <string name="action_app_info">App info</string>
-    <string name="freeze_mode_description_freeze_title">What is Freeze?</string>
-    <string name="freeze_mode_description_freeze_body">App freezing disables the app\'s launch activity which removes it from the app list and updates. It will prevent the app from starting at all until it\'s unfrozen which saves resources but you will need to unfreeze from here or manually re-enable.</string>
-    <string name="freeze_mode_description_freeze_warning">DO NOT FREEZE COMMUNICATION APPS</string>
-    <string name="freeze_mode_description_suspend_title">What is Suspend?</string>
-    <string name="freeze_mode_description_suspend_body">Suspending an app used to pause the app activity and prevent background executions but with recent Android changes, it only pauses the notifications from appearing and that\'s pretty much it. But does allows you to unpause from the launcher app list as they will be still available as grayscale paused app icons.</string>
-    <string name="freeze_mode_description_suspend_footer">Should work the same as the native app pause/ focus mode features.</string>
+    <string name="action_remove">Удалить</string>
+    <string name="action_create_shortcut">Создать ярлык</string>
+    <string name="action_app_info">Информация приложения</string>
+    <string name="freeze_mode_description_freeze_title">Что такое Заморозка?</string>
+    <string name="freeze_mode_description_freeze_body">Заморозка приложения отключает запуск приложения, в результате чего оно удаляется из списка приложений и обновлений. Это предотвратит запуск приложения вообще до тех пор, пока оно не будет разморожено, что экономит ресурсы, но вам нужно будет разморозить его здесь или повторно включить вручную.</string>
+    <string name="freeze_mode_description_freeze_warning">НЕ ЗАМОРАЖИВАЙТЕ КОММУНИКАЦИОННЫЕ ПРИЛОЖЕНИЯ</string>
+    <string name="freeze_mode_description_suspend_title">Что такое Приостановка?</string>
+    <string name="freeze_mode_description_suspend_body">Приостановка приложения использовалась для приостановки активности приложения и предотвращения фонового выполнения, но с последними изменениями в Android это только приостанавливает появление уведомлений, и на этом все. Но это позволяет вам отменить приостановку в списке приложений запуска, поскольку они по-прежнему будут доступны в виде значков приложений, приостановленных в оттенках серого.</string>
+    <string name="freeze_mode_description_suspend_footer">Должно работать так же, как и функции встроенного режима паузы/фокусировки в приложении.</string>
     <string name="content_desc_more_options">Больше настроек</string>
     <string name="action_freeze_all">Заморозить все приложения</string>
     <string name="action_unfreeze_all">Разморозить все приложения</string>
