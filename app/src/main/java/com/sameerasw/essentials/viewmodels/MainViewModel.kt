@@ -597,16 +597,26 @@ class MainViewModel : ViewModel() {
             contentObserver
         )
 
-        context.contentResolver.registerContentObserver(
-            Settings.Secure.getUriFor("doze_always_on"),
-            false,
-            contentObserver
-        )
-        context.contentResolver.registerContentObserver(
-            Settings.Secure.getUriFor("sysui_qs_tiles"),
-            false,
-            contentObserver
-        )
+        try {
+            context.contentResolver.registerContentObserver(
+                Settings.Secure.getUriFor("doze_always_on"),
+                false,
+                contentObserver
+            )
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+        try {
+            context.contentResolver.registerContentObserver(
+                Settings.Secure.getUriFor("sysui_qs_tiles"),
+                false,
+                contentObserver
+            )
+        } catch (e: Exception) {
+            // This might fail on Android 14+ for some system keys
+            e.printStackTrace()
+        }
 
         isPowerSaveModeEnabled.value = DeviceUtils.isPowerSaveMode(context)
         updateBlurState(context)
@@ -2516,7 +2526,14 @@ class MainViewModel : ViewModel() {
     }
 
     private fun updateAddedQSTiles(context: Context) {
-        val tilesString = Settings.Secure.getString(context.contentResolver, "sysui_qs_tiles") ?: ""
-        addedQSTiles.value = tilesString.split(",").map { it.trim() }.filter { it.isNotBlank() }.toSet()
+        var tilesString = ""
+        try {
+            tilesString = Settings.Secure.getString(context.contentResolver, "sysui_qs_tiles") ?: ""
+        } catch (e: Exception) {
+            // sysui_qs_tiles is restricted on Android 14+ (API 34+) for apps targeting API 34+
+            e.printStackTrace()
+        }
+        addedQSTiles.value =
+            tilesString.split(",").map { it.trim() }.filter { it.isNotBlank() }.toSet()
     }
 }
