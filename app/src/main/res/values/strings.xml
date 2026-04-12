@@ -199,6 +199,7 @@
 
     <!-- Tiles -->
     <string name="action_add">Add</string>
+    <string name="action_added">Added</string>
     <string name="qs_tile_already_added">Already added</string>
     <string name="qs_tile_requires_android_13">Requires Android 13+</string>
     <string name="tile_ui_blur">UI Blur</string>

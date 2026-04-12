@@ -102,6 +102,10 @@ fun QuickSettingsTilesSettingsUI(
     var showHelpSheet by remember { mutableStateOf(false) }
     var selectedHelpTile by remember { mutableStateOf<QSTileInfo?>(null) }
 
+    LaunchedEffect(Unit) {
+        viewModel.check(context)
+    }
+
 
     val isUseUsageStats by viewModel.isUseUsageAccess
     val tiles = listOf(
@@ -436,6 +440,14 @@ fun QuickSettingsTilesSettingsUI(
                             )?.isGranted == true
                         }
 
+                        val addedTiles by viewModel.addedQSTiles
+                        val componentName = ComponentName(context, tile.serviceClass)
+                        val isAdded = addedTiles.any { 
+                            it.contains(componentName.flattenToString()) || 
+                            it.contains(componentName.flattenToShortString()) ||
+                            it.contains(tile.serviceClass.name)
+                        }
+
                         QSTileCard(
                             tile = tile,
                             modifier = Modifier
@@ -447,6 +459,7 @@ fun QuickSettingsTilesSettingsUI(
                                     )
                                 ),
                             isMissingPermissions = !allPermissionsGranted,
+                            isAdded = isAdded,
                             onClick = {
                                 if (!allPermissionsGranted) {
                                     selectedTileForPermissions = tile
@@ -511,6 +524,7 @@ fun QuickSettingsTilesSettingsUI(
 fun QSTileCard(
     tile: QSTileInfo,
     isMissingPermissions: Boolean,
+    isAdded: Boolean,
     modifier: Modifier = Modifier,
     onClick: () -> Unit,
     onHelpClick: (() -> Unit)? = null
@@ -551,7 +565,11 @@ fun QSTileCard(
             .fillMaxWidth()
             .alpha(alpha)
             .clip(RoundedCornerShape(24.dp))
-            .background(if (isMissingPermissions) MaterialTheme.colorScheme.errorContainer else MaterialTheme.colorScheme.primary)
+            .background(
+                if (isMissingPermissions) MaterialTheme.colorScheme.errorContainer
+                else if (isAdded) MaterialTheme.colorScheme.secondaryContainer
+                else MaterialTheme.colorScheme.primary
+            )
             .combinedClickable(
                 onClick = {
                     com.sameerasw.essentials.utils.HapticUtil.performVirtualKeyHaptic(view)
@@ -573,10 +591,14 @@ fun QSTileCard(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
+            val contentColor = if (isMissingPermissions) MaterialTheme.colorScheme.onErrorContainer
+            else if (isAdded) MaterialTheme.colorScheme.onSecondaryContainer
+            else MaterialTheme.colorScheme.onPrimary
+
             Icon(
                 painter = painterResource(id = tile.iconRes),
                 contentDescription = null,
-                tint = if (isMissingPermissions) MaterialTheme.colorScheme.onErrorContainer else MaterialTheme.colorScheme.onPrimary,
+                tint = contentColor,
                 modifier = Modifier.padding(8.dp)
             )
 
@@ -584,16 +606,16 @@ fun QSTileCard(
                 Text(
                     text = stringResource(tile.titleRes),
                     style = MaterialTheme.typography.titleMedium,
-                    color = if (isMissingPermissions) MaterialTheme.colorScheme.onErrorContainer else MaterialTheme.colorScheme.onPrimary,
+                    color = contentColor,
                     maxLines = 1,
                     overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis
                 )
                 Text(
-                    text = if (isMissingPermissions) "Grant permission" else stringResource(R.string.action_add),
+                    text = if (isMissingPermissions) "Grant permission"
+                    else if (isAdded) stringResource(R.string.action_added)
+                    else stringResource(R.string.action_add),
                     style = MaterialTheme.typography.bodyMedium,
-                    color = if (isMissingPermissions) MaterialTheme.colorScheme.onErrorContainer.copy(
-                        alpha = 0.8f
-                    ) else MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.8f),
+                    color = contentColor.copy(alpha = 0.8f),
                     maxLines = 1,
                     overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis
                 )

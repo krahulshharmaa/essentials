@@ -125,6 +125,7 @@ class MainViewModel : ViewModel() {
     val isNotificationGlanceSameAsLightingEnabled = mutableStateOf(true)
     val isOnboardingCompleted = mutableStateOf(true) // Default to true so it doesn't flash on first check if not loaded
     val dnsPresets = mutableStateListOf<DnsPreset>()
+    val addedQSTiles = mutableStateOf<Set<String>>(emptySet())
 
 
     data class CalendarAccount(
@@ -264,6 +265,9 @@ class MainViewModel : ViewModel() {
                     }
                     Settings.Secure.getUriFor("doze_always_on") -> {
                         isAodEnabled.value = settingsRepository.isAodEnabled()
+                    }
+                    Settings.Secure.getUriFor("sysui_qs_tiles") -> {
+                        appContext?.let { updateAddedQSTiles(it) }
                     }
                 }
             }
@@ -597,9 +601,15 @@ class MainViewModel : ViewModel() {
             false,
             contentObserver
         )
+        context.contentResolver.registerContentObserver(
+            Settings.Secure.getUriFor("sysui_qs_tiles"),
+            false,
+            contentObserver
+        )
 
         isPowerSaveModeEnabled.value = DeviceUtils.isPowerSaveMode(context)
         updateBlurState(context)
+        updateAddedQSTiles(context)
 
         if (powerSaveReceiver == null) {
             powerSaveReceiver = object : BroadcastReceiver() {
@@ -2486,5 +2496,10 @@ class MainViewModel : ViewModel() {
         val current = settingsRepository.getPrivateDnsPresets().toMutableList()
         current.removeAll { it.id == preset.id }
         settingsRepository.savePrivateDnsPresets(current)
+    }
+
+    private fun updateAddedQSTiles(context: Context) {
+        val tilesString = Settings.Secure.getString(context.contentResolver, "sysui_qs_tiles") ?: ""
+        addedQSTiles.value = tilesString.split(",").map { it.trim() }.filter { it.isNotBlank() }.toSet()
     }
 }
