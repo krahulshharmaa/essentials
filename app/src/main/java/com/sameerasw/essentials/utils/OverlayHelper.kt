@@ -485,7 +485,8 @@ object OverlayHelper {
         indicatorY: Float = 2f,
         indicatorScale: Float = 1.0f,
         randomShapes: Boolean = false,
-        pulseDurationMillis: Long = 3000L
+        pulseDurationMillis: Long = 3000L,
+        onAnimationEnd: (() -> Unit)? = null
     ) {
         val sweepGlowRadiusDp = 15f
         if (style == NotificationLightingStyle.GLOW) {
@@ -524,11 +525,11 @@ object OverlayHelper {
                 pulseDurationMillis = pulseDurationMillis,
                 strokeWidthDp = strokeWidthDp,
                 sweepPositionX = indicatorX,
-                onAnimationEnd = null
+                onAnimationEnd = onAnimationEnd
             )
         }
 
-        fadeInOverlay(view)
+        fadeInOverlay(view, onAnimationEnd)
     }
 
     /**

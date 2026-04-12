@@ -732,6 +732,7 @@ class NotificationListener : NotificationListenerService() {
                                 putExtra("sweep_position", sweepPosition)
                                 putExtra("sweep_thickness", sweepThickness)
                                 putExtra("random_shapes", randomShapes)
+                                putExtra("package_name", sbn.packageName)
                             }
                             if (PermissionUtils.isAccessibilityServiceEnabled(applicationContext)) {
                                 applicationContext.startService(intent)

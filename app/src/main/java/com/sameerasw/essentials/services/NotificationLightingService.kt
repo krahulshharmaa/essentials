@@ -99,7 +99,11 @@ class NotificationLightingService : Service() {
     override fun onBind(intent: Intent?): IBinder? = null
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        Log.d("NotificationLightingSvc", "onStartCommand: action=${intent?.action}")
+        if (intent == null) {
+            stopSelf()
+            return START_NOT_STICKY
+        }
+        Log.d("NotificationLightingSvc", "onStartCommand: action=${intent.action}")
         // Accessibility service Android 12+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             if (!canDrawOverlays() || !isAccessibilityServiceEnabled()) {
@@ -219,6 +223,7 @@ class NotificationLightingService : Service() {
                             intent?.getBooleanExtra("is_ambient_show_lock_screen", false) ?: false
                         )
                         putExtra("random_shapes", randomShapes)
+                        putExtra("package_name", intent.getStringExtra("package_name"))
                     }
                 // Use startService to request the accessibility service perform the elevated overlay.
                 // Starting an accessibility service via startForegroundService can cause MissingForegroundServiceType
@@ -331,7 +336,7 @@ class NotificationLightingService : Service() {
                     OverlayHelper.showPreview(
                         overlay,
                         edgeLightingStyle,
-                        strokeThicknessDp,
+                        if (edgeLightingStyle == NotificationLightingStyle.SWEEP) sweepThickness else strokeThicknessDp,
                         indicatorX,
                         indicatorY,
                         indicatorScale,
@@ -383,20 +388,7 @@ class NotificationLightingService : Service() {
 
 
     private fun getOverlayType(): Int {
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            // Android 12+ supports TYPE_ACCESSIBILITY_OVERLAY for AOD visibility
-            if (isAccessibilityServiceEnabled()) {
-                try {
-                    WindowManager.LayoutParams::class.java.getField("TYPE_ACCESSIBILITY_OVERLAY")
-                        .getInt(null)
-                } catch (_: Exception) {
-                    WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
-                }
-            } else {
-                WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
-            }
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            // Android 8.0-11: Always use TYPE_APPLICATION_OVERLAY for stability
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
         } else {
             @Suppress("DEPRECATION")

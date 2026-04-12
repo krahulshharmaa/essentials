@@ -43,64 +43,97 @@ class NotificationLightingHandler(
     private var sweepThickness: Float = 8f
     private var randomShapes: Boolean = true
 
-    private var isAmbientDisplayRequested: Boolean = false
     private var isAmbientShowLockScreen: Boolean = false
+    private var isAmbientDisplayRequested: Boolean = false
     private var isInterrupted: Boolean = false
+
+    // Queue for staggered playback
+    private val intentQueue = java.util.ArrayDeque<Intent>()
+    private var currentPackageShowing: String? = null
 
     fun handleIntent(intent: Intent) {
         if (intent.action == "SHOW_NOTIFICATION_LIGHTING") {
-            cornerRadiusDp =
-                intent.getFloatExtra("corner_radius_dp", OverlayHelper.CORNER_RADIUS_DP.toFloat())
-            strokeThicknessDp =
-                intent.getFloatExtra("stroke_thickness_dp", OverlayHelper.STROKE_DP.toFloat())
-            isPreview = intent.getBooleanExtra("is_preview", false)
-            ignoreScreenState = intent.getBooleanExtra("ignore_screen_state", false)
-            colorMode = NotificationLightingColorMode.valueOf(
-                intent.getStringExtra("color_mode") ?: "SYSTEM"
-            )
-            customColor = intent.getIntExtra("custom_color", 0)
-            resolvedColor = if (intent.hasExtra("resolved_color")) intent.getIntExtra(
-                "resolved_color",
-                0
-            ) else null
-            pulseCount = intent.getIntExtra("pulse_count", 1)
-            pulseDuration = intent.getLongExtra("pulse_duration", 3000)
-            val styleName = intent.getStringExtra("style")
-            edgeLightingStyle =
-                if (styleName != null) NotificationLightingStyle.valueOf(styleName) else NotificationLightingStyle.STROKE
-            val glowSidesArray = intent.getStringArrayExtra("glow_sides")
-            glowSides = glowSidesArray?.mapNotNull {
-                try {
-                    NotificationLightingSide.valueOf(it)
-                } catch (_: Exception) {
-                    null
-                }
-            }?.toSet()
-                ?: setOf(NotificationLightingSide.LEFT, NotificationLightingSide.RIGHT)
-            indicatorX = intent.getFloatExtra("indicator_x", 50f)
-            indicatorY = intent.getFloatExtra("indicator_y", 2f)
-            indicatorScale = intent.getFloatExtra("indicator_scale", 1.0f)
-            isAmbientDisplayRequested = intent.getBooleanExtra("is_ambient_display", false)
-            isAmbientShowLockScreen = intent.getBooleanExtra("is_ambient_show_lock_screen", false)
-            sweepPosition = intent.getStringExtra("sweep_position") ?: "CENTER"
-            sweepThickness = intent.getFloatExtra("sweep_thickness", 8f)
-            randomShapes = intent.getBooleanExtra("random_shapes", false)
-            isInterrupted = false
-
+            val isPreviewIntent = intent.getBooleanExtra("is_preview", false)
             val removePreview = intent.getBooleanExtra("remove_preview", false)
+
             if (removePreview) {
-                removeOverlay()
+                removeOverlay(immediate = true)
+                intentQueue.clear()
+                currentPackageShowing = null
                 return
             }
 
-            try {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    showNotificationLighting()
-                }
-            } catch (e: Exception) {
-                Log.e("NotificationLighting", "Failed to show notification lighting", e)
+            if (isPreviewIntent) {
+                removeOverlay(immediate = true)
+                intentQueue.clear()
+                currentPackageShowing = null
+                extractIntentExtras(intent)
+                showNotificationLighting()
+                return
             }
+
+            val pkg = intent.getStringExtra("package_name")
+            if (pkg != null) {
+                if (pkg == currentPackageShowing) {
+                    return // Skip if same app is already showing
+                }
+                if (intentQueue.any { it.getStringExtra("package_name") == pkg }) {
+                    return // Skip if same app is already in queue
+                }
+            }
+
+            intentQueue.add(intent)
+            processQueue()
         }
+    }
+
+    private fun extractIntentExtras(intent: Intent) {
+        cornerRadiusDp =
+            intent.getFloatExtra("corner_radius_dp", OverlayHelper.CORNER_RADIUS_DP.toFloat())
+        strokeThicknessDp =
+            intent.getFloatExtra("stroke_thickness_dp", OverlayHelper.STROKE_DP.toFloat())
+        isPreview = intent.getBooleanExtra("is_preview", false)
+        ignoreScreenState = intent.getBooleanExtra("ignore_screen_state", false)
+        colorMode = NotificationLightingColorMode.valueOf(
+            intent.getStringExtra("color_mode") ?: "SYSTEM"
+        )
+        customColor = intent.getIntExtra("custom_color", 0)
+        resolvedColor = if (intent.hasExtra("resolved_color")) intent.getIntExtra(
+            "resolved_color",
+            0
+        ) else null
+        pulseCount = intent.getIntExtra("pulse_count", 1)
+        pulseDuration = intent.getLongExtra("pulse_duration", 3000)
+        val styleName = intent.getStringExtra("style")
+        edgeLightingStyle =
+            if (styleName != null) NotificationLightingStyle.valueOf(styleName) else NotificationLightingStyle.STROKE
+        val glowSidesArray = intent.getStringArrayExtra("glow_sides")
+        glowSides = glowSidesArray?.mapNotNull {
+            try {
+                NotificationLightingSide.valueOf(it)
+            } catch (_: Exception) {
+                null
+            }
+        }?.toSet()
+            ?: setOf(NotificationLightingSide.LEFT, NotificationLightingSide.RIGHT)
+        indicatorX = intent.getFloatExtra("indicator_x", 50f)
+        indicatorY = intent.getFloatExtra("indicator_y", 2f)
+        indicatorScale = intent.getFloatExtra("indicator_scale", 1.0f)
+        isAmbientDisplayRequested = intent.getBooleanExtra("is_ambient_display", false)
+        isAmbientShowLockScreen = intent.getBooleanExtra("is_ambient_show_lock_screen", false)
+        sweepPosition = intent.getStringExtra("sweep_position") ?: "CENTER"
+        sweepThickness = intent.getFloatExtra("sweep_thickness", 8f)
+        randomShapes = intent.getBooleanExtra("random_shapes", false)
+        isInterrupted = false
+    }
+
+    private fun processQueue() {
+        if (currentPackageShowing != null || intentQueue.isEmpty()) return
+
+        val nextIntent = intentQueue.poll() ?: return
+        extractIntentExtras(nextIntent)
+        currentPackageShowing = nextIntent.getStringExtra("package_name")
+        showNotificationLighting()
     }
 
     fun onScreenOn() {
@@ -133,10 +166,7 @@ class NotificationLightingHandler(
     }
 
     private fun showNotificationLighting() {
-        // For preview mode, remove existing overlays
-        if (overlayViews.isNotEmpty() && isPreview) {
-            removeOverlay(immediate = true)
-        }
+        // Optimization check is now handled by processQueue and currentPackageShowing
         windowManager = service.getSystemService(Context.WINDOW_SERVICE) as WindowManager
         val powerManager = service.getSystemService(Context.POWER_SERVICE) as PowerManager
 
@@ -262,11 +292,11 @@ class NotificationLightingHandler(
 
                 if (OverlayHelper.addOverlayView(windowManager, overlay, params)) {
                     overlayViews.add(overlay)
-                    if (isPreview && edgeLightingStyle != NotificationLightingStyle.SWEEP) {
+                    if (isPreview) {
                         OverlayHelper.showPreview(
                             overlay,
                             edgeLightingStyle,
-                            strokeThicknessDp,
+                            if (edgeLightingStyle == NotificationLightingStyle.SWEEP) sweepThickness else strokeThicknessDp,
                             indicatorX = if (edgeLightingStyle == NotificationLightingStyle.SWEEP) {
                                 when (sweepPosition) {
                                     "LEFT" -> 0f
@@ -278,7 +308,10 @@ class NotificationLightingHandler(
                             indicatorScale,
                             randomShapes = randomShapes,
                             pulseDurationMillis = pulseDuration
-                        )
+                        ) {
+                            currentPackageShowing = null
+                            processQueue()
+                        }
                     } else {
                         startPulsing(overlay)
                     }
@@ -311,10 +344,16 @@ class NotificationLightingHandler(
                 service.performGlobalAction(AccessibilityService.GLOBAL_ACTION_LOCK_SCREEN)
 
                 handler.postDelayed({
-                    OverlayHelper.fadeOutAndRemoveOverlay(windowManager, overlay, overlayViews)
+                    OverlayHelper.fadeOutAndRemoveOverlay(windowManager, overlay, overlayViews) {
+                        currentPackageShowing = null
+                        processQueue()
+                    }
                 }, 500)
             } else {
-                OverlayHelper.fadeOutAndRemoveOverlay(windowManager, overlay, overlayViews)
+                OverlayHelper.fadeOutAndRemoveOverlay(windowManager, overlay, overlayViews) {
+                    currentPackageShowing = null
+                    processQueue()
+                }
             }
         }
     }
