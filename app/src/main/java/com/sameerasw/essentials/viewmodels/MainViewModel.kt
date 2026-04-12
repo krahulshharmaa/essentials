@@ -156,6 +156,7 @@ class MainViewModel : ViewModel() {
         mutableStateOf(setOf(NotificationLightingSide.LEFT, NotificationLightingSide.RIGHT))
     val notificationLightingSweepPosition = mutableStateOf(NotificationLightingSweepPosition.CENTER)
     val notificationLightingSweepThickness = mutableFloatStateOf(8f)
+    val notificationLightingSweepRandomShapes = mutableStateOf(false)
     val skipPersistentNotifications = mutableStateOf(false)
     val isAppLockEnabled = mutableStateOf(false)
     val isUseUsageAccess = mutableStateOf(false)
@@ -688,6 +689,7 @@ class MainViewModel : ViewModel() {
         notificationLightingGlowSides.value = settingsRepository.getNotificationLightingGlowSides()
         notificationLightingSweepPosition.value = settingsRepository.getNotificationLightingSweepPosition()
         notificationLightingSweepThickness.floatValue = settingsRepository.getFloat(SettingsRepository.KEY_EDGE_LIGHTING_SWEEP_THICKNESS, 8f)
+        notificationLightingSweepRandomShapes.value = settingsRepository.getBoolean(SettingsRepository.KEY_EDGE_LIGHTING_SWEEP_RANDOM_SHAPES, true)
 
         MapsState.isEnabled = isMapsPowerSavingEnabled.value
         hapticFeedbackType.value = settingsRepository.getHapticFeedbackType()
@@ -1584,6 +1586,7 @@ class MainViewModel : ViewModel() {
         putExtra("indicator_scale", notificationLightingIndicatorScale.value)
         putExtra("sweep_position", notificationLightingSweepPosition.value.name)
         putExtra("sweep_thickness", notificationLightingSweepThickness.floatValue)
+        putExtra("random_shapes", notificationLightingSweepRandomShapes.value)
     }
 
     fun triggerNotificationLighting(context: Context) {
@@ -2326,6 +2329,11 @@ class MainViewModel : ViewModel() {
     fun saveNotificationLightingSweepThickness(context: Context, thickness: Float) {
         notificationLightingSweepThickness.floatValue = thickness
         settingsRepository.putFloat(SettingsRepository.KEY_EDGE_LIGHTING_SWEEP_THICKNESS, thickness)
+    }
+
+    fun saveNotificationLightingSweepRandomShapes(context: Context, enabled: Boolean) {
+        notificationLightingSweepRandomShapes.value = enabled
+        settingsRepository.putBoolean(SettingsRepository.KEY_EDGE_LIGHTING_SWEEP_RANDOM_SHAPES, enabled)
     }
 
 

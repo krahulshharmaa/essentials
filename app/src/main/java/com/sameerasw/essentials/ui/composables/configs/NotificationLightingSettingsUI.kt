@@ -297,6 +297,25 @@ fun NotificationLightingSettingsUI(
                     }
                 )
 
+                IconToggleItem(
+                    iconRes = R.drawable.rounded_interests_24,
+                    title = stringResource(R.string.notification_lighting_sweep_random_shapes_title),
+                    isChecked = viewModel.notificationLightingSweepRandomShapes.value,
+                    onCheckedChange = { checked ->
+                        viewModel.saveNotificationLightingSweepRandomShapes(context, checked)
+                        HapticUtil.performSliderHaptic(view)
+                        viewModel.triggerNotificationLightingForSweep(
+                            context,
+                            viewModel.notificationLightingSweepPosition.value,
+                            viewModel.notificationLightingSweepThickness.floatValue
+                        )
+                        coroutineScope.launch {
+                            delay(5000)
+                            viewModel.removePreviewOverlay(context)
+                        }
+                    }
+                )
+
                 ConfigSliderItem(
                     title = stringResource(R.string.notification_lighting_sweep_thickness_title),
                     value = viewModel.notificationLightingSweepThickness.floatValue,

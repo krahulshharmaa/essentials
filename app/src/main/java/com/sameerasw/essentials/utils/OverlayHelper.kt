@@ -19,6 +19,7 @@ import androidx.compose.material3.LoadingIndicator
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.core.view.updateLayoutParams
+import androidx.graphics.shapes.toPath
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LifecycleRegistry
@@ -66,6 +67,7 @@ object OverlayHelper {
             NotificationLightingSide.RIGHT
         ),
         indicatorScale: Float = 1.0f,
+        randomShapes: Boolean = false,
         showBackground: Boolean = false
     ): FrameLayout {
         if (style == NotificationLightingStyle.GLOW) {
@@ -75,7 +77,7 @@ object OverlayHelper {
             return createIndicatorOverlayView(context, color, indicatorScale, showBackground)
         }
         if (style == NotificationLightingStyle.SWEEP) {
-            return createSweepOverlayView(context, color, strokeDp, showBackground)
+            return createSweepOverlayView(context, color, strokeDp, randomShapes, showBackground)
         }
 
         val overlay = FrameLayout(context)
@@ -218,6 +220,7 @@ object OverlayHelper {
         context: Context,
         color: Int,
         strokeDp: Float,
+        randomShapes: Boolean,
         showBackground: Boolean
     ): FrameLayout {
         val glowRadiusDp = 15f
@@ -226,7 +229,7 @@ object OverlayHelper {
             overlay.setBackgroundColor(Color.BLACK)
         }
 
-        val sweepView = SweepCircleView(context, color, strokeDp, glowRadiusDp).apply {
+        val sweepView = SweepShapeView(context, color, strokeDp, randomShapes).apply {
             tag = "sweep_view"
             alpha = 0f
             layoutParams = FrameLayout.LayoutParams(
@@ -239,21 +242,28 @@ object OverlayHelper {
         return overlay
     }
 
-    private class SweepCircleView(context: Context, val color: Int, val strokeDp: Float, val glowRadiusDp: Float) : View(context) {
+    private class SweepShapeView(
+        context: Context,
+        val color: Int,
+        val strokeDp: Float,
+        val useRandomShapes: Boolean
+    ) : View(context) {
         var centerX: Float = 0f
         var centerY: Float = 0f
 
+        private val polygon = if (useRandomShapes) {
+            AmbientMusicShapeHelper.getRandomPolygon()
+        } else null
+
         private val paint = android.graphics.Paint(android.graphics.Paint.ANTI_ALIAS_FLAG).apply {
             style = android.graphics.Paint.Style.STROKE
-            this.color = this@SweepCircleView.color
+            this.color = this@SweepShapeView.color
             strokeWidth = context.resources.displayMetrics.density * strokeDp
             
-            if (glowRadiusDp > 0) {
-                maskFilter = android.graphics.BlurMaskFilter(
-                    context.resources.displayMetrics.density * glowRadiusDp,
-                    android.graphics.BlurMaskFilter.Blur.NORMAL
-                )
-            }
+            maskFilter = android.graphics.BlurMaskFilter(
+                context.resources.displayMetrics.density * 15f,
+                android.graphics.BlurMaskFilter.Blur.NORMAL
+            )
         }
 
         init {
@@ -268,7 +278,22 @@ object OverlayHelper {
 
         override fun onDraw(canvas: android.graphics.Canvas) {
             super.onDraw(canvas)
-            if (currentRadius > 0) {
+            if (currentRadius <= 0) return
+
+            if (polygon != null) {
+                // Get path from polygon scaled to size
+                val shapePath = polygon.toPath()
+                
+                // Scale and move path
+                val matrix = android.graphics.Matrix()
+                // Shapes from toPath() are normalized to [0, 1] range.
+                // Scale to currentRadius * 2 and center it.
+                matrix.postScale(currentRadius * 2f, currentRadius * 2f)
+                matrix.postTranslate(centerX - currentRadius, centerY - currentRadius)
+                
+                shapePath.transform(matrix)
+                canvas.drawPath(shapePath, paint)
+            } else {
                 canvas.drawCircle(centerX, centerY, currentRadius, paint)
             }
         }
@@ -459,6 +484,7 @@ object OverlayHelper {
         indicatorX: Float = 50f,
         indicatorY: Float = 2f,
         indicatorScale: Float = 1.0f,
+        randomShapes: Boolean = false,
         pulseDurationMillis: Long = 3000L
     ) {
         val sweepGlowRadiusDp = 15f
@@ -498,7 +524,6 @@ object OverlayHelper {
                 pulseDurationMillis = pulseDurationMillis,
                 strokeWidthDp = strokeWidthDp,
                 sweepPositionX = indicatorX,
-                sweepGlowRadiusDp = sweepGlowRadiusDp,
                 onAnimationEnd = null
             )
         }
@@ -569,7 +594,7 @@ object OverlayHelper {
         indicatorX: Float = 50f,
         indicatorY: Float = 2f,
         indicatorScale: Float = 1.0f,
-        sweepGlowRadiusDp: Float = 0f,
+        randomShapes: Boolean = false,
         onAnimationEnd: (() -> Unit)? = null
     ) {
         if (style == NotificationLightingStyle.GLOW) {
@@ -602,7 +627,6 @@ object OverlayHelper {
                 pulseDurationMillis,
                 strokeWidthDp,
                 indicatorX,
-                sweepGlowRadiusDp,
                 onAnimationEnd
             )
             return
@@ -767,10 +791,9 @@ object OverlayHelper {
         pulseDurationMillis: Long,
         strokeWidthDp: Float,
         sweepPositionX: Float,
-        sweepGlowRadiusDp: Float,
         onAnimationEnd: (() -> Unit)? = null
     ) {
-        val sweepView = view.findViewWithTag<SweepCircleView>("sweep_view") ?: return
+        val sweepView = view.findViewWithTag<View>("sweep_view") as? SweepShapeView ?: return
         val displayMetrics = view.resources.displayMetrics
         val screenWidth = displayMetrics.widthPixels
         val screenHeight = displayMetrics.heightPixels
@@ -788,7 +811,7 @@ object OverlayHelper {
         // Max radius to cover the whole screen from the start point
         val maxDistX = Math.max(startX, screenWidth - startX)
         val maxDistY = Math.max(startY, screenHeight - startY)
-        val maxRadius = Math.sqrt((maxDistX * maxDistX + maxDistY * maxDistY).toDouble()).toFloat() + (sweepGlowRadiusDp * displayMetrics.density)
+        val maxRadius = Math.sqrt((maxDistX * maxDistX + maxDistY * maxDistY).toDouble()).toFloat() + (15f * displayMetrics.density)
 
         var pulseCount = 0
 

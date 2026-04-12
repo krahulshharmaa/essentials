@@ -41,6 +41,7 @@ class NotificationLightingHandler(
     private var indicatorScale: Float = 1.0f
     private var sweepPosition: String = "CENTER"
     private var sweepThickness: Float = 8f
+    private var randomShapes: Boolean = true
 
     private var isAmbientDisplayRequested: Boolean = false
     private var isAmbientShowLockScreen: Boolean = false
@@ -83,7 +84,7 @@ class NotificationLightingHandler(
             isAmbientShowLockScreen = intent.getBooleanExtra("is_ambient_show_lock_screen", false)
             sweepPosition = intent.getStringExtra("sweep_position") ?: "CENTER"
             sweepThickness = intent.getFloatExtra("sweep_thickness", 8f)
-            sweepThickness = intent.getFloatExtra("sweep_thickness", 8f)
+            randomShapes = intent.getBooleanExtra("random_shapes", false)
             isInterrupted = false
 
             val removePreview = intent.getBooleanExtra("remove_preview", false)
@@ -169,11 +170,11 @@ class NotificationLightingHandler(
             val overlay = OverlayHelper.createOverlayView(
                 service,
                 color,
-//                strokeDp = strokeThicknessDp,
                 cornerRadiusDp = cornerRadiusDp,
                 style = edgeLightingStyle,
                 glowSides = glowSides,
                 indicatorScale = indicatorScale,
+                randomShapes = randomShapes,
                 strokeDp = if (edgeLightingStyle == NotificationLightingStyle.SWEEP) sweepThickness else strokeThicknessDp,
             )
             val params = OverlayHelper.createOverlayLayoutParams(overlayType)
@@ -192,6 +193,7 @@ class NotificationLightingHandler(
                         style = edgeLightingStyle,
                         glowSides = glowSides,
                         indicatorScale = indicatorScale,
+                        randomShapes = randomShapes,
                         showBackground = true
                     )
                     val ambientParams =
@@ -274,6 +276,7 @@ class NotificationLightingHandler(
                             } else indicatorX,
                             indicatorY,
                             indicatorScale,
+                            randomShapes = randomShapes,
                             pulseDurationMillis = pulseDuration
                         )
                     } else {
@@ -302,6 +305,7 @@ class NotificationLightingHandler(
             } else indicatorX,
             indicatorY = indicatorY,
             indicatorScale = indicatorScale,
+            randomShapes = randomShapes,
         ) {
             if (isAmbientDisplayRequested && !isInterrupted && !isPreview && !isAmbientShowLockScreen) {
                 service.performGlobalAction(AccessibilityService.GLOBAL_ACTION_LOCK_SCREEN)

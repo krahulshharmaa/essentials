@@ -69,6 +69,7 @@ class SettingsRepository(private val context: Context) {
         const val KEY_EDGE_LIGHTING_SELECTED_APPS = "edge_lighting_selected_apps"
         const val KEY_EDGE_LIGHTING_SWEEP_POSITION = "edge_lighting_sweep_position"
         const val KEY_EDGE_LIGHTING_SWEEP_THICKNESS = "edge_lighting_sweep_thickness"
+        const val KEY_EDGE_LIGHTING_SWEEP_RANDOM_SHAPES = "edge_lighting_sweep_random_shapes"
         const val KEY_LOCK_SCREEN_WALLPAPER_SOURCE = "lock_screen_wallpaper_source"
 
         const val KEY_CALL_VIBRATIONS_ENABLED = "call_vibrations_enabled"

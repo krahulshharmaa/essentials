@@ -48,6 +48,7 @@ class NotificationLightingService : Service() {
     private var isAmbientDisplay: Boolean = false
     private var sweepPosition: String = "CENTER"
     private var sweepThickness: Float = 8f
+    private var randomShapes: Boolean = true
 
     private var screenReceiver: BroadcastReceiver? = null
 
@@ -149,6 +150,7 @@ class NotificationLightingService : Service() {
         isAmbientDisplay = intent?.getBooleanExtra("is_ambient_display", false) ?: false
         sweepPosition = intent?.getStringExtra("sweep_position") ?: "CENTER"
         sweepThickness = intent?.getFloatExtra("sweep_thickness", 8f) ?: 8f
+        randomShapes = intent?.getBooleanExtra("random_shapes", false) ?: false
         val ignoreScreenState = intent?.getBooleanExtra("ignore_screen_state", false) ?: false
         val removePreview = intent?.getBooleanExtra("remove_preview", false) ?: false
 
@@ -216,6 +218,7 @@ class NotificationLightingService : Service() {
                             "is_ambient_show_lock_screen",
                             intent?.getBooleanExtra("is_ambient_show_lock_screen", false) ?: false
                         )
+                        putExtra("random_shapes", randomShapes)
                     }
                 // Use startService to request the accessibility service perform the elevated overlay.
                 // Starting an accessibility service via startForegroundService can cause MissingForegroundServiceType
@@ -316,6 +319,7 @@ class NotificationLightingService : Service() {
                 style = edgeLightingStyle,
                 glowSides = glowSides,
                 indicatorScale = indicatorScale,
+                randomShapes = randomShapes,
                 showBackground = isAmbientDisplay
             )
             val params = OverlayHelper.createOverlayLayoutParams(getOverlayType())
@@ -331,6 +335,7 @@ class NotificationLightingService : Service() {
                         indicatorX,
                         indicatorY,
                         indicatorScale,
+                        randomShapes = randomShapes,
                         pulseDurationMillis = pulseDuration
                     )
                 } else {
@@ -349,7 +354,8 @@ class NotificationLightingService : Service() {
                             }
                         } else indicatorX,
                         indicatorY = indicatorY,
-                        indicatorScale = indicatorScale
+                        indicatorScale = indicatorScale,
+                        randomShapes = randomShapes
                     ) {
                         // When pulsing completes, remove the overlay
                         OverlayHelper.fadeOutAndRemoveOverlay(
