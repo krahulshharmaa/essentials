@@ -260,10 +260,10 @@ Sin embargo, sí te permite reanudarla desde la lista de aplicaciones del lanzad
     <string name="screen_locked_security_warning_text">Esta característica no es infalible. Puede haber casos extremos en los que alguien aún pueda interactuar con el mosaico. \nTambién tenga en cuenta que Android siempre permitirá realizar un reinicio forzado y Pixels siempre permitirá que el dispositivo se apague desde la pantalla de bloqueo también.</string>
     <string name="screen_locked_security_airplane_warning">Asegúrese de eliminar el mosaico del modo avión de la configuración rápida, ya que eso no se puede evitar porque no abre una ventana de diálogo.</string>
     <string name="screen_locked_security_description">Cuando esté habilitado, el panel de Configuración rápida se cerrará inmediatamente y el dispositivo se bloqueará si alguien intenta interactuar con mosaicos de Internet mientras el dispositivo está bloqueado. \n\nEsto también deshabilitará el desbloqueo biométrico para evitar más accesos no autorizados. La escala de la animación se reducirá a 0,1x mientras esté bloqueada para que sea aún más difícil interactuar con ella.</string>
-    <string name="disable_qs_when_locked_title">Disable QS when locked</string>
+    <string name="disable_qs_when_locked_title">Desactivar QS cuando el dispositivo esté bloqueado</string>
     <string name="disable_qs_when_locked_desc">Cierra inmediatamente el panel de Ajustes rápidos si alguien intenta abrirlo mientras el dispositivo está bloqueado.</string>
     <string name="search_disable_qs_locked_title">Desactivar QS bloqueado</string>
-    <string name="search_disable_qs_locked_desc">Prevent expanding Quick Settings when device is locked</string>
+    <string name="search_disable_qs_locked_desc">Evitar expandir los Ajustes Rápidos cuando el dispositivo está bloqueado</string>
     <!-- Sound Mode -->
     <string name="sound_mode_reorder_title">Modos de reordenamiento</string>
     <string name="sound_mode_long_press_hint">Mantenga presionado para alternar</string>
@@ -280,7 +280,7 @@ Sin embargo, sí te permite reanudarla desde la lista de aplicaciones del lanzad
     <!-- Status Bar Icons -->
     <string name="icon_wifi">WiFi</string>
     <string name="icon_bluetooth">Bluetooth</string>
-    <string name="icon_nfc">NFC / Felica</string>
+    <string name="icon_nfc">NFC / FeliCa</string>
     <string name="icon_vpn">VPN</string>
     <string name="icon_airplane_mode">Modo avión</string>
     <string name="icon_hotspot">Punto de acceso</string>
@@ -556,7 +556,7 @@ Sin embargo, sí te permite reanudarla desde la lista de aplicaciones del lanzad
     <string name="perm_action_copy_adb">Copiar BAD</string>
     <string name="perm_action_check">Controlar</string>
     <string name="perm_action_enable">Habilitar en Configuración</string>
-    <string name="perm_action_how_to">Como otorgar</string>
+    <string name="perm_action_how_to">Como conceder</string>
     <string name="perm_battery_optimization_title">Optimización de la batería</string>
     <string name="perm_battery_optimization_desc">Asegúrese de que el sistema no interrumpa el servicio para ahorrar energía.</string>
     <!-- Tabs -->
@@ -605,29 +605,29 @@ Sin embargo, sí te permite reanudarla desde la lista de aplicaciones del lanzad
     <string name="action_search">Buscar</string>
     <string name="action_stop">Detener</string>
     <string name="label_search">Buscar</string>
-    <string name="search_frozen_apps_placeholder">Search frozen apps</string>
+    <string name="search_frozen_apps_placeholder">Buscar aplicaciones congeladas</string>
     <!-- UI Components General -->
     <string name="action_back">Atrás</string>
     <string name="content_desc_back">Atrás</string>
     <string name="label_settings">Ajustes</string>
     <string name="action_report_bug">Informar un error</string>
     <!-- Sentry Crash Reporting -->
-    <string name="sentry_report_mode_title">Crash reporting</string>
-    <string name="sentry_mode_off">Off</string>
+    <string name="sentry_report_mode_title">Informe de fallos</string>
+    <string name="sentry_mode_off">Apagado</string>
     <string name="sentry_mode_auto">Auto</string>
-    <string name="sentry_crash_toast">Essentials crashed, Report sent</string>
-    <string name="simulate_crash">Simulate crash</string>
-    <string name="welcome_title">Welcome to Essentials</string>
-    <string name="welcome_subtitle">A Toolbox for Android Nerds</string>
-    <string name="welcome_developer_attribution">by sameerasw.com</string>
-    <string name="action_lets_begin">Let\'s Begin</string>
-    <string name="acknowledgement_title">Acknowledgement</string>
-    <string name="acknowledgement_desc">This app is a collection of utilities that can interact deeply with your device system. Using some features might modify system settings or behavior in unexpected ways. \n\nYou only need to grant necessary permissions which are required for selected features you are using giving you full control over the app\'s behavior. \n\nFurther more, the app does not track or store any of your personal data, I don\'t need them... Keep to yourself safe. You can refer to the source code for more information. \n\nThis app is fully open source and is and always will be free to use. Do not pay or install from unknown sources.</string>
-    <string name="acknowledgement_warning">WARNING: Proceed with caution. The developer takes no responsibility for any system instability, data loss, or other issues caused by the use of this app. By proceeding, you acknowledge these risks.</string>
-    <string name="acknowledgement_footer">I know you didn\'t even read this carefully but, in case you need any help, feel free to reach out the developer or the community.</string>
-    <string name="action_i_understand">I Understand</string>
-    <string name="feature_intro_desc">Anytime you are clueless on a feature or a Quick Settings Tile on what it does and what permissions may necessary for it, just long press it and pick \'What is this?\' to learn more.</string>
-    <string name="feature_intro_footer">You can report bugs or find helpful guides anytime in the app settings.</string>
+    <string name="sentry_crash_toast">Essentials se ha bloqueado, informe enviado</string>
+    <string name="simulate_crash">Simular fallo</string>
+    <string name="welcome_title">Bienvenido a Essentials</string>
+    <string name="welcome_subtitle">Una caja de herramientas para entusiastas de Android</string>
+    <string name="welcome_developer_attribution">por sameerasw.com</string>
+    <string name="action_lets_begin">Empecemos</string>
+    <string name="acknowledgement_title">Reconocimiento</string>
+    <string name="acknowledgement_desc">Esta aplicación es una colección de utilidades que pueden interactuar en profundidad con el sistema de tu dispositivo. El uso de algunas funciones podría modificar la configuración o el comportamiento del sistema de formas inesperadas. \n\nSolo tienes que conceder los permisos necesarios para las funciones seleccionadas que estés utilizando, lo que te da un control total sobre el comportamiento de la aplicación. \n\nAdemás, la aplicación no rastrea ni almacena ninguno de tus datos personales; no los necesito... Mantente seguro. Puedes consultar el código fuente para obtener más información. \n\nEsta aplicación es totalmente de código abierto y es, y siempre será, de uso gratuito. No pagues ni instales desde fuentes desconocidas.</string>
+    <string name="acknowledgement_warning">ADVERTENCIA: Procede con precaución. El desarrollador no se hace responsable de ninguna inestabilidad del sistema, pérdida de datos u otros problemas causados por el uso de esta aplicación. Al continuar, reconoces estos riesgos.</string>
+    <string name="acknowledgement_footer">Sé que probablemente no has leído esto con atención, pero, por si necesitas ayuda, no dudes en contactar con el desarrollador o la comunidad.</string>
+    <string name="action_i_understand">Lo entiendo</string>
+    <string name="feature_intro_desc">Cada vez que no tengas claro para qué sirve una función o un mosaico de Ajustes Rápidos, qué hace o qué permisos necesita, simplemente mantén pulsado sobre él y selecciona “¿Qué es esto?” para obtener más información.</string>
+    <string name="feature_intro_footer">Puedes informar de errores o consultar guías útiles en cualquier momento en los ajustes de la aplicación.</string>
     <string name="action_let_me_in">Let Me in Already</string>
     <string name="preferences_title">Preferences</string>
     <string name="preferences_desc">Configure some basic settings to get started.</string>
@@ -653,7 +653,7 @@ Sin embargo, sí te permite reanudarla desde la lista de aplicaciones del lanzad
     <string name="about_desc_notification_lighting">La iluminación de notificaciones agrega un hermoso efecto de iluminación de borde cuando recibes notificaciones.\n\nPuede personalizar el estilo, los colores y el comportamiento de la animación. Funciona incluso cuando la pantalla está apagada (depende del OEM) o encima de su aplicación actual. Elija aplicaciones, prioridad de notificación o qué comportamiento debería activarse desde controles determinados. Si su OEM no admite superposiciones por encima de AOD, utilice la opción de visualización ambiental que se encuentra a continuación.</string>
     <string name="about_desc_screen_off_widget">Apague fácilmente la pantalla con un toque en un widget transparente de tamaño variable que no agrega íconos ni desorden a su pantalla de inicio.</string>
     <string name="about_desc_statusbar_icons">Tome control total sobre los íconos de su barra de estado.\n\nOculte íconos específicos como WiFi, Bluetooth o datos móviles para mantener limpia su barra de estado. También puedes personalizar el formato del reloj y el indicador de batería con algunos controles inteligentes. Esta es la lista de controles AOSP disponibles, por lo que es posible que el sistema operativo de su dispositivo no respete todos los controles.</string>
-    <string name="about_desc_caffeinate">Cafeína evita que la pantalla se apague automáticamente.\n\nMantén la pantalla despierta durante un período específico o indefinidamente. Útil al leer artículos extensos o hacer referencia a una receta.</string>
+    <string name="about_desc_caffeinate">Cafeína evita que la pantalla se apague automáticamente.\n\nMantiene la pantalla despierta durante un período específico o indefinidamente. Útil al leer artículos extensos o hacer referencia a una receta.</string>
     <string name="about_desc_maps_power_saving">Obtenga el modo de ahorro de energía de Google Maps exclusivo de la serie Pixel 10 con un fondo negro mínimo para mostrar en la pantalla de bloqueo en cualquier dispositivo Android. Inicie una sesión de navegación, apague y vuelva a encender la pantalla.</string>
     <string name="about_desc_flashlight_pulse">Pulse la linterna cuando reciba una notificación.\n\nCuando los dispositivos tienen soporte de hardware para atenuar la linterna, el pulso se animará suavemente.</string>
     <string name="about_desc_snooze_notifications">Posponga las molestas notificaciones persistentes del sistema que no se pueden modificar de forma predeterminada. \n\nEspere hasta que llegue la notificación y luego acceda a esta función donde se enumerará el canal de notificación\'. Seleccione eso para posponer la próxima vez.\n\nAún se puede acceder a cualquier notificación pospuesta desde su historial de notificaciones en Android.</string>
