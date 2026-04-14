@@ -2,15 +2,15 @@
 <resources>
     <string name="label_beta">BETA</string>
     <string name="accessibility_service_description"><b>Servicio de Accesibilidad Esencial</b>\n\nEste servicio es necesario para las siguientes funciones avanzadas:\n\n<b>• Reasignación de Botones Físicos:</b>\nDetecta las pulsaciones de los botones de volumen incluso con la pantalla apagada para activar acciones como la Linterna.\n\n<b>• Ajustes por App:</b>\nSupervisa la app activa para aplicar perfiles específicos de Luz Nocturna Dinámica, Colores de Iluminación de Notificaciones y Bloqueo de Apps.\n\n<b>• Control de Pantalla:</b>\nPermite que la app bloquee la pantalla (p. ej., mediante Doble Toque o Widgets) y detecte cambios de estado.\n\n<b>• Seguridad:</b>\nEvita cambios no autorizados al detectar el contenido de la ventana cuando el dispositivo está bloqueado.\n\n<small>No se recopila ni transmite texto de entrada ni datos confidenciales del usuario.</small></string>
-    <string name="freeze_activity_title">Congelar aplicación</string>
-    <string name="freeze_activity_subtitle">Desactivar aplicaciones que rara vez se utilizan</string>
-    <string name="freeze_shortcut_short_label">Congelar aplicación</string>
+    <string name="freeze_activity_title">Congelación de aplicaciones</string>
+    <string name="freeze_activity_subtitle">Deshabilitar aplicaciones que rara vez se usan</string>
+    <string name="freeze_shortcut_short_label">Congelación de aplicaciones</string>
     <string name="freeze_shortcut_long_label">Abrir aplicación congelada</string>
     <string name="frozen_app_shortcut_label">Aplicación congelada</string>
     <string name="screen_off_widget_label">Pantalla vacía fuera del widget</string>
-    <string name="app_freezing_tile_label">Congelar aplicación</string>
+    <string name="app_freezing_tile_label">Congelación de aplicaciones</string>
     <string name="flashlight_pulse_tile_label">Pulso de linterna</string>
-    <string name="check_pre_releases_label">Consultar pre lanzamientos</string>
+    <string name="check_pre_releases_label">Consultar prelanzamiento</string>
     <string name="check_pre_releases_desc">Podría ser inestable</string>
     <string name="label_default_tab">Pestaña predeterminada</string>
     <!-- App Lock -->
