@@ -101,7 +101,7 @@
     <string name="caffeinate_timeout_5m">5 m</string>
     <string name="caffeinate_timeout_10m">10 m</string>
     <string name="caffeinate_timeout_30m">30 m</string>
-    <string name="perm_notif_policy_title">Acceso No Molestar</string>
+    <string name="perm_notif_policy_title">Acceso a No molestar</string>
     <string name="perm_notif_policy_desc">Requerido para alternar entre los modos de sonido, vibración y silencio.</string>
     <string name="caffeinate_timeout_1h">1 h</string>
     <string name="caffeinate_timeout_infinity">∞</string>
@@ -169,8 +169,8 @@ Sin embargo, sí te permite reanudarla desde la lista de aplicaciones del lanzad
     <string name="notification_lighting_glow_adjustment_section">Ajuste de brillo</string>
     <string name="notification_lighting_glow_spread_title">propagación del resplandor</string>
     <string name="notification_lighting_placement_section">Colocación</string>
-    <string name="notification_lighting_h_pos_title">posición horizontal</string>
-    <string name="notification_lighting_v_pos_title">posición vertical</string>
+    <string name="notification_lighting_h_pos_title">Posición horizontal</string>
+    <string name="notification_lighting_v_pos_title">Posición vertical</string>
     <string name="notification_lighting_indicator_adjustment_section">Ajuste del indicador</string>
     <string name="notification_lighting_scale_title">Escala</string>
     <string name="notification_lighting_duration_title">Duración</string>
@@ -224,8 +224,8 @@ Sin embargo, sí te permite reanudarla desde la lista de aplicaciones del lanzad
     <string name="tile_private_dns_off">Apagado</string>
     <string name="tile_usb_debugging">Depuración USB</string>
     <string name="tile_color_picker">Selector de color</string>
-    <string name="toast_eyedropper_failed">Are you sure you\'re on Androdi 17? (╯°_°）╯</string>
-    <string name="subtitle_eye_dropper">Gotero para ojos</string>
+    <string name="toast_eyedropper_failed">¿Estás seguro de que tienes Android 17? (╯°_°）╯</string>
+    <string name="subtitle_eye_dropper">Cuentagotas</string>
     <string name="on">Encendido</string>
     <string name="off">Apagado</string>
     <string name="private_dns_custom_title">DNS privado personalizado</string>
@@ -266,7 +266,7 @@ Sin embargo, sí te permite reanudarla desde la lista de aplicaciones del lanzad
     <string name="search_disable_qs_locked_desc">Evitar expandir los Ajustes Rápidos cuando el dispositivo está bloqueado</string>
     <!-- Sound Mode -->
     <string name="sound_mode_reorder_title">Modos de reordenamiento</string>
-    <string name="sound_mode_long_press_hint">Mantenga presionado para alternar</string>
+    <string name="sound_mode_long_press_hint">Mantén pulsado para alternar</string>
     <string name="content_desc_drag_reorder">Arrastra para reordenar</string>
     <string name="sound_mode_sound">Sonido</string>
     <string name="sound_mode_vibrate">Vibrar</string>
@@ -306,7 +306,7 @@ Sin embargo, sí te permite reanudarla desde la lista de aplicaciones del lanzad
     <string name="icon_sync">Sincronizar</string>
     <string name="icon_managed_profile">Perfil administrado</string>
     <string name="icon_dnd">No molestar</string>
-    <string name="icon_privacy">Carpeta de privacidad y seguridad</string>
+    <string name="icon_privacy">Privacidad y Carpeta segura</string>
     <string name="icon_security_status">Estado de seguridad (SU)</string>
     <string name="icon_otg">Ratón/teclado OTG</string>
     <string name="icon_samsung_smart">Funciones inteligentes de Samsung</string>
@@ -348,7 +348,7 @@ Sin embargo, sí te permite reanudarla desde la lista de aplicaciones del lanzad
     <string name="cat_visuals">Imágenes</string>
     <string name="cat_system">Sistema</string>
     <!-- UI Elements -->
-    <string name="search_placeholder">Search for Tools, Mods and Tweaks</string>
+    <string name="search_placeholder">Buscar en Essentials</string>
     <string name="search_no_results">No hay resultados para \"%1$s\"</string>
     <string name="search_results_title">Resultados de la búsqueda</string>
     <string name="requires_following_permissions">%1$s requiere los siguientes permisos</string>
@@ -1265,13 +1265,13 @@ Sin embargo, sí te permite reanudarla desde la lista de aplicaciones del lanzad
     <string name="label_alternatively">Alternativamente</string>
     <!-- Pixel Diagnostics -->
     <string name="label_diagnostics">Diagnósticos</string>
-    <string name="label_device_check">Device Check</string>
-    <string name="msg_flashbang">Get ready to be flashbanged!</string>
-    <string name="action_abort">Abort</string>
+    <string name="label_device_check">Comprobación del dispositivo</string>
+    <string name="msg_flashbang">¡Prepárate para el fogonazo!</string>
+    <string name="action_abort">Cancelar</string>
     <string name="action_continue">Continuar</string>
-    <string name="prank_trial_expired_title">Your Essentials trial has expired</string>
-    <string name="prank_trial_expired_desc">Your free trial period of Essentials has ended. Access to advanced features like Button Remap, App Freezing, and DIY Automations with Premium.</string>
-    <string name="prank_button_premium">What\'s in Premium?</string>
-    <string name="prank_reveal_title">April Fools!</string>
-    <string name="prank_reveal_desc">Just kidding, Essentials is and will always be free and open source. Enjoy! (っ◕‿◕)っ</string>
+    <string name="prank_trial_expired_title">Tu periodo de prueba de Essentials ha caducado</string>
+    <string name="prank_trial_expired_desc">Tu periodo de prueba de Essentials ha finalizado. Accede a funciones avanzadas como la reasignación de botones, la congelación de aplicaciones y las automatizaciones personalizadas con Premium.</string>
+    <string name="prank_button_premium">¿Qué incluye la versión Premium?</string>
+    <string name="prank_reveal_title">¡Feliz Día de los Inocentes!</string>
+    <string name="prank_reveal_desc">Es broma, Essentials es y siempre será gratuito y de código abierto. ¡Disfrútalo! (っ◕‿◕)っ</string>
 </resources>
