@@ -12,7 +12,7 @@
     <string name="flashlight_pulse_tile_label">El Feneri Darbesi</string>
     <string name="check_pre_releases_label">Ön sürümleri kontrol edin</string>
     <string name="check_pre_releases_desc">Kararsız olabilir</string>
-    <string name="label_default_tab">Default tab</string>
+    <string name="label_default_tab">Varsayılan sekme</string>
     <!-- App Lock -->
     <string name="settings_section_security">Güvenlik</string>
     <string name="app_lock_enable_title">Uygulama kilidini etkinleştir</string>
@@ -98,12 +98,12 @@
     <string name="caffeinate_skip_countdown_desc">Hemen Kafein almaya başlayın.</string>
     <string name="caffeinate_timeout_presets_title">Zaman Aşımı Ön Ayarları</string>
     <string name="caffeinate_timeout_presets_desc">QS kutucuğu için mevcut süreleri seçin</string>
-    <string name="caffeinate_timeout_5m">5m</string>
-    <string name="caffeinate_timeout_10m">10m</string>
-    <string name="caffeinate_timeout_30m">30 dakika</string>
+    <string name="caffeinate_timeout_5m">5dk</string>
+    <string name="caffeinate_timeout_10m">10dk</string>
+    <string name="caffeinate_timeout_30m">30dk</string>
     <string name="perm_notif_policy_title">Erişimi Rahatsız Etmeyin</string>
     <string name="perm_notif_policy_desc">Ses, titreşim ve sessiz modları arasında geçiş yapmak için gereklidir</string>
-    <string name="caffeinate_timeout_1h">1 saat</string>
+    <string name="caffeinate_timeout_1h">1sa</string>
     <string name="caffeinate_timeout_infinity">∞</string>
     <string name="caffeinate_starting_in"> %1$ds\'de başlıyor…</string>
     <string name="caffeinate_remaining">%1$s geriye kalan</string>
@@ -116,9 +116,9 @@
     <string name="settings_section_app_control">Uygulama Kontrolü</string>
     <string name="action_freeze">Dondur</string>
     <string name="action_unfreeze">Çöz</string>
-    <string name="action_remove">Remove</string>
-    <string name="action_create_shortcut">Create shortcut</string>
-    <string name="action_app_info">App info</string>
+    <string name="action_remove">Kaldır</string>
+    <string name="action_create_shortcut">Kısayol oluştur</string>
+    <string name="action_app_info">Uygulama bilgisi</string>
     <string name="freeze_mode_description_freeze_title">What is Freeze?</string>
     <string name="freeze_mode_description_freeze_body">App freezing disables the app\'s launch activity which removes it from the app list and updates. It will prevent the app from starting at all until it\'s unfrozen which saves resources but you will need to unfreeze from here or manually re-enable.</string>
     <string name="freeze_mode_description_freeze_warning">DO NOT FREEZE COMMUNICATION APPS</string>
@@ -136,9 +136,9 @@
     <string name="freeze_when_locked_title">Kilitlendiğinde don</string>
     <string name="freeze_delay_title">Donma gecikmesi</string>
     <string name="delay_immediate">Hemen</string>
-    <string name="delay_1m">1m</string>
-    <string name="delay_5m">5m</string>
-    <string name="delay_15m">15m</string>
+    <string name="delay_1m">1dk</string>
+    <string name="delay_5m">5dk</string>
+    <string name="delay_15m">15dk</string>
     <string name="delay_manual">Manuel</string>
     <string name="freeze_auto_freeze_section">Uygulamaları otomatik dondurma</string>
     <string name="freeze_automation_hint">Cihaz kilitlendiğinde seçilen uygulamaları dondurun. Ekranı kapattıktan kısa bir süre sonra kilidini açarsanız uygulamaların donmasını önlemek için bir gecikme seçin.</string>
@@ -200,7 +200,7 @@
     <string name="tile_sensitive_content">Hassas İçerik</string>
     <string name="tile_tap_to_wake">Uyandırmak için dokunun</string>
     <string name="tile_aod">AOD</string>
-    <string name="tile_caffeinate">Kafeinat</string>
+    <string name="tile_caffeinate">Kafein</string>
     <string name="tile_sound_mode">Ses Modu</string>
     <string name="tile_notification_lighting">Bildirim Aydınlatması</string>
     <string name="tile_dynamic_night_light">Dinamik Gece Lambası</string>
@@ -356,9 +356,9 @@
     <string name="feat_screen_off_widget_desc">Ekranı kapatmak için görünmez widget</string>
     <string name="feat_statusbar_icons_title">Durum çubuğu simgeleri</string>
     <string name="feat_statusbar_icons_desc">Durum çubuğu simgelerinin görünürlüğünü kontrol etme</string>
-    <string name="feat_caffeinate_title">Kafeinat</string>
+    <string name="feat_caffeinate_title">Kafein</string>
     <string name="feat_caffeinate_desc">Ekranı uyanık tutun</string>
-    <string name="feat_maps_power_saving_title">Haritalar güç tasarrufu modunu</string>
+    <string name="feat_maps_power_saving_title">Haritalar güç tasarrufu modu</string>
     <string name="feat_maps_power_saving_desc">Herhangi bir Android cihaz için</string>
     <string name="feat_notification_lighting_title">Bildirim aydınlatması</string>
     <string name="feat_notification_lighting_desc">Bildirimler için ışığı açın</string>
@@ -397,7 +397,7 @@
     <string name="feat_freeze_desc">Nadiren kullanılan uygulamaları devre dışı bırakın</string>
     <string name="feat_watermark_title">Filigran</string>
     <string name="feat_watermark_desc">Fotoğraflara EXIF ​​verileri ve logolar ekleme</string>
-    <string name="feat_always_on_display_title">Her Zaman Ekranda</string>
+    <string name="feat_always_on_display_title">Her Zaman Açık Ekran</string>
     <string name="feat_always_on_display_desc">Ekran kapalıyken saati ve bilgileri göster</string>
     <string name="feat_calendar_sync_title">Takvim Senkronizasyonu</string>
     <string name="feat_calendar_sync_desc">Etkinlikleri saatinize senkronize edin</string>
@@ -478,7 +478,7 @@
     <string name="search_qs_wake_desc">Kontrolü uyandırmak için iki kez dokunun</string>
     <string name="search_qs_aod_title">AOD</string>
     <string name="search_qs_aod_desc">Daima Açık Ekranda geçiş</string>
-    <string name="search_qs_caffeinate_title">Kafeinat</string>
+    <string name="search_qs_caffeinate_title">Kafein</string>
     <string name="search_qs_caffeinate_desc">Ekranı uyanık tutma geçişi</string>
     <string name="search_qs_sound_title">Ses Modu</string>
     <string name="search_qs_sound_desc">Ses modları arasında geçiş yapma (Zil/Titreşim/Sessiz)</string>
@@ -1005,7 +1005,7 @@
     <string name="instruction_step_perms_3">2. 3 noktalı menüyü açın ve  \'Kısıtlı ayarlara izin ver\' öğesini seçin. Biyometri ile kimlik doğrulaması yapmanız gerekebilir. İşiniz bittiğinde, izni tekrar vermeyi deneyin.</string>
     <string name="instruction_section_shizuku_title">Şizuku</string>
     <string name="instruction_section_shizuku_desc">Shizuku, uygulamaların sistem APi\'lerini doğrudan ADB veya kök izinleriyle kullanmasına olanak tanıyan güçlü bir araçtır. Harita min modu, Uygulama Dondurucu gibi özellikler için gereklidir. Ve WRITE_SECURE_SETTINGS gibi bazı izinlerin verilmesine yardımcı olacağız. \n\nAncak Shizuku\'nun Play Store sürümü eski olabilir ve muhtemelen son Android sürümlerinde kullanılamayacaktır, bu durumda lütfen github\'dan en son sürümü veya bunun güncel bir çatalını edinin.</string>
-    <string name="instruction_section_maps_title">Haritalar güç tasarrufu modunu</string>
+    <string name="instruction_section_maps_title">Haritalar güç tasarrufu modu</string>
     <string name="instruction_section_maps_desc">Bu özellik, şu anda Pixel 10 serisine özel olan Google Haritalar güç tasarrufu modunu otomatik olarak tetikler. Bir topluluk üyesi, haritaların minMode etkinliğini kök ayrıcalıklarıyla başlatarak herhangi bir Android cihazda hala kullanılabilir olduğunu keşfetti. \n\nVe ardından, bir gezinme oturumu sırasında ekran kapandığında otomatik olarak tetiklenecek şekilde Tasker ile otomatik hale getirdim ve ardından sadece çalışma zamanı Shizuku izinleriyle aynı şeyi başarabildim. \n\nÜzerinde gösterilmesi amaçlanıyor Pixel 10 serisinin AOd\'si bu nedenle ekranda ara sıra yatay modu desteklemediğini belirten bir mesaj görebilirsiniz. Bu, uygulama tarafından önlenemez ve göz ardı edebilirsiniz.</string>
     <string name="instruction_section_silent_title">Sessiz ses modu</string>
     <string name="instruction_section_silent_desc">Sessiz modun aynı zamanda DNd\'yi de tetiklediğini fark etmiş olabilirsiniz. \n\nBu, Android\'in bunu nasıl uyguladığından kaynaklanmaktadır; titreşim moduna geçmek için aynı APi\'yi kullansak bile, bazı nedenlerden dolayı sessiz modla birlikte DNd\'yi de açar ve bu şu anda önlenebilir değildir. :(</string>
@@ -1160,7 +1160,7 @@
     <string name="feat_input_actions_desc">Cihazınızı kolaylıkla kontrol edin</string>
     <string name="feat_widgets_title">Widget\'lar</string>
     <string name="feat_widgets_desc">Ana ekranınıza bir bakışta</string>
-    <string name="feat_display_visuals_title">Görüntülemek</string>
+    <string name="feat_display_visuals_title">Ekran</string>
     <string name="feat_display_visuals_desc">Deneyiminizi geliştirecek görseller</string>
     <string name="feat_watch_title">Kol saati</string>
     <string name="feat_watch_desc">WearOS ile entegrasyonlar</string>
@@ -1218,8 +1218,8 @@
     <string name="kaomoji_cat_winking">Winking</string>
     <string name="kaomoji_cat_writing">Writing</string>
     <string name="msg_restrict_own_app_repo">Hey! Güncellemeleri uygulama ayarlarından kontrol edebilirsiniz, buraya eklemenize gerek yok XD</string>
-    <string name="action_export">İhracat</string>
-    <string name="action_import">İçe aktarmak</string>
+    <string name="action_export">Dışa aktar</string>
+    <string name="action_import">İçe aktar</string>
     <string name="msg_export_success">Kod depoları başarıyla dışa aktarıldı</string>
     <string name="msg_export_failed">Kod depoları dışa aktarılamadı</string>
     <string name="msg_import_success">Kod depoları başarıyla içe aktarıldı</string>
@@ -1245,8 +1245,8 @@
     <string name="feat_auto_accessibility_title">Otomatik erişilebilirlik</string>
     <string name="feat_auto_accessibility_desc">WRITE_SECURE_SETTINGS kullanılarak eksikse, uygulama başlatıldığında erişilebilirlik iznini otomatik olarak verir.</string>
     <string name="label_help_guide">Yardım ve Kılavuzlar</string>
-    <string name="tab_your_android">Android\'in</string>
-    <string name="label_device_storage">Depolamak</string>
+    <string name="tab_your_android">Android cihazınız</string>
+    <string name="label_device_storage">Depolama</string>
     <string name="label_device_ram">Hafıza</string>
     <string name="label_use_blur">Bulanıklaştırmayı kullan</string>
     <string name="desc_use_blur">Kullanıcı arayüzünde aşamalı bulanıklaştırma öğelerini etkinleştirin</string>
