@@ -191,7 +191,7 @@
     <string name="ambient_show_lock_screen_title">Kilit ekranını göster</string>
     <string name="ambient_show_lock_screen_desc">Siyah kaplama yok</string>
     <!-- Tiles -->
-    <string name="action_add">Eklemek</string>
+    <string name="action_add">Ekle</string>
     <string name="action_added">Added</string>
     <string name="qs_tile_already_added">Zaten eklendi</string>
     <string name="qs_tile_requires_android_13">Android 13+ gerektirir</string>
@@ -273,11 +273,11 @@
     <!-- Status Bar Categories -->
     <string name="status_bar_category_connectivity">Bağlantı</string>
     <string name="status_bar_category_phone_network">Telefon ve Ağ</string>
-    <string name="status_bar_category_audio_media">Ses ve Medya</string>
+    <string name="status_bar_category_audio_media">Ses&amp; Medya</string>
     <string name="status_bar_category_system_status">Sistem Durumu</string>
-    <string name="status_bar_category_oem_specific">OEm\'e Özel</string>
+    <string name="status_bar_category_oem_specific">OEM\'e Özel</string>
     <!-- Status Bar Icons -->
-    <string name="icon_wifi">Wifi</string>
+    <string name="icon_wifi">WiFi</string>
     <string name="icon_bluetooth">Bluetooth</string>
     <string name="icon_nfc">NFC / Felica</string>
     <string name="icon_vpn">VPN</string>
@@ -305,12 +305,12 @@
     <string name="icon_sync">Senkronizasyon</string>
     <string name="icon_managed_profile">Yönetilen Profil</string>
     <string name="icon_dnd">Rahatsız etmeyin</string>
-    <string name="icon_privacy">Gizlilik ve Güvenli Klasör</string>
+    <string name="icon_privacy">Gizlilik &amp; Güvenli Klasör</string>
     <string name="icon_security_status">Güvenlik Durumu (SU)</string>
     <string name="icon_otg">OTG Fare / Klavye</string>
     <string name="icon_samsung_smart">Samsung Akıllı Özellikler</string>
     <string name="icon_samsung_services">Samsung Hizmetleri</string>
-    <string name="icon_ethernet">ethernet</string>
+    <string name="icon_ethernet">Ethernet</string>
     <!-- Status Bar Settings -->
     <string name="stb_clock_seconds">Saatte Saniyeleri Göster</string>
     <string name="stb_battery_percentage">Pil Yüzdesi</string>
@@ -323,7 +323,7 @@
     <string name="permission_read_phone_state_desc">Akıllı Veri özelliği için ağ türünü algılamak için gereklidir</string>
     <string name="permission_read_phone_state_desc_call_vibrations">Dokunsal geri bildirimi tetiklemek amacıyla çağrı durumu değişikliklerini tespit etmek için gereklidir.</string>
     <string name="settings_section_smart_visibility">Akıllı Görünürlük</string>
-    <string name="smart_wifi_title">Akıllı Wi-Fi</string>
+    <string name="smart_wifi_title">Akıllı WiFi</string>
     <string name="smart_wifi_desc">WiFi bağlandığında mobil verileri gizle</string>
     <string name="smart_data_desc">Belirli modlarda mobil verileri gizle</string>
     <string name="action_reset_all_icons">Tüm Simgeleri Sıfırla</string>
@@ -347,8 +347,8 @@
     <string name="cat_visuals">Görseller</string>
     <string name="cat_system">Sistem</string>
     <!-- UI Elements -->
-    <string name="search_placeholder">Search for Tools, Mods and Tweaks</string>
-    <string name="search_no_results">için sonuç yok \"%1$s\"</string>
+    <string name="search_placeholder">Essentials\'ta Ara</string>
+    <string name="search_no_results">\"%1$s\" için sonuç yok</string>
     <string name="search_results_title">Arama Sonuçları</string>
     <string name="requires_following_permissions">%1$s aşağıdaki izinleri gerektirir</string>
     <!-- Features -->
@@ -522,7 +522,7 @@
     <string name="search_freeze_delay_title">Donma gecikmesi</string>
     <string name="search_freeze_delay_desc">Kilitlemeden sonra donmadan önceki gecikme</string>
     <!-- Permissions metadata -->
-    <string name="perm_shizuku_title">Şizuku</string>
+    <string name="perm_shizuku_title">Shizuku</string>
     <string name="perm_shizuku_desc">Gelişmiş komutlar için gereklidir. Shizuku\'yu Play Store\'dan yükleyin.</string>
     <string name="perm_shizuku_install_action">Shizuku\'yu yükleyin</string>
     <string name="perm_shizuku_grant_title">İzin Ver</string>
@@ -576,7 +576,7 @@
     <string name="error_no_apk_found">En son sürümde APK bulunamadı</string>
     <string name="error_repo_not_found">Depo bulunamadı</string>
     <string name="label_latest_release">Son Sürüm</string>
-    <string name="action_view_readme">BENİOKu\'yu görüntüle</string>
+    <string name="action_view_readme">BENİOku\'yu görüntüle</string>
     <string name="label_stars">%1$d Yıldızlar</string>
     <string name="label_installed_app">Yüklü uygulama</string>
     <string name="label_not_installed">Kurulu değil</string>
@@ -630,8 +630,8 @@
     <string name="action_let_me_in">Let Me in Already</string>
     <string name="preferences_title">Preferences</string>
     <string name="preferences_desc">Configure some basic settings to get started.</string>
-    <string name="label_app_settings">App Settings</string>
-    <string name="label_app_language">Language</string>
+    <string name="label_app_settings">Uygulama Ayarları</string>
+    <string name="label_app_language">Dil</string>
     <string name="label_haptic_feedback">Haptic Feedback</string>
     <string name="label_updates">Updates</string>
     <string name="label_auto_check_updates">Auto check for updates</string>
@@ -643,7 +643,7 @@
     <string name="msg_error_load_release_notes">Couldn\'t load the release note</string>
     <string name="action_view_on_web">View on web</string>
     <string name="action_done">Tamamlamak</string>
-    <string name="action_preview">Önizleme</string>
+    <string name="action_preview">Ön izleme</string>
     <string name="action_help_guide">Yardım Kılavuzu</string>
     <string name="action_what_is_this">Bu nedir?</string>
     <string name="update_available_title">Güncelleme Mevcut</string>
@@ -666,8 +666,8 @@
     <string name="location_reached_edit_title">Edit Destination</string>
     <string name="location_reached_name_placeholder">Home, Office, etc.</string>
     <string name="location_reached_name_label">Name</string>
-    <string name="location_reached_save_btn">Save</string>
-    <string name="location_reached_cancel_btn">Cancel</string>
+    <string name="location_reached_save_btn">Kaydet</string>
+    <string name="location_reached_cancel_btn">İptal et</string>
     <string name="location_reached_resolving">Resolving location…</string>
     <string name="location_reached_last_trip">Last Trip</string>
     <string name="location_reached_saved_destinations">Saved Destinations</string>
@@ -741,7 +741,7 @@
     <string name="diy_select_action">Eylem Seç</string>
     <string name="diy_in_action_label">Eylemde</string>
     <string name="diy_out_action_label">Çıkış Eylemi</string>
-    <string name="action_cancel">İptal etmek</string>
+    <string name="action_cancel">İptal et</string>
     <string name="action_save">Kaydetmek</string>
     <string name="action_edit">Düzenlemek</string>
     <string name="action_delete">Silmek</string>
@@ -847,7 +847,7 @@
     </string-array>
     <string-array name="keywords_privacy">
         <item>güvenli</item>
-        <item>mahremiyet</item>
+        <item>gizlilik</item>
         <item>biyometrik</item>
         <item>yüz</item>
         <item>parmak izi</item>
@@ -859,7 +859,7 @@
     </string-array>
     <string-array name="keywords_timeout">
         <item>kalmak</item>
-        <item>Açık</item>
+        <item>açık</item>
         <item>zaman aşımı</item>
     </string-array>
     <string-array name="keywords_wake_display">
@@ -869,7 +869,7 @@
     </string-array>
     <string-array name="keywords_timer">
         <item>zamanlayıcı</item>
-        <item>Beklemek</item>
+        <item>bekle</item>
         <item>zaman aşımı</item>
     </string-array>
     <string name="label_keyboard_always_dark">Her zaman karanlık tema</string>
@@ -899,7 +899,7 @@
     </string-array>
     <string-array name="keywords_adb_debug">
         <item>adb</item>
-        <item>USB</item>
+        <item>usb</item>
         <item>hata ayıklama</item>
     </string-array>
     <string-array name="keywords_blur_glass">
@@ -913,7 +913,7 @@
         <item>kaplama</item>
     </string-array>
     <string-array name="keywords_always_display">
-        <item>Her zaman</item>
+        <item>her zaman</item>
         <item>görüntülemek</item>
         <item>saat</item>
     </string-array>
@@ -929,12 +929,12 @@
     </string-array>
     <string-array name="keywords_app_freezing">
         <item>dondurmak</item>
-        <item>Şizuku</item>
+        <item>shizuku</item>
     </string-array>
     <string-array name="keywords_manual_now">
         <item>manuel</item>
-        <item>Şimdi</item>
-        <item>Şizuku</item>
+        <item>şimdi</item>
+        <item>shizuku</item>
     </string-array>
     <string-array name="keywords_proximity_sensor">
         <item>yakınlık</item>
@@ -989,7 +989,7 @@
     <string name="app_tasks">Görevler</string>
     <string name="app_zero">Sıfır</string>
     <!-- Help & Guides -->
-    <string name="help_guides_title">Yardım ve Kılavuzlar</string>
+    <string name="help_guides_title">Yardım &amp; Kılavuzlar</string>
     <string name="need_more_support_reach_out">Daha fazla desteğe mi ihtiyacınız var? Ulaş,</string>
     <string name="action_collapse">Yıkılmak</string>
     <string name="action_expand">Genişletmek</string>
@@ -1003,7 +1003,7 @@
     <string name="instruction_step_perms_1">Erişilebilirlik, bildirim dinleyicisi veya yer paylaşımı izinleri gibi hassas izinler vermeye çalışırsanız bu erişim reddedildi mesajını alabilirsiniz. Bunu vermek için aşağıdaki adımları kontrol edin.</string>
     <string name="instruction_step_perms_2">1. Essentials\'ın uygulama bilgileri sayfasına gidin.</string>
     <string name="instruction_step_perms_3">2. 3 noktalı menüyü açın ve  \'Kısıtlı ayarlara izin ver\' öğesini seçin. Biyometri ile kimlik doğrulaması yapmanız gerekebilir. İşiniz bittiğinde, izni tekrar vermeyi deneyin.</string>
-    <string name="instruction_section_shizuku_title">Şizuku</string>
+    <string name="instruction_section_shizuku_title">Shizuku</string>
     <string name="instruction_section_shizuku_desc">Shizuku, uygulamaların sistem APi\'lerini doğrudan ADB veya kök izinleriyle kullanmasına olanak tanıyan güçlü bir araçtır. Harita min modu, Uygulama Dondurucu gibi özellikler için gereklidir. Ve WRITE_SECURE_SETTINGS gibi bazı izinlerin verilmesine yardımcı olacağız. \n\nAncak Shizuku\'nun Play Store sürümü eski olabilir ve muhtemelen son Android sürümlerinde kullanılamayacaktır, bu durumda lütfen github\'dan en son sürümü veya bunun güncel bir çatalını edinin.</string>
     <string name="instruction_section_maps_title">Haritalar güç tasarrufu modu</string>
     <string name="instruction_section_maps_desc">Bu özellik, şu anda Pixel 10 serisine özel olan Google Haritalar güç tasarrufu modunu otomatik olarak tetikler. Bir topluluk üyesi, haritaların minMode etkinliğini kök ayrıcalıklarıyla başlatarak herhangi bir Android cihazda hala kullanılabilir olduğunu keşfetti. \n\nVe ardından, bir gezinme oturumu sırasında ekran kapandığında otomatik olarak tetiklenecek şekilde Tasker ile otomatik hale getirdim ve ardından sadece çalışma zamanı Shizuku izinleriyle aynı şeyi başarabildim. \n\nÜzerinde gösterilmesi amaçlanıyor Pixel 10 serisinin AOd\'si bu nedenle ekranda ara sıra yatay modu desteklemediğini belirten bir mesaj görebilirsiniz. Bu, uygulama tarafından önlenemez ve göz ardı edebilirsiniz.</string>
@@ -1122,7 +1122,7 @@
     <string name="label_no_app_linked">Bağlı uygulama yok</string>
     <string name="format_updated_relative">Güncellendi %1$s</string>
     <!-- Relative Time -->
-    <string name="time_just_now">Şu anda</string>
+    <string name="time_just_now">hemen şimdi</string>
     <string name="today">Today</string>
     <string name="yesterday">Yesterday</string>
     <string name="time_min_ago">%1$dm önce</string>
@@ -1171,10 +1171,10 @@
     <string name="cat_interface">Arayüz</string>
     <string name="cat_display">Görüntülemek</string>
     <string name="cat_protection">Koruma</string>
-    <string name="cat_accessibility">Accessibility</string>
-    <string name="cat_connectivity">Connectivity</string>
-    <string name="cat_privacy">Privacy</string>
-    <string name="cat_utils">Utilities</string>
+    <string name="cat_accessibility">Erişilebilirlik</string>
+    <string name="cat_connectivity">Bağlantı</string>
+    <string name="cat_privacy">Gizlilik</string>
+    <string name="cat_utils">Araçlar</string>
     <string name="label_kbd_abc">ABC</string>
     <string name="label_kbd_symbols">\?#/</string>
     <string name="label_kaomoji">Kaomoji</string>
