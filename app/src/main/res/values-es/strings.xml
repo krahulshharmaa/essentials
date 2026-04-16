@@ -107,7 +107,7 @@
     <string name="caffeinate_timeout_infinity">∞</string>
     <string name="caffeinate_starting_in">Comenzando en %1$ds…</string>
     <string name="caffeinate_remaining">%1$s restante</string>
-    <string name="caffeinate_live_channel_desc">Notificación persistente de cafeína</string>
+    <string name="caffeinate_live_channel_desc">Notificación persistente para Cafeína</string>
     <!-- Dynamic Night Light -->
     <string name="dynamic_night_light_enable_title">Habilitar luz nocturna dinámica</string>
     <string name="dynamic_night_light_apps_section">Aplicaciones que desactivan la luz nocturna</string>
