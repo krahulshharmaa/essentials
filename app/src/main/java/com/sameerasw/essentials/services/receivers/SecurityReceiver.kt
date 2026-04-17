@@ -25,12 +25,16 @@ class SecurityReceiver : BroadcastReceiver() {
 
                 // New Disable QS logic
                 if (isDisableQsEnabled) {
-                    ShellUtils.runCommand(context, "cmd statusbar send-disable-flag quick-settings")
+                    com.sameerasw.essentials.utils.StatusBarManager.requestDisable(
+                        context,
+                        "ScreenLockedSecurity",
+                        setOf(com.sameerasw.essentials.utils.StatusBarManager.FLAG_QUICK_SETTINGS)
+                    )
                 }
             }
             Intent.ACTION_USER_PRESENT -> {
                 // Restore QS access on unlock
-                ShellUtils.runCommand(context, "cmd statusbar send-disable-flag none")
+                com.sameerasw.essentials.utils.StatusBarManager.requestRestore(context, "ScreenLockedSecurity")
             }
         }
     }

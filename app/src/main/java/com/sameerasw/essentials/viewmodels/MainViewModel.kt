@@ -2427,7 +2427,7 @@ class MainViewModel : ViewModel() {
             enabled
         )
         if (!enabled) {
-            com.sameerasw.essentials.utils.ShellUtils.runCommand(context, "cmd statusbar send-disable-flag none")
+            com.sameerasw.essentials.utils.StatusBarManager.requestRestore(context, "ScreenLockedSecurity")
         }
     }
 
@@ -2435,7 +2435,7 @@ class MainViewModel : ViewModel() {
         isDisableQsWhenLockedEnabled.value = enabled
         settingsRepository.putBoolean(SettingsRepository.KEY_DISABLE_QS_WHEN_LOCKED, enabled)
         if (!enabled) {
-            com.sameerasw.essentials.utils.ShellUtils.runCommand(context, "cmd statusbar send-disable-flag none")
+            com.sameerasw.essentials.utils.StatusBarManager.requestRestore(context, "ScreenLockedSecurity")
         }
     }
 
