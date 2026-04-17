@@ -133,6 +133,7 @@ class MainViewModel : ViewModel() {
     val dnsPresets = mutableStateListOf<DnsPreset>()
     val addedQSTiles = mutableStateOf<Set<String>>(emptySet())
     val isHideGestureBarEnabled = mutableStateOf(false)
+    val isCircleToSearchGestureEnabled = mutableStateOf(false)
 
 
 
@@ -486,6 +487,10 @@ class MainViewModel : ViewModel() {
                     SettingsRepository.KEY_FLASHLIGHT_PULSE_MAX_INTENSITY -> {
                         flashlightPulseMaxIntensity.floatValue = settingsRepository.getFloat(key, 0.5f)
                     }
+
+                    SettingsRepository.KEY_CIRCLE_TO_SEARCH_GESTURE_ENABLED -> {
+                        isCircleToSearchGestureEnabled.value = settingsRepository.getBoolean(key)
+                    }
                 }
             }
         }
@@ -520,6 +525,7 @@ class MainViewModel : ViewModel() {
         isShizukuPermissionGranted.value = ShizukuUtils.hasPermission()
         isAutoAccessibilityEnabled.value = settingsRepository.getBoolean(SettingsRepository.KEY_AUTO_ACCESSIBILITY_ENABLED)
         isHideGestureBarEnabled.value = settingsRepository.getBoolean(SettingsRepository.KEY_HIDE_GESTURE_BAR_ENABLED, false)
+        isCircleToSearchGestureEnabled.value = settingsRepository.getBoolean(SettingsRepository.KEY_CIRCLE_TO_SEARCH_GESTURE_ENABLED, false)
         notificationLightingSystemMode.intValue = settingsRepository.getNotificationLightingSystemMode()
         if (isHideGestureBarEnabled.value) {
             applyHideGestureBar(context, true)
@@ -1259,6 +1265,11 @@ class MainViewModel : ViewModel() {
         isHideGestureBarEnabled.value = enabled
         settingsRepository.putBoolean(SettingsRepository.KEY_HIDE_GESTURE_BAR_ENABLED, enabled)
         applyHideGestureBar(context, enabled)
+    }
+
+    fun setCircleToSearchGestureEnabled(enabled: Boolean, context: Context) {
+        isCircleToSearchGestureEnabled.value = enabled
+        settingsRepository.putBoolean(SettingsRepository.KEY_CIRCLE_TO_SEARCH_GESTURE_ENABLED, enabled)
     }
 
     private fun applyHideGestureBar(context: Context, enabled: Boolean) {
