@@ -54,6 +54,7 @@
     <string name="action_ai_assistant">Asistente de IA</string>
     <string name="action_take_screenshot">Hacer una captura de pantalla</string>
     <string name="action_cycle_sound_modes">Modos de sonido cíclicos</string>
+    <string name="action_circle_to_search">Circle to Search</string>
     <string name="action_like_song">Me gusta la canción actual</string>
     <string name="like_song_settings_title">Me gusta la configuración de la canción</string>
     <string name="like_song_settings_desc">Esta función requiere acceso a las notificaciones para detectar el contenido multimedia que se está reproduciendo actualmente y activar la acción de \"Me gusta\". Actívala a continuación.</string>
@@ -339,9 +340,11 @@ Sin embargo, sí te permite reanudarla desde la lista de aplicaciones del lanzad
     <string name="hide_notification_icons_title">Ocultar notificaciones</string>
     <string name="hide_notification_icons_desc">Ocultar todos los iconos de notificaciones entrantes</string>
     <string name="feat_hide_gesture_bar_title">Ocultar la barra de gestos</string>
+    <string name="feat_hide_gesture_bar_desc">Hide the navigation pill at the bottom</string>
+    <string name="feat_circle_to_search_gesture_title">Circle to Search gesture</string>
+    <string name="feat_circle_to_search_gesture_desc">Long-press the bottom area to trigger Circle to Search</string>
     <string name="feat_other_customizations_title">Otras personalizaciones</string>
     <string name="feat_other_customizations_desc">Ajustes y modificaciones adicionales del sistema</string>
-    <string name="feat_hide_gesture_bar_desc">En la navegación por gestos</string>
     <string name="status_bar_icons_disclaimer">Tenga en cuenta que la implementación de estas opciones puede depender del OEM y es posible que algunas no funcionen en absoluto.</string>
     <!-- Network Type Picker -->
     <string name="network_type_other">Otro</string>
