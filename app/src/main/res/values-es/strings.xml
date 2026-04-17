@@ -256,11 +256,12 @@ Sin embargo, sí te permite reanudarla desde la lista de aplicaciones del lanzad
     <string name="deactivated">No optimizado</string>
     <string name="permission_missing">Falta permiso</string>
     <!-- Screen Locked Security -->
-    <string name="screen_locked_security_title">Seguridad de pantalla bloqueada</string>
-    <string name="screen_locked_security_dialog_title">Seguridad de pantalla bloqueada</string>
-    <string name="screen_locked_security_auth_enable">Autenticar para habilitar la seguridad de pantalla bloqueada</string>
-    <string name="screen_locked_security_auth_disable">Autenticarse para desactivar la seguridad de pantalla bloqueada</string>
+    <string name="screen_locked_security_title">Disable QS tiles when the device is locked</string>
+    <string name="screen_locked_security_dialog_title">Disable QS tiles when the device is locked</string>
     <string name="warning_title">⚠️ ADVERTENCIA</string>
+    <string name="screen_locked_security_auth_enable">Authenticate to enable this feature</string>
+    <string name="screen_locked_security_auth_disable">Authenticate to disable this feature</string>
+    <string name="screen_locked_security_desc">Disable quick setting tiles when the device is locked</string>
     <string name="search_disable_qs_locked_title">Desactivar QS bloqueado</string>
     <string name="search_disable_qs_locked_desc">Evitar expandir los Ajustes Rápidos cuando el dispositivo está bloqueado</string>
     <!-- Sound Mode -->
@@ -652,6 +653,8 @@ Sin embargo, sí te permite reanudarla desde la lista de aplicaciones del lanzad
     <string name="unit_seconds">%d seconds</string>
     <string name="unit_minute">1 minute</string>
     <string name="unit_minutes">%d minutes</string>
+    <string name="action_restart_systemui">Restart SystemUI</string>
+    <string name="desc_restart_systemui">Kills and restarts SystemUI process to apply some changes immediately</string>
     <string name="msg_error_load_release_notes">No se han podido cargar las notas de la versión</string>
     <string name="action_view_on_web">Ver en la web</string>
     <string name="action_done">Hecho</string>
