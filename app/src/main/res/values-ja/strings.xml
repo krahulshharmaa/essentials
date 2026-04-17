@@ -63,6 +63,8 @@
     <string name="feat_ambient_music_glance_desc">AODにメディアの情報を表示</string>
     <string name="ambient_glance_docked_mode_title">ドックモード</string>
     <string name="ambient_glance_docked_mode_desc">AODで音楽を再生している間、無期限にオーバーレイを表示します</string>
+    <string name="ambient_glance_random_shapes_title">Random shapes</string>
+    <string name="ambient_glance_random_shapes_desc">Use various Material 3 shapes for the album art</string>
     <string name="feat_notification_glance_title">通知を表示</string>
     <string name="feat_notification_glance_desc">Keep AOD on while notifications are pending</string>
     <string name="notification_glance_same_as_lighting_title">通知ライトと同じアプリ</string>
@@ -161,6 +163,8 @@
     <string name="flashlight_pulse_title">ライト点滅</string>
     <string name="flashlight_pulse_facedown_title">下を向いているときのみ</string>
     <string name="flashlight_pulse_same_as_lighting_title">通知ライトと同じアプリ</string>
+    <string name="flashlight_pulse_max_brightness">Max brightness</string>
+    <string name="flashlight_pulse_preview">Preview pulse</string>
     <string name="settings_section_style">スタイル</string>
     <string name="notification_lighting_stroke_adjustment_section">ストローク調整</string>
     <string name="notification_lighting_corner_radius_title">角の半径</string>
