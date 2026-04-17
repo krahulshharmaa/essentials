@@ -41,7 +41,7 @@ class ScreenLockedSecurityTileService : BaseTileService() {
     override fun getTileLabel(): String = "Locked Security"
 
     override fun getTileSubtitle(): String {
-        return if (qsTile.state == Tile.STATE_ACTIVE) "Enabled" else "Disabled"
+        return if (getTileState() == Tile.STATE_ACTIVE) "Enabled" else "Disabled"
     }
 
     override fun hasFeaturePermission(): Boolean {
