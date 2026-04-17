@@ -63,6 +63,8 @@
     <string name="feat_ambient_music_glance_desc">Ρίξτε μια ματιά στα μέσα ενημέρωσης στο AOD</string>
     <string name="ambient_glance_docked_mode_title">Λειτουργία σύνδεσης</string>
     <string name="ambient_glance_docked_mode_desc">Διατηρήστε την επικάλυψη ορατή επ\' αόριστον κατά την αναπαραγωγή μουσικής στο AOD</string>
+    <string name="ambient_glance_random_shapes_title">Random shapes</string>
+    <string name="ambient_glance_random_shapes_desc">Use various Material 3 shapes for the album art</string>
     <string name="feat_notification_glance_title">Ειδοποιητική ματιά</string>
     <string name="feat_notification_glance_desc">Διατηρήστε το AOD ενεργοποιημένο όσο οι ειδοποιήσεις είναι σε εκκρεμότητα</string>
     <string name="notification_glance_same_as_lighting_title">Ίδιες εφαρμογές με το φωτισμό ειδοποιήσεων</string>
@@ -161,6 +163,8 @@
     <string name="flashlight_pulse_title">Παλμός φακού</string>
     <string name="flashlight_pulse_facedown_title">Μόνο με το πρόσωπο προς τα κάτω</string>
     <string name="flashlight_pulse_same_as_lighting_title">Ίδιες εφαρμογές με το φωτισμό ειδοποιήσεων</string>
+    <string name="flashlight_pulse_max_brightness">Max brightness</string>
+    <string name="flashlight_pulse_preview">Preview pulse</string>
     <string name="settings_section_style">Στυλ</string>
     <string name="notification_lighting_stroke_adjustment_section">Ρύθμιση εγκεφαλικού επεισοδίου</string>
     <string name="notification_lighting_corner_radius_title">Γωνιακή ακτίνα</string>
