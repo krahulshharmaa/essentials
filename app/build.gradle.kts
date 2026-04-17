@@ -21,8 +21,8 @@ android {
         applicationId = "com.sameerasw.essentials"
         minSdk = 26
         targetSdk = 36
-        versionCode = 38
-        versionName = "12.7"
+        versionCode = 39
+        versionName = "13.0"
 
         val whatsNewCounter = 1
         buildConfigField("int", "WHATS_NEW_COUNTER", whatsNewCounter.toString())
@@ -34,16 +34,16 @@ android {
 
 //        optimized dev build
 
-          debug {
-             isMinifyEnabled = true
-             isShrinkResources = true
-             isDebuggable = false
-
-             proguardFiles(
-                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                 "proguard-rules.pro"
-             )
-          }
+//          debug {
+//             isMinifyEnabled = true
+//             isShrinkResources = true
+//             isDebuggable = false
+//
+//             proguardFiles(
+//                 getDefaultProguardFile("proguard-android-optimize.txt"),
+//                 "proguard-rules.pro"
+//             )
+//          }
 
         // end
 
