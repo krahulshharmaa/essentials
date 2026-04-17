@@ -105,6 +105,18 @@ fun OtherCustomizationsSettingsUI(
                 iconRes = R.drawable.rounded_home_24,
                 modifier = Modifier.highlight(highlightSetting == "hide_gesture_bar_toggle")
             )
+
+            IconToggleItem(
+                title = stringResource(R.string.feat_circle_to_search_gesture_title),
+                description = stringResource(R.string.feat_circle_to_search_gesture_desc),
+                isChecked = viewModel.isCircleToSearchGestureEnabled.value,
+                onCheckedChange = { enabled ->
+                    viewModel.setCircleToSearchGestureEnabled(enabled, context)
+                },
+                enabled = viewModel.isHideGestureBarEnabled.value,
+                iconRes = R.drawable.rounded_touch_app_24,
+                modifier = Modifier.highlight(highlightSetting == "circle_to_search_gesture_toggle")
+            )
         }
     }
 }
