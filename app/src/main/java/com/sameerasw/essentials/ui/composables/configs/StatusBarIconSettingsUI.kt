@@ -430,6 +430,31 @@ fun StatusBarIconSettingsUI(
             )
 
             IconToggleItem(
+                iconRes = R.drawable.rounded_lock_clock_24,
+                title = stringResource(R.string.hide_system_icons_locked_only_title),
+                description = stringResource(R.string.hide_system_icons_locked_only_desc),
+                isChecked = viewModel.isHideSystemIconsLockedOnlyEnabled.value,
+                onCheckedChange = { checked ->
+                    if (!isAdvancedEnabled) {
+                        showAdvancedPermissionSheet = true
+                    } else {
+                        viewModel.setAdvancedFlagEnabled(
+                            context,
+                            StatusBarIconViewModel.PREF_HIDE_SYSTEM_ICONS_LOCKED_ONLY,
+                            checked
+                        )
+                    }
+                },
+                enabled = viewModel.isHideSystemIconsEnabled.value,
+                onDisabledClick = {
+                    if (!isAdvancedEnabled) {
+                        showAdvancedPermissionSheet = true
+                    }
+                },
+                modifier = Modifier.highlight(highlightSetting == "hide_system_icons_locked")
+            )
+
+            IconToggleItem(
                 iconRes = R.drawable.rounded_nest_clock_farsight_analog_24,
                 title = stringResource(R.string.hide_clock_title),
                 description = stringResource(R.string.hide_clock_desc),

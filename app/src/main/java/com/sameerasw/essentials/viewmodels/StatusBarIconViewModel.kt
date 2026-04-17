@@ -35,6 +35,7 @@ class StatusBarIconViewModel : ViewModel() {
     val isWriteSettingsEnabled = mutableStateOf(false)
  
     val isHideSystemIconsEnabled = mutableStateOf(false)
+    val isHideSystemIconsLockedOnlyEnabled = mutableStateOf(false)
     val isHideClockEnabled = mutableStateOf(false)
     val isHideNotificationIconsEnabled = mutableStateOf(false)
 
@@ -57,6 +58,7 @@ class StatusBarIconViewModel : ViewModel() {
         const val PREF_SELECTED_NETWORK_TYPES = "selected_network_types"
         const val PREF_BATTERY_PERCENT_MODE = "battery_percent_mode"
         const val PREF_HIDE_SYSTEM_ICONS = "hide_system_icons"
+        const val PREF_HIDE_SYSTEM_ICONS_LOCKED_ONLY = "hide_system_icons_locked_only"
         const val PREF_HIDE_CLOCK = "hide_clock"
         const val PREF_HIDE_NOTIFICATION_ICONS = "hide_notification_icons"
         private const val ADVANCED_FLAGS_REQUESTER_ID = "StatusBarIconAdvanced"
@@ -593,6 +595,7 @@ class StatusBarIconViewModel : ViewModel() {
     private fun loadAdvancedFlags(context: Context) {
         val prefs = context.getSharedPreferences("essentials_prefs", Context.MODE_PRIVATE)
         isHideSystemIconsEnabled.value = prefs.getBoolean(PREF_HIDE_SYSTEM_ICONS, false)
+        isHideSystemIconsLockedOnlyEnabled.value = prefs.getBoolean(PREF_HIDE_SYSTEM_ICONS_LOCKED_ONLY, false)
         isHideClockEnabled.value = prefs.getBoolean(PREF_HIDE_CLOCK, false)
         isHideNotificationIconsEnabled.value = prefs.getBoolean(PREF_HIDE_NOTIFICATION_ICONS, false)
         applyAdvancedFlags(context)
@@ -602,6 +605,7 @@ class StatusBarIconViewModel : ViewModel() {
         val prefs = context.getSharedPreferences("essentials_prefs", Context.MODE_PRIVATE)
         when (flagKey) {
             PREF_HIDE_SYSTEM_ICONS -> isHideSystemIconsEnabled.value = enabled
+            PREF_HIDE_SYSTEM_ICONS_LOCKED_ONLY -> isHideSystemIconsLockedOnlyEnabled.value = enabled
             PREF_HIDE_CLOCK -> isHideClockEnabled.value = enabled
             PREF_HIDE_NOTIFICATION_ICONS -> isHideNotificationIconsEnabled.value = enabled
         }
@@ -611,7 +615,9 @@ class StatusBarIconViewModel : ViewModel() {
 
     private fun applyAdvancedFlags(context: Context) {
         val flags = mutableSetOf<String>()
-        if (isHideSystemIconsEnabled.value) flags.add(com.sameerasw.essentials.utils.StatusBarManager.FLAG_SYSTEM_ICONS)
+        if (isHideSystemIconsEnabled.value && !isHideSystemIconsLockedOnlyEnabled.value) {
+            flags.add(com.sameerasw.essentials.utils.StatusBarManager.FLAG_SYSTEM_ICONS)
+        }
         if (isHideClockEnabled.value) flags.add(com.sameerasw.essentials.utils.StatusBarManager.FLAG_CLOCK)
         if (isHideNotificationIconsEnabled.value) flags.add(com.sameerasw.essentials.utils.StatusBarManager.FLAG_NOTIFICATION_ICONS)
 
