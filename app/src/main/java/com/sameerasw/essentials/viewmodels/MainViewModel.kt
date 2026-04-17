@@ -57,6 +57,7 @@ import com.sameerasw.essentials.utils.AppUtil
 import com.sameerasw.essentials.utils.DeviceUtils
 import com.sameerasw.essentials.utils.PermissionUtils
 import com.sameerasw.essentials.utils.RootUtils
+import com.sameerasw.essentials.utils.ShellUtils
 import com.sameerasw.essentials.utils.ShizukuUtils
 import com.sameerasw.essentials.utils.UpdateNotificationHelper
 import kotlinx.coroutines.Dispatchers
@@ -164,6 +165,7 @@ class MainViewModel : ViewModel() {
     val notificationLightingSweepPosition = mutableStateOf(NotificationLightingSweepPosition.CENTER)
     val notificationLightingSweepThickness = mutableFloatStateOf(8f)
     val notificationLightingSweepRandomShapes = mutableStateOf(false)
+    val notificationLightingSystemMode = mutableIntStateOf(0) // 0: Charging ripple, 1: Auth ripple
     val skipPersistentNotifications = mutableStateOf(false)
     val isAppLockEnabled = mutableStateOf(false)
     val isUseUsageAccess = mutableStateOf(false)
@@ -518,6 +520,7 @@ class MainViewModel : ViewModel() {
         isShizukuPermissionGranted.value = ShizukuUtils.hasPermission()
         isAutoAccessibilityEnabled.value = settingsRepository.getBoolean(SettingsRepository.KEY_AUTO_ACCESSIBILITY_ENABLED)
         isHideGestureBarEnabled.value = settingsRepository.getBoolean(SettingsRepository.KEY_HIDE_GESTURE_BAR_ENABLED, false)
+        notificationLightingSystemMode.intValue = settingsRepository.getNotificationLightingSystemMode()
         if (isHideGestureBarEnabled.value) {
             applyHideGestureBar(context, true)
         }
@@ -1281,8 +1284,17 @@ class MainViewModel : ViewModel() {
     }
 
     fun setNotificationLightingStyle(style: NotificationLightingStyle, context: Context) {
+        if (style == NotificationLightingStyle.SYSTEM && !ShellUtils.hasPermission(context)) {
+            // Permission handling should be done in UI, but we can ensure state consistency here
+            return
+        }
         notificationLightingStyle.value = style
         settingsRepository.putString(SettingsRepository.KEY_EDGE_LIGHTING_STYLE, style.name)
+    }
+
+    fun setNotificationLightingSystemMode(mode: Int, context: Context) {
+        notificationLightingSystemMode.intValue = mode
+        settingsRepository.saveNotificationLightingSystemMode(mode)
     }
 
     fun setNotificationLightingColorMode(mode: NotificationLightingColorMode, context: Context) {
@@ -1736,9 +1748,14 @@ class MainViewModel : ViewModel() {
         putExtra("sweep_position", notificationLightingSweepPosition.value.name)
         putExtra("sweep_thickness", notificationLightingSweepThickness.floatValue)
         putExtra("random_shapes", notificationLightingSweepRandomShapes.value)
+        putExtra("system_lighting_mode", notificationLightingSystemMode.intValue)
     }
 
     fun triggerNotificationLighting(context: Context) {
+        if (notificationLightingStyle.value == NotificationLightingStyle.SYSTEM) {
+            triggerNotificationLightingSystem(context)
+            return
+        }
         try {
             val intent = Intent(context, NotificationLightingService::class.java).apply {
                 addLightingExtras(isPreview = false)
@@ -1747,6 +1764,28 @@ class MainViewModel : ViewModel() {
         } catch (e: Exception) {
             // ignore
         }
+    }
+
+    fun triggerNotificationLightingSystem(context: Context) {
+        if (!ShellUtils.hasPermission(context)) return
+
+        val windowManager = context.getSystemService(Context.WINDOW_SERVICE) as android.view.WindowManager
+        val metrics = android.util.DisplayMetrics()
+        windowManager.defaultDisplay.getRealMetrics(metrics)
+        val centerX = metrics.widthPixels / 2
+        val centerY = metrics.heightPixels / 2
+
+        val command = if (notificationLightingSystemMode.intValue == 0) {
+            "cmd statusbar charging-ripple"
+        } else if (notificationLightingSystemMode.intValue == 1) {
+            "cmd statusbar auth-ripple custom $centerX $centerY"
+        } else {
+            val posX = (notificationLightingIndicatorX.value / 100f * metrics.widthPixels).toInt()
+            val posY = (notificationLightingIndicatorY.value / 100f * metrics.heightPixels).toInt()
+            "cmd statusbar auth-ripple custom $posX $posY"
+        }
+
+        ShellUtils.runCommand(context, command)
     }
 
     // Helper to show the overlay service

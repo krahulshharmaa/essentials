@@ -504,7 +504,7 @@ fun StatusBarIconSettingsUI(
                 modifier = Modifier.highlight(highlightSetting == "hide_notifications")
             )
         }
-        
+
         Text(
             text = stringResource(R.string.status_bar_icons_disclaimer),
             style = MaterialTheme.typography.bodySmall,
