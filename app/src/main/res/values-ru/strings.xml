@@ -340,7 +340,7 @@
     <string name="feat_hide_gesture_bar_title">Скрыть панель жестов</string>
     <string name="feat_other_customizations_title">Другие настройки</string>
     <string name="feat_other_customizations_desc">Дополнительные настройки и модификации системы</string>
-    <string name="feat_hide_gesture_bar_desc">In gesture navigation</string>
+    <string name="feat_hide_gesture_bar_desc">При навигации жестами</string>
     <string name="status_bar_icons_disclaimer">Обратите внимание, что реализация этих функций может зависеть от производителя оригинального оборудования, а некоторые из них могут быть вообще недоступны.</string>
     <!-- Network Type Picker -->
     <string name="network_type_other">Другое</string>
@@ -652,9 +652,9 @@
     <string name="action_check_whats_new">Проверьте \"Что нового?\"</string>
     <string name="welcome_back_title">Добро пожаловать в Essentials</string>
     <string name="action_see_whats_new">Что нового</string>
-    <string name="label_mode_default">Default</string>
-    <string name="label_mode_glove">Glove mode</string>
-    <string name="tile_scale_animations">Glove Mode</string>
+    <string name="label_mode_default">По умолчанию</string>
+    <string name="label_mode_glove">«В перчатках»</string>
+    <string name="tile_scale_animations">«В перчатках»</string>
     <string name="about_desc_scale_animations_tile">Быстрое переключение между профилями пользовательского интерфейса «По умолчанию» и «В перчатках»</string>
     <string name="label_increase_touch_sensitivity">Увеличение чувствительности сенсорного экран</string>
     <string name="desc_increase_touch_sensitivity">Улучшите чувствительность сенсорного экрана при использовании перчаток или защитных стекол</string>
