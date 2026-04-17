@@ -231,6 +231,8 @@ class MainViewModel : ViewModel() {
     val isAmbientMusicGlanceRandomShapesEnabled = mutableStateOf(true)
     val scaleAnimationsMode = mutableStateOf("default")
     val isTouchSensitivityEnabled = mutableStateOf(false)
+    val isAutoRotateEnabled = mutableStateOf(false)
+    val screenTimeout = mutableStateOf(30000L)
     val fontScale = mutableFloatStateOf(1.0f)
     val fontWeight = mutableIntStateOf(0)
     val animatorDurationScale = mutableFloatStateOf(1.0f)
@@ -949,6 +951,8 @@ class MainViewModel : ViewModel() {
         isNotificationGlanceSameAsLightingEnabled.value = settingsRepository.getBoolean(SettingsRepository.KEY_NOTIFICATION_GLANCE_SAME_AS_LIGHTING, true)
         scaleAnimationsMode.value = settingsRepository.getScaleAnimationsMode()
         isTouchSensitivityEnabled.value = settingsRepository.getTouchSensitivityEnabled()
+        isAutoRotateEnabled.value = settingsRepository.getAutoRotateEnabled()
+        screenTimeout.value = settingsRepository.getScreenTimeout()
         isPowerSaveModeEnabled.value = DeviceUtils.isPowerSaveMode(context)
         updateBlurState(context)
 
@@ -1393,7 +1397,9 @@ class MainViewModel : ViewModel() {
             transitionAnimationScale = transitionAnimationScale.floatValue,
             windowAnimationScale = windowAnimationScale.floatValue,
             smallestWidth = smallestWidth.intValue,
-            touchSensitivityEnabled = isTouchSensitivityEnabled.value
+            touchSensitivityEnabled = isTouchSensitivityEnabled.value,
+            autoRotateEnabled = isAutoRotateEnabled.value,
+            screenTimeout = screenTimeout.value
         )
         settingsRepository.saveScaleAnimationsProfile(oldMode, currentProfile)
 
@@ -1412,11 +1418,23 @@ class MainViewModel : ViewModel() {
         setAnimationScale(android.provider.Settings.Global.WINDOW_ANIMATION_SCALE, newProfile.windowAnimationScale)
         setSmallestWidth(newProfile.smallestWidth)
         setTouchSensitivityEnabled(newProfile.touchSensitivityEnabled)
+        setAutoRotateEnabled(newProfile.autoRotateEnabled)
+        setScreenTimeout(newProfile.screenTimeout)
     }
 
     fun setTouchSensitivityEnabled(enabled: Boolean) {
         isTouchSensitivityEnabled.value = enabled
         settingsRepository.setTouchSensitivityEnabled(enabled)
+    }
+
+    fun setAutoRotateEnabled(enabled: Boolean) {
+        isAutoRotateEnabled.value = enabled
+        settingsRepository.setAutoRotateEnabled(enabled)
+    }
+
+    fun setScreenTimeout(timeoutMs: Long) {
+        screenTimeout.value = timeoutMs
+        settingsRepository.setScreenTimeout(timeoutMs)
     }
 
     fun updateFontScale(scale: Float) {

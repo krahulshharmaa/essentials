@@ -980,7 +980,9 @@ class SettingsRepository(private val context: Context) {
             ScaleAnimationsProfile(
                 fontScale = 1.25f,
                 smallestWidth = 385,
-                touchSensitivityEnabled = true
+                touchSensitivityEnabled = true,
+                autoRotateEnabled = true,
+                screenTimeout = 60000L
             )
         } else {
             ScaleAnimationsProfile()
@@ -1004,6 +1006,38 @@ class SettingsRepository(private val context: Context) {
     fun setTouchSensitivityEnabled(enabled: Boolean) {
         try {
             android.provider.Settings.Secure.putInt(context.contentResolver, "touch_sensitivity_enabled", if (enabled) 1 else 0)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    fun getAutoRotateEnabled(): Boolean {
+        return try {
+            android.provider.Settings.System.getInt(context.contentResolver, android.provider.Settings.System.ACCELEROMETER_ROTATION, 0) == 1
+        } catch (e: Exception) {
+            false
+        }
+    }
+
+    fun setAutoRotateEnabled(enabled: Boolean) {
+        try {
+            android.provider.Settings.System.putInt(context.contentResolver, android.provider.Settings.System.ACCELEROMETER_ROTATION, if (enabled) 1 else 0)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    fun getScreenTimeout(): Long {
+        return try {
+            android.provider.Settings.System.getLong(context.contentResolver, android.provider.Settings.System.SCREEN_OFF_TIMEOUT, 30000L)
+        } catch (e: Exception) {
+            30000L
+        }
+    }
+
+    fun setScreenTimeout(timeoutMs: Long) {
+        try {
+            android.provider.Settings.System.putLong(context.contentResolver, android.provider.Settings.System.SCREEN_OFF_TIMEOUT, timeoutMs)
         } catch (e: Exception) {
             e.printStackTrace()
         }

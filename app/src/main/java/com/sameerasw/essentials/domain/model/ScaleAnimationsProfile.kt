@@ -7,5 +7,7 @@ data class ScaleAnimationsProfile(
     val transitionAnimationScale: Float = 1.0f,
     val windowAnimationScale: Float = 1.0f,
     val smallestWidth: Int = 360,
-    val touchSensitivityEnabled: Boolean = false
+    val touchSensitivityEnabled: Boolean = false,
+    val autoRotateEnabled: Boolean = false,
+    val screenTimeout: Long = 30000L
 )

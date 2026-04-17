@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -33,9 +34,15 @@ fun ConfigSliderItem(
     increment: Float = 0.1f,
     valueFormatter: (Float) -> String = { "%.0f".format(it) },
     onValueChangeFinished: (() -> Unit)? = null,
-    enabled: Boolean = true
+    enabled: Boolean = true,
+    iconRes: Int = 0,
+    description: String? = null,
+    icon: Int? = null,
+    subtitle: String? = null
 ) {
     val view = LocalView.current
+    val finalIconRes = icon ?: iconRes
+    val finalDescription = subtitle ?: description
 
     Column(
         modifier = modifier
@@ -46,11 +53,33 @@ fun ConfigSliderItem(
             )
             .padding(top = 16.dp, start = 16.dp, end = 16.dp, bottom = 8.dp)
     ) {
-        Text(
-            text = "$title: ${valueFormatter(value)}",
-            style = MaterialTheme.typography.bodyMedium,
-            color = if (enabled) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.38f)
-        )
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            if (finalIconRes != 0) {
+                Icon(
+                    painter = painterResource(id = finalIconRes),
+                    contentDescription = null,
+                    modifier = Modifier.padding(end = 12.dp).size(24.dp),
+                    tint = MaterialTheme.colorScheme.primary
+                )
+            }
+            Column(modifier = Modifier.weight(1f)) {
+                Text(
+                    text = "$title: ${valueFormatter(value)}",
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = if (enabled) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.38f)
+                )
+                if (finalDescription != null) {
+                    Text(
+                        text = finalDescription,
+                        style = MaterialTheme.typography.labelSmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f)
+                    )
+                }
+            }
+        }
         Row(
             modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically

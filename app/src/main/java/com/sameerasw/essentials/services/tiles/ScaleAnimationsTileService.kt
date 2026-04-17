@@ -45,7 +45,9 @@ class ScaleAnimationsTileService : BaseTileService() {
             transitionAnimationScale = settingsRepository.getAnimationScale(android.provider.Settings.Global.TRANSITION_ANIMATION_SCALE),
             windowAnimationScale = settingsRepository.getAnimationScale(android.provider.Settings.Global.WINDOW_ANIMATION_SCALE),
             smallestWidth = settingsRepository.getSmallestWidth(),
-            touchSensitivityEnabled = settingsRepository.getTouchSensitivityEnabled()
+            touchSensitivityEnabled = settingsRepository.getTouchSensitivityEnabled(),
+            autoRotateEnabled = settingsRepository.getAutoRotateEnabled(),
+            screenTimeout = settingsRepository.getScreenTimeout()
         )
         settingsRepository.saveScaleAnimationsProfile(oldMode, currentProfile)
 
@@ -65,5 +67,7 @@ class ScaleAnimationsTileService : BaseTileService() {
         settingsRepository.setAnimationScale(android.provider.Settings.Global.WINDOW_ANIMATION_SCALE, profile.windowAnimationScale)
         settingsRepository.setSmallestWidth(profile.smallestWidth)
         settingsRepository.setTouchSensitivityEnabled(profile.touchSensitivityEnabled)
+        settingsRepository.setAutoRotateEnabled(profile.autoRotateEnabled)
+        settingsRepository.setScreenTimeout(profile.screenTimeout)
     }
 }

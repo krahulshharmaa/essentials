@@ -75,6 +75,35 @@ fun TextAnimationsSettingsUI(
                 checked = viewModel.isTouchSensitivityEnabled.value,
                 onCheckedChange = { viewModel.setTouchSensitivityEnabled(it) }
             )
+            com.sameerasw.essentials.ui.components.cards.IconToggleItem(
+                title = stringResource(R.string.label_auto_rotate),
+                subtitle = stringResource(R.string.desc_auto_rotate),
+                icon = R.drawable.rounded_mobile_rotate_24,
+                checked = viewModel.isAutoRotateEnabled.value,
+                onCheckedChange = { viewModel.setAutoRotateEnabled(it) }
+            )
+
+        val timeoutValues = listOf(15000L, 30000L, 60000L, 120000L, 300000L, 600000L, 1800000L)
+        val currentTimeoutIndex = timeoutValues.indexOf(viewModel.screenTimeout.value).coerceAtLeast(0)
+
+            com.sameerasw.essentials.ui.components.sliders.ConfigSliderItem(
+                title = stringResource(R.string.label_screen_timeout),
+                value = currentTimeoutIndex.toFloat(),
+                onValueChange = { index ->
+                    viewModel.setScreenTimeout(timeoutValues[index.toInt()])
+                },
+                valueRange = 0f..(timeoutValues.size - 1).toFloat(),
+                steps = timeoutValues.size - 2,
+                valueFormatter = { index ->
+                    val ms = timeoutValues[index.toInt()]
+                    when {
+                        ms < 60000 -> context.getString(R.string.unit_seconds, (ms / 1000).toInt())
+                        ms == 60000L -> context.getString(R.string.unit_minute)
+                        else -> context.getString(R.string.unit_minutes, (ms / 60000).toInt())
+                    }
+                },
+                icon = R.drawable.rounded_timer_24
+            )
         }
 
         // Text Section
