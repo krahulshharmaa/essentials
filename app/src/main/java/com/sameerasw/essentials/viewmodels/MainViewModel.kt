@@ -44,6 +44,7 @@ import com.sameerasw.essentials.domain.model.NotificationLightingSide
 import com.sameerasw.essentials.domain.model.NotificationLightingStyle
 import com.sameerasw.essentials.domain.model.NotificationLightingSweepPosition
 import com.sameerasw.essentials.domain.model.SearchableItem
+import com.sameerasw.essentials.domain.model.ScaleAnimationsProfile
 import com.sameerasw.essentials.domain.model.UpdateInfo
 import com.sameerasw.essentials.domain.registry.SearchRegistry
 import com.sameerasw.essentials.services.CaffeinateWakeLockService
@@ -228,6 +229,7 @@ class MainViewModel : ViewModel() {
     val isBatteryWidgetBackgroundEnabled = mutableStateOf(true)
     val isAmbientMusicGlanceDockedModeEnabled = mutableStateOf(false)
     val isAmbientMusicGlanceRandomShapesEnabled = mutableStateOf(true)
+    val scaleAnimationsMode = mutableStateOf("default")
     val fontScale = mutableFloatStateOf(1.0f)
     val fontWeight = mutableIntStateOf(0)
     val animatorDurationScale = mutableFloatStateOf(1.0f)
@@ -944,6 +946,7 @@ class MainViewModel : ViewModel() {
         isNotificationGlanceEnabled.value = settingsRepository.getBoolean(SettingsRepository.KEY_NOTIFICATION_GLANCE_ENABLED)
         isAodForceTurnOffEnabled.value = settingsRepository.getBoolean(SettingsRepository.KEY_AOD_FORCE_TURN_OFF_ENABLED)
         isNotificationGlanceSameAsLightingEnabled.value = settingsRepository.getBoolean(SettingsRepository.KEY_NOTIFICATION_GLANCE_SAME_AS_LIGHTING, true)
+        scaleAnimationsMode.value = settingsRepository.getScaleAnimationsMode()
         isPowerSaveModeEnabled.value = DeviceUtils.isPowerSaveMode(context)
         updateBlurState(context)
 
@@ -1374,6 +1377,37 @@ class MainViewModel : ViewModel() {
     fun setAmbientMusicGlanceRandomShapesEnabled(enabled: Boolean) {
         isAmbientMusicGlanceRandomShapesEnabled.value = enabled
         settingsRepository.putBoolean(SettingsRepository.KEY_AMBIENT_MUSIC_GLANCE_RANDOM_SHAPES, enabled)
+    }
+
+    fun switchScaleAnimationsMode(mode: String) {
+        val oldMode = scaleAnimationsMode.value
+        if (oldMode == mode) return
+
+        // 1. Save current state to old profile slot
+        val currentProfile = ScaleAnimationsProfile(
+            fontScale = fontScale.floatValue,
+            fontWeight = fontWeight.intValue,
+            animatorDurationScale = animatorDurationScale.floatValue,
+            transitionAnimationScale = transitionAnimationScale.floatValue,
+            windowAnimationScale = windowAnimationScale.floatValue,
+            smallestWidth = smallestWidth.intValue
+        )
+        settingsRepository.saveScaleAnimationsProfile(oldMode, currentProfile)
+
+        // 2. Load new profile
+        val newProfile = settingsRepository.getScaleAnimationsProfile(mode)
+        
+        // 3. Update mode
+        scaleAnimationsMode.value = mode
+        settingsRepository.setScaleAnimationsMode(mode)
+
+        // 4. Apply new profile
+        setFontScale(newProfile.fontScale)
+        setFontWeight(newProfile.fontWeight)
+        setAnimationScale(android.provider.Settings.Global.ANIMATOR_DURATION_SCALE, newProfile.animatorDurationScale)
+        setAnimationScale(android.provider.Settings.Global.TRANSITION_ANIMATION_SCALE, newProfile.transitionAnimationScale)
+        setAnimationScale(android.provider.Settings.Global.WINDOW_ANIMATION_SCALE, newProfile.windowAnimationScale)
+        setSmallestWidth(newProfile.smallestWidth)
     }
 
     fun updateFontScale(scale: Float) {

@@ -11,6 +11,7 @@ import com.sameerasw.essentials.domain.model.NotificationLightingStyle
 import com.sameerasw.essentials.domain.model.NotificationLightingSweepPosition
 import com.sameerasw.essentials.domain.model.DnsPreset
 import com.sameerasw.essentials.domain.model.TrackedRepo
+import com.sameerasw.essentials.domain.model.ScaleAnimationsProfile
 import com.sameerasw.essentials.domain.model.github.GitHubUser
 import com.sameerasw.essentials.utils.RootUtils
 import com.sameerasw.essentials.utils.ShizukuUtils
@@ -196,6 +197,9 @@ class SettingsRepository(private val context: Context) {
         const val KEY_PRIVATE_DNS_PRESETS = "private_dns_presets"
         const val KEY_APRIL_FOOLS_SHOWN = "april_fools_shown"
         const val KEY_WHATS_NEW_LAST_SHOWN_COUNTER = "whats_new_last_shown_counter"
+        const val KEY_SCALE_ANIMATIONS_MODE = "scale_animations_mode"
+        const val KEY_SCALE_ANIMATIONS_DEFAULT_PROFILE = "scale_animations_default_profile"
+        const val KEY_SCALE_ANIMATIONS_GLOVE_PROFILE = "scale_animations_glove_profile"
     }
 
     // Observe changes
@@ -952,6 +956,40 @@ class SettingsRepository(private val context: Context) {
 
     fun resetPrivateDnsPresets() {
         savePrivateDnsPresets(getDefaultDnsPresets())
+    }
+
+    fun getScaleAnimationsMode(): String = getString(KEY_SCALE_ANIMATIONS_MODE, "default") ?: "default"
+    fun setScaleAnimationsMode(mode: String) = putString(KEY_SCALE_ANIMATIONS_MODE, mode)
+
+    fun getScaleAnimationsProfile(mode: String): ScaleAnimationsProfile {
+        val key = if (mode == "glove") KEY_SCALE_ANIMATIONS_GLOVE_PROFILE else KEY_SCALE_ANIMATIONS_DEFAULT_PROFILE
+        val json = prefs.getString(key, null)
+        return if (json != null) {
+            try {
+                gson.fromJson(json, ScaleAnimationsProfile::class.java)
+            } catch (e: Exception) {
+                getDefaultScaleAnimationsProfile(mode)
+            }
+        } else {
+            getDefaultScaleAnimationsProfile(mode)
+        }
+    }
+
+    private fun getDefaultScaleAnimationsProfile(mode: String): ScaleAnimationsProfile {
+        return if (mode == "glove") {
+            ScaleAnimationsProfile(
+                fontScale = 1.25f,
+                smallestWidth = 385
+            )
+        } else {
+            ScaleAnimationsProfile()
+        }
+    }
+
+    fun saveScaleAnimationsProfile(mode: String, profile: ScaleAnimationsProfile) {
+        val key = if (mode == "glove") KEY_SCALE_ANIMATIONS_GLOVE_PROFILE else KEY_SCALE_ANIMATIONS_DEFAULT_PROFILE
+        val json = gson.toJson(profile)
+        putString(key, json)
     }
 
 }

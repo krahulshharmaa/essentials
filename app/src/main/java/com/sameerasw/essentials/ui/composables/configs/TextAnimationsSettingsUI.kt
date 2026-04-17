@@ -24,6 +24,9 @@ import com.sameerasw.essentials.R
 import com.sameerasw.essentials.ui.components.containers.RoundedCardContainer
 import com.sameerasw.essentials.ui.components.sliders.ConfigSliderItem
 import com.sameerasw.essentials.utils.HapticUtil
+import com.sameerasw.essentials.ui.components.pickers.SegmentedPicker
+import androidx.compose.material3.Icon
+import androidx.compose.ui.res.painterResource
 import com.sameerasw.essentials.viewmodels.MainViewModel
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
@@ -42,6 +45,28 @@ fun TextAnimationsSettingsUI(
             .padding(horizontal = 16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
+
+        RoundedCardContainer(spacing = 2.dp) {
+            SegmentedPicker(
+                items = listOf("default", "glove"),
+                selectedItem = viewModel.scaleAnimationsMode.value,
+                onItemSelected = { viewModel.switchScaleAnimationsMode(it) },
+                labelProvider = {
+                    when (it) {
+                        "glove" -> context.getString(R.string.label_mode_glove)
+                        else -> context.getString(R.string.label_mode_default)
+                    }
+                },
+                iconProvider = {
+                    when (it) {
+                        "glove" -> Icon(painterResource(R.drawable.round_front_hand_24), null)
+                        else -> Icon(painterResource(R.drawable.rounded_front_hand_24), null)
+                    }
+                },
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
+
         // Text Section
         Text(
             text = stringResource(R.string.settings_section_text),
