@@ -63,6 +63,8 @@
     <string name="feat_ambient_music_glance_desc">Aperçu du média joué sur le mode Always-on</string>
     <string name="ambient_glance_docked_mode_title">Mode docké</string>
     <string name="ambient_glance_docked_mode_desc">Garder la superposition visible indéfiniment quand de la musique est jouée sur le mode Always-on</string>
+    <string name="ambient_glance_random_shapes_title">Random shapes</string>
+    <string name="ambient_glance_random_shapes_desc">Use various Material 3 shapes for the album art</string>
     <string name="feat_notification_glance_title">Aperçu des notifications</string>
     <string name="feat_notification_glance_desc">Garder le mode Always-on tant qu\'il y a des notifications</string>
     <string name="notification_glance_same_as_lighting_title">Mêmes applis que les notifications lumineuses</string>
@@ -161,6 +163,8 @@
     <string name="flashlight_pulse_title">Clignotement de la de lampe torche</string>
     <string name="flashlight_pulse_facedown_title">Seulement quand le téléphone est vers le bas</string>
     <string name="flashlight_pulse_same_as_lighting_title">Mêmes applis que les notifications lumineuses</string>
+    <string name="flashlight_pulse_max_brightness">Max brightness</string>
+    <string name="flashlight_pulse_preview">Preview pulse</string>
     <string name="settings_section_style">Style</string>
     <string name="notification_lighting_stroke_adjustment_section">Ajustement du trait</string>
     <string name="notification_lighting_corner_radius_title">Rayon des coins</string>
