@@ -341,8 +341,8 @@ Sin embargo, sí te permite reanudarla desde la lista de aplicaciones del lanzad
     <string name="hide_notification_icons_desc">Ocultar todos los iconos de notificaciones entrantes</string>
     <string name="feat_hide_gesture_bar_title">Ocultar la barra de gestos</string>
     <string name="feat_hide_gesture_bar_desc">En la navegación por gestos</string>
-    <string name="feat_hide_gesture_bar_on_launcher_title">Show on launcher</string>
-    <string name="feat_hide_gesture_bar_on_launcher_desc">Dynamically show the gesture bar only when on the home screen</string>
+    <string name="feat_hide_gesture_bar_on_launcher_title">Mostrar en el lanzador</string>
+    <string name="feat_hide_gesture_bar_on_launcher_desc">Mostrar dinámicamente la barra de gestos solo cuando estés en la pantalla de inicio</string>
     <string name="feat_circle_to_search_gesture_title">Gesto de Círculo para buscar</string>
     <string name="feat_circle_to_search_gesture_desc">Mantén pulsada la zona inferior para activar Círculo para buscar</string>
     <string name="feat_other_customizations_title">Otras personalizaciones</string>
