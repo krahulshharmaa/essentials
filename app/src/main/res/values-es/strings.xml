@@ -46,7 +46,7 @@
     <string name="volume_up">Subir volumen</string>
     <string name="volume_down">Bajar volumen</string>
     <string name="action_toggle_flashlight">Alternar linterna</string>
-    <string name="action_media_play_pause">Reproducir/pausar medios</string>
+    <string name="action_media_play_pause">Reproducir/pausar multimedia</string>
     <string name="action_media_next">Siguiente medio</string>
     <string name="action_media_previous">Medio anterior</string>
     <string name="action_toggle_vibrate">Alternar vibración</string>
