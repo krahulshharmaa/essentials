@@ -71,12 +71,12 @@
     <string name="notification_glance_same_as_lighting_title">Las mismas aplicaciones que la iluminación de notificaciones</string>
     <string name="notification_glance_desc">Esta función activará dinámicamente la Pantalla Siempre Encendida (AOD) cuando llegue una notificación de una aplicación seleccionada y la desactivará cuando todas las notificaciones correspondientes se hayan descartado. Elige las aplicaciones o usa la misma selección que para la iluminación de notificaciones.</string>
     <string name="grant_notification_access">Conceder acceso a las notificaciones</string>
-    <string name="action_toggle_media_volume">Alternar volumen de medios</string>
+    <string name="action_toggle_media_volume">Activar o desactivar el volumen multimedia</string>
     <string name="button_remap_screen_off_hint">Cuando la pantalla esté apagada, mantén pulsado el botón seleccionado para activar la acción que le hayas asignado. En los dispositivos Pixel, esta acción solo se activa si la función AOD está activada, debido a limitaciones del sistema.</string>
     <string name="button_remap_screen_on_hint">Cuando la pantalla esté encendida, mantén pulsado el botón seleccionado para activar la acción que se le ha asignado.</string>
     <string name="flashlight_intensity_title">Intensidad de la linterna</string>
     <string name="flashlight_fade_title">Fundido de entrada y salida</string>
-    <string name="flashlight_fade_desc">Alternar suavemente la linterna</string>
+    <string name="flashlight_fade_desc">Activar o desactivar la linterna suavemente</string>
     <string name="flashlight_global_title">Controles globales</string>
     <string name="flashlight_global_desc">Activar la linterna con fundido de entrada de forma global</string>
     <string name="flashlight_adjust_intensity_title">Ajustar la intensidad</string>
@@ -518,9 +518,9 @@ Sin embargo, sí te permite reanudarla desde la lista de aplicaciones del lanzad
     <string name="search_qs_private_dns_title">DNS privado</string>
     <string name="search_qs_private_dns_desc">Alternar modos de DNS privado (Desactivado/Automático/Nombre de host)</string>
     <string name="search_qs_usb_debugging_title">Depuración USB</string>
-    <string name="search_qs_usb_debugging_desc">Alternar la opción de desarrollador de depuración USB</string>
+    <string name="search_qs_usb_debugging_desc">Activar/desactivar la opción de desarrollador \"Depuración USB\"</string>
     <string name="search_remap_enable_title">Habilitar reasignación de botones</string>
-    <string name="search_remap_enable_desc">Alternancia maestra para reasignación de botones de volumen</string>
+    <string name="search_remap_enable_desc">Interruptor principal para reasignar los botones de volumen</string>
     <string name="search_remap_haptic_title">Reasignar retroalimentación háptica</string>
     <string name="search_remap_haptic_desc">Retroalimentación de vibración cuando se presiona el botón reasignado</string>
     <string name="search_remap_flashlight_title">Alternar linterna</string>
