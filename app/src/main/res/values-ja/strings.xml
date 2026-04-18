@@ -64,8 +64,8 @@
     <string name="feat_ambient_music_glance_desc">AODにメディアの情報を表示</string>
     <string name="ambient_glance_docked_mode_title">ドックモード</string>
     <string name="ambient_glance_docked_mode_desc">AODで音楽を再生している間、無期限にオーバーレイを表示します</string>
-    <string name="ambient_glance_random_shapes_title">Random shapes</string>
-    <string name="ambient_glance_random_shapes_desc">Use various Material 3 shapes for the album art</string>
+    <string name="ambient_glance_random_shapes_title">ランダムな形</string>
+    <string name="ambient_glance_random_shapes_desc">アルバムアートにさまざまなMaterial 3の形状を使用する</string>
     <string name="feat_notification_glance_title">通知を表示</string>
     <string name="feat_notification_glance_desc">Keep AOD on while notifications are pending</string>
     <string name="notification_glance_same_as_lighting_title">通知ライトと同じアプリ</string>
