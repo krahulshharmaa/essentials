@@ -347,7 +347,7 @@ Sin embargo, sí te permite reanudarla desde la lista de aplicaciones del lanzad
     <string name="feat_circle_to_search_gesture_desc">Mantén pulsada la zona inferior para activar Círculo para buscar</string>
     <string name="feat_other_customizations_title">Otras personalizaciones</string>
     <string name="feat_other_customizations_desc">Ajustes y modificaciones adicionales del sistema</string>
-    <string name="status_bar_icons_disclaimer">Tenga en cuenta que la implementación de estas opciones puede depender del OEM y es posible que algunas no funcionen en absoluto.</string>
+    <string name="status_bar_icons_disclaimer">Ten en cuenta que la implementación de estas opciones puede depender del fabricante (OEM) y algunas podrían no funcionar en absoluto.</string>
     <!-- Network Type Picker -->
     <string name="network_type_other">Otro</string>
     <!-- Search -->
@@ -428,23 +428,23 @@ Sin embargo, sí te permite reanudarla desde la lista de aplicaciones del lanzad
     <string name="action_share">Compartir</string>
     <string name="watermark_exif_settings">Configuración EXIF</string>
     <string name="watermark_exif_focal_length">Longitud focal</string>
-    <string name="watermark_exif_aperture">Abertura</string>
+    <string name="watermark_exif_aperture">Apertura</string>
     <string name="watermark_exif_iso">ISO</string>
     <string name="watermark_exif_shutter_speed">Velocidad de obturación</string>
     <string name="watermark_exif_date">Fecha y hora</string>
-    <string name="watermark_move_to_top">Mover hacia arriba</string>
+    <string name="watermark_move_to_top">Mover a la parte superior</string>
     <string name="watermark_left_align">Alinear a la izquierda</string>
     <string name="watermark_text_size_brand">Tamaño de la marca</string>
-    <string name="watermark_text_size_data">Tamaño de datos</string>
+    <string name="watermark_text_size_data">Tamaño de los datos</string>
     <string name="watermark_text_size_custom">Tamaño del texto</string>
-    <string name="watermark_font_options">Tamaño de fuente</string>
+    <string name="watermark_font_options">Tamaño de la fuente</string>
     <string name="watermark_custom_text">Texto personalizado</string>
     <string name="watermark_custom_text_hint">Introduce tu texto...</string>
     <string name="watermark_spacing">Espaciado</string>
-    <string name="watermark_border_width">Ancho del borde</string>
+    <string name="watermark_border_width">Grosor del borde</string>
     <string name="watermark_border_corners">Esquinas redondeadas</string>
     <string name="watermark_color_section">Color</string>
-    <string name="watermark_logo_section">Logo</string>
+    <string name="watermark_logo_section">Logotipo</string>
     <string name="watermark_logo_show">Mostrar logotipo</string>
     <string name="watermark_logo_size">Tamaño del logotipo</string>
     <string name="watermark_edit_texts">Editar textos de marcas de agua</string>
@@ -461,21 +461,21 @@ Sin embargo, sí te permite reanudarla desde la lista de aplicaciones del lanzad
     <string name="calendar_sync_periodic_title">Sincronización periódica</string>
     <string name="calendar_sync_periodic_desc">Sincronización cada 15 minutos si se encuentran cambios</string>
     <string name="calendar_sync_sync_now">Sincronizar ahora</string>
-    <string name="calendar_sync_manual_sync_desc">Activar sincronización inmediata para mirar</string>
+    <string name="calendar_sync_manual_sync_desc">Iniciar sincronización inmediata con el reloj</string>
     <string name="calendar_sync_no_calendars">No se encontraron calendarios locales</string>
     <string name="calendar_sync_sync_started">Se inició la sincronización del calendario</string>
     <!-- Search Settings -->
-    <string name="search_haptic_title">Widget de retroalimentación háptica</string>
-    <string name="search_haptic_desc">Elija retroalimentación háptica para toques de widgets</string>
+    <string name="search_haptic_title">Vibración háptica del widget</string>
+    <string name="search_haptic_desc">“Elige la respuesta háptica para los toques en el widget</string>
     <string name="search_smart_wifi_title">WiFi inteligente</string>
-    <string name="search_smart_wifi_desc">Ocultar datos móviles cuando WiFi está conectado</string>
+    <string name="search_smart_wifi_desc">Ocultar los datos móviles cuando haya Wi‑Fi conectado</string>
     <string name="search_smart_data_title">Datos inteligentes</string>
-    <string name="search_smart_data_desc">Ocultar datos móviles en ciertos modos</string>
+    <string name="search_smart_data_desc">Ocultar los datos móviles en ciertos modos</string>
     <string name="search_reset_icons_title">Restablecer todos los iconos</string>
-    <string name="search_reset_icons_desc">Restablecer la visibilidad del icono de la barra de estado a los valores predeterminados</string>
+    <string name="search_reset_icons_desc">Restablecer la visibilidad de los iconos de la barra de estado a los valores predeterminados</string>
     <string name="search_caffeinate_abort_screen_off_title">Cancelar Cafeína con la pantalla apagada</string>
     <string name="search_caffeinate_abort_screen_off_desc">Apagar automáticamente Cafeína al bloquear manualmente el dispositivo</string>
-    <string name="search_lighting_style_title">Estilo de iluminación</string>
+    <string name="search_lighting_style_title">Estilo de iluminación de la linterna</string>
     <string name="search_lighting_style_desc">Elige entre Trazo, Resplandor, Girador y más</string>
     <string name="search_corner_radius_title">Radio de esquina</string>
     <string name="search_corner_radius_desc">Ajustar el radio de la esquina de la iluminación de notificación.</string>
@@ -483,7 +483,7 @@ Sin embargo, sí te permite reanudarla desde la lista de aplicaciones del lanzad
     <string name="search_skip_silent_desc">No mostrar iluminación para notificaciones silenciosas</string>
     <string name="search_flashlight_pulse_title">Pulso de linterna</string>
     <string name="search_flashlight_pulse_desc">Pulse lentamente la linterna para recibir nuevas notificaciones</string>
-    <string name="search_only_facing_down_title">Sólo mirando hacia abajo</string>
+    <string name="search_only_facing_down_title">Solo mientras esté boca abajo</string>
     <string name="search_only_facing_down_desc">Linterna de pulso solo cuando el dispositivo está boca abajo</string>
     <string name="snooze_no_channels_discovered">Aún no se han descubierto canales del sistema. Aparecerán aquí una vez detectados.</string>
     <string name="search_qs_blur_title">Desenfoque de la interfaz de usuario</string>
