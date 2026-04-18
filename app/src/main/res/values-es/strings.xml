@@ -9,7 +9,7 @@
     <string name="frozen_app_shortcut_label">Aplicación congelada</string>
     <string name="screen_off_widget_label">Widget vacío para apagar la pantalla</string>
     <string name="app_freezing_tile_label">Congelación de aplicaciones</string>
-    <string name="flashlight_pulse_tile_label">Pulso</string>
+    <string name="flashlight_pulse_tile_label">Parpadeo de la linterna</string>
     <string name="check_pre_releases_label">Buscar versiones preliminares</string>
     <string name="check_pre_releases_desc">Podría ser inestable</string>
     <string name="label_default_tab">Pestaña predeterminada</string>
