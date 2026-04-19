@@ -90,7 +90,7 @@
     <!-- Caffeinate / Permissions -->
     <string name="permission_show_notification_title">Mostrar notificación</string>
     <string name="permission_post_notifications_title">Notificaciones de publicaciones</string>
-    <string name="permission_post_notifications_desc">Permite que la aplicación muestre notificaciones.</string>
+    <string name="permission_post_notifications_desc">Permite que la aplicación muestre notificaciones</string>
     <string name="permission_grant_action">Conceder permiso</string>
     <string name="caffeinate_notification_title">Cafeína activa</string>
     <string name="caffeinate_active">Activo</string>
@@ -105,7 +105,7 @@
     <string name="caffeinate_timeout_10m">10 m</string>
     <string name="caffeinate_timeout_30m">30 m</string>
     <string name="perm_notif_policy_title">Acceso a No molestar</string>
-    <string name="perm_notif_policy_desc">Requerido para alternar entre los modos de sonido, vibración y silencio.</string>
+    <string name="perm_notif_policy_desc">Requerido para alternar entre los modos de sonido, vibración y silencio</string>
     <string name="caffeinate_timeout_1h">1 h</string>
     <string name="caffeinate_timeout_infinity">∞</string>
     <string name="caffeinate_starting_in">Comenzando en %1$ds…</string>
@@ -164,7 +164,7 @@ Sin embargo, sí te permite reanudarla desde la lista de aplicaciones del lanzad
     <string name="settings_section_flashlight_pulse">Destellos de la Linterna</string>
     <string name="flashlight_pulse_title">Destellos de la linterna</string>
     <string name="flashlight_pulse_facedown_title">Solo mientras esté boca abajo</string>
-    <string name="flashlight_pulse_same_as_lighting_title">Las mismas aplicaciones que la iluminación de notificaciones.</string>
+    <string name="flashlight_pulse_same_as_lighting_title">Las mismas aplicaciones que la iluminación de notificaciones</string>
     <string name="flashlight_pulse_max_brightness">Brillo máximo</string>
     <string name="flashlight_pulse_preview">Vista previa de los destellos</string>
     <string name="settings_section_style">Estilo</string>
@@ -605,7 +605,7 @@ Sin embargo, sí te permite reanudarla desde la lista de aplicaciones del lanzad
     <string name="label_up_to_date">Actualizado</string>
     <string name="feat_app_updates_desc">Realice un seguimiento y descargue las últimas versiones de sus aplicaciones favoritas directamente desde GitHub.</string>
     <string name="error_invalid_repo_format">Formato no válido. Utiliza propietario/repositorio o la URL de GitHub</string>
-    <string name="error_generic_search">Se produjo un error durante la búsqueda.</string>
+    <string name="error_generic_search">Se produjo un error durante la búsqueda</string>
     <string name="label_auto">Auto</string>
     <string name="label_options">Opciones</string>
     <string name="option_allow_prereleases">Consultar prelanzamientos</string>
@@ -681,13 +681,13 @@ Sin embargo, sí te permite reanudarla desde la lista de aplicaciones del lanzad
     <string name="action_what_is_this">¿Qué es esto?</string>
     <string name="update_available_title">Actualización disponible</string>
     <string name="about_desc_your_android">Echa un vistazo a las especificaciones de hardware y software de tu dispositivo con todo detalle. Esta información se obtiene de GSMArena y de las propiedades del sistema para ofrecerte una descripción general completa de tu dispositivo Android.</string>
-    <string name="about_desc_ambient_music_glance">Ambient Music Glance muestra una superposición de Now Playing en la pantalla de bloqueo cuando la música se reproduce y la reproducción cambia. \n\nSi tu dispositivo no admite superposiciones sobre AOD, puedes optar por el protector de pantalla Ambience añadido en los Ajustes de Android como alternativa mientras se carga.</string>
-    <string name="about_desc_notification_lighting">Iluminación de notificaciones añade un hermoso efecto de iluminación de los  bordes cuando recibes notificaciones.\n\nPuedes personalizar el estilo, los colores y el comportamiento de la animación. Funciona incluso cuando la pantalla está apagada (depende del OEM) o encima de tu aplicación actual. Elige aplicaciones, prioridad de las notificaciones o qué comportamiento debería activar desde los controles disponibles. Si tu OEM no admite superposiciones por encima de AOD, utiliza la opción de Pantalla ambiente que se encuentra más abajo.</string>
+    <string name="about_desc_ambient_music_glance">Ambient Music Glance muestra una superposición de Now Playing en la pantalla de bloqueo cuando la música se reproduce y la reproducción cambia. \n\nSi tu dispositivo no admite superposiciones sobre AOD, puedes optar por el protector de pantalla \"Modo Ambiente\" añadido en los ajustes de Android como alternativa mientras se carga.</string>
+    <string name="about_desc_notification_lighting">Iluminación de notificaciones añade un hermoso efecto de iluminación en los bordes cuando recibes notificaciones.\n\nPuedes personalizar el estilo de la animación, los colores y el comportamiento. Funciona incluso cuando la pantalla está apagada (dependiendo del OEM) o por encima de la aplicación que estés usando. Elige las aplicaciones, la prioridad de las notificaciones o el comportamiento que debería activar el efecto desde los controles disponibles. Si tu OEM no admite superposiciones sobre la pantalla AOD, usa la opción de Pantalla ambiente que se encuentra más abajo.</string>
     <string name="about_desc_screen_off_widget">Apaga la pantalla fácilmente con un toque en un widget transparente y redimensionable que no añade iconos ni desordena tu pantalla de inicio.</string>
-    <string name="about_desc_statusbar_icons">Toma el control total sobre los íconos de tu barra de estado.\n\nOculta íconos específicos como WiFi, Bluetooth o Datos móviles para mantener limpia tu barra de estado. También puedes personalizar el formato del reloj y el indicador de batería con algunos controles inteligentes. Esta es la lista de controles AOSP disponibles, por lo que es posible que el sistema operativo de tu dispositivo no respete todos los controles.</string>
-    <string name="about_desc_caffeinate">Cafeína evita que la pantalla se apague automáticamente.\n\nMantiene la pantalla despierta durante un período específico o indefinidamente. Útil al leer artículos extensos o hacer referencia a una receta.</string>
-    <string name="about_desc_maps_power_saving">Obtenga el modo de ahorro de energía de Google Maps exclusivo de la serie Pixel 10 con un fondo negro mínimo para mostrar en la pantalla de bloqueo en cualquier dispositivo Android. Inicie una sesión de navegación, apague y vuelva a encender la pantalla.</string>
-    <string name="about_desc_flashlight_pulse">Pulse la linterna cuando reciba una notificación.\n\nCuando los dispositivos tienen soporte de hardware para atenuar la linterna, el pulso se animará suavemente.</string>
+    <string name="about_desc_statusbar_icons">Toma el control total sobre los iconos de tu barra de estado.\n\nOculta iconos específicos como WiFi, Bluetooth o Datos móviles para mantener limpia tu barra de estado. También puedes personalizar el formato del reloj y el indicador de batería con algunos controles inteligentes. Esta es la lista de controles AOSP disponibles, por lo que es posible que el sistema operativo de tu dispositivo no respete todos los controles.</string>
+    <string name="about_desc_caffeinate">Cafeína evita que la pantalla se apague automáticamente.\n\nMantiene la pantalla activa durante un tiempo específico o indefinidamente. Útil cuando lees artículos largos o sigues una receta.</string>
+    <string name="about_desc_maps_power_saving">Obtén el modo de ahorro de energía exclusivo de Google Maps para la serie Pixel 10, con un fondo totalmente negro minimalista que se muestra sobre tu pantalla de bloqueo en cualquier dispositivo Android. Inicia una sesión de navegación, apaga la pantalla y vuelve a encenderla.</string>
+    <string name="about_desc_flashlight_pulse">Haz que la linterna emita destellos cuando recibas una notificación.\n\nEn los dispositivos que tienen soporte de hardware para el atenuado de la linterna, el destello se animará de forma suave.</string>
     <string name="about_desc_snooze_notifications">Posponga las molestas notificaciones persistentes del sistema que no se pueden modificar de forma predeterminada. \n\nEspere hasta que llegue la notificación y luego acceda a esta función donde se enumerará el canal de notificación\'. Seleccione eso para posponer la próxima vez.\n\nAún se puede acceder a cualquier notificación pospuesta desde su historial de notificaciones en Android.</string>
     <string name="about_desc_quick_settings_tiles">Agregue mosaicos personalizados a su panel de Configuración rápida.\n\nMantenga presionado cualquiera de ellos para saber qué hacen.</string>
     <string name="about_desc_button_remap">Vuelva a asignar los botones de su hardware para realizar diferentes acciones y accesos directos.\n\nPersonalice lo que sucede cuando mantiene presionados los botones de volumen con ciertas condiciones. \n\nAlgunos comportamientos, como el disparador de pantalla apagada o los controles de la linterna, pueden depender del OEM en su implementación y es posible que no funcionen en todos los dispositivos como se esperaba. Algunos escenarios podrían solucionarse utilizando los permisos de Shizuku, pero es posible que no brinden la misma experiencia debido a las implementaciones.</string>
