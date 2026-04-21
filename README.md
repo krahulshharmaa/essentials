@@ -144,7 +144,8 @@ Essential tools, mods and workarounds for Pixels and other Androids
 - Android 8.0 or higher (Feature support may vary)
 - App permissions are optional, Grant necessary permissions for each feature
 - Targetted for Google Pixel devices extending to other Androids
-- Tested on Google Pixel 7 (Android 17 beta program)
+- Tested on Google Pixel 7 (Android 17 beta program).
+- > Some features and functionalities might not work as expected on other OEMs.
 
 # Screenshots
 
