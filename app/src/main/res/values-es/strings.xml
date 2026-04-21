@@ -734,9 +734,9 @@ Sin embargo, sí te permite reanudarla desde la lista de aplicaciones del lanzad
     <string name="about_desc_notification_glance">Controla automáticamente tu Pantalla Siempre Activa según tus notificaciones. 
 Cuando llegue un mensaje o alerta de una aplicación seleccionada, la Pantalla Siempre Activa permanecerá encendida hasta que descartes la notificación, asegurando que no te pierdas información importante sin gastar batería cuando no hay avisos.</string>
     <string name="about_desc_mono_audio">Combina los canales de audio en mono.\n\nÚtil cuando usas un solo auricular o con fines de accesibilidad.</string>
-    <string name="about_desc_flashlight_tile">Activa/desactiva la linterna.\n\nUna pulsación prolongada abre los controles para ajustar la intensidad, lo cual podría requerir una implementación de hardware que algunos dispositivos no incluyen.</string>
-    <string name="about_desc_stay_awake">Mantenga la pantalla activa mientras se carga.\n\nEvita que la pantalla entre en suspensión siempre que el dispositivo esté conectado a una fuente de alimentación adecuada para los desarrolladores durante la depuración.</string>
-    <string name="about_desc_nfc">Alternar NFC.\n\nHabilite o deshabilite rápidamente la comunicación de campo cercano para pagos y emparejamiento.</string>
+    <string name="about_desc_flashlight_tile">Activar/desactivar la linterna.\n\nUna pulsación prolongada abre los controles de ajuste de intensidad, lo cual puede requerir una implementación de hardware que algunos dispositivos podrían no tener.</string>
+    <string name="about_desc_stay_awake">Mantener la pantalla activa mientras se carga.\n\nEvita que la pantalla se apague mientras el dispositivo esté conectado a una fuente de alimentación, algo útil para desarrolladores durante la depuración.</string>
+    <string name="about_desc_nfc">Activar/desactivar el NFC.\n\nActiva o desactiva rápidamente la comunicación de campo cercano (NFC) para pagos y emparejamientos.</string>
     <string name="about_desc_adaptive_brightness">Alternar brillo adaptativo.\n\nHabilite o deshabilite el ajuste automático del brillo de la pantalla según la luz ambiental.</string>
     <string name="about_desc_private_dns">Alternar DNS privado.\n\nPase por los modos de proveedor de DNS privado, apagado y automático.</string>
     <string name="about_desc_usb_debugging">Alternar depuración USB.\n\nHabilite o deshabilite el acceso de depuración ADB directamente desde la configuración rápida.</string>
