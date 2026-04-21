@@ -829,7 +829,7 @@ Cuando llegue un mensaje o alerta de una aplicación seleccionada, la Pantalla S
     <string name="keyword_hide">ocultar</string>
     <string name="keyword_show">mostrar</string>
     <string name="keyword_visibility">visibilidad</string>
-    <string name="error_loading_apps">Error al cargar aplicaciones: %1$s</string>
+    <string name="error_loading_apps">Error al cargar las aplicaciones: %1$s</string>
     <string-array name="keywords_haptic">
         <item>vibración</item>
         <item>tocar</item>
@@ -839,11 +839,11 @@ Cuando llegue un mensaje o alerta de una aplicación seleccionada, la Pantalla S
         <item>red</item>
         <item>visibilidad</item>
         <item>auto</item>
-        <item>esconder</item>
+        <item>ocultar</item>
     </string-array>
     <string-array name="keywords_restore_default">
         <item>restaurar</item>
-        <item>por defecto</item>
+        <item>predeterminado</item>
         <item>icono</item>
     </string-array>
     <string-array name="keywords_keyboard">
@@ -851,22 +851,22 @@ Cuando llegue un mensaje o alerta de una aplicación seleccionada, la Pantalla S
         <item>altura</item>
         <item>relleno</item>
         <item>háptico</item>
-        <item>aporte</item>
+        <item>entrada</item>
     </string-array>
     <string-array name="keywords_flashlight">
         <item>luz</item>
-        <item>antorcha</item>
+        <item>linterna</item>
     </string-array>
     <string-array name="keywords_flashlight_pulse">
         <item>luz</item>
         <item>antorcha</item>
-        <item>legumbres</item>
+        <item>destello</item>
         <item>notificación</item>
     </string-array>
     <string-array name="keywords_qs_stay_awake">
         <item>despierto</item>
-        <item>revelador</item>
-        <item>fuerza</item>
+        <item>desarrollador</item>
+        <item>energía</item>
         <item>cargar</item>
     </string-array>
     <string-array name="keywords_notification_lighting">
@@ -883,53 +883,53 @@ Cuando llegue un mensaje o alerta de una aplicación seleccionada, la Pantalla S
         <item>seguro</item>
         <item>privacidad</item>
         <item>biométrico</item>
-        <item>rostro</item>
+        <item>cara</item>
         <item>huella dactilar</item>
     </string-array>
     <string-array name="keywords_sound_accessibility">
         <item>sonido</item>
         <item>accesibilidad</item>
-        <item>escuchar</item>
+        <item>oír</item>
     </string-array>
     <string-array name="keywords_timeout">
         <item>permanecer</item>
-        <item>en</item>
-        <item>se acabó el tiempo</item>
+        <item>encendido</item>
+        <item>tiempo de espera</item>
     </string-array>
     <string-array name="keywords_wake_display">
         <item>tocar</item>
         <item>despertar</item>
-        <item>mostrar</item>
+        <item>pantalla</item>
     </string-array>
     <string-array name="keywords_timer">
-        <item>minutero</item>
+        <item>temporizador</item>
         <item>esperar</item>
-        <item>se acabó el tiempo</item>
+        <item>tiempo de espera</item>
     </string-array>
-    <string name="label_keyboard_always_dark">Tema siempre oscuro</string>
-    <string name="label_keyboard_pitch_black">Tema negro</string>
+    <string name="label_keyboard_always_dark">Siempre tema oscuro</string>
+    <string name="label_keyboard_pitch_black">Tema negro absoluto</string>
     <string name="label_keyboard_clipboard_enabled">Historial del portapapeles</string>
     <string name="label_keyboard_long_press_symbols">Mantén pulsado para ver los símbolos</string>
     <string name="label_keyboard_accented_characters">Caracteres acentuados</string>
     <string-array name="keywords_selection">
         <item>lista</item>
-        <item>recogedor</item>
+        <item>selector</item>
         <item>selección</item>
     </string-array>
     <string-array name="keywords_visual_style">
         <item>animación</item>
         <item>visual</item>
-        <item>mirar</item>
+        <item>aspecto</item>
     </string-array>
     <string-array name="keywords_quiet_filter">
-        <item>tranquilo</item>
+        <item>silencioso</item>
         <item>ignorar</item>
-        <item>filtrar</item>
+        <item>filtro</item>
     </string-array>
     <string-array name="keywords_automation_lock">
         <item>automatización</item>
         <item>auto</item>
-        <item>cerrar</item>
+        <item>bloquear</item>
     </string-array>
     <string-array name="keywords_adb_debug">
         <item>adb</item>
@@ -937,18 +937,18 @@ Cuando llegue un mensaje o alerta de una aplicación seleccionada, la Pantalla S
         <item>depurar</item>
     </string-array>
     <string-array name="keywords_blur_glass">
-        <item>difuminar</item>
-        <item>vaso</item>
+        <item>desenfocar</item>
+        <item>cristal</item>
         <item>viñeta</item>
     </string-array>
     <string-array name="keywords_float_window">
         <item>flotar</item>
         <item>ventana</item>
-        <item>cubrir</item>
+        <item>superposición</item>
     </string-array>
     <string-array name="keywords_always_display">
         <item>siempre</item>
-        <item>mostrar</item>
+        <item>pantalla</item>
         <item>reloj</item>
     </string-array>
     <string-array name="keywords_audio_mute">
@@ -958,7 +958,7 @@ Cuando llegue un mensaje o alerta de una aplicación seleccionada, la Pantalla S
     </string-array>
     <string-array name="keywords_blue_filter">
         <item>azul</item>
-        <item>filtrar</item>
+        <item>filtro</item>
         <item>auto</item>
     </string-array>
     <string-array name="keywords_app_freezing">
@@ -973,11 +973,11 @@ Cuando llegue un mensaje o alerta de una aplicación seleccionada, la Pantalla S
     <string-array name="keywords_proximity_sensor">
         <item>proximidad</item>
         <item>sensor</item>
-        <item>rostro</item>
+        <item>cara</item>
         <item>abajo</item>
     </string-array>
     <string-array name="keywords_switch_master">
-        <item>cambiar</item>
+        <item>interruptor</item>
         <item>maestro</item>
     </string-array>
     <string-array name="keywords_vibration">
@@ -987,7 +987,7 @@ Cuando llegue un mensaje o alerta de una aplicación seleccionada, la Pantalla S
     <string-array name="keywords_battery">
         <item>batería</item>
         <item>cargar</item>
-        <item>mejoramiento</item>
+        <item>optimización</item>
         <item>píxel</item>
     </string-array>
     <!-- App Selection Extra -->
@@ -995,7 +995,7 @@ Cuando llegue un mensaje o alerta de una aplicación seleccionada, la Pantalla S
     <string name="toggle_show_system_apps">Mostrar aplicaciones del sistema</string>
     <!-- Updates -->
     <string name="status_up_to_date">Estas al día</string>
-    <string name="warning_pre_release">Esta es una versión preliminar y puede ser inestable.</string>
+    <string name="warning_pre_release">Esta es una versión preliminar y podría ser inestable.</string>
     <string name="release_notes_format">Notas de la versión %1$s</string>
     <string name="action_view_on_github">Ver en GitHub</string>
     <string name="action_download_apk">Descargar APK</string>
@@ -1003,8 +1003,8 @@ Cuando llegue un mensaje o alerta de una aplicación seleccionada, la Pantalla S
     <string name="haptic_none">Ninguno</string>
     <string name="haptic_subtle">Sutil</string>
     <string name="haptic_double">Doble</string>
-    <string name="haptic_click">Hacer clic</string>
-    <string name="haptic_tick">Garrapata</string>
+    <string name="haptic_click">Clic</string>
+    <string name="haptic_tick">Marca</string>
     <!-- Flashlight Intensity Overlay -->
     <string name="action_turn_off">Apagar</string>
     <string name="feature_flashlight_brightness_title">Brillo de la linterna</string>
@@ -1014,36 +1014,36 @@ Cuando llegue un mensaje o alerta de una aplicación seleccionada, la Pantalla S
     <string name="developed_by_format">Desarrollado por %1$s\ncon ❤\uFE0F de \uD83C\uDDF1\uD83C\uDDF0</string>
     <string name="action_website">Sitio web</string>
     <string name="action_contact">Contacto</string>
-    <string name="action_telegram">Telegrama</string>
-    <string name="action_support">Apoyo</string>
+    <string name="action_telegram">Telegram</string>
+    <string name="action_support">Soporte</string>
     <string name="label_other_apps">Otras aplicaciones</string>
-    <string name="app_airsync">Sincronización aérea</string>
+    <string name="app_airsync">AirSync</string>
     <string name="app_zenzero">ZenZero</string>
     <string name="app_canvas">Lienzo</string>
     <string name="app_tasks">Tareas</string>
     <string name="app_zero">Cero</string>
     <!-- Help & Guides -->
     <string name="help_guides_title">Ayuda y guías</string>
-    <string name="need_more_support_reach_out">¿Necesita más apoyo? Extiende la mano,</string>
-    <string name="action_collapse">Colapsar</string>
+    <string name="need_more_support_reach_out">¿Necesitas más ayuda? Ponte en contacto,</string>
+    <string name="action_collapse">Contraer</string>
     <string name="action_expand">Expandir</string>
-    <string name="support_group_label">Grupo de apoyo</string>
+    <string name="support_group_label">Grupo de soporte</string>
     <string name="email_label">Correo electrónico</string>
     <string name="send_email_chooser_title">Enviar correo electrónico</string>
     <string name="error_no_email_app">No hay ninguna aplicación de correo electrónico disponible</string>
     <string name="instruction_step_image_description">Paso %1$d Imagen</string>
     <!-- Instructions Content -->
-    <string name="instruction_section_perms_title">Permisos de accesibilidad, notificación y superposición</string>
-    <string name="instruction_step_perms_1">Es posible que reciba este mensaje de acceso denegado si intenta otorgar permisos confidenciales como accesibilidad, escucha de notificaciones o permisos de superposición. Para otorgarlo, consulte los pasos a continuación.</string>
-    <string name="instruction_step_perms_2">1. Vete a la página de información de la aplicación de Essentials.</string>
-    <string name="instruction_step_perms_3">2. Abra el menú de 3 puntos y seleccione \'Permitir configuraciones restringidas\'. Es posible que tengas que autentificarte con datos biométricos. Una vez hecho esto, intente otorgar el permiso nuevamente.</string>
+    <string name="instruction_section_perms_title">Permisos de accesibilidad, notificaciones y superposición</string>
+    <string name="instruction_step_perms_1">Es posible que recibas este mensaje de acceso denegado si intentas otorgar permisos sensibles como accesibilidad, escucha de notificaciones o permisos de superposición. Para concederlos, sigue los pasos que se indican a continuación.</string>
+    <string name="instruction_step_perms_2">1. Vete a la página de información de la aplicación Essentials.</string>
+    <string name="instruction_step_perms_3">2. Abre el menú de los 3 puntos y selecciona ‘Permitir ajustes restringidos’. Es posible que tengas que autenticarte con biometría. Una vez hecho, intenta conceder el permiso de nuevo.</string>
     <string name="instruction_section_shizuku_title">Shizuku</string>
-    <string name="instruction_section_shizuku_desc">Shizuku es una poderosa herramienta que permite que las aplicaciones utilicen las API del sistema directamente con ADB o permisos de root. Es necesario para funciones como el modo mínimo de Maps y App Freezer. Y seguirá concediendo algunos permisos como WRITE_SECURE_SETTINGS. \n\nPero la versión Play Store de Shizuku podría estar desactualizada y probablemente no se podrá utilizar en versiones recientes de Android, por lo que, en ese caso, obtenga la última versión de github o una bifurcación actualizada del mismo.</string>
+    <string name="instruction_section_shizuku_desc">Shizuku es una herramienta potente que permite a las aplicaciones usar APIs del sistema directamente mediante permisos ADB o de root. Es necesaria para funciones como el modo mínimo de Maps o el congelador de aplicaciones, y ayuda a conceder algunos permisos como WRITE_SECURE_SETTINGS. \n\nSin embargo, la versión de Shizuku disponible en Play Store podría estar desactualizada y probablemente no funcione en versiones recientes de Android, así que en ese caso, obtén la versión más reciente desde GitHub o desde un fork actualizado.</string>
     <string name="instruction_section_maps_title">Modo de ahorro de energía de mapas</string>
-    <string name="instruction_section_maps_desc">Esta función activa automáticamente el modo de ahorro de energía de Google Maps, que actualmente es exclusivo de la serie Pixel 10. Un miembro de la comunidad descubrió que todavía se puede utilizar en cualquier dispositivo Android iniciando la actividad minMode de mapas con privilegios de root. \n\nY luego, lo automaticé con Tasker para que se activara automáticamente cuando la pantalla se apaga durante una sesión de navegación y luego pude lograr lo mismo solo con permisos de tiempo de ejecución de Shizuku. \n\nEstá pensado para mostrarse en el AOD de la serie Pixel 10, por lo que es posible que aparezca un mensaje ocasional en la pantalla indicando que no es compatible con el modo horizontal. La aplicación no puede evitarlo y puedes ignorarlo.</string>
+    <string name="instruction_section_maps_desc">Esta función activa automáticamente el modo de ahorro de energía de Google Maps, que actualmente es exclusivo de la serie Pixel 10. Un miembro de la comunidad descubrió que aún puede usarse en cualquier dispositivo Android iniciando la actividad maps minMode con privilegios de root. \n\nLuego lo automaticé con Tasker para que se activara automáticamente cuando la pantalla se apaga durante una sesión de navegación, y después conseguí lo mismo usando solo permisos de ejecución de Shizuku. \n\nEstá diseñado para mostrarse sobre el AOD de la serie Pixel 10, por lo que, debido a eso, puede que veas ocasionalmente un mensaje en la pantalla indicando que no admite el modo horizontal. La app no puede evitarlo y puedes ignorarlo.</string>
     <string name="instruction_section_silent_title">Modo de sonido silencioso</string>
-    <string name="instruction_section_silent_desc">Es posible que hayas notado que el modo silencioso también activa DND. \n\nEsto se debe a cómo lo implementó Android, ya que incluso si usamos la misma API para cambiar al modo de vibración, por alguna razón activa DND junto con el modo silencioso y esto no se puede evitar en este momento. :(</string>
-    <string name="instruction_section_freeze_title">¿Qué es la congelación?</string>
+    <string name="instruction_section_silent_desc">Puede que hayas notado que el modo silencioso también activa \"No molestar\". \n\nEsto se debe a cómo lo implementó Android, ya que incluso si usamos la misma API para cambiar al modo de vibración, por alguna razón también activa \"No molestar\" junto con el modo silencioso y esto no se puede evitar en este momento. :(</string>
+    <string name="instruction_section_freeze_title">¿Qué es congelar?</string>
     <string name="instruction_section_freeze_desc">Pausa y mantente alejado de las distracciones de las aplicaciones mientras ahorras un poco de energía evitando que las aplicaciones se ejecuten en segundo plano. Adecuado para aplicaciones que se usan con poca frecuencia. \n\nNo se recomienda para ningún servicio de comunicación, ya que no le notificarán en caso de emergencia a menos que los descongele. \n\nSe recomienda encarecidamente no congelar las aplicaciones del sistema, ya que pueden provocar inestabilidad en el sistema. Procede con precaución, fuiste advertido. \n\nInspirado en Hail &lt;3</string>
     <string name="instruction_section_security_title">¿El bloqueo de aplicaciones y la seguridad de pantalla bloqueada son realmente seguros?</string>
     <string name="instruction_section_security_desc">Absolutamente no. \n\nCualquier aplicación de terceros no puede interferir al 100% con las interacciones habituales del dispositivo e incluso el bloqueo de la aplicación es solo una superposición sobre las aplicaciones seleccionadas para evitar la interacción con ellas. Existen soluciones alternativas y no es infalible. \n\nLo mismo ocurre con la función de seguridad de pantalla bloqueada que detecta a alguien que intenta interactuar con los mosaicos de red que, por alguna razón, todavía son accesibles para cualquier persona en Pixels. Entonces, si se esfuerzan lo suficiente, es posible que aún puedan cambiarlos y, especialmente si tiene agregado un mosaico QS de modo de vuelo, esta aplicación no puede evitar las interacciones con él. \n\nEstas características se crean solo como experimentos para uso liviano y nunca se recomendarían como soluciones sólidas de seguridad y privacidad. \n\nSeguro alternativas:\n - Bloqueo de aplicación: espacio privado y carpeta segura en Pixels y Samsung\n - Impedir el acceso a redes móviles: asegúrese de que la protección contra robo y la configuración de búsqueda de mi dispositivo sin conexión/apagado estén activadas. También puedes consultar Graphene OS.</string>
