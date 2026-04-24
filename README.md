@@ -1,6 +1,8 @@
 # Essentials
 
 Essential tools, mods and workarounds for Pixels and other Androids
+## [sameerasw.com/essentials](https://sameerasw.com/essentials)
+
 
 <p align="center">
 <img width="99%" src="https://github.com/user-attachments/assets/c0849951-4cf0-4a91-9964-f7c212977af1" />
