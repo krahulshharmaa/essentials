@@ -1,6 +1,7 @@
 package com.sameerasw.essentials.ui.components.pickers
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
@@ -64,7 +65,7 @@ fun HapticFeedbackPicker(
                     else -> ButtonGroupDefaults.connectedMiddleButtonShapes()
                 },
             ) {
-                Text(stringResource(label), fontSize = dimensionResource(R.dimen.font_small).value.sp)
+                Text(stringResource(label), fontSize = dimensionResource(R.dimen.font_small).value.sp, modifier= Modifier.basicMarquee(), maxLines = 1)
             }
         }
     }
