@@ -1009,17 +1009,17 @@
     <!-- QS / Activities -->
     <string name="error_unlock_network_settings">Ağ ayarlarını değiştirmek için telefonun kilidini açın</string>
     <!-- About Section -->
-    <string name="developed_by_format"> %1$s\nile ❤\uFE0F  tarafından geliştirildi \uD83C\uDDF1\uD83C\uDDF0</string>
+    <string name="developed_by_format">%1$s tarafından\n❤\uFE0F ile \uD83C\uDDF1\uD83C\uDDF0\'de geliştirildi</string>
     <string name="action_website">Web sitesi</string>
-    <string name="action_contact">Temas etmek</string>
-    <string name="action_telegram">Telgraf</string>
+    <string name="action_contact">İletişim</string>
+    <string name="action_telegram">Telegram</string>
     <string name="action_support">Destek</string>
     <string name="label_other_apps">Diğer Uygulamalar</string>
     <string name="app_airsync">AirSync</string>
     <string name="app_zenzero">ZenZero</string>
-    <string name="app_canvas">Tuval</string>
-    <string name="app_tasks">Görevler</string>
-    <string name="app_zero">Sıfır</string>
+    <string name="app_canvas">Canvas</string>
+    <string name="app_tasks">Tasks</string>
+    <string name="app_zero">Zero</string>
     <!-- Help & Guides -->
     <string name="help_guides_title">Yardım &amp; Kılavuzlar</string>
     <string name="need_more_support_reach_out">Daha fazla desteğe mi ihtiyacınız var? Ulaş,</string>
