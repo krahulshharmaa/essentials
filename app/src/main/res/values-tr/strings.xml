@@ -274,7 +274,7 @@
     <!-- Status Bar Categories -->
     <string name="status_bar_category_connectivity">Bağlantı</string>
     <string name="status_bar_category_phone_network">Telefon &amp; Ağ</string>
-    <string name="status_bar_category_audio_media">Ses&amp; Medya</string>
+    <string name="status_bar_category_audio_media">Ses &amp; Medya</string>
     <string name="status_bar_category_system_status">Sistem Durumu</string>
     <string name="status_bar_category_oem_specific">OEM\'e Özel</string>
     <!-- Status Bar Icons -->
@@ -393,7 +393,7 @@
     <!-- DIY Automation -->
     <string name="diy_create_trigger_title">Tetikleme Otomasyonu</string>
     <string name="diy_create_trigger_desc">Bir gözlemde tetiklenecek bir eylem planlayın</string>
-    <string name="diy_create_state_title">Devlet Otomasyonu</string>
+    <string name="diy_create_state_title">Durum Otomasyonu</string>
     <string name="diy_create_state_desc">Bir koşulun giriş ve çıkış durumuna göre yürütülecek bir eylem zamanlayın</string>
     <string name="diy_editor_new_title">Yeni Otomasyon</string>
     <string name="diy_editor_edit_title">Otomasyonu Düzenle</string>
@@ -572,7 +572,7 @@
     <string name="perm_action_copy_adb">ADB\'yi kopyala</string>
     <string name="perm_action_check">Kontrol etmek</string>
     <string name="perm_action_enable">Ayarlar\'da etkinleştir</string>
-    <string name="perm_action_how_to">Nasıl hibe edilir</string>
+    <string name="perm_action_how_to">Nasıl verilir</string>
     <string name="perm_battery_optimization_title">Pil Optimizasyonu</string>
     <string name="perm_battery_optimization_desc">Güç tasarrufu sağlamak için hizmetin sistem tarafından sonlandırılmadığından emin olun.</string>
     <!-- Tabs -->
@@ -589,7 +589,7 @@
     <string name="action_add_repo">Depo Ekle</string>
     <string name="action_edit_repo">Depoyu Düzenle</string>
     <string name="prompt_enter_repo_url">GitHub Depo URL\'sini veya \'sahip/depo\'yu girin</string>
-    <string name="action_track">İzlemek</string>
+    <string name="action_track">İzle</string>
     <string name="error_no_apk_found">En son sürümde APK bulunamadı</string>
     <string name="error_repo_not_found">Depo bulunamadı</string>
     <string name="label_latest_release">Son Sürüm</string>
@@ -600,7 +600,7 @@
     <string name="action_pick_app">Uygulama seç</string>
     <string name="action_select_app">Uygulamayı seçin</string>
     <string name="action_untrack">Takibi kaldır</string>
-    <string name="label_pending">Askıda olması</string>
+    <string name="label_pending">Askıda</string>
     <string name="label_up_to_date">Güncel</string>
     <string name="feat_app_updates_desc">Favori uygulamalarınızın en son sürümlerini doğrudan GitHub\'dan takip edin ve indirin.</string>
     <string name="error_invalid_repo_format">Geçersiz format. sahip/depo veya GitHub URL\'si kullanın</string>
@@ -732,7 +732,7 @@
     <string name="about_desc_aod">Her Zaman Açık Ekran\'a geçiş yapın.\n\nBilgileri bir bakışta görüntülemek için her zaman açık ekranı hızlı bir şekilde etkinleştirin veya devre dışı bırakın.</string>
     <string name="about_desc_notification_glance">Daima Açık Ekranınızı bildirimlerinize göre otomatik olarak kontrol edin. Seçilen bir uygulamadan bir mesaj veya uyarı geldiğinde, siz bildirimi kapatana kadar AOD açık kalacak ve hiçbir uyarı olmadığında pilinizi boşa harcamadan önemli bilgileri asla kaçırmamanızı sağlayacak.</string>
     <string name="about_desc_mono_audio">Ses kanallarını mono olarak birleştirin.\n\nTek bir kulaklık kullanıldığında veya erişilebilirlik amacıyla kullanışlıdır.</string>
-    <string name="about_desc_flashlight_tile">El fenerini açın/kapatın.\n\nA Uzun basıldığında, bazı cihazlarda eksik olabilecek donanım uygulaması gerektirebilecek yoğunluk ayarı kontrolleri açılır.</string>
+    <string name="about_desc_flashlight_tile">El fenerini açın/kapatın.\n\nUzun süre basılı tutmak, bazı cihazlarda bulunmayabilecek donanım uygulaması gerektiren yoğunluk ayarı kontrollerini açar.</string>
     <string name="about_desc_stay_awake">Şarj olurken ekranı uyanık tutun.\n\nHata ayıklama sırasında geliştiricilere uygun bir güç kaynağına bağlı olduğu sürece ekranın uyku moduna geçmesini engeller.</string>
     <string name="about_desc_nfc">NFC\'yi açın/kapatın.\n\nÖdemeler ve eşleştirme için Yakın Alan İletişimini hızla etkinleştirin veya devre dışı bırakın.</string>
     <string name="about_desc_adaptive_brightness">Uyarlanabilir parlaklığı açın/kapatın.\n\nOrtam ışığına göre otomatik ekran parlaklığı ayarını etkinleştirin veya devre dışı bırakın.</string>
@@ -769,12 +769,12 @@
     <string name="diy_select_trigger">Tetikleyiciyi Seçin</string>
     <string name="diy_create_app_title">Uygulama</string>
     <string name="diy_create_app_desc">Açık uygulamaya göre otomatikleştirin</string>
-    <string name="diy_select_state">Eyalet Seçin</string>
-    <string name="diy_select_action">Eylem Seç</string>
+    <string name="diy_select_state">Durum Seçin</string>
+    <string name="diy_select_action">Eylem Seçin</string>
     <string name="diy_in_action_label">Eylemde</string>
     <string name="diy_out_action_label">Çıkış Eylemi</string>
     <string name="action_cancel">İptal et</string>
-    <string name="action_save">Kaydetmek</string>
+    <string name="action_save">Kaydet</string>
     <string name="action_edit">Düzenlemek</string>
     <string name="action_delete">Silmek</string>
     <string name="action_enable">Olanak vermek</string>
@@ -1117,7 +1117,7 @@
     <string name="test_keyboard_hint">Klavyeyi test edin</string>
     <string name="label_keyboard_height">Klavye Yüksekliği</string>
     <string name="label_keyboard_bottom_padding">Alt Dolgu</string>
-    <string name="label_keyboard_haptics">Dokunsal Geribildirim</string>
+    <string name="label_keyboard_haptics">Dokunsal Geri bildirim</string>
     <string name="label_keyboard_roundness">Anahtar Yuvarlaklığı</string>
     <string name="label_keyboard_functions_bottom">İşlevleri aşağıya taşı</string>
     <string name="label_keyboard_functions_padding">Yan dolgu fonksiyonları</string>
@@ -1167,7 +1167,7 @@
     <string name="time_months_ago">%1$d ay önce</string>
     <string name="time_year_ago">%1$dy önce</string>
     <string name="action_retry">Yeniden dene</string>
-    <string name="action_start_sign_in">Oturum Açmayı Başlat</string>
+    <string name="action_start_sign_in">Oturum Açmayı başlat</string>
     <string name="auth_requesting_code">Cihaz kodu isteniyor...</string>
     <string name="auth_copy_code_instruction">1. Kodunuzu kopyalayın:</string>
     <string name="auth_paste_code_instruction">2. Kodu GitHub\'a yapıştırın:</string>
