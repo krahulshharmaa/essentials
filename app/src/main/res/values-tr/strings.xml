@@ -39,7 +39,7 @@
     <string name="flashlight_options_desc">Solmayı ve diğer ayarları düzenleyin</string>
     <string name="setting_pitch_black_theme_title">Zifiri siyah tema</string>
     <string name="setting_pitch_black_theme_desc">Karanlık modda saf siyah arka plan kullanın</string>
-    <string name="settings_section_haptic">Dokunsal Geri bildirim</string>
+    <string name="settings_section_haptic">Dokunsal Geri Bildirim</string>
     <string name="button_remap_section_long_press">Uzun Basmayı Yeniden Eşle</string>
     <string name="screen_off">Ekran Kapalı</string>
     <string name="screen_on">Ekran Açık</string>
@@ -344,7 +344,7 @@
     <string name="feat_hide_gesture_bar_desc">In gesture navigation</string>
     <string name="feat_hide_gesture_bar_on_launcher_title">Launcher\'da göster</string>
     <string name="feat_hide_gesture_bar_on_launcher_desc">Dinamik olarak hareket çubuğunu yalnızca ana ekranda olduğunuzda gösterir</string>
-    <string name="feat_circle_to_search_gesture_title">Aramak için Daire hareketi</string>
+    <string name="feat_circle_to_search_gesture_title">Aramak için daire hareketi</string>
     <string name="feat_circle_to_search_gesture_desc">Aramak için Daire\'yi başlatmak için alt alana uzun basın</string>
     <string name="feat_circle_to_search_gesture_height_title">Gesture zone height</string>
     <string name="feat_circle_to_search_gesture_height_desc">Adjust the height of the touch area at the bottom</string>
@@ -607,7 +607,7 @@
     <string name="error_no_apk_found">En son sürümde APK bulunamadı</string>
     <string name="error_repo_not_found">Depo bulunamadı</string>
     <string name="label_latest_release">Son Sürüm</string>
-    <string name="action_view_readme">BENİOku\'yu görüntüle</string>
+    <string name="action_view_readme">README dosyasını görüntüle</string>
     <string name="label_stars">%d Yıldız</string>
     <string name="label_installed_app">Yüklü uygulama</string>
     <string name="label_not_installed">Yüklenmedi</string>
@@ -1114,7 +1114,7 @@
     <string name="location_reached_alarm_subtitle">İnmeye hazırlanın</string>
     <string name="location_reached_dismiss">Azletmek</string>
     <string name="location_reached_toast_set">Hedef seti: %1$.4f, %2$.4f</string>
-    <string name="setting_use_root_title">Root kullan</string>
+    <string name="setting_use_root_title">Root erişimi kullan</string>
     <string name="setting_use_root_desc">Shizuku\'nun yerine</string>
     <string name="root_not_available_toast">Root erişimi mevcut değil. Lütfen root yöneticinizi kontrol edin.</string>
     <!-- System Keyboard -->
