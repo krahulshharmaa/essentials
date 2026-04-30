@@ -55,7 +55,9 @@ class ScreenOffAccessibilityService : AccessibilityService(), SensorEventListene
 
     private val preferenceChangeListener =
         android.content.SharedPreferences.OnSharedPreferenceChangeListener { _, key ->
-            if (key == "circle_to_search_gesture_enabled") {
+            if (key == "circle_to_search_gesture_enabled" || 
+                key == "circle_to_search_gesture_height" || 
+                key == "circle_to_search_preview_enabled") {
                 updateOmniOverlay()
             }
         }
@@ -166,7 +168,9 @@ class ScreenOffAccessibilityService : AccessibilityService(), SensorEventListene
     private fun updateOmniOverlay() {
         val prefs = getSharedPreferences("essentials_prefs", MODE_PRIVATE)
         val isGestureEnabled = prefs.getBoolean("circle_to_search_gesture_enabled", false)
-        omniGestureOverlayHandler.updateOverlay(isGestureEnabled)
+        val height = try { prefs.getFloat("circle_to_search_gesture_height", 48f) } catch (e: Exception) { 48f }
+        val isPreview = prefs.getBoolean("circle_to_search_preview_enabled", false)
+        omniGestureOverlayHandler.updateOverlay(isGestureEnabled, height, isPreview)
     }
 
     override fun onDestroy() {

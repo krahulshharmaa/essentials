@@ -136,6 +136,8 @@ class MainViewModel : ViewModel() {
     val isHideGestureBarEnabled = mutableStateOf(false)
     val isHideGestureBarOnLauncherEnabled = mutableStateOf(false)
     val isCircleToSearchGestureEnabled = mutableStateOf(false)
+    val circleToSearchGestureHeight = mutableFloatStateOf(48f)
+    val isCircleToSearchPreviewEnabled = mutableStateOf(false)
 
 
 
@@ -508,6 +510,14 @@ class MainViewModel : ViewModel() {
                         isCircleToSearchGestureEnabled.value = settingsRepository.getBoolean(key)
                     }
 
+                    SettingsRepository.KEY_CIRCLE_TO_SEARCH_GESTURE_HEIGHT -> {
+                        circleToSearchGestureHeight.floatValue = settingsRepository.getFloat(key, 48f)
+                    }
+
+                    SettingsRepository.KEY_CIRCLE_TO_SEARCH_PREVIEW_ENABLED -> {
+                        isCircleToSearchPreviewEnabled.value = settingsRepository.getBoolean(key)
+                    }
+
                     SettingsRepository.KEY_HIDE_GESTURE_BAR_ON_LAUNCHER_ENABLED -> {
                         isHideGestureBarOnLauncherEnabled.value = settingsRepository.getBoolean(key)
                         appContext?.let { updateAppDetectionService(it) }
@@ -547,6 +557,8 @@ class MainViewModel : ViewModel() {
         isAutoAccessibilityEnabled.value = settingsRepository.getBoolean(SettingsRepository.KEY_AUTO_ACCESSIBILITY_ENABLED)
         isHideGestureBarEnabled.value = settingsRepository.getBoolean(SettingsRepository.KEY_HIDE_GESTURE_BAR_ENABLED, false)
         isCircleToSearchGestureEnabled.value = settingsRepository.getBoolean(SettingsRepository.KEY_CIRCLE_TO_SEARCH_GESTURE_ENABLED, false)
+        circleToSearchGestureHeight.floatValue = settingsRepository.getFloat(SettingsRepository.KEY_CIRCLE_TO_SEARCH_GESTURE_HEIGHT, 48f)
+        isCircleToSearchPreviewEnabled.value = settingsRepository.getBoolean(SettingsRepository.KEY_CIRCLE_TO_SEARCH_PREVIEW_ENABLED, false)
         isHideGestureBarOnLauncherEnabled.value = settingsRepository.getBoolean(SettingsRepository.KEY_HIDE_GESTURE_BAR_ON_LAUNCHER_ENABLED, false)
         notificationLightingSystemMode.intValue = settingsRepository.getNotificationLightingSystemMode()
         if (isHideGestureBarEnabled.value) {
@@ -1301,6 +1313,16 @@ class MainViewModel : ViewModel() {
     fun setCircleToSearchGestureEnabled(enabled: Boolean, context: Context) {
         isCircleToSearchGestureEnabled.value = enabled
         settingsRepository.putBoolean(SettingsRepository.KEY_CIRCLE_TO_SEARCH_GESTURE_ENABLED, enabled)
+    }
+
+    fun setCircleToSearchGestureHeight(height: Float) {
+        circleToSearchGestureHeight.floatValue = height
+        settingsRepository.putFloat(SettingsRepository.KEY_CIRCLE_TO_SEARCH_GESTURE_HEIGHT, height)
+    }
+
+    fun setCircleToSearchPreviewEnabled(enabled: Boolean) {
+        isCircleToSearchPreviewEnabled.value = enabled
+        settingsRepository.putBoolean(SettingsRepository.KEY_CIRCLE_TO_SEARCH_PREVIEW_ENABLED, enabled)
     }
 
     fun setHideGestureBarOnLauncherEnabled(enabled: Boolean, context: Context) {
