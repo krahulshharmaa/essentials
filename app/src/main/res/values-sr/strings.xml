@@ -28,7 +28,7 @@
     <string name="setting_use_usage_access_desc">Instead of accessibility (Freeze, App Lock, Dynamic Night Light)</string>
     <!-- Button Remap -->
     <string name="button_remap_enable_title">Омогући пресликавање дугмета</string>
-    <string name="button_remap_use_shizuku_title">Користите Схизуку или Роот или Роот</string>
+    <string name="button_remap_use_shizuku_title">Use Shizuku or Root</string>
     <string name="button_remap_use_shizuku_desc">Ради са искљученим екраном (препоручено)</string>
     <string name="shizuku_not_running_toast">Шизуку не трчи</string>
     <string name="shizuku_detected_prefix">Детецтед %1$s</string>
