@@ -28,7 +28,7 @@
     <string name="setting_use_usage_access_desc">Statt des Barrierefreiheitsdienstes (Einfrieren, App-Sperre, Dynamisches Nachtlicht)</string>
     <!-- Button Remap -->
     <string name="button_remap_enable_title">Aktiviere Tastenneubelegung</string>
-    <string name="button_remap_use_shizuku_title">Use Shizuku</string>
+    <string name="button_remap_use_shizuku_title">Use Shizuku or Root</string>
     <string name="button_remap_use_shizuku_desc">Funktioniert mit ausgeschaltetem Display (Empfohlen)</string>
     <string name="shizuku_not_running_toast">Shizuku läuft nicht</string>
     <string name="shizuku_detected_prefix">Erkannte %1$s</string>
