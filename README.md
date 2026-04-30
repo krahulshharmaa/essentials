@@ -1,13 +1,25 @@
 # Essentials
 
 Essential tools, mods and workarounds for Pixels and other Androids
+## [sameerasw.com/essentials](https://sameerasw.com/essentials)
+
+<br>
 
 <p align="center">
 <img width="99%" src="https://github.com/user-attachments/assets/c0849951-4cf0-4a91-9964-f7c212977af1" />
 </p>
 
 <p align="center">
-  <a href="https://github.com/sameerasw/essentials/releases/latest"><img alt="GitHub Downloads (specific asset, all releases)" src="https://img.shields.io/github/downloads/sameerasw/essentials/app-release.apk?displayAssetName=false&style=for-the-badge&logo=android&logoColor=%23fff&labelColor=%2348C&color=%2348C">
+  <a href="https://www.reddit.com/r/MadebySameerasw"><img  width="99%"  alt=" reddit-banner" src="https://github.com/user-attachments/assets/a5197458-d64a-4c6a-a6a3-9e1f36030205" /></a>
+</p>
+<p align="center">
+  <a href="https://t.me/tidwib"><img  width="99%"  alt=" telegram-banner" src="https://github.com/user-attachments/assets/425b3cc1-9ac6-46ec-8f48-71c7af9c9ca2" /></a>
+</p>
+
+<br>
+
+<p align="center">
+  <a href="https://github.com/sameerasw/essentials/releases/latest"><img alt="GitHub Downloads (specific asset, all releases)" src="https://img.shields.io/github/downloads/sameerasw/essentials/app-release.apk?displayAssetName=false&style=for-the-badge&logo=android&logoColor=%23fff&labelColor=%2348C&color=%2348C">      
 </a>
   <a href="https://github.com/sameerasw/essentials/issues/new?template=bug_report.md"><img alt="GitHub Issues or Pull Requests by label" src="https://img.shields.io/github/issues/sameerasw/essentials/bug?style=for-the-badge&logo=openbugbounty&logoColor=%23fff&label=bug%3F&labelColor=%232a6&color=%232a6">
 </a>
@@ -55,7 +67,7 @@ Essential tools, mods and workarounds for Pixels and other Androids
 
 #### Security and Privacy
 
-- Screen locked security - Prevent network tile access when locked
+- Screen locked security - Disable QS tiles while locked
 - App lock
 
 #### Notifications and Alerts
@@ -70,6 +82,7 @@ Essential tools, mods and workarounds for Pixels and other Androids
 - Link actions - Intercept and share links from default apps
 - Button remap
 - Keyboard
+- Circle to search automations
 
 #### Widgets
 
@@ -78,11 +91,13 @@ Essential tools, mods and workarounds for Pixels and other Androids
 
 #### Display
 
-- Customize statusbar icons
+- Customize statusbar icons and modules
 - Dynamic Always on Display
 - Caffeinate to keep screen awake
 - Dynamic night light - App based night light
 - Scale and animation adjustments
+- Glove mode
+- Hide gesture bar
 
 #### Watch
 
@@ -135,7 +150,8 @@ Essential tools, mods and workarounds for Pixels and other Androids
 - Android 8.0 or higher (Feature support may vary)
 - App permissions are optional, Grant necessary permissions for each feature
 - Targetted for Google Pixel devices extending to other Androids
-- Tested on Google Pixel 7 (Android 17 beta program)
+- Tested on Google Pixel 7 (Android 17 beta program).
+- > Some features and functionalities might not work as expected on other OEMs. (Especially NothingOS and OneUI)
 
 # Screenshots
 
