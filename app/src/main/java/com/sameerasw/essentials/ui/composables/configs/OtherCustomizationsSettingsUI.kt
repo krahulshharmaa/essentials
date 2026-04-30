@@ -185,7 +185,7 @@ fun OtherCustomizationsSettingsUI(
                         requestingPermissionFor = PermissionModule.CIRCLE_TO_SEARCH
                     }
                 },
-                enabled = viewModel.isHideGestureBarEnabled.value || viewModel.isHideGestureBarOnLauncherEnabled.value,
+                enabled = true,
                 onDisabledClick = {
                     if (!isShellGranted || !isAccessibilityEnabled) {
                         requestingPermissionFor = PermissionModule.CIRCLE_TO_SEARCH
