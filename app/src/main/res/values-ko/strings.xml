@@ -28,7 +28,7 @@
     <string name="setting_use_usage_access_desc">Instead of accessibility (Freeze, App Lock, Dynamic Night Light)</string>
     <!-- Button Remap -->
     <string name="button_remap_enable_title">버튼 재매핑 활성화</string>
-    <string name="button_remap_use_shizuku_title">Shizuku 또는 루트 또는 루트 사용</string>
+    <string name="button_remap_use_shizuku_title">Use Shizuku or Root</string>
     <string name="button_remap_use_shizuku_desc">화면이 꺼진 상태에서도 작동(권장)</string>
     <string name="shizuku_not_running_toast">시즈쿠가 달리고 있지 않아요</string>
     <string name="shizuku_detected_prefix">감지됨 %1$s</string>
