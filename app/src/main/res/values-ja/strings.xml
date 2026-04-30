@@ -346,6 +346,8 @@
     <string name="feat_hide_gesture_bar_on_launcher_desc">ホーム画面にいるときのみ、ジェスチャーバーを動的に表示する</string>
     <string name="feat_circle_to_search_gesture_title">かこって検索ジェスチャー</string>
     <string name="feat_circle_to_search_gesture_desc">下部を長押ししてかこって検索を開きます</string>
+    <string name="feat_circle_to_search_gesture_height_title">Gesture zone height</string>
+    <string name="feat_circle_to_search_gesture_height_desc">Adjust the height of the touch area at the bottom</string>
     <string name="feat_other_customizations_title">その他のカスタマイズ</string>
     <string name="feat_other_customizations_desc">その他のシステムの調整と変更</string>
     <string name="status_bar_icons_disclaimer">これらのオプションの実装は機種によって異なる場合があり、一部は全く機能しない場合がありますのでご注意ください。</string>
@@ -412,6 +414,14 @@
     <string name="feat_screen_locked_security_title">ロック画面セキュリティ</string>
     <string name="feat_app_lock_title">アプリロック</string>
     <string name="feat_app_lock_desc">生体認証でアプリを保護</string>
+    <string name="app_lock_auto_lock_delay_title">Auto lock delay</string>
+    <string name="app_lock_auto_lock_delay_desc">After leaving the app</string>
+    <string name="app_lock_auto_lock_delay_none">None</string>
+    <string name="app_lock_auto_lock_delay_1min">1 minute</string>
+    <string name="app_lock_auto_lock_delay_5min">5 minutes</string>
+    <string name="app_lock_auto_lock_delay_10min">10 minutes</string>
+    <string name="app_lock_auto_lock_delay_20min">20 minutes</string>
+    <string name="app_lock_auto_lock_delay_30min">30 minutes</string>
     <string name="feat_freeze_title">フリーズ</string>
     <string name="feat_freeze_desc">あまり使わないアプリを無効にする</string>
     <string name="feat_watermark_title">ウォーターマーク</string>
