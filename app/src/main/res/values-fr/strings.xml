@@ -28,7 +28,7 @@
     <string name="setting_use_usage_access_desc">À la place de l\'accessibilité (Gel, Verrouillage d\'applis, Éclairage nocturne dynamique)</string>
     <!-- Button Remap -->
     <string name="button_remap_enable_title">Activer la réattribution de boutons</string>
-    <string name="button_remap_use_shizuku_title">Use Shizuku or Root</string>
+    <string name="button_remap_use_shizuku_title">Utiliser Shizuku ou l\'accès racine (root)</string>
     <string name="button_remap_use_shizuku_desc">Fonctionne avec l\'écran éteint (Recommandé)</string>
     <string name="shizuku_not_running_toast">Shizuku n\'est pas actif</string>
     <string name="shizuku_detected_prefix"> %1$s Détecté</string>
@@ -222,6 +222,8 @@
     <string name="tile_inactive">Inactif</string>
     <string name="tile_developer_options">Options pour les développeurs </string>
     <string name="about_desc_developer_options">Activez/désactivez facilement les Options pour les développeurs depuis un bloc dans les Réglages rapides. Cela peut réinitialiser certains paramètres développeurs que vous avez modifiés.</string>
+    <string name="tile_refresh_rate">Refresh Rate</string>
+    <string name="about_desc_refresh_rate_tile">Cycle between the system default and preset refresh rates directly from a Quick Settings tile using Shizuku.</string>
     <string name="nfc_tile_label">NFC</string>
     <string name="tile_private_dns">DNS Privé</string>
     <string name="tile_private_dns_auto">Auto</string>
@@ -339,7 +341,7 @@
     <string name="hide_notification_icons_title">Masquer les notifications</string>
     <string name="hide_notification_icons_desc">Masquer toutes les icônes de notification entrantes</string>
     <string name="feat_hide_gesture_bar_title">Masquer la barre de gestes</string>
-    <string name="feat_hide_gesture_bar_desc">Masquer la barre de navigation en bas</string>
+    <string name="feat_hide_gesture_bar_desc">In gesture navigation</string>
     <string name="feat_hide_gesture_bar_on_launcher_title">Afficher dans le lanceur</string>
     <string name="feat_hide_gesture_bar_on_launcher_desc">Afficher la barre de gestes de manière dynamique uniquement sur l\'écran d\'accueil</string>
     <string name="feat_circle_to_search_gesture_title">Geste « Entourez pour rechercher »</string>
@@ -518,6 +520,8 @@
     <string name="search_qs_private_dns_desc">Changer le mode de DNS privé (Désactivé/Auto/Nom d\'hôte)</string>
     <string name="search_qs_usb_debugging_title">Débogage USB</string>
     <string name="search_qs_usb_debugging_desc">Activer/désactiver le débogage USB</string>
+    <string name="search_qs_refresh_rate_title">Refresh Rate</string>
+    <string name="search_qs_refresh_rate_desc">Cycle between the system default and preset screen refresh rates</string>
     <string name="search_remap_enable_title">Activer la réattribution de boutons</string>
     <string name="search_remap_enable_desc">Basculer globalement la réattribution du bouton volume</string>
     <string name="search_remap_haptic_title">Reconfigurer le retour haptique</string>
@@ -1259,6 +1263,8 @@
     <string name="label_apps">Applis</string>
     <string name="feat_text_animations_title">Échelles et animations</string>
     <string name="feat_text_animations_desc">Ajustez les échelles et animations système</string>
+    <string name="feat_screen_refresh_rate_title">Screen Refresh Rate</string>
+    <string name="feat_screen_refresh_rate_desc">Set a fixed or ranged screen refresh rate</string>
     <string name="settings_section_text">Texte</string>
     <string name="label_font_scale">Taille de la police </string>
     <string name="label_font_weight">Épaisseur de la police </string>
@@ -1272,6 +1278,28 @@
     <string name="label_transition_animation_scale">Échelle d\'animation des transitions </string>
     <string name="label_window_animation_scale">Échelle d\'animation des fenêtres </string>
     <string name="about_desc_text_animations">Ajustez la taille de la police, son épaisseur et les vitesses d\'animations pour tout le système. Veuillez noter que certains paramètres peuvent nécessiter des permissions avancées ou un redémarrage pour certaines applis afin d\'appliquer les modifications. \n\nDes permissions additionnelles comme Shizuku ou l\'accès racine (root) peuvent être nécessaires pour l\'ajustement des échelles</string>
+    <string name="about_desc_screen_refresh_rate">Set a custom screen refresh rate using Shizuku. Fixed mode locks both the minimum and peak refresh rate to one value, while range mode lets you define separate minimum and peak values. Reset clears the custom override and returns the device to its system-managed refresh behavior.</string>
+    <string name="refresh_rate_section_mode">Mode</string>
+    <string name="refresh_rate_section_values">Refresh Rate</string>
+    <string name="refresh_rate_mode_fixed">Fixed</string>
+    <string name="refresh_rate_mode_range">Range</string>
+    <string name="refresh_rate_fixed_title">Fixed refresh rate</string>
+    <string name="refresh_rate_fixed_desc">Set both minimum and peak refresh rate to the same value</string>
+    <string name="refresh_rate_min_title">Minimum refresh rate</string>
+    <string name="refresh_rate_min_desc">Choose the lowest refresh rate the display may use</string>
+    <string name="refresh_rate_peak_title">Peak refresh rate</string>
+    <string name="refresh_rate_peak_desc">Choose the highest refresh rate the display may use</string>
+    <string name="refresh_rate_system_default">System</string>
+    <string name="refresh_rate_reset_desc">Remove the custom override and return to the system default refresh behavior</string>
+    <string name="msg_refresh_rate_permission_required">Shizuku permission required to adjust refresh rate</string>
+    <string name="search_refresh_rate_mode_title">Refresh Rate Mode</string>
+    <string name="search_refresh_rate_mode_desc">Switch between fixed and ranged refresh rate control</string>
+    <string name="search_refresh_rate_fixed_title">Fixed Refresh Rate</string>
+    <string name="search_refresh_rate_fixed_desc">Lock the display to one custom refresh rate</string>
+    <string name="search_refresh_rate_range_title">Refresh Rate Range</string>
+    <string name="search_refresh_rate_range_desc">Configure separate minimum and peak refresh rates</string>
+    <string name="search_refresh_rate_reset_title">Reset Refresh Rate</string>
+    <string name="search_refresh_rate_reset_desc">Clear the custom refresh rate override</string>
     <string name="feat_aod_force_turn_off_title">Forcer la désactivation du mode Always-on</string>
     <string name="feat_aod_force_turn_off_desc">Forcer la désactivation du mode Always-On quand il n\'y a aucune notification. Cela requiert la permission d\'accessibilité.</string>
     <string name="feat_auto_accessibility_title">Accessibilité Auto</string>
