@@ -28,7 +28,7 @@
     <string name="setting_use_usage_access_desc">En lugar de accesibilidad (Bloqueo de pantalla, Bloqueo de aplicaciones, Luz nocturna dinámica)</string>
     <!-- Button Remap -->
     <string name="button_remap_enable_title">Habilitar reasignación de botones</string>
-    <string name="button_remap_use_shizuku_title">Use Shizuku or Root</string>
+    <string name="button_remap_use_shizuku_title">Utiliza Shizuku o Root o Root</string>
     <string name="button_remap_use_shizuku_desc">Funciona con la pantalla apagada (Recomendado)</string>
     <string name="shizuku_not_running_toast">Shizuku no se está ejecutando</string>
     <string name="shizuku_detected_prefix">Detectado %1$s</string>
@@ -223,6 +223,8 @@ Sin embargo, sí te permite reanudarla desde la lista de aplicaciones del lanzad
     <string name="tile_inactive">Inactivo</string>
     <string name="tile_developer_options">Opciones de desarrollador</string>
     <string name="about_desc_developer_options">Activa o desactiva las Opciones de desarrollador del sistema desde un mosaico de Ajustes Rápidos. Esto puede restablecer algunas de las configuraciones de desarrollador que hayas modificado.</string>
+    <string name="tile_refresh_rate">Refresh Rate</string>
+    <string name="about_desc_refresh_rate_tile">Cycle between the system default and preset refresh rates directly from a Quick Settings tile using Shizuku.</string>
     <string name="nfc_tile_label">NFC</string>
     <string name="tile_private_dns">DNS privado</string>
     <string name="tile_private_dns_auto">Auto</string>
@@ -519,6 +521,8 @@ Sin embargo, sí te permite reanudarla desde la lista de aplicaciones del lanzad
     <string name="search_qs_private_dns_desc">Alternar modos de DNS privado (Desactivado/Automático/Nombre de host)</string>
     <string name="search_qs_usb_debugging_title">Depuración USB</string>
     <string name="search_qs_usb_debugging_desc">Activar/desactivar la opción de desarrollador \"Depuración USB\"</string>
+    <string name="search_qs_refresh_rate_title">Refresh Rate</string>
+    <string name="search_qs_refresh_rate_desc">Cycle between the system default and preset screen refresh rates</string>
     <string name="search_remap_enable_title">Habilitar reasignación de botones</string>
     <string name="search_remap_enable_desc">Interruptor principal para reasignar los botones de volumen</string>
     <string name="search_remap_haptic_title">Reasignar la retroalimentación háptica</string>
@@ -1015,7 +1019,7 @@ Cuando llegue un mensaje o alerta de una aplicación seleccionada, la Pantalla S
     <string name="action_website">Sitio web</string>
     <string name="action_contact">Contacto</string>
     <string name="action_telegram">Telegram</string>
-    <string name="action_support">Apoyo</string>
+    <string name="action_support">Apoyar</string>
     <string name="label_other_apps">Otras aplicaciones</string>
     <string name="app_airsync">AirSync</string>
     <string name="app_zenzero">ZenZero</string>
@@ -1261,6 +1265,8 @@ Cuando llegue un mensaje o alerta de una aplicación seleccionada, la Pantalla S
     <string name="label_apps">Aplicaciones</string>
     <string name="feat_text_animations_title">Escala y animaciones</string>
     <string name="feat_text_animations_desc">Ajustar la escala y las animaciones del sistema</string>
+    <string name="feat_screen_refresh_rate_title">Screen Refresh Rate</string>
+    <string name="feat_screen_refresh_rate_desc">Set a fixed or ranged screen refresh rate</string>
     <string name="settings_section_text">Texto</string>
     <string name="label_font_scale">Escala de la fuente</string>
     <string name="label_font_weight">Grosor de la fuente</string>
@@ -1274,6 +1280,28 @@ Cuando llegue un mensaje o alerta de una aplicación seleccionada, la Pantalla S
     <string name="label_transition_animation_scale">Escala de animación de transición</string>
     <string name="label_window_animation_scale">Escala de animación de ventana</string>
     <string name="about_desc_text_animations">Ajusta la escala y el grosor de la fuente en todo el sistema, así como la velocidad de las animaciones. Ten en cuenta que algunos ajustes pueden requerir permisos avanzados o reiniciar el dispositivo para que ciertas aplicaciones reflejen los cambios. \n\nEs posible que se necesiten permisos adicionales de Shizuku o acceso root para realizar ajustes de escala</string>
+    <string name="about_desc_screen_refresh_rate">Set a custom screen refresh rate using Shizuku. Fixed mode locks both the minimum and peak refresh rate to one value, while range mode lets you define separate minimum and peak values. Reset clears the custom override and returns the device to its system-managed refresh behavior.</string>
+    <string name="refresh_rate_section_mode">Mode</string>
+    <string name="refresh_rate_section_values">Refresh Rate</string>
+    <string name="refresh_rate_mode_fixed">Fixed</string>
+    <string name="refresh_rate_mode_range">Range</string>
+    <string name="refresh_rate_fixed_title">Fixed refresh rate</string>
+    <string name="refresh_rate_fixed_desc">Set both minimum and peak refresh rate to the same value</string>
+    <string name="refresh_rate_min_title">Minimum refresh rate</string>
+    <string name="refresh_rate_min_desc">Choose the lowest refresh rate the display may use</string>
+    <string name="refresh_rate_peak_title">Peak refresh rate</string>
+    <string name="refresh_rate_peak_desc">Choose the highest refresh rate the display may use</string>
+    <string name="refresh_rate_system_default">System</string>
+    <string name="refresh_rate_reset_desc">Remove the custom override and return to the system default refresh behavior</string>
+    <string name="msg_refresh_rate_permission_required">Shizuku permission required to adjust refresh rate</string>
+    <string name="search_refresh_rate_mode_title">Refresh Rate Mode</string>
+    <string name="search_refresh_rate_mode_desc">Switch between fixed and ranged refresh rate control</string>
+    <string name="search_refresh_rate_fixed_title">Fixed Refresh Rate</string>
+    <string name="search_refresh_rate_fixed_desc">Lock the display to one custom refresh rate</string>
+    <string name="search_refresh_rate_range_title">Refresh Rate Range</string>
+    <string name="search_refresh_rate_range_desc">Configure separate minimum and peak refresh rates</string>
+    <string name="search_refresh_rate_reset_title">Reset Refresh Rate</string>
+    <string name="search_refresh_rate_reset_desc">Clear the custom refresh rate override</string>
     <string name="feat_aod_force_turn_off_title">Forzar desactivación del AOD (Pantalla Siempre Activa)</string>
     <string name="feat_aod_force_turn_off_desc">Forzar la desactivación del AOD cuando no haya notificaciones. Requiere permiso de accesibilidad.</string>
     <string name="feat_auto_accessibility_title">Accesibilidad automática</string>
