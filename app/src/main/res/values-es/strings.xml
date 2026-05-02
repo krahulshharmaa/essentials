@@ -69,7 +69,7 @@
     <string name="feat_notification_glance_title">Vista rápida de notificaciones</string>
     <string name="feat_notification_glance_desc">Mantener AOD activado mientras las notificaciones estén pendientes</string>
     <string name="notification_glance_same_as_lighting_title">Las mismas aplicaciones que la iluminación de notificaciones</string>
-    <string name="notification_glance_desc">Esta función activará dinámicamente la Pantalla Siempre Encendida (AOD) cuando llegue una notificación de una aplicación seleccionada y la desactivará cuando todas las notificaciones correspondientes se hayan descartado. Elige las aplicaciones o usa la misma selección que para la iluminación de notificaciones.</string>
+    <string name="notification_glance_desc">Esta función activará dinámicamente la Pantalla Siempre Activa (AOD) cuando llegue una notificación de una aplicación seleccionada y la desactivará cuando todas las notificaciones correspondientes se hayan descartado. Elige las aplicaciones o usa la misma selección que para la iluminación de notificaciones.</string>
     <string name="grant_notification_access">Conceder acceso a las notificaciones</string>
     <string name="action_toggle_media_volume">Activar/desactivar el volumen multimedia</string>
     <string name="button_remap_screen_off_hint">Cuando la pantalla esté apagada, mantén pulsado el botón seleccionado para activar la acción que le hayas asignado. En los dispositivos Pixel, esta acción solo se activa si la función AOD está activada, debido a limitaciones del sistema.</string>
