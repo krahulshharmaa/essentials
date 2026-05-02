@@ -587,6 +587,7 @@
     <string name="perm_action_check">チェック</string>
     <string name="perm_action_enable">設定で有効にする</string>
     <string name="perm_action_how_to">付与の方法</string>
+    <string name="perm_action_granted">Granted</string>
     <string name="perm_battery_optimization_title">バッテリーの最適化を無視</string>
     <string name="perm_battery_optimization_desc">バッテリー節約のためにシステムがアプリを強制終了しないようにしてください。</string>
     <!-- Tabs -->
