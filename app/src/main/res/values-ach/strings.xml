@@ -587,6 +587,7 @@
     <string name="perm_action_check">Neno kapore</string>
     <string name="perm_action_enable">Yab i yub</string>
     <string name="perm_action_how_to">Kit me miiyo</string>
+    <string name="perm_action_granted">Granted</string>
     <string name="perm_battery_optimization_title">Yubu batri maber</string>
     <string name="perm_battery_optimization_desc">Nen ni tic ni pe ki neko ki jami ni me gwoko teko.</string>
     <!-- Tabs -->
