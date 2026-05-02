@@ -587,6 +587,7 @@
     <string name="perm_action_check">Kontrola</string>
     <string name="perm_action_enable">Povolit v Nastavení</string>
     <string name="perm_action_how_to">Jak udělit</string>
+    <string name="perm_action_granted">Granted</string>
     <string name="perm_battery_optimization_title">Optimalizace baterie</string>
     <string name="perm_battery_optimization_desc">Zajistěte, aby služba nebyla ukončena systémem, abyste ušetřili energii.</string>
     <!-- Tabs -->
