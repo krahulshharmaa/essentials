@@ -587,6 +587,7 @@
     <string name="perm_action_check">يفحص</string>
     <string name="perm_action_enable">تمكين في الإعدادات</string>
     <string name="perm_action_how_to">كيفية منح</string>
+    <string name="perm_action_granted">Granted</string>
     <string name="perm_battery_optimization_title">تحسين البطارية</string>
     <string name="perm_battery_optimization_desc">تأكد من عدم إيقاف الخدمة من قبل النظام لتوفير الطاقة.</string>
     <!-- Tabs -->
