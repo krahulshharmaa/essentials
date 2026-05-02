@@ -205,7 +205,7 @@ Sin embargo, sí te permite reanudarla desde la lista de aplicaciones del lanzad
     <string name="tile_bubbles">Burbujas</string>
     <string name="tile_sensitive_content">Contenido sensible</string>
     <string name="tile_tap_to_wake">Tocar para activar</string>
-    <string name="tile_aod">AOD (Pantalla siempre activa)</string>
+    <string name="tile_aod">AOD (Pantalla Siempre Activa)</string>
     <string name="tile_caffeinate">Cafeína</string>
     <string name="tile_sound_mode">Modo de sonido</string>
     <string name="tile_notification_lighting">Iluminación de notificaciones</string>
@@ -754,7 +754,7 @@ Cuando llegue un mensaje o alerta de una aplicación seleccionada, la Pantalla S
     <string name="about_desc_nfc">Activar/desactivar el NFC.\n\nActiva o desactiva rápidamente la comunicación de campo cercano (NFC) para pagos y emparejamientos.</string>
     <string name="about_desc_adaptive_brightness">Alternar brillo adaptativo.\n\nHabilite o deshabilite el ajuste automático del brillo de la pantalla según la luz ambiental.</string>
     <string name="about_desc_private_dns">Activar/desactivar el DNS privado.\n\nAlternar entre los modos Desactivado, Automático y Proveedor de DNS privado.</string>
-    <string name="about_desc_usb_debugging">Activar o desactivar la depuración USB.\n\nActiva o desactiva el acceso a la depuración ADB directamente desde los ajustes rápidos.</string>
+    <string name="about_desc_usb_debugging">Activar/desactivar la depuración USB.\n\nActiva o desactiva el acceso a la depuración ADB directamente desde los ajustes rápidos.</string>
     <string name="about_desc_color_picker">Inicia la herramienta cuentagotas para seleccionar colores, introducida en Android 17 BETA 2</string>
     <string name="about_desc_charge_optimization">Optimiza la duración de la batería limitando la carga máxima o usando la carga adaptativa. Esta función está diseñada especialmente para dispositivos Pixel para garantizar una mayor vida útil y ciclos de carga saludables.\n\nCréditos: TebbeUbben/ChargeQuickTile</string>
     <string name="action_download">Descargar</string>
