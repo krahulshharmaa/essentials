@@ -1197,7 +1197,7 @@ Cuando llegue un mensaje o alerta de una aplicación seleccionada, la Pantalla S
     <string name="search_sound_mode_behavior_title">Comportamiento del ciclo</string>
     <string name="search_sound_mode_behavior_desc">Elige los modos por los que se alternará</string>
     <string name="feat_ambient_music_title">Un vistazo a la música ambiental</string>
-    <string name="feat_ambient_music_desc">Un vistazo a los medios en la Pantalla Siempre Activa</string>
+    <string name="feat_ambient_music_desc">Un vistazo a los medios en AOD (Pantalla Siempre Activa)</string>
     <string name="feat_sound_haptics_title">Sonido y vibración</string>
     <string name="feat_sound_haptics_desc">Funciones de volumen y vibración</string>
     <string name="feat_security_privacy_title">Seguridad y privacidad</string>
