@@ -587,6 +587,7 @@
     <string name="perm_action_check">Kontroleer</string>
     <string name="perm_action_enable">Aktiveer in Instellings</string>
     <string name="perm_action_how_to">Hoe om toe te ken</string>
+    <string name="perm_action_granted">Granted</string>
     <string name="perm_battery_optimization_title">Battery optimering</string>
     <string name="perm_battery_optimization_desc">Maak seker dat die diens nie deur die stelsel doodgemaak word nie om krag te bespaar.</string>
     <!-- Tabs -->
