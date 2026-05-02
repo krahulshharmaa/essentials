@@ -139,6 +139,11 @@ class MainViewModel : ViewModel() {
     val circleToSearchGestureHeight = mutableFloatStateOf(48f)
     val isCircleToSearchPreviewEnabled = mutableStateOf(false)
 
+    // Live Wallpaper
+    val liveWallpaperSelectedVideo = mutableStateOf(SettingsRepository.LIVE_WALLPAPER_DEFAULT_VIDEO)
+    val liveWallpaperPlaybackTrigger = mutableStateOf(SettingsRepository.LIVE_WALLPAPER_TRIGGER_UNLOCK)
+    val liveWallpaperCustomVideos = mutableStateListOf<String>()
+
 
 
     data class CalendarAccount(
@@ -523,6 +528,19 @@ class MainViewModel : ViewModel() {
                         isHideGestureBarOnLauncherEnabled.value = settingsRepository.getBoolean(key)
                         appContext?.let { updateAppDetectionService(it) }
                     }
+
+                    SettingsRepository.KEY_LIVE_WALLPAPER_SELECTED_VIDEO -> {
+                        liveWallpaperSelectedVideo.value = settingsRepository.getLiveWallpaperSelectedVideo()
+                    }
+
+                    SettingsRepository.KEY_LIVE_WALLPAPER_PLAYBACK_TRIGGER -> {
+                        liveWallpaperPlaybackTrigger.value = settingsRepository.getLiveWallpaperPlaybackTrigger()
+                    }
+
+                    SettingsRepository.KEY_LIVE_WALLPAPER_CUSTOM_VIDEOS -> {
+                        liveWallpaperCustomVideos.clear()
+                        liveWallpaperCustomVideos.addAll(settingsRepository.getLiveWallpaperCustomVideos())
+                    }
                 }
             }
         }
@@ -795,6 +813,13 @@ class MainViewModel : ViewModel() {
         hapticFeedbackType.value = settingsRepository.getHapticFeedbackType()
         defaultTab.value = settingsRepository.getDIYTab()
         sentryReportMode.value = settingsRepository.getString(SettingsRepository.KEY_SENTRY_REPORT_MODE, "auto") ?: "auto"
+
+        // Live Wallpaper initialization
+        liveWallpaperSelectedVideo.value = settingsRepository.getLiveWallpaperSelectedVideo()
+        liveWallpaperPlaybackTrigger.value = settingsRepository.getLiveWallpaperPlaybackTrigger()
+        liveWallpaperCustomVideos.clear()
+        liveWallpaperCustomVideos.addAll(settingsRepository.getLiveWallpaperCustomVideos())
+
         checkCaffeinateActive(context)
 
         // Button Remap & Migration

@@ -212,6 +212,15 @@ class SettingsRepository(private val context: Context) {
         const val KEY_REFRESH_RATE_MIN = "refresh_rate_min"
         const val KEY_REFRESH_RATE_PEAK = "refresh_rate_peak"
         const val KEY_REFRESH_RATE_DEFAULT_PEAK_INFINITY = "refresh_rate_default_peak_infinity"
+
+        // Live Wallpaper
+        const val LIVE_WALLPAPER_PREFS_NAME = "live_wallpaper_prefs"
+        const val KEY_LIVE_WALLPAPER_SELECTED_VIDEO = "selected_video"
+        const val KEY_LIVE_WALLPAPER_PLAYBACK_TRIGGER = "playback_trigger"
+        const val KEY_LIVE_WALLPAPER_CUSTOM_VIDEOS = "custom_videos"
+        const val LIVE_WALLPAPER_DEFAULT_VIDEO = "my_video"
+        const val LIVE_WALLPAPER_TRIGGER_UNLOCK = "unlock"
+        const val LIVE_WALLPAPER_TRIGGER_SCREEN_ON = "screen_on"
     }
 
     // Observe changes
@@ -580,7 +589,8 @@ class SettingsRepository(private val context: Context) {
                 "essentials_prefs",
                 "caffeinate_prefs",
                 "link_prefs",
-                "diy_automations_prefs"
+                "diy_automations_prefs",
+                "live_wallpaper_prefs"
             )
 
             prefFiles.forEach { fileName ->
@@ -793,6 +803,48 @@ class SettingsRepository(private val context: Context) {
 
     fun isBatteryNotificationEnabled(): Boolean = getBoolean(KEY_BATTERY_NOTIFICATION_ENABLED, false)
     fun setBatteryNotificationEnabled(enabled: Boolean) = putBoolean(KEY_BATTERY_NOTIFICATION_ENABLED, enabled)
+
+    // Live Wallpaper Helpers
+    private val liveWallpaperPrefs: SharedPreferences by lazy {
+        context.getSharedPreferences(LIVE_WALLPAPER_PREFS_NAME, Context.MODE_PRIVATE)
+    }
+
+    fun getLiveWallpaperSelectedVideo(): String =
+        liveWallpaperPrefs.getString(KEY_LIVE_WALLPAPER_SELECTED_VIDEO, LIVE_WALLPAPER_DEFAULT_VIDEO)
+            ?: LIVE_WALLPAPER_DEFAULT_VIDEO
+
+    fun saveLiveWallpaperSelectedVideo(video: String) =
+        liveWallpaperPrefs.edit().putString(KEY_LIVE_WALLPAPER_SELECTED_VIDEO, video).apply()
+
+    fun getLiveWallpaperPlaybackTrigger(): String =
+        liveWallpaperPrefs.getString(KEY_LIVE_WALLPAPER_PLAYBACK_TRIGGER, LIVE_WALLPAPER_TRIGGER_UNLOCK)
+            ?: LIVE_WALLPAPER_TRIGGER_UNLOCK
+
+    fun saveLiveWallpaperPlaybackTrigger(trigger: String) =
+        liveWallpaperPrefs.edit().putString(KEY_LIVE_WALLPAPER_PLAYBACK_TRIGGER, trigger).apply()
+
+    fun getLiveWallpaperCustomVideos(): List<String> =
+        liveWallpaperPrefs.getString(KEY_LIVE_WALLPAPER_CUSTOM_VIDEOS, "")?.split(",")?.filter { it.isNotEmpty() }
+            ?: emptyList()
+
+    fun saveLiveWallpaperCustomVideos(videos: List<String>) =
+        liveWallpaperPrefs.edit().putString(KEY_LIVE_WALLPAPER_CUSTOM_VIDEOS, videos.joinToString(",")).apply()
+
+    fun addLiveWallpaperCustomVideo(uri: String) {
+        val current = getLiveWallpaperCustomVideos().toMutableList()
+        if (current.contains(uri)) {
+            current.remove(uri)
+        }
+        current.add(0, uri)
+        saveLiveWallpaperCustomVideos(if (current.size > 5) current.take(5) else current)
+    }
+
+    fun getLiveWallpaperAvailableVideos(): List<String> {
+        val raws = com.sameerasw.essentials.R.raw::class.java.fields.mapNotNull { field ->
+            try { field.name } catch (e: Exception) { null }
+        }
+        return raws + getLiveWallpaperCustomVideos()
+    }
 
     fun getFontScale(): Float {
         return try {

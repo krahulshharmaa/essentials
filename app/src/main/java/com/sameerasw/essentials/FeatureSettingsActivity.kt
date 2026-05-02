@@ -64,6 +64,7 @@ import com.sameerasw.essentials.ui.composables.configs.ButtonRemapSettingsUI
 import com.sameerasw.essentials.ui.composables.configs.CaffeinateSettingsUI
 import com.sameerasw.essentials.ui.composables.configs.DynamicNightLightSettingsUI
 import com.sameerasw.essentials.ui.composables.configs.KeyboardSettingsUI
+import com.sameerasw.essentials.ui.composables.configs.LiveWallpaperSettingsUI
 import com.sameerasw.essentials.ui.composables.configs.LocationReachedSettingsUI
 import com.sameerasw.essentials.ui.composables.configs.MapsPowerSavingSettingsUI
 import com.sameerasw.essentials.ui.composables.configs.NotificationLightingSettingsUI
@@ -643,6 +644,14 @@ class FeatureSettingsActivity : AppCompatActivity() {
 
                                     "Always on Display" -> {
                                         AlwaysOnDisplaySettingsUI(
+                                            viewModel = viewModel,
+                                            modifier = Modifier.padding(top = 16.dp),
+                                            highlightSetting = highlightSetting
+                                        )
+                                    }
+
+                                    "LiveWallpaper" -> {
+                                        LiveWallpaperSettingsUI(
                                             viewModel = viewModel,
                                             modifier = Modifier.padding(top = 16.dp),
                                             highlightSetting = highlightSetting

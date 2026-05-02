@@ -148,4 +148,9 @@ dependencies {
     implementation("org.jsoup:jsoup:1.15.3")
     implementation(libs.sentry.android)
     implementation(libs.androidx.graphics.shapes)
+
+    // Media3 for Live Wallpaper
+    implementation(libs.androidx.media3.exoplayer)
+    implementation(libs.androidx.media3.common)
+
 }
