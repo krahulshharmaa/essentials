@@ -587,6 +587,7 @@
     <string name="perm_action_check">Vérifier</string>
     <string name="perm_action_enable">Activer dans les paramètres</string>
     <string name="perm_action_how_to">Comment accorder</string>
+    <string name="perm_action_granted">Granted</string>
     <string name="perm_battery_optimization_title">Optimisation de la batterie</string>
     <string name="perm_battery_optimization_desc">Assure que le service ne soit pas fermé par le système pour économise de l\'énergie.</string>
     <!-- Tabs -->
