@@ -587,6 +587,7 @@
     <string name="perm_action_check">Перевірте</string>
     <string name="perm_action_enable">Увімкнути в налаштуваннях</string>
     <string name="perm_action_how_to">Як надати</string>
+    <string name="perm_action_granted">Granted</string>
     <string name="perm_battery_optimization_title">Оптимізація батареї</string>
     <string name="perm_battery_optimization_desc">Переконайтеся, що служба не припиняється системою, щоб заощадити енергію.</string>
     <!-- Tabs -->
