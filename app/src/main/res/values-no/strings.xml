@@ -587,6 +587,7 @@
     <string name="perm_action_check">Sjekke</string>
     <string name="perm_action_enable">Aktiver i Innstillinger</string>
     <string name="perm_action_how_to">Hvordan gi</string>
+    <string name="perm_action_granted">Granted</string>
     <string name="perm_battery_optimization_title">Batterioptimalisering</string>
     <string name="perm_battery_optimization_desc">Sørg for at tjenesten ikke blir drept av systemet for å spare strøm.</string>
     <!-- Tabs -->
