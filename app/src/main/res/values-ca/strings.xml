@@ -587,6 +587,7 @@
     <string name="perm_action_check">Comproveu</string>
     <string name="perm_action_enable">Activa a Configuració</string>
     <string name="perm_action_how_to">Com concedir</string>
+    <string name="perm_action_granted">Granted</string>
     <string name="perm_battery_optimization_title">Optimització de la bateria</string>
     <string name="perm_battery_optimization_desc">Assegureu-vos que el sistema no destrueixi el servei per estalviar energia.</string>
     <!-- Tabs -->
