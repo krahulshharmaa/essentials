@@ -53,7 +53,7 @@ fun ScreenLockedSecuritySettingsUI(
                     title = if (!isShizukuAvailable) R.string.perm_shizuku_title else R.string.perm_shizuku_grant_title,
                     description = if (!isShizukuAvailable) R.string.perm_shizuku_desc else R.string.perm_shizuku_grant_desc,
                     dependentFeatures = listOf(R.string.screen_locked_security_title),
-                    actionLabel = if (!isShizukuAvailable) R.string.perm_shizuku_install_action else R.string.perm_action_grant,
+                    actionLabel = if (!isShizukuAvailable) R.string.perm_shizuku_install_action else if (isShellGranted) R.string.perm_action_granted else R.string.perm_action_grant,
                     action = {
                         if (!isShizukuAvailable) {
                             val intent = Intent(

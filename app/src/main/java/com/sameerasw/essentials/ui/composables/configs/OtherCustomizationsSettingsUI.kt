@@ -68,7 +68,7 @@ fun OtherCustomizationsSettingsUI(
                 R.string.feat_hide_gesture_bar_on_launcher_title,
                 R.string.feat_circle_to_search_gesture_title
             ),
-            actionLabel = if (!isShizukuAvailable) R.string.perm_shizuku_install_action else R.string.perm_action_grant,
+            actionLabel = if (!isShizukuAvailable) R.string.perm_shizuku_install_action else if (isShellGranted) R.string.perm_action_granted else R.string.perm_action_grant,
             action = {
                 if (!isShizukuAvailable) {
                     val intent = Intent(
@@ -89,7 +89,7 @@ fun OtherCustomizationsSettingsUI(
             title = R.string.perm_accessibility_title,
             description = R.string.perm_accessibility_desc_common,
             dependentFeatures = listOf(R.string.feat_hide_gesture_bar_on_launcher_title, R.string.feat_circle_to_search_gesture_title),
-            actionLabel = R.string.perm_action_enable,
+            actionLabel = if (isAccessibilityEnabled) R.string.label_enabled else R.string.perm_action_enable,
             action = { com.sameerasw.essentials.utils.PermissionUtils.openAccessibilitySettings(context) },
             isGranted = isAccessibilityEnabled
         )
@@ -99,7 +99,7 @@ fun OtherCustomizationsSettingsUI(
             title = R.string.perm_usage_stats_title,
             description = R.string.perm_usage_stats_desc_app_lock,
             dependentFeatures = listOf(R.string.feat_hide_gesture_bar_on_launcher_title),
-            actionLabel = R.string.perm_action_enable,
+            actionLabel = if (isUsageStatsGranted) R.string.perm_action_granted else R.string.perm_action_enable,
             action = { com.sameerasw.essentials.utils.PermissionUtils.openUsageStatsSettings(context) },
             isGranted = isUsageStatsGranted
         )

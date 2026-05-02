@@ -28,7 +28,7 @@ object PermissionUIHelper {
                 title = R.string.perm_accessibility_title,
                 description = R.string.perm_accessibility_desc_common,
                 dependentFeatures = PermissionRegistry.getFeatures("ACCESSIBILITY"),
-                actionLabel = R.string.perm_action_enable,
+                actionLabel = if (viewModel.isAccessibilityEnabled.value) R.string.label_enabled else R.string.perm_action_enable,
                 action = {
                     val intent = Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)
                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
@@ -42,7 +42,7 @@ object PermissionUIHelper {
                 title = R.string.perm_write_secure_title,
                 description = R.string.perm_write_secure_desc_common,
                 dependentFeatures = PermissionRegistry.getFeatures("WRITE_SECURE_SETTINGS"),
-                actionLabel = R.string.perm_action_copy_adb,
+                actionLabel = if (viewModel.isWriteSecureSettingsEnabled.value) R.string.perm_action_granted else R.string.perm_action_copy_adb,
                 action = {
                     val adbCommand =
                         "adb shell pm grant ${context.packageName} android.permission.WRITE_SECURE_SETTINGS"
@@ -65,7 +65,7 @@ object PermissionUIHelper {
                 )
                     R.string.perm_notif_listener_desc_freeze else R.string.perm_notif_listener_desc_lighting,
                 dependentFeatures = PermissionRegistry.getFeatures("NOTIFICATION_LISTENER"),
-                actionLabel = R.string.perm_action_grant,
+                actionLabel = if (viewModel.isNotificationListenerEnabled.value) R.string.perm_action_granted else R.string.perm_action_grant,
                 action = { viewModel.requestNotificationListenerPermission(context) },
                 isGranted = viewModel.isNotificationListenerEnabled.value
             )
@@ -75,7 +75,7 @@ object PermissionUIHelper {
                 title = R.string.perm_overlay_title,
                 description = R.string.perm_overlay_desc,
                 dependentFeatures = PermissionRegistry.getFeatures("DRAW_OVERLAYS"),
-                actionLabel = R.string.perm_action_grant,
+                actionLabel = if (viewModel.isOverlayPermissionGranted.value) R.string.perm_action_granted else R.string.perm_action_grant,
                 action = { PermissionUtils.openOverlaySettings(context) },
                 isGranted = viewModel.isOverlayPermissionGranted.value
             )
@@ -85,7 +85,7 @@ object PermissionUIHelper {
                 title = R.string.perm_write_settings_title,
                 description = R.string.perm_write_settings_desc,
                 dependentFeatures = PermissionRegistry.getFeatures("WRITE_SETTINGS"),
-                actionLabel = R.string.perm_action_grant,
+                actionLabel = if (viewModel.isWriteSettingsEnabled.value) R.string.perm_action_granted else R.string.perm_action_grant,
                 action = { PermissionUtils.openWriteSettings(context) },
                 isGranted = viewModel.isWriteSettingsEnabled.value
             )
@@ -95,7 +95,7 @@ object PermissionUIHelper {
                 title = R.string.perm_notif_policy_title,
                 description = R.string.perm_notif_policy_desc,
                 dependentFeatures = PermissionRegistry.getFeatures("NOTIFICATION_POLICY"),
-                actionLabel = R.string.perm_action_grant,
+                actionLabel = if (viewModel.isNotificationPolicyAccessGranted.value) R.string.perm_action_granted else R.string.perm_action_grant,
                 action = { PermissionUtils.openNotificationPolicySettings(context) },
                 isGranted = viewModel.isNotificationPolicyAccessGranted.value
             )
@@ -105,7 +105,7 @@ object PermissionUIHelper {
                 title = R.string.permission_post_notifications_title,
                 description = R.string.permission_post_notifications_desc,
                 dependentFeatures = PermissionRegistry.getFeatures("POST_NOTIFICATIONS"),
-                actionLabel = R.string.perm_action_grant,
+                actionLabel = if (viewModel.isPostNotificationsEnabled.value) R.string.perm_action_granted else R.string.perm_action_grant,
                 action = {
                     if (activity != null) {
                         ActivityCompat.requestPermissions(
@@ -129,7 +129,7 @@ object PermissionUIHelper {
                 title = R.string.permission_read_phone_state_title,
                 description = R.string.permission_read_phone_state_desc_call_vibrations,
                 dependentFeatures = PermissionRegistry.getFeatures("READ_PHONE_STATE"),
-                actionLabel = R.string.perm_action_grant,
+                actionLabel = if (viewModel.isReadPhoneStateEnabled.value) R.string.perm_action_granted else R.string.perm_action_grant,
                 action = {
                     if (activity != null) {
                         ActivityCompat.requestPermissions(
@@ -147,7 +147,7 @@ object PermissionUIHelper {
                 title = R.string.perm_location_title,
                 description = R.string.perm_location_desc,
                 dependentFeatures = PermissionRegistry.getFeatures("LOCATION"),
-                actionLabel = R.string.perm_action_grant,
+                actionLabel = if (viewModel.isLocationPermissionGranted.value) R.string.perm_action_granted else R.string.perm_action_grant,
                 action = {
                     (activity as? androidx.activity.ComponentActivity)?.let {
                         viewModel.requestLocationPermission(
@@ -163,7 +163,7 @@ object PermissionUIHelper {
                 title = R.string.perm_bg_location_title,
                 description = R.string.perm_bg_location_desc,
                 dependentFeatures = PermissionRegistry.getFeatures("BACKGROUND_LOCATION"),
-                actionLabel = R.string.perm_action_grant,
+                actionLabel = if (viewModel.isBackgroundLocationPermissionGranted.value) R.string.perm_action_granted else R.string.perm_action_grant,
                 action = {
                     (activity as? androidx.activity.ComponentActivity)?.let {
                         viewModel.requestBackgroundLocationPermission(
@@ -179,7 +179,7 @@ object PermissionUIHelper {
                 title = R.string.perm_device_admin_title,
                 description = R.string.perm_device_admin_desc,
                 dependentFeatures = PermissionRegistry.getFeatures("DEVICE_ADMIN"),
-                actionLabel = R.string.action_enable_in_settings,
+                actionLabel = if (viewModel.isDeviceAdminEnabled.value) R.string.label_enabled else R.string.action_enable_in_settings,
                 action = { viewModel.requestDeviceAdmin(context) },
                 isGranted = viewModel.isDeviceAdminEnabled.value
             )
@@ -189,7 +189,7 @@ object PermissionUIHelper {
                 title = R.string.perm_root_title,
                 description = R.string.perm_root_desc,
                 dependentFeatures = PermissionRegistry.getFeatures("ROOT"),
-                actionLabel = R.string.perm_action_grant,
+                actionLabel = if (viewModel.isRootPermissionGranted.value) R.string.perm_action_granted else R.string.perm_action_grant,
                 action = { viewModel.check(context) },
                 isGranted = viewModel.isRootPermissionGranted.value
             )
@@ -199,7 +199,7 @@ object PermissionUIHelper {
                 title = R.string.perm_shizuku_title,
                 description = R.string.perm_shizuku_desc,
                 dependentFeatures = PermissionRegistry.getFeatures("SHIZUKU"),
-                actionLabel = R.string.perm_action_grant,
+                actionLabel = if (viewModel.isShizukuPermissionGranted.value) R.string.perm_action_granted else R.string.perm_action_grant,
                 action = { viewModel.requestShizukuPermission() },
                 isGranted = viewModel.isShizukuPermissionGranted.value
             )
@@ -209,7 +209,7 @@ object PermissionUIHelper {
                 title = R.string.feat_calendar_sync_title,
                 description = R.string.feat_calendar_sync_desc,
                 dependentFeatures = PermissionRegistry.getFeatures("READ_CALENDAR"),
-                actionLabel = R.string.perm_action_grant,
+                actionLabel = if (viewModel.isCalendarPermissionGranted.value) R.string.perm_action_granted else R.string.perm_action_grant,
                 action = {
                     if (activity != null) {
                         ActivityCompat.requestPermissions(
@@ -228,7 +228,7 @@ object PermissionUIHelper {
                 description = if (viewModel.isUseUsageAccess.value)
                     R.string.perm_usage_stats_desc_app_lock else R.string.perm_usage_stats_desc,
                 dependentFeatures = PermissionRegistry.getFeatures("USAGE_STATS"),
-                actionLabel = R.string.perm_action_grant,
+                actionLabel = if (viewModel.isUsageStatsPermissionGranted.value) R.string.perm_action_granted else R.string.perm_action_grant,
                 action = { PermissionUtils.openUsageStatsSettings(context) },
                 isGranted = viewModel.isUsageStatsPermissionGranted.value
             )
@@ -238,7 +238,7 @@ object PermissionUIHelper {
                 title = R.string.perm_default_browser_title,
                 description = R.string.perm_default_browser_desc,
                 dependentFeatures = PermissionRegistry.getFeatures("DEFAULT_BROWSER"),
-                actionLabel = R.string.perm_action_grant,
+                actionLabel = if (viewModel.isDefaultBrowserSet.value) R.string.perm_action_granted else R.string.perm_action_grant,
                 action = {
                     val intent = Intent(Settings.ACTION_MANAGE_DEFAULT_APPS_SETTINGS)
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
@@ -258,7 +258,7 @@ object PermissionUIHelper {
                 title = R.string.perm_nearby_devices_title,
                 description = R.string.perm_nearby_devices_desc,
                 dependentFeatures = PermissionRegistry.getFeatures(key),
-                actionLabel = R.string.perm_action_grant,
+                actionLabel = if (viewModel.isBluetoothPermissionGranted.value) R.string.perm_action_granted else R.string.perm_action_grant,
                 action = {
                     if (activity != null) {
                         val permissions = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {

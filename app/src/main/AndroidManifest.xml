@@ -793,6 +793,25 @@
             </intent-filter>
         </service>
 
+        <service
+            android:name=".services.LiveWallpaperService"
+            android:label="@string/live_wallpaper_label"
+            android:permission="android.permission.BIND_WALLPAPER"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.service.wallpaper.WallpaperService" />
+            </intent-filter>
+            <meta-data
+                android:name="android.service.wallpaper"
+                android:resource="@xml/live_wallpaper_info" />
+        </service>
+
+        <activity
+            android:name=".ui.activities.LiveWallpaperActivity"
+            android:exported="true"
+            android:label="@string/live_wallpaper_label" />
+
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.fileprovider"
