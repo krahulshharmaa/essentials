@@ -587,6 +587,7 @@
     <string name="perm_action_check">Sprawdzać</string>
     <string name="perm_action_enable">Włącz w Ustawieniach</string>
     <string name="perm_action_how_to">Jak udzielić</string>
+    <string name="perm_action_granted">Granted</string>
     <string name="perm_battery_optimization_title">Optymalizacja baterii</string>
     <string name="perm_battery_optimization_desc">Aby oszczędzać energię, upewnij się, że usługa nie zostanie zatrzymana przez system.</string>
     <!-- Tabs -->
