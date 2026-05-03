@@ -223,7 +223,7 @@
     <string name="tile_developer_options">開発者向けオプション</string>
     <string name="about_desc_developer_options">クイック設定タイルから簡単に開発者向けオプションを切り替えれます。これにより、設定した内容が一部リセットされる可能性があります。</string>
     <string name="tile_refresh_rate">リフレッシュレート</string>
-    <string name="about_desc_refresh_rate_tile">Cycle between the system default and preset refresh rates directly from a Quick Settings tile using Shizuku.</string>
+    <string name="about_desc_refresh_rate_tile">Shizukuを使用すれば、クイック設定タイルから直接、システムのデフォルトのリフレッシュレートとプリセットのリフレッシュレートを切り替えることができます。</string>
     <string name="nfc_tile_label">NFC</string>
     <string name="tile_private_dns">プライベートDNS</string>
     <string name="tile_private_dns_auto">自動</string>
@@ -346,8 +346,8 @@
     <string name="feat_hide_gesture_bar_on_launcher_desc">ホーム画面にいるときのみ、ジェスチャーバーを動的に表示する</string>
     <string name="feat_circle_to_search_gesture_title">かこって検索ジェスチャー</string>
     <string name="feat_circle_to_search_gesture_desc">下部を長押ししてかこって検索を開きます</string>
-    <string name="feat_circle_to_search_gesture_height_title">Gesture zone height</string>
-    <string name="feat_circle_to_search_gesture_height_desc">Adjust the height of the touch area at the bottom</string>
+    <string name="feat_circle_to_search_gesture_height_title">ジェスチャー範囲の高さ</string>
+    <string name="feat_circle_to_search_gesture_height_desc">下部のタッチ領域の高さを調整する</string>
     <string name="feat_other_customizations_title">その他のカスタマイズ</string>
     <string name="feat_other_customizations_desc">その他のシステムの調整と変更</string>
     <string name="status_bar_icons_disclaimer">これらのオプションの実装は機種によって異なる場合があり、一部は全く機能しない場合がありますのでご注意ください。</string>
@@ -414,14 +414,14 @@
     <string name="feat_screen_locked_security_title">ロック画面セキュリティ</string>
     <string name="feat_app_lock_title">アプリロック</string>
     <string name="feat_app_lock_desc">生体認証でアプリを保護</string>
-    <string name="app_lock_auto_lock_delay_title">Auto lock delay</string>
-    <string name="app_lock_auto_lock_delay_desc">After leaving the app</string>
-    <string name="app_lock_auto_lock_delay_none">None</string>
-    <string name="app_lock_auto_lock_delay_1min">1 minute</string>
-    <string name="app_lock_auto_lock_delay_5min">5 minutes</string>
-    <string name="app_lock_auto_lock_delay_10min">10 minutes</string>
-    <string name="app_lock_auto_lock_delay_20min">20 minutes</string>
-    <string name="app_lock_auto_lock_delay_30min">30 minutes</string>
+    <string name="app_lock_auto_lock_delay_title">自動ロック遅延</string>
+    <string name="app_lock_auto_lock_delay_desc">アプリを終了した後</string>
+    <string name="app_lock_auto_lock_delay_none">なし</string>
+    <string name="app_lock_auto_lock_delay_1min">1分</string>
+    <string name="app_lock_auto_lock_delay_5min">5分</string>
+    <string name="app_lock_auto_lock_delay_10min">10分</string>
+    <string name="app_lock_auto_lock_delay_20min">20分</string>
+    <string name="app_lock_auto_lock_delay_30min">30分</string>
     <string name="feat_freeze_title">フリーズ</string>
     <string name="feat_freeze_desc">あまり使わないアプリを無効にする</string>
     <string name="feat_watermark_title">ウォーターマーク</string>
@@ -530,8 +530,8 @@
     <string name="search_qs_private_dns_desc">プライベートDNSモードを切り替える (OFF/自動/ホスト名)</string>
     <string name="search_qs_usb_debugging_title">USBデバッグ</string>
     <string name="search_qs_usb_debugging_desc">USBデバッグを使うか切り替える</string>
-    <string name="search_qs_refresh_rate_title">Refresh Rate</string>
-    <string name="search_qs_refresh_rate_desc">Cycle between the system default and preset screen refresh rates</string>
+    <string name="search_qs_refresh_rate_title">リフレッシュレート</string>
+    <string name="search_qs_refresh_rate_desc">システムの既定の画面リフレッシュレートとプリセットの画面リフレッシュレートを切り替える</string>
     <string name="search_remap_enable_title">ボタンリマップを有効にする</string>
     <string name="search_remap_enable_desc">音量ボタンの機能を再設定する機能を使うか切り替える</string>
     <string name="search_remap_haptic_title">リマップ触覚フィードバック</string>
@@ -587,7 +587,7 @@
     <string name="perm_action_check">チェック</string>
     <string name="perm_action_enable">設定で有効にする</string>
     <string name="perm_action_how_to">付与の方法</string>
-    <string name="perm_action_granted">Granted</string>
+    <string name="perm_action_granted">付与済み</string>
     <string name="perm_battery_optimization_title">バッテリーの最適化を無視</string>
     <string name="perm_battery_optimization_desc">バッテリー節約のためにシステムがアプリを強制終了しないようにしてください。</string>
     <!-- Tabs -->
@@ -1351,16 +1351,16 @@
     <string name="msg_shizuku_root_required_system_lighting">Shizuku or Root permission is required for System lighting effects</string>
     <string name="notification_lighting_system_disclaimer">Google Pixel専用です。他の端末ではご利用いただけない場合があります。</string>
     <!-- Live Wallpaper -->
-    <string name="feat_live_wallpaper_title">Live wallpaper</string>
-    <string name="feat_live_wallpaper_desc">Set custom video as live wallpaper</string>
-    <string name="live_wallpaper_label">Live Wallpaper</string>
+    <string name="feat_live_wallpaper_title">ライブ壁紙</string>
+    <string name="feat_live_wallpaper_desc">好きな動画をライブ壁紙に設定する</string>
+    <string name="live_wallpaper_label">ライブ壁紙</string>
     <string name="live_wallpaper_description">A video live wallpaper that plays when unlocked.</string>
-    <string name="live_wallpaper_playback_trigger_title">Play when</string>
-    <string name="live_wallpaper_trigger_unlock">Unlock</string>
-    <string name="live_wallpaper_trigger_screen_on">Screen on</string>
-    <string name="live_wallpaper_video_title">Video</string>
-    <string name="btn_apply">Apply</string>
-    <string name="add_video">Add video</string>
+    <string name="live_wallpaper_playback_trigger_title">再生タイミング</string>
+    <string name="live_wallpaper_trigger_unlock">ロック解除時</string>
+    <string name="live_wallpaper_trigger_screen_on">画面オン時</string>
+    <string name="live_wallpaper_video_title">動画</string>
+    <string name="btn_apply">適用</string>
+    <string name="add_video">動画を追加</string>
     <string name="custom_video">Custom video</string>
     <string name="about_desc_live_wallpaper">Set your favorite video as your home screen wallpaper. Choose between triggering the animation upon unlocking or simply whenever the screen turns on for a dynamic experience.</string>
 </resources>
