@@ -539,7 +539,7 @@ Sin embargo, sí te permite reanudarla desde la lista de aplicaciones del lanzad
     <string name="search_remap_haptic_desc">Retroalimentación de vibración cuando se presiona el botón reasignado</string>
     <string name="search_remap_flashlight_title">Activar/desactivar la linterna</string>
     <string name="search_remap_flashlight_desc">Activar/desactivar la linterna con los botones de volumen</string>
-    <string name="search_night_light_enable_title">Habilitar luz Nocturna Dinámica</string>
+    <string name="search_night_light_enable_title">Habilitar Luz Nocturna Dinámica</string>
     <string name="search_night_light_enable_desc">Interruptor principal para la luz nocturna dinámica</string>
     <string name="search_app_lock_enable_title">Habilitar bloqueo de aplicaciones</string>
     <string name="search_app_lock_enable_desc">Interruptor principal para el bloqueo de aplicaciones</string>
@@ -561,7 +561,7 @@ Sin embargo, sí te permite reanudarla desde la lista de aplicaciones del lanzad
     <string name="perm_shizuku_grant_desc">Requerido para ejecutar comandos de ahorro de energía mientras Maps está navegando.</string>
     <string name="req_shizuku">Requiere Shizuku o Root</string>
     <string name="perm_root_title">Acceso Root</string>
-    <string name="perm_root_desc">Permisos necesarios para acciones del sistema utilizando privilegios de raíz.</string>
+    <string name="perm_root_desc">Permisos necesarios para acciones del sistema utilizando privilegios Root.</string>
     <string name="perm_notif_listener_title">Servicio de notificaciones</string>
     <string name="perm_notif_listener_desc_maps">Requiere acceso al servicio de notificaciones para supervisar el estado de navegación de Google Maps y activar el ahorro de energía cuando no se esté navegando.</string>
     <string name="perm_notif_listener_desc_lighting">Requiere acceso al servicio de notificaciones para detectar nuevas notificaciones y activar la iluminación del borde.</string>
