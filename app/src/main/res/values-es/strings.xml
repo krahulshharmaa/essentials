@@ -254,7 +254,7 @@ Sin embargo, sí te permite reanudarla desde la lista de aplicaciones del lanzad
     <string name="dns_preset_cleanbrowsing">CleanBrowsing</string>
     <string name="dns_preset_cleanbrowsing_hostname">adult-filter-dns.cleanbrowsing.org</string>
     <string name="tile_charge_optimization">Cargando</string>
-    <string name="limit_to_80">Límite al 80%</string>
+    <string name="limit_to_80">Limitar al 80%</string>
     <string name="adaptive_charging">Adaptado</string>
     <string name="deactivated">No optimizado</string>
     <string name="permission_missing">Falta permiso</string>
@@ -272,7 +272,7 @@ Sin embargo, sí te permite reanudarla desde la lista de aplicaciones del lanzad
     <string name="sound_mode_long_press_hint">Mantén pulsado para alternar</string>
     <string name="content_desc_drag_reorder">Arrastrar para reordenar</string>
     <string name="sound_mode_sound">Sonido</string>
-    <string name="sound_mode_vibrate">Vibrar</string>
+    <string name="sound_mode_vibrate">Vibración</string>
     <string name="sound_mode_silent">Silencio</string>
     <!-- Status Bar Categories -->
     <string name="status_bar_category_connectivity">Conectividad</string>
