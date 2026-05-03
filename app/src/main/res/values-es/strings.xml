@@ -574,11 +574,11 @@ Sin embargo, sí te permite reanudarla desde la lista de aplicaciones del lanzad
     <string name="perm_accessibility_desc_remap">Requerido para interceptar eventos de botones físicos</string>
     <string name="perm_accessibility_desc_ambient_music_glance">Requerido para interceptar eventos de las teclas de volumen cuando la pantalla está apagada y activar la superposición de De un vistazo.</string>
     <string name="perm_accessibility_desc_night_light">Necesario para supervisar las aplicaciones en primer plano.</string>
-    <string name="perm_write_secure_title">Escribir ajustes seguros</string>
+    <string name="perm_write_secure_title">Escribir Ajustes Seguros</string>
     <string name="perm_write_secure_desc_common">Requerido para los iconos de la barra de estado y la seguridad con la pantalla bloqueada</string>
     <string name="perm_write_secure_desc_night_light">Necesario para activar o desactivar Luz Nocturna. Concédelo mediante ADB o root.</string>
     <string name="perm_write_settings_title">Modificar ajustes del sistema</string>
-    <string name="perm_write_settings_desc">Requerido para activar o desactivar el Brillo Adaptativo y otros ajustes del sistema</string>
+    <string name="perm_write_settings_desc">Requerido para activar o desactivar el Brillo adaptativo y otros ajustes del sistema</string>
     <string name="perm_overlay_title">Permiso de superposición</string>
     <string name="perm_overlay_desc">Requerido para mostrar la superposición de iluminación de notificaciones en la pantalla</string>
     <string name="perm_device_admin_title">Administrador de dispositivos</string>
@@ -610,7 +610,7 @@ Sin embargo, sí te permite reanudarla desde la lista de aplicaciones del lanzad
     <string name="error_repo_not_found">Repositorio no encontrado</string>
     <string name="label_latest_release">Última versión</string>
     <string name="action_view_readme">Ver LÉEME</string>
-    <string name="label_stars">%d estrellas</string>
+    <string name="label_stars">%d Estrellas</string>
     <string name="label_installed_app">Aplicación instalada</string>
     <string name="label_not_installed">No instalada</string>
     <string name="action_pick_app">Elige una aplicación</string>
@@ -623,7 +623,7 @@ Sin embargo, sí te permite reanudarla desde la lista de aplicaciones del lanzad
     <string name="error_generic_search">Se produjo un error durante la búsqueda</string>
     <string name="label_auto">Auto</string>
     <string name="label_options">Opciones</string>
-    <string name="option_allow_prereleases">Consultar prelanzamientos</string>
+    <string name="option_allow_prereleases">Comprobar prelanzamientos</string>
     <string name="option_notifications">Notificaciones</string>
     <string name="error_rate_limited">Se superó el límite de tasa de GitHub. Inténtalo de nuevo más tarde.</string>
     <!-- Keyboard Setup -->
