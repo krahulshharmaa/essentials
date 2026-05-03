@@ -645,7 +645,7 @@
     <!-- Sentry Crash Reporting -->
     <string name="sentry_report_mode_title">Çökme raporu</string>
     <string name="sentry_mode_off">Kapalı</string>
-    <string name="sentry_mode_auto">Oto</string>
+    <string name="sentry_mode_auto">Otomatik</string>
     <string name="sentry_crash_toast">Essentials çöktü, Rapor gönderildi</string>
     <string name="simulate_crash">Çökmeyi simüle et</string>
     <string name="welcome_title">Essentials\'a hoş geldiniz</string>
