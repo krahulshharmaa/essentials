@@ -69,7 +69,7 @@
     <string name="feat_notification_glance_title">Vista rápida de notificaciones</string>
     <string name="feat_notification_glance_desc">Mantener AOD activado mientras las notificaciones estén pendientes</string>
     <string name="notification_glance_same_as_lighting_title">Las mismas aplicaciones que la iluminación de notificaciones</string>
-    <string name="notification_glance_desc">Esta función activará dinámicamente la Pantalla Siempre Activa (AOD) cuando llegue una notificación de una aplicación seleccionada y la desactivará cuando todas las notificaciones correspondientes se hayan descartado. Elige las aplicaciones o usa la misma selección que para la iluminación de notificaciones.</string>
+    <string name="notification_glance_desc">Esta función activará dinámicamente la Pantalla siempre activa (AOD) cuando llegue una notificación de una aplicación seleccionada y la desactivará cuando todas las notificaciones correspondientes se hayan descartado. Elige las aplicaciones o usa la misma selección que para la iluminación de notificaciones.</string>
     <string name="grant_notification_access">Conceder acceso a las notificaciones</string>
     <string name="action_toggle_media_volume">Activar/desactivar el volumen multimedia</string>
     <string name="button_remap_screen_off_hint">Cuando la pantalla esté apagada, mantén pulsado el botón seleccionado para activar la acción que le hayas asignado. En los dispositivos Pixel, esta acción solo se activa si la función AOD está activada, debido a limitaciones del sistema.</string>
@@ -100,7 +100,7 @@
     <string name="caffeinate_skip_countdown_title">Saltar cuenta regresiva</string>
     <string name="caffeinate_skip_countdown_desc">Iniciar Cafeína inmediatamente.</string>
     <string name="caffeinate_timeout_presets_title">Preajustes de tiempo de espera</string>
-    <string name="caffeinate_timeout_presets_desc">Seleccionar las duraciones disponibles para el mosaico de Ajustes Rápidos</string>
+    <string name="caffeinate_timeout_presets_desc">Seleccionar las duraciones disponibles para el mosaico de Ajustes rápidos</string>
     <string name="caffeinate_timeout_5m">5 m</string>
     <string name="caffeinate_timeout_10m">10 m</string>
     <string name="caffeinate_timeout_30m">30 m</string>
@@ -112,7 +112,7 @@
     <string name="caffeinate_remaining">%1$s restante</string>
     <string name="caffeinate_live_channel_desc">Notificación persistente para Cafeína</string>
     <!-- Dynamic Night Light -->
-    <string name="dynamic_night_light_enable_title">Habilitar luz nocturna dinámica</string>
+    <string name="dynamic_night_light_enable_title">Habilitar Luz nocturna dinámica</string>
     <string name="dynamic_night_light_apps_section">Aplicaciones que desactivan la luz nocturna</string>
     <string name="action_select_apps">Seleccionar aplicaciones</string>
     <!-- App Freezing -->
@@ -151,9 +151,9 @@ Sin embargo, sí te permite reanudarla desde la lista de aplicaciones del lanzad
     <string name="freeze_dont_freeze_active_apps_title">No congelar aplicaciones activas</string>
     <string name="perm_usage_stats_title">Estadísticas de uso</string>
     <string name="perm_usage_stats_desc">Requerido para detectar qué aplicaciones están actualmente en primer plano para evitar congelarlas</string>
-    <string name="perm_usage_stats_desc_app_lock">Requerido para detectar aplicaciones en primer plano para las funciones de Bloqueo de Aplicaciones cuando no se usa la accesibilidad.</string>
+    <string name="perm_usage_stats_desc_app_lock">Requerido para detectar aplicaciones en primer plano para las funciones de Bloqueo de aplicaciones cuando no se usa la accesibilidad.</string>
     <string name="perm_notif_listener_desc_freeze">Requerido para detectar medios en reproducción y notificaciones activas para evitar congelarlas</string>
-    <string name="freeze_mode_title">Modo Congelar</string>
+    <string name="freeze_mode_title">Modo congelar</string>
     <string name="freeze_mode_freeze">Congelación</string>
     <string name="freeze_mode_suspend">Suspensión de aplicaciones</string>
     <string name="freeze_mode_warning_desc">No se puede cambiar de modo mientras las aplicaciones están congeladas. Por favor, descongélalas todas e inténtalo de nuevo.</string>
@@ -161,7 +161,7 @@ Sin embargo, sí te permite reanudarla desde la lista de aplicaciones del lanzad
     <string name="notification_lighting_screen_off_title">Mostrar solo cuando la pantalla esté apagada</string>
     <string name="notification_lighting_skip_silent_title">Omitir las notificaciones silenciosas</string>
     <string name="notification_lighting_skip_persistent_title">Omitir las notificaciones persistentes</string>
-    <string name="settings_section_flashlight_pulse">Destellos de la Linterna</string>
+    <string name="settings_section_flashlight_pulse">Destellos de la linterna</string>
     <string name="flashlight_pulse_title">Destellos de la linterna</string>
     <string name="flashlight_pulse_facedown_title">Solo mientras esté boca abajo</string>
     <string name="flashlight_pulse_same_as_lighting_title">Las mismas aplicaciones que la iluminación de notificaciones</string>
@@ -205,7 +205,7 @@ Sin embargo, sí te permite reanudarla desde la lista de aplicaciones del lanzad
     <string name="tile_bubbles">Burbujas</string>
     <string name="tile_sensitive_content">Contenido sensible</string>
     <string name="tile_tap_to_wake">Tocar para activar</string>
-    <string name="tile_aod">AOD (Pantalla Siempre Activa)</string>
+    <string name="tile_aod">AOD (Pantalla siempre activa)</string>
     <string name="tile_caffeinate">Cafeína</string>
     <string name="tile_sound_mode">Modo de sonido</string>
     <string name="tile_notification_lighting">Iluminación de notificaciones</string>
@@ -222,9 +222,9 @@ Sin embargo, sí te permite reanudarla desde la lista de aplicaciones del lanzad
     <string name="tile_active">Activo</string>
     <string name="tile_inactive">Inactivo</string>
     <string name="tile_developer_options">Opciones de desarrollador</string>
-    <string name="about_desc_developer_options">Activa o desactiva las Opciones de desarrollador del sistema desde un mosaico de Ajustes Rápidos. Esto puede restablecer algunas de las configuraciones de desarrollador que hayas modificado.</string>
+    <string name="about_desc_developer_options">Activa o desactiva las Opciones de desarrollador del sistema desde un mosaico de Ajustes rápidos. Esto puede restablecer algunas de las configuraciones de desarrollador que hayas modificado.</string>
     <string name="tile_refresh_rate">Frecuencia de actualización</string>
-    <string name="about_desc_refresh_rate_tile">Alterna entre la frecuencia de actualización predeterminada del sistema y las frecuencias preestablecidas directamente desde un mosaico de Ajustes Rápidos usando Shizuku.</string>
+    <string name="about_desc_refresh_rate_tile">Alterna entre la frecuencia de actualización predeterminada del sistema y las frecuencias preestablecidas directamente desde un mosaico de Ajustes rápidos usando Shizuku.</string>
     <string name="nfc_tile_label">NFC</string>
     <string name="tile_private_dns">DNS privado</string>
     <string name="tile_private_dns_auto">Auto</string>
@@ -259,14 +259,14 @@ Sin embargo, sí te permite reanudarla desde la lista de aplicaciones del lanzad
     <string name="deactivated">No optimizado</string>
     <string name="permission_missing">Falta permiso</string>
     <!-- Screen Locked Security -->
-    <string name="screen_locked_security_title">Desactivar los mosaicos de Ajustes Rápidos cuando el dispositivo esté bloqueado</string>
-    <string name="screen_locked_security_dialog_title">Desactivar los mosaicos de Ajustes Rápidos al bloquear el dispositivo</string>
+    <string name="screen_locked_security_title">Desactivar los mosaicos de Ajustes rápidos cuando el dispositivo esté bloqueado</string>
+    <string name="screen_locked_security_dialog_title">Desactivar los mosaicos de Ajustes rápidos al bloquear el dispositivo</string>
     <string name="warning_title">⚠️ ADVERTENCIA</string>
     <string name="screen_locked_security_auth_enable">Autenticarse para activar esta función</string>
     <string name="screen_locked_security_auth_disable">Autenticarse para desactivar esta función</string>
-    <string name="screen_locked_security_desc">Desactivar los mosaicos de Ajustes Rápidos cuando el dispositivo esté bloqueado</string>
-    <string name="search_disable_qs_locked_title">Desactivar bloqueo de Ajustes Rápidos</string>
-    <string name="search_disable_qs_locked_desc">Evitar expandir los Ajustes Rápidos cuando el dispositivo está bloqueado</string>
+    <string name="screen_locked_security_desc">Desactivar los mosaicos de Ajustes rápidos cuando el dispositivo esté bloqueado</string>
+    <string name="search_disable_qs_locked_title">Desactivar bloqueo de Ajustes rápidos</string>
+    <string name="search_disable_qs_locked_desc">Evitar expandir los Ajustes rápidos cuando el dispositivo está bloqueado</string>
     <!-- Sound Mode -->
     <string name="sound_mode_reorder_title">Modos de reordenamiento</string>
     <string name="sound_mode_long_press_hint">Mantén pulsado para alternar</string>
@@ -427,7 +427,7 @@ Sin embargo, sí te permite reanudarla desde la lista de aplicaciones del lanzad
     <string name="feat_freeze_desc">Deshabilitar aplicaciones de uso poco frecuente</string>
     <string name="feat_watermark_title">Marca de agua</string>
     <string name="feat_watermark_desc">Añadir datos EXIF ​​y logotipos a las fotos</string>
-    <string name="feat_always_on_display_title">Pantalla Siempre Activa</string>
+    <string name="feat_always_on_display_title">Pantalla siempre activa</string>
     <string name="feat_always_on_display_desc">Mostrar hora e información con la pantalla apagada</string>
     <string name="feat_calendar_sync_title">Sincronización del calendario</string>
     <string name="feat_calendar_sync_desc">Sincronizar eventos con tu reloj</string>
@@ -507,7 +507,7 @@ Sin embargo, sí te permite reanudarla desde la lista de aplicaciones del lanzad
     <string name="search_qs_wake_title">Tocar para activar</string>
     <string name="search_qs_wake_desc">Control de doble toque para activar</string>
     <string name="search_qs_aod_title">AOD</string>
-    <string name="search_qs_aod_desc">Activar/desactivar Pantalla Siempre Activa</string>
+    <string name="search_qs_aod_desc">Activar/desactivar Pantalla siempre activa</string>
     <string name="search_qs_caffeinate_title">Cafeína</string>
     <string name="search_qs_caffeinate_desc">Interruptor para mantener la pantalla activa</string>
     <string name="search_qs_sound_title">Modo de sonido</string>
@@ -539,7 +539,7 @@ Sin embargo, sí te permite reanudarla desde la lista de aplicaciones del lanzad
     <string name="search_remap_haptic_desc">Retroalimentación de vibración cuando se presiona el botón reasignado</string>
     <string name="search_remap_flashlight_title">Activar/desactivar la linterna</string>
     <string name="search_remap_flashlight_desc">Activar/desactivar la linterna con los botones de volumen</string>
-    <string name="search_night_light_enable_title">Habilitar Luz Nocturna Dinámica</string>
+    <string name="search_night_light_enable_title">Habilitar Luz nocturna dinámica</string>
     <string name="search_night_light_enable_desc">Interruptor principal para la luz nocturna dinámica</string>
     <string name="search_app_lock_enable_title">Habilitar bloqueo de aplicaciones</string>
     <string name="search_app_lock_enable_desc">Interruptor principal para el bloqueo de aplicaciones</string>
@@ -574,9 +574,9 @@ Sin embargo, sí te permite reanudarla desde la lista de aplicaciones del lanzad
     <string name="perm_accessibility_desc_remap">Requerido para interceptar eventos de botones físicos</string>
     <string name="perm_accessibility_desc_ambient_music_glance">Requerido para interceptar eventos de las teclas de volumen cuando la pantalla está apagada y activar la superposición de De un vistazo.</string>
     <string name="perm_accessibility_desc_night_light">Necesario para supervisar las aplicaciones en primer plano.</string>
-    <string name="perm_write_secure_title">Escribir Ajustes Seguros</string>
+    <string name="perm_write_secure_title">Escribir Ajustes seguros</string>
     <string name="perm_write_secure_desc_common">Requerido para los iconos de la barra de estado y la seguridad con la pantalla bloqueada</string>
-    <string name="perm_write_secure_desc_night_light">Necesario para activar o desactivar Luz Nocturna. Concédelo mediante ADB o root.</string>
+    <string name="perm_write_secure_desc_night_light">Necesario para activar o desactivar Luz nocturna. Concédelo mediante ADB o root.</string>
     <string name="perm_write_settings_title">Modificar ajustes del sistema</string>
     <string name="perm_write_settings_desc">Requerido para activar o desactivar el Brillo adaptativo y otros ajustes del sistema</string>
     <string name="perm_overlay_title">Permiso de superposición</string>
