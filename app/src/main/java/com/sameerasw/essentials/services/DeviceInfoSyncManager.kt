@@ -35,6 +35,13 @@ object DeviceInfoSyncManager {
         
         // Start periodic sync
         handler.postDelayed(syncRunnable, 5 * 60 * 1000)
+
+        // Sync on battery change
+        context.registerReceiver(object : android.content.BroadcastReceiver() {
+            override fun onReceive(context: Context, intent: Intent) {
+                syncDeviceInfo(context)
+            }
+        }, IntentFilter(Intent.ACTION_BATTERY_CHANGED))
     }
 
     fun forceSync(context: Context) {
@@ -52,10 +59,14 @@ object DeviceInfoSyncManager {
         val batteryPct = if (level != -1 && scale != -1) (level / scale.toFloat() * 100).toInt() else -1
         
         val status: Int = batteryStatus?.getIntExtra(BatteryManager.EXTRA_STATUS, -1) ?: -1
+        val plugged: Int = batteryStatus?.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1) ?: -1
         val isCharging = status == BatteryManager.BATTERY_STATUS_CHARGING ||
-                status == BatteryManager.BATTERY_STATUS_FULL
+                status == BatteryManager.BATTERY_STATUS_FULL ||
+                plugged == BatteryManager.BATTERY_PLUGGED_AC ||
+                plugged == BatteryManager.BATTERY_PLUGGED_USB ||
+                plugged == BatteryManager.BATTERY_PLUGGED_WIRELESS
 
-        Log.d(TAG, "Syncing device info: Battery=$batteryPct%, Charging=$isCharging")
+        Log.d(TAG, "syncDeviceInfo: Battery=$batteryPct%, Status=$status, Plugged=$plugged, isCharging=$isCharging")
 
         val putDataMapReq = PutDataMapRequest.create(SYNC_PATH)
         val dataMap = putDataMapReq.dataMap
