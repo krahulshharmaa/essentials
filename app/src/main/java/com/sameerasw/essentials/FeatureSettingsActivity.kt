@@ -610,6 +610,15 @@ class FeatureSettingsActivity : AppCompatActivity() {
                                         )
                                     }
 
+                                    "Lock from Watch" -> {
+                                        com.sameerasw.essentials.ui.composables.configs.RemoteLockSettingsUI(
+                                            mainViewModel = viewModel,
+                                            watchViewModel = watchViewModel,
+                                            modifier = Modifier.padding(top = 16.dp),
+                                            highlightSetting = highlightSetting
+                                        )
+                                    }
+
                                     "Maps power saving mode" -> {
                                         MapsPowerSavingSettingsUI(
                                             viewModel = viewModel,

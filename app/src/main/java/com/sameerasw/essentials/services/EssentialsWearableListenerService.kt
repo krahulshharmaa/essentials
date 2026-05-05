@@ -38,6 +38,25 @@ class EssentialsWearableListenerService : WearableListenerService() {
             "/toggle_sound_mode" -> {
                 com.sameerasw.essentials.services.handlers.SoundModeHandler(this).cycleNextMode()
             }
+            "/lock_device" -> {
+                val repository = com.sameerasw.essentials.data.repository.SettingsRepository(this)
+                val mode = repository.getInt(com.sameerasw.essentials.data.repository.SettingsRepository.KEY_REMOTE_LOCK_MODE, 0)
+                
+                if (mode == 1) {
+                    // Device Admin Lock
+                    val dpm = getSystemService(android.content.Context.DEVICE_POLICY_SERVICE) as android.app.admin.DevicePolicyManager
+                    val adminComponent = android.content.ComponentName(this, com.sameerasw.essentials.services.receivers.SecurityDeviceAdminReceiver::class.java)
+                    if (dpm.isAdminActive(adminComponent)) {
+                        dpm.lockNow()
+                    }
+                } else {
+                    // Accessibility Lock
+                    val intent = android.content.Intent(this, com.sameerasw.essentials.services.tiles.ScreenOffAccessibilityService::class.java).apply {
+                        action = "LOCK_SCREEN"
+                    }
+                    startService(intent)
+                }
+            }
         }
     }
 }
