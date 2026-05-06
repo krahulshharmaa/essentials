@@ -435,7 +435,7 @@
     <string name="remote_lock_mode_title">Kilit Modu</string>
     <string name="remote_lock_mode_screen_off">Ekran kapalı</string>
     <string name="remote_lock_mode_lock">Kilit</string>
-    <string name="remote_lock_mode_admin_note">Cihaz yönetici kilidini kullanmak biyometrik kimlik doğrulamayı devre dışı bırakacaktır</string>
+    <string name="remote_lock_mode_admin_note">Cihaz yöneticisi kilidini kullanmak biyometrik kimlik doğrulamayı devre dışı bırakacaktır</string>
     <string name="watch_connected_status">Bağlı</string>
     <string name="watch_unknown_name">Bilinmeyen Saat</string>
     <string name="watermark_style_overlay">Kaplama</string>
