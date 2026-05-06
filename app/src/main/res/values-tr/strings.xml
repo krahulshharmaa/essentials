@@ -80,7 +80,7 @@
     <string name="flashlight_global_title">Küresel kontroller</string>
     <string name="flashlight_global_desc">Küresel çapta kademeli el feneri</string>
     <string name="flashlight_adjust_intensity_title">Yoğunluğu ayarlayın</string>
-    <string name="flashlight_adjust_intensity_desc">Ses + - el feneri yoğunluğunu ayarlar</string>
+    <string name="flashlight_adjust_intensity_desc">Ses + - düğmeleri el feneri yoğunluğunu ayarlar</string>
     <string name="flashlight_live_update_title">Canlı güncelleme</string>
     <string name="flashlight_live_update_desc">Durum çubuğunda parlaklığı göster</string>
     <string name="settings_section_other">Diğer</string>
@@ -286,14 +286,14 @@
     <string name="icon_vpn">VPN</string>
     <string name="icon_airplane_mode">Uçak Modu</string>
     <string name="icon_hotspot">Sıcak nokta</string>
-    <string name="icon_cast">Döküm</string>
+    <string name="icon_cast">Yansıtma</string>
     <string name="icon_mobile_data">Mobil Veri</string>
     <string name="icon_phone_signal">Telefon Sinyali</string>
     <string name="icon_volte">VoLTE / VoNR</string>
     <string name="icon_wifi_calling">WiFi Arama / VoWiFi</string>
     <string name="icon_call_status">Çağrı Durumu / Senkronizasyon</string>
     <string name="icon_tty">TTY</string>
-    <string name="icon_volume">Hacim</string>
+    <string name="icon_volume">Ses</string>
     <string name="icon_headset">Kulaklık</string>
     <string name="icon_speakerphone">Hoparlör</string>
     <string name="icon_dmb">DMB</string>
@@ -667,7 +667,7 @@
     <string name="action_i_understand">Anladım</string>
     <string name="feature_intro_desc">Bir özelliğin veya Hızlı Ayarlar kutucuğunun ne işe yaradığını ve hangi izinlerin gerekli olduğunu anlamadığınızda, üzerine uzun süre basılı tutun ve daha fazla bilgi edinmek için \'Bu nedir?\' seçeneğini seçin.</string>
     <string name="feature_intro_footer">Uygulama ayarlarından istediğiniz zaman hataları bildirebilir veya yararlı kılavuzlara ulaşabilirsiniz.</string>
-    <string name="action_let_me_in">Beni içeri alın Artık</string>
+    <string name="action_let_me_in">Beni içeri al Artık</string>
     <string name="preferences_title">Tercihler</string>
     <string name="preferences_desc">Başlamak için bazı temel ayarları yapılandırın.</string>
     <string name="label_app_settings">Uygulama Ayarları</string>
@@ -975,7 +975,7 @@
     <string-array name="keywords_audio_mute">
         <item>ses</item>
         <item>sesini kapatmak</item>
-        <item>hacim</item>
+        <item>ses</item>
     </string-array>
     <string-array name="keywords_blue_filter">
         <item>mavi</item>
@@ -1025,7 +1025,7 @@
     <string name="haptic_subtle">Hemen göze çarpmayan</string>
     <string name="haptic_double">Çift</string>
     <string name="haptic_click">Tıklamak</string>
-    <string name="haptic_tick">Kene</string>
+    <string name="haptic_tick">Tik</string>
     <!-- Flashlight Intensity Overlay -->
     <string name="action_turn_off">Kapamak</string>
     <string name="feature_flashlight_brightness_title">El Feneri Parlaklığı</string>
@@ -1206,7 +1206,7 @@
     <string name="feat_ambient_music_title">Ortam müziği bakışı</string>
     <string name="feat_ambient_music_desc">AOD\'deki medyaya bakış</string>
     <string name="feat_sound_haptics_title">Ses ve Dokunma</string>
-    <string name="feat_sound_haptics_desc">Hacim ve dokunsal özellikler</string>
+    <string name="feat_sound_haptics_desc">Ses ve dokunsal özellikler</string>
     <string name="feat_security_privacy_title">Güvenlik ve Gizlilik</string>
     <string name="feat_security_privacy_desc">Cihazınızı koruyun ve güvenliğini sağlayın</string>
     <string name="feat_notifications_alerts_title">Bildirimler ve Uyarılar</string>
