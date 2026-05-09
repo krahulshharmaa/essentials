@@ -92,6 +92,7 @@ fun SetupFeatures(
 ) {
     val isAccessibilityEnabled by viewModel.isAccessibilityEnabled
     val isWriteSecureSettingsEnabled by viewModel.isWriteSecureSettingsEnabled
+    val isWriteSettingsEnabled by viewModel.isWriteSettingsEnabled
     val isShizukuAvailable by viewModel.isShizukuAvailable
     val isShizukuPermissionGranted by viewModel.isShizukuPermissionGranted
     val isNotificationListenerEnabled by viewModel.isNotificationListenerEnabled
@@ -202,6 +203,7 @@ fun SetupFeatures(
         showSheet,
         isAccessibilityEnabled,
         isWriteSecureSettingsEnabled,
+        isWriteSettingsEnabled,
         isShizukuAvailable,
         isShizukuPermissionGranted,
         isNotificationListenerEnabled,
@@ -365,6 +367,48 @@ fun SetupFeatures(
                                     // instructions
                                 },
                                 isGranted = isWriteSecureSettingsEnabled
+                            )
+                        )
+                    }
+                }
+
+                R.string.feat_shut_up_title -> {
+                    if (!isWriteSecureSettingsEnabled) {
+                        missing.add(
+                            PermissionItem(
+                                iconRes = R.drawable.rounded_security_24,
+                                title = R.string.perm_write_secure_title,
+                                description = R.string.perm_write_secure_desc_common,
+                                dependentFeatures = PermissionRegistry.getFeatures("WRITE_SECURE_SETTINGS"),
+                                actionLabel = R.string.perm_action_grant,
+                                action = { viewModel.requestWriteSecureSettingsPermission(context) },
+                                isGranted = isWriteSecureSettingsEnabled
+                            )
+                        )
+                    }
+                    if (!isWriteSettingsEnabled) {
+                        missing.add(
+                            PermissionItem(
+                                iconRes = R.drawable.rounded_settings_24,
+                                title = R.string.perm_write_settings_title,
+                                description = R.string.perm_write_settings_desc,
+                                dependentFeatures = PermissionRegistry.getFeatures("WRITE_SETTINGS"),
+                                actionLabel = R.string.perm_action_grant,
+                                action = { viewModel.requestWriteSettingsPermission(context) },
+                                isGranted = isWriteSettingsEnabled
+                            )
+                        )
+                    }
+                    if (!viewModel.isUsageStatsPermissionGranted.value) {
+                        missing.add(
+                            PermissionItem(
+                                iconRes = R.drawable.rounded_app_registration_24,
+                                title = R.string.perm_usage_stats_title,
+                                description = R.string.perm_usage_stats_desc,
+                                dependentFeatures = PermissionRegistry.getFeatures("USAGE_STATS"),
+                                actionLabel = R.string.perm_action_grant,
+                                action = { viewModel.requestUsageStatsPermission(context) },
+                                isGranted = viewModel.isUsageStatsPermissionGranted.value
                             )
                         )
                     }

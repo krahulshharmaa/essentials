@@ -21,6 +21,7 @@ import android.os.PowerManager
 import android.provider.CalendarContract
 import android.provider.Settings
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableIntStateOf
@@ -143,6 +144,9 @@ class MainViewModel : ViewModel() {
     val liveWallpaperSelectedVideo = mutableStateOf(SettingsRepository.LIVE_WALLPAPER_DEFAULT_VIDEO)
     val liveWallpaperPlaybackTrigger = mutableStateOf(SettingsRepository.LIVE_WALLPAPER_TRIGGER_UNLOCK)
     val liveWallpaperCustomVideos = mutableStateListOf<String>()
+
+    val shutUpConfigs = mutableStateOf<List<com.sameerasw.essentials.domain.model.ShutUpAppConfig>>(emptyList())
+    val isShutUpLoading = mutableStateOf(false)
 
 
 
@@ -556,6 +560,64 @@ class MainViewModel : ViewModel() {
         AppCompatDelegate.setApplicationLocales(appLocale)
     }
 
+    fun loadShutUpConfigs() {
+        shutUpConfigs.value = settingsRepository.loadShutUpConfigs()
+    }
+
+    fun updateShutUpConfig(config: com.sameerasw.essentials.domain.model.ShutUpAppConfig) {
+        settingsRepository.updateShutUpConfig(config)
+        loadShutUpConfigs()
+    }
+
+    fun removeShutUpConfig(packageName: String) {
+        val current = shutUpConfigs.value.toMutableList()
+        current.removeAll { it.packageName == packageName }
+        settingsRepository.saveShutUpConfigs(current)
+        loadShutUpConfigs()
+    }
+
+    fun saveShutUpSelectedApps(context: Context, apps: List<AppSelection>) {
+        val currentConfigs = settingsRepository.loadShutUpConfigs().associateBy { it.packageName }
+        val newConfigs = apps.filter { it.isEnabled }.map {
+            currentConfigs[it.packageName] ?: com.sameerasw.essentials.domain.model.ShutUpAppConfig(it.packageName)
+        }
+        settingsRepository.saveShutUpConfigs(newConfigs)
+        loadShutUpConfigs()
+    }
+
+    fun createShutUpShortcut(context: Context, config: com.sameerasw.essentials.domain.model.ShutUpAppConfig) {
+        val appName = try {
+            val appInfo = context.packageManager.getApplicationInfo(config.packageName, 0)
+            context.packageManager.getApplicationLabel(appInfo).toString()
+        } catch (e: Exception) {
+            config.packageName
+        }
+
+        val intent = Intent(context, com.sameerasw.essentials.ShutUpShortcutActivity::class.java).apply {
+            action = Intent.ACTION_MAIN
+            putExtra("package_name", config.packageName)
+            data = Uri.parse("shutup://${config.packageName}")
+        }
+
+        if (androidx.core.content.pm.ShortcutManagerCompat.isRequestPinShortcutSupported(context)) {
+            val appIcon = try {
+                val drawable = context.packageManager.getApplicationIcon(config.packageName)
+                AppUtil.drawableToBitmap(drawable)
+            } catch (e: Exception) {
+                null
+            }
+
+            val pinShortcutInfo = androidx.core.content.pm.ShortcutInfoCompat.Builder(context, config.packageName)
+                .setShortLabel(appName)
+                .setIcon(if (appIcon != null) androidx.core.graphics.drawable.IconCompat.createWithBitmap(appIcon) else androidx.core.graphics.drawable.IconCompat.createWithResource(context, R.drawable.rounded_volume_off_24))
+                .setIntent(intent)
+                .build()
+
+            androidx.core.content.pm.ShortcutManagerCompat.requestPinShortcut(context, pinShortcutInfo, null)
+            Toast.makeText(context, context.getString(R.string.shut_up_shortcut_created, appName), Toast.LENGTH_SHORT).show()
+        }
+    }
+
     fun check(context: Context) {
         appContext = context.applicationContext
         settingsRepository = SettingsRepository(context)
@@ -580,6 +642,9 @@ class MainViewModel : ViewModel() {
         isCircleToSearchPreviewEnabled.value = settingsRepository.getBoolean(SettingsRepository.KEY_CIRCLE_TO_SEARCH_PREVIEW_ENABLED, false)
         isHideGestureBarOnLauncherEnabled.value = settingsRepository.getBoolean(SettingsRepository.KEY_HIDE_GESTURE_BAR_ON_LAUNCHER_ENABLED, false)
         notificationLightingSystemMode.intValue = settingsRepository.getNotificationLightingSystemMode()
+        
+        loadShutUpConfigs()
+
         if (isHideGestureBarEnabled.value) {
             applyHideGestureBar(context, true)
         }
@@ -2076,6 +2141,21 @@ class MainViewModel : ViewModel() {
         val intent = Intent(Settings.ACTION_INPUT_METHOD_SETTINGS)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         context.startActivity(intent)
+    }
+
+    fun requestWriteSecureSettingsPermission(context: Context) {
+        val adbCommand = "adb shell pm grant ${context.packageName} android.permission.WRITE_SECURE_SETTINGS"
+        val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as android.content.ClipboardManager
+        val clip = android.content.ClipData.newPlainText("adb_command", adbCommand)
+        clipboard.setPrimaryClip(clip)
+    }
+
+    fun requestUsageStatsPermission(context: Context) {
+        PermissionUtils.openUsageStatsSettings(context)
+    }
+
+    fun requestWriteSettingsPermission(context: Context) {
+        PermissionUtils.openWriteSettings(context)
     }
 
     fun showImePicker(context: Context) {

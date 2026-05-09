@@ -222,6 +222,9 @@ class SettingsRepository(private val context: Context) {
         const val LIVE_WALLPAPER_DEFAULT_VIDEO = "my_video"
         const val LIVE_WALLPAPER_TRIGGER_UNLOCK = "unlock"
         const val LIVE_WALLPAPER_TRIGGER_SCREEN_ON = "screen_on"
+
+        const val KEY_SHUT_UP_SELECTED_APPS = "shut_up_selected_apps"
+        const val KEY_SHUT_UP_ORIGINAL_SETTINGS = "shut_up_original_settings"
     }
 
     // Observe changes
@@ -480,6 +483,50 @@ class SettingsRepository(private val context: Context) {
     fun updateNotificationGlanceAppSelection(packageName: String, enabled: Boolean) =
         updateAppSelection(KEY_NOTIFICATION_GLANCE_SELECTED_APPS, packageName, enabled)
 
+    fun loadShutUpConfigs(): List<com.sameerasw.essentials.domain.model.ShutUpAppConfig> {
+        val json = prefs.getString(KEY_SHUT_UP_SELECTED_APPS, null)
+        return if (json != null) {
+            try {
+                gson.fromJson(json, Array<com.sameerasw.essentials.domain.model.ShutUpAppConfig>::class.java).toList()
+            } catch (e: Exception) {
+                emptyList()
+            }
+        } else {
+            emptyList()
+        }
+    }
+
+    fun saveShutUpConfigs(configs: List<com.sameerasw.essentials.domain.model.ShutUpAppConfig>) {
+        val json = gson.toJson(configs)
+        putString(KEY_SHUT_UP_SELECTED_APPS, json)
+    }
+
+    fun updateShutUpConfig(config: com.sameerasw.essentials.domain.model.ShutUpAppConfig) {
+        val current = loadShutUpConfigs().toMutableList()
+        val index = current.indexOfFirst { it.packageName == config.packageName }
+        if (index != -1) {
+            current[index] = config
+        } else {
+            current.add(config)
+        }
+        saveShutUpConfigs(current)
+    }
+
+    fun saveShutUpOriginalSettings(settings: Map<String, String>) {
+        val json = gson.toJson(settings)
+        putString(KEY_SHUT_UP_ORIGINAL_SETTINGS, json)
+    }
+
+    fun getShutUpOriginalSettings(): Map<String, String> {
+        val json = prefs.getString(KEY_SHUT_UP_ORIGINAL_SETTINGS, null) ?: return emptyMap()
+        return try {
+            @Suppress("UNCHECKED_CAST")
+            gson.fromJson(json, Map::class.java) as Map<String, String>
+        } catch (e: Exception) {
+            emptyMap()
+        }
+    }
+
     private fun updateAppSelection(key: String, packageName: String, enabled: Boolean) {
         val current = loadAppSelection(key).toMutableList()
         val index = current.indexOfFirst { it.packageName == packageName }
@@ -601,7 +648,8 @@ class SettingsRepository(private val context: Context) {
                 p.all.forEach { (key, value) ->
                     if (key == "freeze_auto_excluded_apps" || key.endsWith("_selected_apps")) {
                     } else if (key.startsWith("mac_battery_") || key == "airsync_mac_connected" ||
-                        key == KEY_SNOOZE_DISCOVERED_CHANNELS || key == KEY_MAPS_DISCOVERED_CHANNELS
+                        key == KEY_SNOOZE_DISCOVERED_CHANNELS || key == KEY_MAPS_DISCOVERED_CHANNELS ||
+                        key == KEY_SHUT_UP_ORIGINAL_SETTINGS
                     ) {
                         return@forEach
                     }

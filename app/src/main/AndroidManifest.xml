@@ -233,6 +233,14 @@
         </activity>
 
         <activity
+            android:name=".ShutUpShortcutActivity"
+            android:exported="true"
+            android:excludeFromRecents="true"
+            android:noHistory="true"
+            android:taskAffinity=""
+            android:theme="@style/Theme.Essentials.Translucent" />
+
+        <activity
             android:name=".ui.activities.FlashlightIntensityActivity"
             android:exported="true"
             android:excludeFromRecents="true"

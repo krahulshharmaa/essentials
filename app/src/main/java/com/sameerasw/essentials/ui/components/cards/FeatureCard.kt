@@ -62,7 +62,10 @@ fun FeatureCard(
     isBeta: Boolean = false,
     isPinned: Boolean = false,
     onPinToggle: (() -> Unit)? = null,
-    onHelpClick: (() -> Unit)? = null
+    onHelpClick: (() -> Unit)? = null,
+    additionalMenuItems: (@Composable (onDismiss: () -> Unit) -> Unit)? = null,
+    customTrailingContent: (@Composable () -> Unit)? = null,
+    iconPainter: androidx.compose.ui.graphics.painter.Painter? = null
 ) {
     val view = LocalView.current
     var showMenu by remember { mutableStateOf(false) }
@@ -114,7 +117,7 @@ fun FeatureCard(
         modifier = modifier
             .alpha(alpha)
             .blur(blurRadius),
-        leadingContent = if (iconRes != null) {
+        leadingContent = if (iconPainter != null || iconRes != null) {
             {
                 Box(
                     modifier = Modifier
@@ -125,12 +128,20 @@ fun FeatureCard(
                         ),
                     contentAlignment = Alignment.Center
                 ) {
-                    Icon(
-                        painter = painterResource(id = iconRes),
-                        contentDescription = resolvedTitle,
-                        modifier = Modifier.size(24.dp),
-                        tint = ColorUtil.getVibrantColorFor(resolvedTitle)
-                    )
+                    if (iconPainter != null) {
+                        androidx.compose.foundation.Image(
+                            painter = iconPainter,
+                            contentDescription = resolvedTitle,
+                            modifier = Modifier.size(24.dp)
+                        )
+                    } else if (iconRes != null) {
+                        Icon(
+                            painter = painterResource(id = iconRes),
+                            contentDescription = resolvedTitle,
+                            modifier = Modifier.size(24.dp),
+                            tint = ColorUtil.getVibrantColorFor(resolvedTitle)
+                        )
+                    }
                 }
             }
         } else null,
@@ -186,6 +197,10 @@ fun FeatureCard(
                                 })
                         }
                     }
+                }
+
+                if (customTrailingContent != null) {
+                    customTrailingContent()
                 }
             }
         },
@@ -264,6 +279,10 @@ fun FeatureCard(
                             )
                         }
                     )
+                }
+
+                if (additionalMenuItems != null) {
+                    additionalMenuItems { showMenu = false }
                 }
             }
         }

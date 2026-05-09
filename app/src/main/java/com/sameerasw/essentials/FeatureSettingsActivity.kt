@@ -69,6 +69,7 @@ import com.sameerasw.essentials.ui.composables.configs.LocationReachedSettingsUI
 import com.sameerasw.essentials.ui.composables.configs.MapsPowerSavingSettingsUI
 import com.sameerasw.essentials.ui.composables.configs.NotificationLightingSettingsUI
 import com.sameerasw.essentials.ui.composables.configs.OtherCustomizationsSettingsUI
+import com.sameerasw.essentials.ui.composables.configs.ShutUpSettingsUI
 import com.sameerasw.essentials.ui.composables.configs.QuickSettingsTilesSettingsUI
 import com.sameerasw.essentials.ui.composables.configs.RefreshRateSettingsUI
 import com.sameerasw.essentials.ui.composables.configs.ScreenLockedSecuritySettingsUI
@@ -270,6 +271,7 @@ class FeatureSettingsActivity : AppCompatActivity() {
                             "Text and animations" -> !viewModel.isWriteSettingsEnabled.value || !isWriteSecureSettingsEnabled
                             "Always on Display" -> !isWriteSecureSettingsEnabled
                             "Other customizations" -> !com.sameerasw.essentials.utils.ShellUtils.hasPermission(context)
+                            "Shut-Up!" -> !isWriteSecureSettingsEnabled || !viewModel.isUsageStatsPermissionGranted.value
                             else -> false
                         }
                         if (hasMissingPermissions) {
@@ -412,6 +414,7 @@ class FeatureSettingsActivity : AppCompatActivity() {
                                                 "Battery notification" -> !viewModel.isPostNotificationsEnabled.value || (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && !viewModel.isBluetoothPermissionGranted.value)
                                                 "Text and animations" -> !viewModel.isWriteSettingsEnabled.value || !isWriteSecureSettingsEnabled
                                                 "Screen refresh rate" -> !viewModel.isShizukuPermissionGranted.value
+                                                "Shut-Up!" -> !isWriteSecureSettingsEnabled || !viewModel.isUsageStatsPermissionGranted.value
                                                 else -> false
                                             }
 
@@ -676,6 +679,14 @@ class FeatureSettingsActivity : AppCompatActivity() {
                                             viewModel = viewModel,
                                             modifier = Modifier.padding(top = 16.dp),
                                             highlightSetting = highlightSetting
+                                        )
+                                    }
+
+                                    "Shut-Up!" -> {
+                                        ShutUpSettingsUI(
+                                            viewModel = viewModel,
+                                            modifier = Modifier.padding(top = 16.dp),
+                                            highlightKey = highlightSetting
                                         )
                                     }
                                 }
