@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Build
 import android.os.IBinder
 import android.os.PersistableBundle
+import android.util.Log
 import org.lsposed.hiddenapibypass.HiddenApiBypass
 import rikka.shizuku.Shizuku
 import rikka.shizuku.ShizukuBinderWrapper
@@ -376,13 +377,40 @@ object FreezeManager {
     private fun getSuspenderPackage(): String =
         if (Shizuku.getUid() == 0) "com.sameerasw.essentials" else "com.android.shell"
 
-    private fun getUserId(): Int = android.os.Process.myUserHandle().hashCode()
+    private fun getUserId(): Int {
+        return try {
+            val userHandle = android.os.Process.myUserHandle()
+            val method = userHandle.javaClass.getMethod("getIdentifier")
+            method.invoke(userHandle) as Int
+        } catch (_: Exception) {
+            0
+        }
+    }
 
     private fun setApplicationEnabledSetting(
         context: Context,
         packageName: String,
         newState: Int
     ): Boolean {
+        // 1. Try Shizuku first
+        if (ShizukuUtils.isShizukuAvailable() && ShizukuUtils.hasPermission()) {
+            try {
+                val pm = getService("package", "android.content.pm.IPackageManager\$Stub")
+                if (pm != null) { 
+                    val userId = getUserId()
+                    Log.d("FreezeManager", "Shizuku: setting $packageName to $newState for user $userId")
+                    HiddenApiBypass.invoke(
+                        pm.javaClass, pm, "setApplicationEnabledSetting",
+                        packageName, newState, 0, userId, "android"
+                    )
+                    return true
+                }
+            } catch (e: Exception) {
+                Log.e("FreezeManager", "Shizuku call failed", e)
+            }
+        }
+
+        // 2. Fallback to Shell (Root)
         if (!ShellUtils.hasPermission(context)) return false
 
         val cmd = when (newState) {
