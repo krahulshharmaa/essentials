@@ -142,11 +142,17 @@ fun ShutUpSettingsUI(
         }
 
         if (selectedConfigForEditing != null) {
+            val frozenApps = remember { viewModel.loadFreezeSelectedApps(context) }
+            val isFrozen = remember(selectedConfigForEditing) {
+                frozenApps.any { it.packageName == selectedConfigForEditing?.packageName }
+            }
+            
             ShutUpPerAppSettingsSheet(
                 onDismissRequest = { selectedConfigForEditing = null },
                 config = configs.find { it.packageName == selectedConfigForEditing?.packageName } ?: selectedConfigForEditing!!,
                 onConfigChanged = { viewModel.updateShutUpConfig(it) },
-                onCreateShortcut = { viewModel.createShutUpShortcut(context, it) }
+                onCreateShortcut = { viewModel.createShutUpShortcut(context, it) },
+                isFrozen = isFrozen
             )
         }
     }

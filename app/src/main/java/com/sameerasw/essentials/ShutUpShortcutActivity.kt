@@ -61,6 +61,12 @@ class ShutUpShortcutActivity : ComponentActivity() {
         val config = settingsRepository.loadShutUpConfigs().find { it.packageName == packageName }
 
         lifecycleScope.launch {
+            // Unfreeze first while Shizuku/Root is still  functional
+            if (com.sameerasw.essentials.utils.FreezeManager.isAppFrozen(this@ShutUpShortcutActivity, packageName)) {
+                com.sameerasw.essentials.utils.FreezeManager.unfreezeApp(this@ShutUpShortcutActivity, packageName)
+                delay(200) // Small extra delay for system to register unfreeze
+            }
+
             if (config != null && config.isEnabled) {
                 if (PermissionUtils.canWriteSecureSettings(this@ShutUpShortcutActivity)) {
                     applyShutUpSettings(config, settingsRepository)
@@ -70,6 +76,7 @@ class ShutUpShortcutActivity : ComponentActivity() {
                 }
             }
 
+            // Delay to ensure system registers the settings changes
             delay(800)
 
             launchApp(packageName)

@@ -1474,4 +1474,8 @@
     <string name="shut_up_shortcut_created">Shortcut created for %s</string>
     <string name="shut_up_toast_active">App got shut up</string>
     <string name="shut_up_toast_restored">Shut up features returned</string>
+    <string name="shut_up_auto_archive_notif_title">Auto Freeze</string>
+    <string name="shut_up_auto_archive_notif_text">%1$s will be archived in %2$d seconds</string>
+    <string name="shut_up_auto_archive_action_freeze">Freeze now</string>
+    <string name="shut_up_auto_archive_action_abort">Abort</string>
 </resources>

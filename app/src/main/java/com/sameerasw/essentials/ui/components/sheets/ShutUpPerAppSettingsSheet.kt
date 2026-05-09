@@ -18,7 +18,8 @@ fun ShutUpPerAppSettingsSheet(
     onDismissRequest: () -> Unit,
     config: ShutUpAppConfig,
     onConfigChanged: (ShutUpAppConfig) -> Unit,
-    onCreateShortcut: (ShutUpAppConfig) -> Unit
+    onCreateShortcut: (ShutUpAppConfig) -> Unit,
+    isFrozen: Boolean
 ) {
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
     var currentConfig by remember(config) { mutableStateOf(config) }
@@ -81,6 +82,16 @@ fun ShutUpPerAppSettingsSheet(
                     isChecked = currentConfig.disableAccessibility,
                     onCheckedChange = { 
                         val newConfig = currentConfig.copy(disableAccessibility = it)
+                        currentConfig = newConfig
+                        onConfigChanged(newConfig)
+                    }
+                )
+                IconToggleItem(
+                    iconRes = R.drawable.rounded_snowflake_24,
+                    title = stringResource(R.string.shut_up_auto_archive_notif_title),
+                    isChecked = currentConfig.autoArchive,
+                    onCheckedChange = { 
+                        val newConfig = currentConfig.copy(autoArchive = it)
                         currentConfig = newConfig
                         onConfigChanged(newConfig)
                     }
