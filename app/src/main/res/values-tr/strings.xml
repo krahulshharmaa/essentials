@@ -80,7 +80,7 @@
     <string name="flashlight_global_title">Küresel kontroller</string>
     <string name="flashlight_global_desc">Küresel çapta kademeli el feneri</string>
     <string name="flashlight_adjust_intensity_title">Yoğunluğu ayarlayın</string>
-    <string name="flashlight_adjust_intensity_desc">Ses + - el feneri yoğunluğunu ayarlar</string>
+    <string name="flashlight_adjust_intensity_desc">Ses + - düğmeleri el feneri yoğunluğunu ayarlar</string>
     <string name="flashlight_live_update_title">Canlı güncelleme</string>
     <string name="flashlight_live_update_desc">Durum çubuğunda parlaklığı göster</string>
     <string name="settings_section_other">Diğer</string>
@@ -286,14 +286,14 @@
     <string name="icon_vpn">VPN</string>
     <string name="icon_airplane_mode">Uçak Modu</string>
     <string name="icon_hotspot">Sıcak nokta</string>
-    <string name="icon_cast">Döküm</string>
+    <string name="icon_cast">Yansıtma</string>
     <string name="icon_mobile_data">Mobil Veri</string>
     <string name="icon_phone_signal">Telefon Sinyali</string>
     <string name="icon_volte">VoLTE / VoNR</string>
     <string name="icon_wifi_calling">WiFi Arama / VoWiFi</string>
     <string name="icon_call_status">Çağrı Durumu / Senkronizasyon</string>
     <string name="icon_tty">TTY</string>
-    <string name="icon_volume">Hacim</string>
+    <string name="icon_volume">Ses</string>
     <string name="icon_headset">Kulaklık</string>
     <string name="icon_speakerphone">Hoparlör</string>
     <string name="icon_dmb">DMB</string>
@@ -975,7 +975,7 @@
     <string-array name="keywords_audio_mute">
         <item>ses</item>
         <item>sesini kapatmak</item>
-        <item>hacim</item>
+        <item>ses</item>
     </string-array>
     <string-array name="keywords_blue_filter">
         <item>mavi</item>
@@ -1025,7 +1025,7 @@
     <string name="haptic_subtle">Hemen göze çarpmayan</string>
     <string name="haptic_double">Çift</string>
     <string name="haptic_click">Tıklamak</string>
-    <string name="haptic_tick">Kene</string>
+    <string name="haptic_tick">Tik</string>
     <!-- Flashlight Intensity Overlay -->
     <string name="action_turn_off">Kapamak</string>
     <string name="feature_flashlight_brightness_title">El Feneri Parlaklığı</string>
@@ -1206,7 +1206,7 @@
     <string name="feat_ambient_music_title">Ortam müziği bakışı</string>
     <string name="feat_ambient_music_desc">AOD\'deki medyaya bakış</string>
     <string name="feat_sound_haptics_title">Ses ve Dokunma</string>
-    <string name="feat_sound_haptics_desc">Hacim ve dokunsal özellikler</string>
+    <string name="feat_sound_haptics_desc">Ses ve dokunsal özellikler</string>
     <string name="feat_security_privacy_title">Güvenlik ve Gizlilik</string>
     <string name="feat_security_privacy_desc">Cihazınızı koruyun ve güvenliğini sağlayın</string>
     <string name="feat_notifications_alerts_title">Bildirimler ve Uyarılar</string>
@@ -1372,4 +1372,23 @@
     <string name="add_video">Video ekle</string>
     <string name="custom_video">Özel video</string>
     <string name="about_desc_live_wallpaper">En sevdiğiniz videoyu ana ekran duvar kağıdınız olarak ayarlayın. Dinamik bir deneyim için animasyonun kilidi açtığınızda mı yoksa ekran açıldığında mı tetikleneceğini seçin.</string>
+    <!-- Shut-Up! Feature -->
+    <string name="feat_shut_up_title">Kapa Çeneni!</string>
+    <string name="feat_shut_up_desc">Ne yaptığımı biliyorum</string>
+    <string name="shut_up_description">Kapa Çeneni! hassas uygulamaları başlattığınızda geliştirici seçeneklerini, erişilebilirliği ve hata ayıklama ayarlarını dinamik olarak gizleyerek uygulama kısıtlamalarını ve kontrollerini atlar. \n\nUygulama başlatılmadan önce ayarların gizlenmesini sağlamak için özel kısayolları kullanın.</string>
+    <string name="shut_up_select_apps_title">Uygulamaları seç</string>
+    <string name="shut_up_select_apps_desc">Kapa Çeneni! mantığı uygulanacak uygulamaları seçin</string>
+    <string name="shut_up_settings_title">Kapa Çeneni! Ayarları</string>
+    <string name="shut_up_per_app_settings">Kapa Çeneni! Özellikleri</string>
+    <string name="shut_up_disable_dev_options">Geliştirici Seçeneklerini Devre Dışı Bırak</string>
+    <string name="shut_up_disable_usb_debugging">USB Hata Ayıklamayı Devre Dışı Bırak</string>
+    <string name="shut_up_disable_wireless_debugging">Kablosuz Hata Ayıklamayı Devre Dışı Bırak</string>
+    <string name="shut_up_disable_accessibility">Erişilebilirlik Hizmetlerini Devre Dışı Bırak</string>
+    <string name="shut_up_shortcut_created">%s için kısayol oluşturuldu</string>
+    <string name="shut_up_toast_active">Uygulama susturuldu</string>
+    <string name="shut_up_toast_restored">Susturma özellikleri geri döndü</string>
+    <string name="shut_up_auto_archive_notif_title">Otomatik Dondurma</string>
+    <string name="shut_up_auto_archive_notif_text">%1$s %2$d saniye içinde arşivlenecek</string>
+    <string name="shut_up_auto_archive_action_freeze">Şimdi Dondur</string>
+    <string name="shut_up_auto_archive_action_abort">İptal et</string>
 </resources>
